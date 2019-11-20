@@ -10,7 +10,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d0c0a21e3bf46994d7f7a41d9cc729f&libraries=services"></script>
+   
     <jsp:include page="./css/css.jsp"></jsp:include>
+    <jsp:include page="ValidationCheck.jsp"></jsp:include>
 
 
     <style type="text/css">
@@ -65,10 +71,10 @@
 
         <!-- Top jsp -->
         <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-            <jsp:include page="./include/Top.jsp"></jsp:include>
+            <jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
 
             <!-- Side jsp -->
-            <jsp:include page="./include/Side.jsp"></jsp:include>
+            <jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
         </nav>
         <!--Login Sections-->
 
@@ -95,49 +101,49 @@
                                     <br> 
                                     <div class="form-group">                                                                         
                                         <label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-                                        <input type="text" class="form-control" name="User_Id" id="User_Id" required="required">
+                                        <input type="text" class="form-control" name="id" id="id" required="required">
                                     </div>
                                      <div class="form-group">
                                         <label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>
-                                        <input type="password" class="form-control" name="User_Pwd" id="User_Pwd"
+                                        <input type="password" class="form-control" name="pwd" id="pwd"
                                             required="required" placeholder="영문+숫자 7자 이상">
                                     </div>
                                     <div class="form-group">
                                         <label>비밀번호 확인 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
-                                        <input type="password" class="form-control" name="userPassCheck"
-                                            id="userPassCheck" required="required" placeholder="영문+숫자 7자 이상">
+                                        <input type="password" class="form-control" name="pwdCheck"
+                                            id="pwdCheck" required="required" placeholder="영문+숫자 7자 이상">
                                     </div>                                                                       
                                     <div class="form-group">
                                         <label>이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-                                        <input type="text" class="form-control" name="User_Name" id="User_Name" required="required">
+                                        <input type="text" class="form-control" name="name" id="name" required="required">
                                     </div>  
                                     <div class="form-group">
                                         <label>휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
-                                        <input type="password" class="form-control" name="userPassCheck"
-                                            id="userPassCheck" required="required" placeholder="010-0000-0000">
+                                        <input type="password" class="form-control" name="phoneNum"
+                                            id="phoneNum" required="required" placeholder="010-0000-0000">
                                     </div>
-                                    <div class="form-group">
-                                        <label>사업자등록번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-                                        <input type="text" class="form-control" name="User_Name" id="User_Name" required="required" placeholder="000-00-00000">
-                                    </div>                                     
                                     <div class="form-group">
                                         <label>사무소 이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-                                        <input type="text" class="form-control" name="Name" id="Name" required="required">
+                                        <input type="text" class="form-control" name="officeName" id="officeName" required="required">
                                     </div>
+                                    <div class="form-group">
+										<label>사무소 주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
+										<div class="row">&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="text" class="form-control" name="officeAddr" id="officeAddr"
+											required="required" placeholder="주소" style="width:72%;"> &nbsp;&nbsp;
+											<input type="button" onclick="searchAddr()" value="주소 검색"><br>
+										</div>
+										<div id="map"
+											style="width: 300px; height: 300px; margin-top: 10px; margin-left:17%;display: none"></div>
+									</div>
                                     <div class="form-group">
                                         <label>사무소 전화번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-                                        <input type="text" class="form-control" name="Name" id="Name" required="required" placeholder="02-0000-0000">
-                                    </div>                                                                         
+                                        <input type="text" class="form-control" name="officeHp" id="officeHp" required="required" placeholder="02-0000-0000">
+                                    </div> 
                                     <div class="form-group">
-                                        <label>사무소 주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
-                                        <input type="text" class="form-control" name="userPassCheck"
-                                            id="userPassCheck" required="required" placeholder="기본주소">
-                                        <input type="text" class="form-control" name="userPassCheck"
-                                            id="userPassCheck" required="required" placeholder="상세주소">                                            
-                                    </div>
-
-
-
+                                        <label>사업자등록번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
+                                        <input type="text" class="form-control" name="regNum" id="regNum" required="required" placeholder="000-00-00000">
+                                    </div>     
 								<div class="form-group">
 								<div class="row">
 								<div class="col-sm-6">
@@ -164,14 +170,64 @@
         </section>
 
         <!-- scroll up-->
-        <jsp:include page="./include/ScrollUp.jsp"></jsp:include>
+        <div class="scrollup">
+            <a href="#"><i class="fa fa-chevron-up"></i></a>
+        </div>
         <!-- End off scroll up -->
-        <jsp:include page="./include/Bottom.jsp"></jsp:include>
+        <jsp:include page="WEB-INF/include/Bottom.jsp"></jsp:include>
     </div>
 
     <!-- JS includes -->
     <jsp:include page="./js/js.jsp"></jsp:include>
+	<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+		mapOption = {
+			center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+			level : 5
+		// 지도의 확대 레벨
+		};
 
+		//지도를 미리 생성
+		var map = new daum.maps.Map(mapContainer, mapOption);
+		//주소-좌표 변환 객체를 생성
+		var geocoder = new daum.maps.services.Geocoder();
+		//마커를 미리 생성
+		var marker = new daum.maps.Marker({
+			position : new daum.maps.LatLng(37.537187, 127.005476),
+			map : map
+		});
+
+		function searchAddr() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+					var addr = data.address; // 최종 주소 변수
+
+					// 주소 정보를 해당 필드에 넣는다.
+					document.getElementById("officeAddr").value = addr;
+					// 주소로 상세 정보를 검색
+					geocoder.addressSearch(data.address, function(results,
+							status) {
+						// 정상적으로 검색이 완료됐으면
+						if (status === daum.maps.services.Status.OK) {
+
+							var result = results[0]; //첫번째 결과의 값을 활용
+
+							// 해당 주소에 대한 좌표를 받아서
+							var coords = new daum.maps.LatLng(result.y,
+									result.x);
+							// 지도를 보여준다.
+							mapContainer.style.display = "block";
+							map.relayout();
+							// 지도 중심을 변경한다.
+							map.setCenter(coords);
+							// 마커를 결과값으로 받은 위치로 옮긴다.
+							marker.setPosition(coords)
+						}
+					});
+				}
+			}).open();
+		}
+	</script>
 
 </body>
 
