@@ -366,14 +366,6 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
-		else if (url_Command.equals("/SelectAllUserService.d4b")) {
-			try {
-				action = new SelectAllUserService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 		//update========================================
 		else if (url_Command.equals("/UpdateBlackService.d4b")) {

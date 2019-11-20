@@ -11,7 +11,6 @@ import javax.sql.DataSource;
 
 import kr.or.bit.dto.GenericUser;
 import kr.or.bit.dto.REAUser;
-import kr.or.bit.dto.Users;
 
 public class UserDao {
 	/*
@@ -29,11 +28,12 @@ public class UserDao {
 		return false;
 	}
 
-	public List<Users> selectAllUser() { // 모든 회원 검색
+	
+	public List<GenericUser> selectGenericUser() { // 일반 회원 검색
 		return null;
 	}
-
-	public List<Users> selectAllTypeUser(String userCode) { // 타입별로 회원 모두 검색
+	
+	public List<REAUser> selectREAUser() { // 공인중개사 회원 검색
 		return null;
 	}
 
