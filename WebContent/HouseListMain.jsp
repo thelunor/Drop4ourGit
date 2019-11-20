@@ -161,9 +161,7 @@ table {
 
 
 		<!-- scroll up-->
-		<div class="scrollup">
-			<a href="#"><i class="fa fa-chevron-up"></i></a>
-		</div>
+		<jsp:include page="./include/ScrollUp.jsp"></jsp:include>
 		<!-- End off scroll up -->
 		<jsp:include page="./include/Bottom.jsp"></jsp:include>
 	</div>

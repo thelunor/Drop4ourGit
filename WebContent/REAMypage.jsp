@@ -57,11 +57,11 @@ input {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="./common/Top.jsp"></jsp:include>
+			<jsp:include page="./include/Top.jsp"></jsp:include>
 
 
 			<!-- Side jsp -->
-			<jsp:include page="./common/Side.jsp"></jsp:include>
+			<jsp:include page="./include/Side.jsp"></jsp:include>
 		</nav>
 		<!--Join Sections-->
 
@@ -97,7 +97,7 @@ input {
 						<button type="submit" class="btn-group">매물 등록</button> &nbsp; <button type="submit" class="btn-group">지난 매물 보기</button> &nbsp; 
 						<button type="submit" class="btn-group">계약서 작성</button>&nbsp; <button type="submit" class="btn-group">계약 관리</button>
 							<br>	<br>
-							<jsp:include page="./common/Datatable.jsp"></jsp:include>
+							<jsp:include page="./include/TableList.jsp"></jsp:include>
 						</div>
 					</div>
 
@@ -110,11 +110,9 @@ input {
 
 
 		<!-- scroll up-->
-		<div class="scrollup">
-			<a href="#"><i class="fa fa-chevron-up"></i></a>
-		</div>
+		<jsp:include page="./include/ScrollUp.jsp"></jsp:include>
 		<!-- End off scroll up -->
-		<jsp:include page="./common/Bottom.jsp"></jsp:include>
+		<jsp:include page="./include/Bottom.jsp"></jsp:include>
 	</div>
 
 	<!-- JS includes -->

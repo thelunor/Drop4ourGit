@@ -1,4 +1,4 @@
-<%@page import="kr.or.bit.utils.Singleton_Helper"%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -8,7 +8,7 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 
-<jsp:include page="AdminAuthority.jsp"></jsp:include>
+
 
 <!DOCTYPE html>
 <html>
@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">매물 관리</h6>
+            <h6 class="m-0 font-weight-bold text-primary">지난 매물 관리</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -28,7 +28,7 @@
 					ResultSet rs = null;
 					
 					try {
-						conn = Singleton_Helper.getConnection("oracle");
+
 						String sql="select id, pwd, name, age, gender, email from koreamember";
 						pstmt = conn.prepareStatement(sql);
 						rs = pstmt.executeQuery();
@@ -43,7 +43,7 @@
                       <th>보증금</th>
                       <th>향</th>
                       <th>매물 특징</th>
-                      <th>수정</th>
+                      <th>재등록</th>
                       <th>삭제</th>
                     </tr>
                   </thead>
@@ -57,7 +57,7 @@
                       <td><%= rs.getString("email") %></td>
                       <td><%= rs.getString("email") %></td>
                       <td><a href="MemberDetail.jsp?id=<%= rs.getString("id") %>">
-                      		수정</a>
+                      		등록</a>
                       </td><td><a href="MemberDetail.jsp?id=<%= rs.getString("id") %>">
                       		삭제</a>
                       </td>
@@ -69,8 +69,7 @@
 				} catch(Exception e) {
 					e.getStackTrace();
 				} finally {
-					Singleton_Helper.close(rs);
-					Singleton_Helper.close(pstmt);
+
 				}
 			  %>
               </div>

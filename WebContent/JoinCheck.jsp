@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <jsp:include page="./css/css.jsp"></jsp:include>
-    <jsp:include page="ValidationCheck.jsp"></jsp:include>
 
 
 <style type="text/css">
@@ -35,10 +34,10 @@ font-size: 15px;
 
         <!-- Top jsp -->
         <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-            <jsp:include page="./common/Top.jsp"></jsp:include>
+            <jsp:include page="./include/Top.jsp"></jsp:include>
 
             <!-- Side jsp -->
-            <jsp:include page="./common/Side.jsp"></jsp:include>
+            <jsp:include page="./include/Side.jsp"></jsp:include>
         </nav>
         <!--Login Sections-->
 
@@ -60,11 +59,11 @@ font-size: 15px;
 									<label class="fancy-checkbox"><input type="checkbox">&nbsp;<b>이용약관, 개인정보 수집 및 이용, 위치정보 이용약관에 모두 동의합니다.</b></h6></label>
 									<br>
                                     </div>
-                                     <jsp:include page="./common/Agree1.jsp"></jsp:include>
+                                     <jsp:include page="./include/Agree1.jsp"></jsp:include>
                                      <br>
-                                     <jsp:include page="./common/Agree2.jsp"></jsp:include>
+                                     <jsp:include page="./include/Agree2.jsp"></jsp:include>
                                      <br>
-                                     <jsp:include page="./common/Agree3.jsp"></jsp:include>
+                                     <jsp:include page="./include/Agree3.jsp"></jsp:include>
 
 								<br>
 								<div class="form-group">
@@ -93,11 +92,9 @@ font-size: 15px;
         </section>
 
         <!-- scroll up-->
-        <div class="scrollup">
-            <a href="#"><i class="fa fa-chevron-up"></i></a>
-        </div>
+        <jsp:include page="./include/ScrollUp.jsp"></jsp:include>
         <!-- End off scroll up -->
-        <jsp:include page="./common/Bottom.jsp"></jsp:include>
+        <jsp:include page="./include/Bottom.jsp"></jsp:include>
     </div>
 
     <!-- JS includes -->

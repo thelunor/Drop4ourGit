@@ -13,7 +13,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <jsp:include page="./css/css.jsp"></jsp:include>
-<jsp:include page="ValidationCheck.jsp"></jsp:include>
 
 
 <style type="text/css">
@@ -56,10 +55,10 @@ form-control {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="./common/Top.jsp"></jsp:include>
+			<jsp:include page="./include/Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
-			<jsp:include page="./common/Side.jsp"></jsp:include>
+			<jsp:include page="./include/Side.jsp"></jsp:include>
 		</nav>
 		<!--Login Sections-->
 
@@ -202,11 +201,9 @@ form-control {
 		</section>
 
 		<!-- scroll up-->
-		<div class="scrollup">
-			<a href="#"><i class="fa fa-chevron-up"></i></a>
-		</div>
+		<jsp:include page="./include/ScrollUp.jsp"></jsp:include>
 		<!-- End off scroll up -->
-		<jsp:include page="./common/Bottom.jsp"></jsp:include>
+		<jsp:include page="./include/Bottom.jsp"></jsp:include>
 	</div>
 
 	<!-- JS includes -->

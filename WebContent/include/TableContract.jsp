@@ -1,4 +1,4 @@
-<%@page import="kr.or.bit.utils.Singleton_Helper"%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
@@ -8,7 +8,6 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 
-<jsp:include page="AdminAuthority.jsp"></jsp:include>
 
 <!DOCTYPE html>
 <html>
@@ -28,7 +27,6 @@
 					ResultSet rs = null;
 					
 					try {
-						conn = Singleton_Helper.getConnection("oracle");
 						String sql="select id, pwd, name, age, gender, email from koreamember";
 						pstmt = conn.prepareStatement(sql);
 						rs = pstmt.executeQuery();
@@ -66,8 +64,7 @@
 				} catch(Exception e) {
 					e.getStackTrace();
 				} finally {
-					Singleton_Helper.close(rs);
-					Singleton_Helper.close(pstmt);
+
 				}
 			  %>
               </div>
