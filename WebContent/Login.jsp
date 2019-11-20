@@ -2,13 +2,14 @@
 	pageEncoding="UTF-8"%>
 <!doctype html>
 <html class="no-js" lang="en">
+<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+
 <head>
-	<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
     <meta charset="utf-8">
-    <title>Login Page</title>
+    <title>Drop 4our bit</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <jsp:include page="./css/css.jsp"></jsp:include>
+    <jsp:include page="../../css/css.jsp"></jsp:include>
 
     <style type="text/css">
         .input-group {
@@ -17,22 +18,25 @@
 
         h2 {
             font-family: 'Jua', sans-serif;
+
         }
     </style>
 </head>
+
 <body data-spy="scroll" data-target=".navbar-collapse">
 
     <div class="culmn">
+        <!-- Top jsp -->
         <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<!-- Top jsp -->
-            <jsp:include page="./include/Top.jsp"></jsp:include>
+
+            <jsp:include page="../../include/Top.jsp"></jsp:include>
             <!-- Side jsp -->
-            <jsp:include page="./include/Side.jsp"></jsp:include>
+            <jsp:include page="../../include/Side.jsp"></jsp:include>
         </nav>
         
         <!--Login Sections-->
         <section id="id" class="about roomy-100">
-            <form action="UserLoginService.d4b" method="post" name="loginForm">
+            <form action="loginok.d4b" method="post" name="loginForm">
                 <div class="container">
                     <div class="about_content">
                         <div class="row">
@@ -71,9 +75,12 @@
         <div class="scrollup">
             <a href="#"><i class="fa fa-chevron-up"></i></a>
         </div>
-        <jsp:include page="./include/Bottom.jsp" ></jsp:include>
+        <jsp:include page="../../include/Bottom.jsp"></jsp:include>
     </div>
-    <jsp:include page="./js/js.jsp"></jsp:include>
+
+    <jsp:include page="../../js/js.jsp"></jsp:include>
+
 
 </body>
+
 </html>

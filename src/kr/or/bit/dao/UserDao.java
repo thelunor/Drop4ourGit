@@ -2,7 +2,6 @@ package kr.or.bit.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.naming.Context;
@@ -27,28 +26,7 @@ public class UserDao {
 	}
 
 	public boolean userLogin(String id, String pwd) { // 로그인
-		boolean check = false;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = ds.getConnection();
-			
-			String sql = "SELECT PWD FROM USERS WHERE ID=? and PWD=?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pwd);
-			rs = pstmt.executeQuery();
-			
-			if (rs.next()) {
-				check = true;
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		} 
-		
-		return check;
+		return false;
 	}
 
 	public List<Users> selectAllUser() { // 모든 회원 검색
