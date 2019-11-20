@@ -150,7 +150,7 @@ $(function() {
 
 </head>
 <body>
-	<div style="width: 75%;">
+	<div style="width: 100%;">
 		<canvas id="canvas"></canvas>
 	</div>
 

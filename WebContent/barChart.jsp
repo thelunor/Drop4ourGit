@@ -230,7 +230,7 @@ $(function() {
 
  		};
 
-			var ctx = document.getElementById('canvas').getContext('2d');
+			var ctx = document.getElementById('canvas1').getContext('2d');
  			window.myBar = new Chart(ctx, {
  				type: 'bar',
  				data: barChartData,
@@ -241,7 +241,7 @@ $(function() {
  					},
  					title: {
  						display: true,
- 						text: '서울시 대표 6개 구의 실거래 매매 평균치 (단위 : 십만 원)'
+ 						text: '서울시 대표 6개 구의 실거래 매매 평균치 (단위 : 백만 원)'
  					}
  				}
  			});
@@ -251,8 +251,8 @@ $(function() {
 </script>
 </head>
 <body>
-<div id="container" style="width: 75%;">
-		<canvas id="canvas"></canvas>
+<div id="container" style="width: 100%;">
+		<canvas id="canvas1"></canvas>
 	</div>
 </body>
 </html>

@@ -114,7 +114,7 @@ $(function() {
 				} ]
 			};
 
-			var ctx = document.getElementById('canvas').getContext('2d');
+			var ctx = document.getElementById('canvas0').getContext('2d');
 			window.myLine = Chart.Line(ctx, {
 				data : lineChartData,
 				options : {
@@ -150,7 +150,7 @@ $(function() {
 </head>
 <body>
 	<div style="width: 100%;">
-		<canvas id="canvas"></canvas>
+		<canvas id="canvas0"></canvas>
 	</div>
 
 </body>

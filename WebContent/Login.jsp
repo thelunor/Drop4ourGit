@@ -9,7 +9,7 @@
     <title>Drop 4our bit</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <jsp:include page="../../css/css.jsp"></jsp:include>
+    <jsp:include page="./css/css.jsp"></jsp:include>
 
     <style type="text/css">
         .input-group {
@@ -29,9 +29,9 @@
         <!-- Top jsp -->
         <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
 
-            <jsp:include page="../../include/Top.jsp"></jsp:include>
+            <jsp:include page="./WEB-INF/include/Top.jsp"></jsp:include>
             <!-- Side jsp -->
-            <jsp:include page="../../include/Side.jsp"></jsp:include>
+            <jsp:include page="./WEB-INF/include/Side.jsp"></jsp:include>
         </nav>
         
         <!--Login Sections-->
@@ -75,10 +75,10 @@
         <div class="scrollup">
             <a href="#"><i class="fa fa-chevron-up"></i></a>
         </div>
-        <jsp:include page="../../include/Bottom.jsp"></jsp:include>
+        <jsp:include page="./WEB-INF/include/Bottom.jsp"></jsp:include>
     </div>
 
-    <jsp:include page="../../js/js.jsp"></jsp:include>
+    <jsp:include page="./js/js.jsp"></jsp:include>
 
 
 </body>
