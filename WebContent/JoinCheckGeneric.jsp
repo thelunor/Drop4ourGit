@@ -22,10 +22,18 @@
  }
 b{
 color : black;
-font-size: 15px;
+font-size: 16px;
 }
-    </style>
-
+</style>
+<script>
+function checkAll(){
+    if( $("#allCheck").is(':checked') ){
+      $("input[name=check]").prop("checked", true);
+    }else{
+      $("input[name=check]").prop("checked", false);
+    }
+}
+</script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
@@ -42,7 +50,7 @@ font-size: 15px;
         <!--Login Sections-->
 
         <section id="join" class="about roomy-100">
-            <form action="Join_ok.jsp" method="post" name="loginForm">
+
                 <div class="container">
                     <div class="about_content">
                         <div class="row">
@@ -56,7 +64,7 @@ font-size: 15px;
                                     <hr>
   
                                     <div class="form-group">                                                                         
-									<label class="fancy-checkbox"><input type="checkbox">&nbsp;<b>이용약관, 개인정보 수집 및 이용, 위치정보 이용약관에 모두 동의합니다.</b></h6></label>
+									<label class="fancy-checkbox"><input type="checkbox" id="allCheck" onclick="checkAll()">&nbsp;<b>이용약관, 개인정보 수집 및 이용, 위치정보 이용약관에 모두 동의합니다.</b></label>
 									<br>
                                     </div>
                                      <jsp:include page="WEB-INF/include/Agree1.jsp"></jsp:include>
@@ -69,10 +77,10 @@ font-size: 15px;
 								<div class="form-group">
 								<div class="row">
 								<div class="col-sm-6">
-						            <button type="submit" class="btn btn-primary btn-block btn-lg">Agree</button>
+						            <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='JoinMember.jsp'">Agree</button>
 						        </div>
 						        <div class="col-sm-6">
-						        	 <button type="reset" class="btn btn-primary btn-block btn-lg">Cancel</button>
+						        	 <button type="reset" class="btn btn-primary btn-block btn-lg" onclick="location.href='Main.jsp'">Cancel</button>
 						        </div>	
 						        </div> 
 						        </div>
@@ -88,7 +96,7 @@ font-size: 15px;
                     <!--End off row-->
                 </div>
                 <!--End off container -->
-            </form>
+
         </section>
 
         <!-- scroll up-->

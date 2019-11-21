@@ -44,7 +44,7 @@ padding : 10px;
 		</nav>
 		<!--Login Sections-->
 		<section id="id" class="about roomy-100">
-			<div action="Login_ok.jsp" method="post" name="loginForm">
+			<div>
 				<div class="container">
 					<div class="about_content">
 						<div class="row">
@@ -74,22 +74,21 @@ padding : 10px;
 <br> <br> <br>
 						<div class="row">
 							<div class="col-md-6">
-								<div class="form">
+								<div class="form">														
 								<br>
 									<h5><i class="fas fa-user"></i> 개인회원</h5>
 									<br><p>맞집의 다양한 정보와 서비스를 모두 이용하실 수 있습니다.</p><br>
-									<button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="location.href='JoinMember.jsp'">Join</button>
+									<button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="location.href='JoinCheckGeneric.jsp'">Join</button>
 								</div>
 
 							</div>
 							<div class="col-md-6">
-								<div class="form">
+								<div class="form">							
 								<br>
 									<h5><i class="fas fa-home"></i> 공인중개사회원</h5>
 									<br><p>맞집의 중개사 지원을 위한 서비스를 모두 이용하실 수 있습니다.</p><br>
-									<button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="location.href='JoinREA.jsp'">Join</button>
+									<button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="location.href='JoinCheckREA.jsp'">Join</button>
 								</div>
-
 							</div>
 
 						</div>

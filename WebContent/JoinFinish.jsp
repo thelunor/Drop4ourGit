@@ -56,7 +56,7 @@ text-align: center;
 								<div class="form-group">
 								<div class="row">
 								<div class="col-sm-6">
-						            <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='Login_form.jsp'">Log in</button>
+						            <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='Login.jsp'">Log in</button>
 						        </div>
 						        <div class="col-sm-6">
 						        	 <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='Main.jsp'">Main</button>
