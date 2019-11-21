@@ -1,119 +1,143 @@
 package kr.or.bit.dto;
 
 public class REAUser {	//중개사 DTO
-	private String id; 
-	private String pwd;
-	private String name;
-	private String phoneNum;
+	private String reaId; 
+	private String reaPwd;
+	private String reaName;
+	private String reaPhoneNum;
 	private String officeName;//사무실 이름
 	private String officeAddr;	//사무실 주소
+	private String officeDetailAddr; //사무실 상세주소
 	private String officeHp; //사무실 번호
 	private String regNum; //사업자 등록번호
-	private String userType; //회원타입
-	private String isBlack; //블랙회원여부
+	private String userCode;
+	
 	
 	public REAUser(){}
 
-	public REAUser(String id, String pwd, String name, String phoneNum, String officeName, String officeAddr,
-			String officeHp, String regNum, String userType, String isBlack) {
+
+	public REAUser(String reaId, String reaPwd, String reaName, String reaPhoneNum, String officeName,
+			String officeAddr, String officeDetailAddr, String officeHp, String regNum, String userCode) {
 		super();
-		this.id = id;
-		this.pwd = pwd;
-		this.name = name;
-		this.phoneNum = phoneNum;
+		this.reaId = reaId;
+		this.reaPwd = reaPwd;
+		this.reaName = reaName;
+		this.reaPhoneNum = reaPhoneNum;
 		this.officeName = officeName;
 		this.officeAddr = officeAddr;
+		this.officeDetailAddr = officeDetailAddr;
 		this.officeHp = officeHp;
 		this.regNum = regNum;
-		this.userType = userType;
-		this.isBlack = isBlack;
+		this.userCode = userCode;
 	}
 
-	public String getId() {
-		return id;
+
+	public String getReaId() {
+		return reaId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+
+	public void setReaId(String reaId) {
+		this.reaId = reaId;
 	}
 
-	public String getPwd() {
-		return pwd;
+
+	public String getReaPwd() {
+		return reaPwd;
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+
+	public void setReaPwd(String reaPwd) {
+		this.reaPwd = reaPwd;
 	}
 
-	public String getName() {
-		return name;
+
+	public String getReaName() {
+		return reaName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+
+	public void setReaName(String reaName) {
+		this.reaName = reaName;
 	}
 
-	public String getPhoneNum() {
-		return phoneNum;
+
+	public String getReaPhoneNum() {
+		return reaPhoneNum;
 	}
 
-	public void setPhoneNum(String phoneNum) {
-		this.phoneNum = phoneNum;
+
+	public void setReaPhoneNum(String reaPhoneNum) {
+		this.reaPhoneNum = reaPhoneNum;
 	}
+
 
 	public String getOfficeName() {
 		return officeName;
 	}
 
+
 	public void setOfficeName(String officeName) {
 		this.officeName = officeName;
 	}
+
 
 	public String getOfficeAddr() {
 		return officeAddr;
 	}
 
+
 	public void setOfficeAddr(String officeAddr) {
 		this.officeAddr = officeAddr;
 	}
+
+
+	public String getOfficeDetailAddr() {
+		return officeDetailAddr;
+	}
+
+
+	public void setOfficeDetailAddr(String officeDetailAddr) {
+		this.officeDetailAddr = officeDetailAddr;
+	}
+
 
 	public String getOfficeHp() {
 		return officeHp;
 	}
 
+
 	public void setOfficeHp(String officeHp) {
 		this.officeHp = officeHp;
 	}
+
 
 	public String getRegNum() {
 		return regNum;
 	}
 
+
 	public void setRegNum(String regNum) {
 		this.regNum = regNum;
 	}
 
-	public String getUserType() {
-		return userType;
+
+	public String getUserCode() {
+		return userCode;
 	}
 
-	public void setUserType(String userType) {
-		this.userType = userType;
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 
-	public String getIsBlack() {
-		return isBlack;
-	}
-
-	public void setIsBlack(String isBlack) {
-		this.isBlack = isBlack;
-	}
 
 	@Override
 	public String toString() {
-		return "REAUser [id=" + id + ", pwd=" + pwd + ", name=" + name + ", phoneNum=" + phoneNum + ", officeName="
-				+ officeName + ", officeAddr=" + officeAddr + ", officeHp=" + officeHp + ", regNum=" + regNum
-				+ ", userType=" + userType + ", isBlack=" + isBlack + ", toString()=" + super.toString() + "]";
+		return "REAUser [reaId=" + reaId + ", reaPwd=" + reaPwd + ", reaName=" + reaName + ", reaPhoneNum="
+				+ reaPhoneNum + ", officeName=" + officeName + ", officeAddr=" + officeAddr + ", officeDetailAddr="
+				+ officeDetailAddr + ", officeHp=" + officeHp + ", regNum=" + regNum + ", userCode=" + userCode
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 	

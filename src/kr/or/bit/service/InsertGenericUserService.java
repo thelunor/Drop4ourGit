@@ -27,14 +27,6 @@ public class InsertGenericUserService implements Action {
 
 		//2. 객체에 데이터 저장
 		GenericUser user = new GenericUser();
-		user.setId(id);
-		user.setPwd(pwd);
-		user.setName(name);
-		user.setFrontResNum(frontResNum);
-		user.setBackResNum(backResNum);
-		user.setPhoneNum(phoneNum);
-		user.setAddr(addr);
-		user.setDetailAddr(detailAddr);
 		
 		try {
 			//3. DB 저장

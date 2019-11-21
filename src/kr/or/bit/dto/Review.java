@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class Review {					//후기 DTO
 	private int reviewNum;			//후기 번호
-	private String id;					//후기 작성자 아이디
+	private String userId;			    //후기 작성자 아이디
 	private String reviewContent;	//후기 내용
 	private Date reviewDate;		//후기 작성 시간
 	
 	public Review() {}
 
-	public Review(int reviewNum, String id, String reviewContent, Date reviewDate) {
+	public Review(int reviewNum, String userId, String reviewContent, Date reviewDate) {
 		super();
 		this.reviewNum = reviewNum;
-		this.id = id;
+		this.userId = userId;
 		this.reviewContent = reviewContent;
 		this.reviewDate = reviewDate;
 	}
@@ -26,12 +26,12 @@ public class Review {					//후기 DTO
 		this.reviewNum = reviewNum;
 	}
 
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getReviewContent() {
@@ -52,11 +52,11 @@ public class Review {					//후기 DTO
 
 	@Override
 	public String toString() {
-		return "Review [reviewNum=" + reviewNum + ", id=" + id + ", reviewContent=" + reviewContent + ", reviewDate="
-				+ reviewDate + ", toString()=" + super.toString() + "]";
+		return "Review [reviewNum=" + reviewNum + ", userId=" + userId + ", reviewContent=" + reviewContent
+				+ ", reviewDate=" + reviewDate + ", toString()=" + super.toString() + "]";
 	}
-	
-	
+
+
 
 }
 

@@ -1,56 +1,54 @@
 package kr.or.bit.dto;
 
 public class GenericUser{	//일반회원 DTO
-	private String id; 
-	private String pwd;
-	private String name;
+	private String userId; 
+	private String userPwd;
+	private String userName;
 	private String frontResNum; //주민등록번호 앞자리
 	private String backResNum; //주민등록번호 뒷자리
-	private String phoneNum;
-	private String addr; //주소
-	private String detailAddr; //상세주소
-	private String userType; //회원타입
-	private String isBlack; //블랙회원여부
+	private String userPhoneNum;
+	private String userAddr; //주소
+	private String userDetailAddr; //상세주소
+	private String userCode; //유저코드
 	
 	public GenericUser() {}
 
-	public GenericUser(String id, String pwd, String name, String frontResNum, String backResNum, String phoneNum,
-			String addr, String detailAddr, String userType, String isBlack) {
+	public GenericUser(String userId, String userPwd, String userName, String frontResNum, String backResNum,
+			String userPhoneNum, String userAddr, String userDetailAddr, String userCode) {
 		super();
-		this.id = id;
-		this.pwd = pwd;
-		this.name = name;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
 		this.frontResNum = frontResNum;
 		this.backResNum = backResNum;
-		this.phoneNum = phoneNum;
-		this.addr = addr;
-		this.detailAddr = detailAddr;
-		this.userType = userType;
-		this.isBlack = isBlack;
+		this.userPhoneNum = userPhoneNum;
+		this.userAddr = userAddr;
+		this.userDetailAddr = userDetailAddr;
+		this.userCode = userCode;
 	}
 
-	public String getId() {
-		return id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getPwd() {
-		return pwd;
+	public String getUserPwd() {
+		return userPwd;
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setUserPwd(String userPwd) {
+		this.userPwd = userPwd;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getFrontResNum() {
@@ -69,55 +67,47 @@ public class GenericUser{	//일반회원 DTO
 		this.backResNum = backResNum;
 	}
 
-	public String getPhoneNum() {
-		return phoneNum;
+	public String getUserPhoneNum() {
+		return userPhoneNum;
 	}
 
-	public void setPhoneNum(String phoneNum) {
-		this.phoneNum = phoneNum;
+	public void setUserPhoneNum(String userPhoneNum) {
+		this.userPhoneNum = userPhoneNum;
 	}
 
-	public String getAddr() {
-		return addr;
+	public String getUserAddr() {
+		return userAddr;
 	}
 
-	public void setAddr(String addr) {
-		this.addr = addr;
+	public void setUserAddr(String userAddr) {
+		this.userAddr = userAddr;
 	}
 
-	public String getDetailAddr() {
-		return detailAddr;
+	public String getUserDetailAddr() {
+		return userDetailAddr;
 	}
 
-	public void setDetailAddr(String detailAddr) {
-		this.detailAddr = detailAddr;
+	public void setUserDetailAddr(String userDetailAddr) {
+		this.userDetailAddr = userDetailAddr;
 	}
 
-	public String getUserType() {
-		return userType;
+	public String getUserCode() {
+		return userCode;
 	}
 
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-
-	public String getIsBlack() {
-		return isBlack;
-	}
-
-	public void setIsBlack(String isBlack) {
-		this.isBlack = isBlack;
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 
 	@Override
 	public String toString() {
-		return "GenericUser [id=" + id + ", pwd=" + pwd + ", name=" + name + ", frontResNum=" + frontResNum
-				+ ", backResNum=" + backResNum + ", phoneNum=" + phoneNum + ", addr=" + addr + ", detailAddr="
-				+ detailAddr + ", userType=" + userType + ", isBlack=" + isBlack + ", toString()=" + super.toString()
-				+ "]";
+		return "GenericUser [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", frontResNum="
+				+ frontResNum + ", backResNum=" + backResNum + ", userPhoneNum=" + userPhoneNum + ", userAddr="
+				+ userAddr + ", userDetailAddr=" + userDetailAddr + ", userCode=" + userCode + ", toString()="
+				+ super.toString() + "]";
 	}
 
-
+	
 
 	
 }
