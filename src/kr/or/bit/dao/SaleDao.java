@@ -32,23 +32,41 @@ public class SaleDao {
 			pstmt = conn.prepareStatement(sql_insert_type);
 			pstmt.setString(1, sale.getType());
 			resultRow = pstmt.executeUpdate();
-			
+			System.out.println("첫번째 쿼리문 완료");
 			
 			//2. 공인중개사 id 가져와서 객체에 넣기
 			//String sql_insert_sale = "insert into sale"
 			
-			String sql_select_reaId = "select reaId from reaUser where reaId=?";
-			pstmt = conn.prepareStatement(sql_select_reaId);
-			pstmt.setString(1, "");
+			//String sql_select_reaId = "select reaId from reaUser where reaId=?";
+			//pstmt = conn.prepareStatement(sql_select_reaId);
+			//pstmt.setString(1, "");
 					
 			//3. 매물 테이블에 객체 넣기
+			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" + 
+								"values(seq_aptNum.nextval, ?,?,?,?,?,?,?,?,?,?,?)";
+			pstmt = conn.prepareStatement(sql_insert_sale);
+			pstmt.setString(1, sale.getAptSize());
+			pstmt.setString(2, sale.getType());
+			pstmt.setString(3, sale.getAddr());
+			pstmt.setString(4, sale.getAptName());
+			pstmt.setString(5, sale.getAptDong());
+			pstmt.setString(6, sale.getAptHo());
+			pstmt.setInt(7, sale.getPrice());
+			pstmt.setString(8, sale.getDirection());
+			pstmt.setString(9, sale.getEtc());
+			pstmt.setString(10, sale.getIsContract());
+			pstmt.setString(11, sale.getId());
+			resultRow = pstmt.executeUpdate();
+			System.out.println("두번째 쿼리문");
 			
+			if(resultRow>0) {
+				conn.commit();
+			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		//1. 매물 번호 부여하기
 		
-		return 0;
+		return resultRow;
 	}
 
 	public Sale getSaleData(String aptNum) { // 매물 한개 읽기 (매물 번호로)

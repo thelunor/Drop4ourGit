@@ -70,9 +70,7 @@ input {
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
 		<!--Join Sections-->
-
 		<section id="id" class="about roomy-100">
-
 			<div class="container">
 				<div class="about_content">
 					<h2>My Page</h2>
@@ -104,7 +102,6 @@ input {
 							<jsp:include page="WEB-INF/include/TableList.jsp"></jsp:include>
 						</div>
 					</div>
-
 
 				</div>
 			</div>

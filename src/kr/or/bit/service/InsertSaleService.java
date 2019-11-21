@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.AdminDao;
+import kr.or.bit.dao.SaleDao;
 import kr.or.bit.dto.GenericUser;
 import kr.or.bit.dto.Sale;
 
@@ -61,10 +62,12 @@ public class InsertSaleService implements Action {
 		sale.setIsContract(isContract);
 		sale.setId(id);
 		
+		
 		System.out.println("데이터" + sale.toString());
 		
 		try {
-			
+			SaleDao dao = new SaleDao();
+			dao.insertSale(sale);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("insertSaleService 실패");

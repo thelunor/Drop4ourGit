@@ -15,7 +15,7 @@
 				%>
 				</li>		
 				<li class="join"><a href="JoinPage.jsp">회원가입</a></li>
-				<li class="mypage"><a href="d">마이페이지</a></li>
+				<li class="mypage"><a href="REAMypage.jsp">마이페이지</a></li>
 				<li class="side-menu">
 				<%
 					String id = null;
