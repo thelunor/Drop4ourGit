@@ -77,7 +77,7 @@ img.avatar {
 		<!--Login Sections-->
 
 		<section id="join" class="about roomy-100">
-			<form action="Join_ok.jsp" method="post" name="loginForm">
+			<form action="InsertREAUserService.d4b" method="post" name="loginForm">
 				<div class="container">
 					<div class="about_content">
 						<div class="row">
@@ -97,13 +97,13 @@ img.avatar {
 									<br> <br>
 									<div class="form-group">
 										<label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-										<input type="text" class="form-control" name="id" id="id"
+										<input type="text" class="form-control" name="reaId" id="reaId"
 											required="required">
 									</div>
 									<div class="form-group">
 										<label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>
-										<input type="password" class="form-control" name="pwd"
-											id="pwd" required="required" placeholder="영문+숫자 7자 이상">
+										<input type="password" class="form-control" name="reaPwd"
+											id="reaPwd" required="required" placeholder="영문+숫자 7자 이상">
 									</div>
 									<div class="form-group">
 										<label>비밀번호 확인 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
@@ -112,13 +112,13 @@ img.avatar {
 									</div>
 									<div class="form-group">
 										<label>이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-										<input type="text" class="form-control" name="name" id="name"
+										<input type="text" class="form-control" name="reaName" id="reaName"
 											required="required">
 									</div>
 									<div class="form-group">
 										<label>휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
-										<input type="password" class="form-control" name="phoneNum"
-											id="phoneNum" required="required" placeholder="010-0000-0000">
+										<input type="password" class="form-control" name="reaPhoneNum"
+											id="reaPhoneNum" required="required" placeholder="010-0000-0000">
 									</div>
 									<div class="form-group">
 										<label>사무소 이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>

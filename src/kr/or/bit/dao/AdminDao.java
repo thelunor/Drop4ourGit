@@ -63,10 +63,7 @@ public class AdminDao {
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			
-			String userCode = "U01";
-			//2. 일반회원 db 저장 (9개 데이터)
-			//String sql_insert_usercode = "insert into genericuser(usercode) values (select usercode from usercode where usercode=?)";
+			//개인회원 db 저장 (9개 데이터)
 			String sql_insert_genericuser = "insert into genericuser(userid,userpwd,username,frontResNum,backResNum,userPhoneNum,useraddr,userDetailAddr,userCode)"
 			+" values(?,?,?,?,?,?,?,?,(select usercode from usercode where usercode=?))";
 			pstmt = conn.prepareStatement(sql_insert_genericuser);
@@ -81,9 +78,6 @@ public class AdminDao {
 			pstmt.setString(9, user.getUserCode());
 			
 			resultRow = pstmt.executeUpdate();
-			System.out.println("유저코드" + userCode);
-
-			System.out.println("resultRow "+resultRow);
 			if(resultRow>0) {
 				System.out.println(" dao 완료");
 			}
@@ -104,7 +98,45 @@ public class AdminDao {
 	}
 
 	public int insertREAUser(REAUser user) { // 중개사회원 추가
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			//공인중개사 회원 db 저장 (10개 데이터)
+			String sql_insert_reauser = "insert into REAUSER(reaId,reaPwd,reaName,reaPhoneNum,officeName,officeAddr,officeDetailAddr,officeHp,regNum,userCode)"
+					+ " values(?,?,?,?,?,?,?,?,?,(select usercode from usercode where usercode=?))";
+			pstmt = conn.prepareStatement(sql_insert_reauser);
+			pstmt.setString(1, user.getReaId());
+			pstmt.setString(2, user.getReaPwd());
+			pstmt.setString(3, user.getReaName());
+			pstmt.setString(4, user.getReaPhoneNum());
+			pstmt.setString(5, user.getOfficeName());
+			pstmt.setString(6, user.getOfficeAddr());
+			pstmt.setString(7, user.getOfficeDetailAddr());
+			pstmt.setString(8, user.getOfficeHp());
+			pstmt.setString(9, user.getRegNum());
+			pstmt.setString(10, user.getUserCode());
+			
+			resultRow = pstmt.executeUpdate();
+
+			if(resultRow>0) {
+				System.out.println(" dao 완료");
+			}
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultRow;
 	}
 
 	public int deleteGenericUser(String id) { // 일반회원 삭제
