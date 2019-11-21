@@ -2,19 +2,19 @@ package kr.or.bit.dto;
 
 public class SaleImage { //매물이미지
 	private int saleImgNum; //매물 사진 번호
-	private String saleImgName; //매물사진 파일명
-	private String saleImgPath; //매물사진 파일경로
+	private String saleImgOriginName; //매물사진 원본 파일명
+	private String saleImgSaveName; //매물사진 저장 파일명
 	private String aptNum; //매물번호
 
 	
 	public SaleImage() {}
 
 
-	public SaleImage(int saleImgNum, String saleImgName, String saleImgPath, String aptNum) {
+	public SaleImage(int saleImgNum, String saleImgOriginName, String saleImgSaveName, String aptNum) {
 		super();
 		this.saleImgNum = saleImgNum;
-		this.saleImgName = saleImgName;
-		this.saleImgPath = saleImgPath;
+		this.saleImgOriginName = saleImgOriginName;
+		this.saleImgSaveName = saleImgSaveName;
 		this.aptNum = aptNum;
 	}
 
@@ -29,23 +29,23 @@ public class SaleImage { //매물이미지
 	}
 
 
-	public String getSaleImgName() {
-		return saleImgName;
+	public String getSaleImgOriginName() {
+		return saleImgOriginName;
 	}
 
 
-	public void setSaleImgName(String saleImgName) {
-		this.saleImgName = saleImgName;
+	public void setSaleImgOriginName(String saleImgOriginName) {
+		this.saleImgOriginName = saleImgOriginName;
 	}
 
 
-	public String getSaleImgPath() {
-		return saleImgPath;
+	public String getSaleImgSaveName() {
+		return saleImgSaveName;
 	}
 
 
-	public void setSaleImgPath(String saleImgPath) {
-		this.saleImgPath = saleImgPath;
+	public void setSaleImgSaveName(String saleImgSaveName) {
+		this.saleImgSaveName = saleImgSaveName;
 	}
 
 
@@ -61,13 +61,9 @@ public class SaleImage { //매물이미지
 
 	@Override
 	public String toString() {
-		return "SaleImage [saleImgNum=" + saleImgNum + ", saleImgName=" + saleImgName + ", saleImgPath=" + saleImgPath
-				+ ", aptNum=" + aptNum + ", toString()=" + super.toString() + "]";
+		return "SaleImage [saleImgNum=" + saleImgNum + ", saleImgOriginName=" + saleImgOriginName + ", saleImgSaveName="
+				+ saleImgSaveName + ", aptNum=" + aptNum + ", toString()=" + super.toString() + "]";
 	}
 
-
-	
-
-	
 	
 }

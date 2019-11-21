@@ -13,6 +13,7 @@ import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.AdminDao;
 import kr.or.bit.dto.GenericUser;
+import kr.or.bit.dto.REAImage;
 import kr.or.bit.dto.REAUser;
 
 public class InsertREAUserService implements Action {
@@ -47,11 +48,13 @@ public class InsertREAUserService implements Action {
 		String regNum = multi.getParameter("regNum");
 		String userCode = multi.getParameter("userCode");
 		
-		String reaImgName ="";
+		String reaImgOriginName =""; //중개사 이미지 원본 파일명
+		String reaImgSaveName = ""; //중개사 이미지 저장 파일명
+		
 		Enumeration filenames = multi.getFileNames();
         String file = (String)filenames.nextElement();
-        reaImgName = multi.getFilesystemName(file);
-        //originFileName = multi.getOriginalFileName(file);
+        reaImgSaveName = multi.getFilesystemName(file);
+        reaImgOriginName = multi.getOriginalFileName(file);
 		
 		//2. 객체에 데이터 저장
 		REAUser user = new REAUser();
@@ -65,6 +68,12 @@ public class InsertREAUserService implements Action {
 		user.setOfficeHp(officeHp);
 		user.setRegNum(regNum);
 		user.setUserCode(userCode);
+		
+		
+		REAImage reaImg = new REAImage();
+		reaImg.setReaId(reaId);
+		reaImg.setReaImgOriginName(reaImgOriginName);
+		reaImg.setReaImgSaveName(reaImgSaveName);
 		
 		System.out.println("데이터" + user.toString());
 		

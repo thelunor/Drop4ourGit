@@ -1,68 +1,58 @@
 package kr.or.bit.dto;
 
 public class REAImage {					//중개사 이미지 DTO
-	private String id;						//중개사 아이디
-	private String reaImgName;	//중개사 이미지파일명
-	private String reaImgPath;		//중개사 이미지파일 경로
-	private String officeImgName;	//사무실 이미지파일명
-	private String officeImgPath;	//사무실 이미지파일 경로
+	private String reaId;						//중개사 아이디
+	private String reaImgOriginName;	//중개사 이미지 원본 파일명
+	private String reaImgSaveName;		//중개사 이미지 저장 파일명
+	
 	
 	public REAImage() {}
 
-	public REAImage(String id, String reaImgName, String reaImgPath, String officeImgName, String officeImgPath) {
+
+	public REAImage(String reaId, String reaImgOriginName, String reaImgSaveName) {
 		super();
-		this.id = id;
-		this.reaImgName = reaImgName;
-		this.reaImgPath = reaImgPath;
-		this.officeImgName = officeImgName;
-		this.officeImgPath = officeImgPath;
+		this.reaId = reaId;
+		this.reaImgOriginName = reaImgOriginName;
+		this.reaImgSaveName = reaImgSaveName;
 	}
 
-	public String getId() {
-		return id;
+
+	public String getReaId() {
+		return reaId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+
+	public void setReaId(String reaId) {
+		this.reaId = reaId;
 	}
 
-	public String getReaImgName() {
-		return reaImgName;
+
+	public String getReaImgOriginName() {
+		return reaImgOriginName;
 	}
 
-	public void setReaImgName(String reaImgName) {
-		this.reaImgName = reaImgName;
+
+	public void setReaImgOriginName(String reaImgOriginName) {
+		this.reaImgOriginName = reaImgOriginName;
 	}
 
-	public String getReaImgPath() {
-		return reaImgPath;
+
+	public String getReaImgSaveName() {
+		return reaImgSaveName;
 	}
 
-	public void setReaImgPath(String reaImgPath) {
-		this.reaImgPath = reaImgPath;
+
+	public void setReaImgSaveName(String reaImgSaveName) {
+		this.reaImgSaveName = reaImgSaveName;
 	}
 
-	public String getOfficeImgName() {
-		return officeImgName;
-	}
-
-	public void setOfficeImgName(String officeImgName) {
-		this.officeImgName = officeImgName;
-	}
-
-	public String getOfficeImgPath() {
-		return officeImgPath;
-	}
-
-	public void setOfficeImgPath(String officeImgPath) {
-		this.officeImgPath = officeImgPath;
-	}
 
 	@Override
 	public String toString() {
-		return "REAImage [id=" + id + ", reaImgName=" + reaImgName + ", reaImgPath=" + reaImgPath + ", officeImgName="
-				+ officeImgName + ", officeImgPath=" + officeImgPath + ", toString()=" + super.toString() + "]";
+		return "REAImage [reaId=" + reaId + ", reaImgOriginName=" + reaImgOriginName + ", reaImgSaveName="
+				+ reaImgSaveName + ", toString()=" + super.toString() + "]";
 	}
+
 	
 	
 }
