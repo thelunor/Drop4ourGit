@@ -10,7 +10,7 @@
 				if(session.getAttribute("id") != null){
 					out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 				}else{
-					out.print("<a href ='LoginService.d4b'>로그인</a>");
+					out.print("<a href ='Login.jsp'>로그인</a>");
 				}	
 				%>
 				</li>		

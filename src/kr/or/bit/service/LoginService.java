@@ -21,46 +21,46 @@ public class LoginService implements Action {
 		String pwd = request.getParameter("pwd");
 		System.out.println(id);
 		System.out.println(pwd);
+
 		try {
 
 				AdminDao dao = new AdminDao();
 				boolean result = dao.adminLogin(id, pwd);
 
 				if (result) { // 로그인 완료		
-					session.setAttribute("id", id);
-					System.out.println("로그인 완료1");
 					forward.setPath("Main.jsp");
-					System.out.println("로그인 완료2");
+					session.setAttribute("id", id);
+					
 					return forward;
 					
 				} else {
 					forward.setPath("Login.jsp");
-				}				
-				System.out.println("지나가기");
+				}								
+			
+
+			
 				GenericUserDao gdao = new GenericUserDao();
 				boolean gresult = gdao.GenericUserLogin(id, pwd);
 				
 				if (gresult) { // 로그인 완료		
 					forward.setPath("Main.jsp");
 					session.setAttribute("id", id);
-					System.out.println("로그인 완료");
 					return forward;
 				} else {
 					forward.setPath("Login.jsp");
+					
 				}	
 				
 				REAUserDao rdao = new REAUserDao();
 				boolean rresult = rdao.REAUserLogin(id, pwd);
-				System.out.println("나까지 탔음");
 				if (rresult) { // 로그인 완료		
 					forward.setPath("Main.jsp");
 					session.setAttribute("id", id);
-					System.out.println("로그인 완료");
 					return forward;
 				} else {
 					forward.setPath("Login.jsp");
 				}				
-			
+
 
 		} catch (Exception e) {
 			System.out.println("LoginService 예외");

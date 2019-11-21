@@ -34,7 +34,7 @@ public class GenericUserDao {
 	         pstmt.setString(1, userId);
 	         pstmt.setString(2, userPwd);
 	         pstmt.setString(3, "U01");
-	         rs = pstmt.executeQuery();
+	         rs = pstmt.executeQuery();	         
 	         if (rs.next()) {
 	            check = true;
 	         }

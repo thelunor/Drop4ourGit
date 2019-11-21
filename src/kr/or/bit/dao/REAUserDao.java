@@ -34,10 +34,8 @@ public class REAUserDao {
 	         pstmt.setString(2, REAPwd);
 	         pstmt.setString(3, "U02");	         
 	         rs = pstmt.executeQuery();
-	         System.out.println(rs);
 	         if (rs.next()) {
 	            check = true;
-	            System.out.println(check + "얍");
 	         }
 	      } catch (SQLException e) {
 	         e.printStackTrace();

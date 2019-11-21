@@ -457,7 +457,7 @@ public class FrontController extends HttpServlet {
 			}
 		}
 		
-		//로그인 관련 
+		//로그인 관련  controller 191121 이정은
 		else if (url_Command.equals("/LoginService.d4b")) {
 				action = new LoginService(); //
 				forward = action.execute(request, response);
