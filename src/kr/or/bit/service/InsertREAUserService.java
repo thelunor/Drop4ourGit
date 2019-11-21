@@ -1,7 +1,13 @@
 package kr.or.bit.service;
 
+import java.util.Enumeration;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
@@ -14,21 +20,39 @@ public class InsertREAUserService implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
+		 ServletContext application = request.getServletContext();
+	      String uploadpath = application.getRealPath("reaimg"); 
+	      int size = 1024*1024*10; //10M 네이버 계산기
+	     
+	      MultipartRequest multi;
+
+	      try {
+	         multi = new MultipartRequest(
+	               request, //기존에 있는  request 객체의 주소값 
+	               uploadpath, //실 저장 경로 (배포경로)
+	               size, //10M
+	               "UTF-8",
+	               new DefaultFileRenamePolicy() //파일 중복(upload 폴더 안에:a.jpg -> a_1.jpg(업로드 파일 변경))
+	               );
 
 		//1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr
-		String reaId = request.getParameter("reaId");
-		String reaPwd = request.getParameter("reaPwd");
-		String reaName = request.getParameter("reaName");
-		String reaPhoneNum = request.getParameter("reaPhoneNum");
-		String officeName = request.getParameter("officeName");
-		String officeAddr = request.getParameter("officeAddr");
-		String officeDetailAddr = request.getParameter("officeDetailAddr");
-		String officeHp = request.getParameter("officeHp");
-		String regNum = request.getParameter("regNum");
-		String userCode = request.getParameter("userCode");
+		String reaId = multi.getParameter("reaId");
+		String reaPwd = multi.getParameter("reaPwd");
+		String reaName = multi.getParameter("reaName");
+		String reaPhoneNum = multi.getParameter("reaPhoneNum");
+		String officeName = multi.getParameter("officeName");
+		String officeAddr = multi.getParameter("officeAddr");
+		String officeDetailAddr = multi.getParameter("officeDetailAddr");
+		String officeHp = multi.getParameter("officeHp");
+		String regNum = multi.getParameter("regNum");
+		String userCode = multi.getParameter("userCode");
 		
+		String reaImgName ="";
+		Enumeration filenames = multi.getFileNames();
+        String file = (String)filenames.nextElement();
+        reaImgName = multi.getFilesystemName(file);
+        //originFileName = multi.getOriginalFileName(file);
 		
-
 		//2. 객체에 데이터 저장
 		REAUser user = new REAUser();
 		user.setReaId(reaId);
@@ -57,6 +81,11 @@ public class InsertREAUserService implements Action {
 			System.out.println("회원가입 서비스 실패");
 		}
 		
-		return forward;
+	      }catch(Exception e) {
+	    	  
 	}
+			return forward;
+
+	}
+	
 }

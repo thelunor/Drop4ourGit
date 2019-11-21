@@ -77,7 +77,7 @@ img.avatar {
 		<!--Login Sections-->
 
 		<section id="join" class="about roomy-100">
-			<form action="InsertREAUserService.d4b" method="post" name="loginForm">
+			<form action="InsertREAUserService.d4b" method="post" name="loginForm" enctype="multipart/form-data">
 				<div class="container">
 					<div class="about_content">
 						<div class="row">
