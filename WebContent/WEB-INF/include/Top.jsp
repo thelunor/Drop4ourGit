@@ -7,10 +7,10 @@
 			<ul>
 				<li class="login">
 				<%
-				if(session.getAttribute("userid") != null){
-					out.print("<a href ='Logout.jsp'>로그아웃</a>");
+				if(session.getAttribute("id") != null){
+					out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 				}else{
-					out.print("<a href ='Login_form.jsp'>로그인</a>");
+					out.print("<a href ='LoginService.d4b'>로그인</a>");
 				}	
 				%>
 				</li>		
@@ -19,7 +19,7 @@
 				<li class="side-menu">
 				<%
 					String id = null;
-					id = (String)session.getAttribute("userid");
+					id = (String)session.getAttribute("id");
 					
 					if(id != null){
 						if(id.equals("admin")){

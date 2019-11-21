@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
+import kr.or.bit.service.LoginService;
+import kr.or.bit.service.LogoutService;
 import kr.or.bit.service.DeleteBookMarkService;
 import kr.or.bit.service.DeleteContractService;
 import kr.or.bit.service.DeleteGenericUserService;
@@ -453,14 +455,17 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/UserLoginService.d4b")) {
-			try {
-				action = new UserLoginService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
+		
+		//로그인 관련 
+		else if (url_Command.equals("/LoginService.d4b")) {
+				action = new LoginService(); //
+				forward = action.execute(request, response);
+
+		}else if (url_Command.equals("/LogoutService.d4b")) {
+	         action = new LogoutService();
+	         forward = action.execute(request, response);
+		}     
 		// 페이지 이동관련 ==========================================
 
 		// dispatcher =================================================

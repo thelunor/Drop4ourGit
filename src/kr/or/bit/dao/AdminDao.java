@@ -33,14 +33,13 @@ public class AdminDao {
 	      Connection conn = null;
 	      PreparedStatement pstmt = null;
 	      ResultSet rs = null;
-	      System.out.println(check);
+
 	      try {
 	         conn = ds.getConnection();
-	         String sql = "select adminPwd from ADMIN where adminId=? and adminPwd=?";
-	         pstmt = conn.prepareStatement(sql);
+	         String sql_adminLogin = "select adminPwd from Admin where adminId=? and adminPwd=?";
+	         pstmt = conn.prepareStatement(sql_adminLogin);
 	         pstmt.setString(1, adminId);
 	         pstmt.setString(2, adminPwd);
-	         System.out.println(pstmt);
 	         rs = pstmt.executeQuery();
 	         if (rs.next()) {
 	            check = true;
