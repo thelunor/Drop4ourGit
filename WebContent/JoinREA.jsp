@@ -10,8 +10,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d0c0a21e3bf46994d7f7a41d9cc729f&libraries=services"></script>
+    <script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d0c0a21e3bf46994d7f7a41d9cc729f&libraries=services"></script>
    
     <jsp:include page="./css/css.jsp"></jsp:include>
     <jsp:include page="ValidationCheck.jsp"></jsp:include>
@@ -124,16 +126,19 @@
                                         <label>사무소 이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
                                         <input type="text" class="form-control" name="officeName" id="officeName" required="required">
                                     </div>
-                                    <div class="form-group">
-										<label>사무소 주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
+                                   <div class="form-group">
+										<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 										<div class="row">&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" class="form-control" name="officeAddr" id="officeAddr"
 											required="required" placeholder="주소" style="width:72%;"> &nbsp;&nbsp;
-											<input type="button" onclick="searchAddr()" value="주소 검색"><br>
+											<input type="button" onclick="searchAddr()" value="주소 검색"><br><br>
 										</div>
+										<input type="text" class="form-control" name="officeDetailAddr" id="officeDetailAddr"
+											required="required" placeholder="상세주소" style="width:77%;"><br>
 										<div id="map"
 											style="width: 300px; height: 300px; margin-top: 10px; margin-left:17%;display: none"></div>
-									</div>
+									</div><br>
+									
                                     <div class="form-group">
                                         <label>사무소 전화번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
                                         <input type="text" class="form-control" name="officeHp" id="officeHp" required="required" placeholder="02-0000-0000">

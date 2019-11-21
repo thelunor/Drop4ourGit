@@ -44,21 +44,21 @@
     
         <!-- Top jsp -->
         <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed white no-background bootsnav">
-            <jsp:include page="./include/Top.jsp"></jsp:include>
+            <jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
             <!-- Start Side Menu -->
-            <jsp:include page="./include/Side.jsp"></jsp:include>
+            <jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
             <!-- End Side Menu -->
 
         </nav>
         <!--Home Sections-->
-        <jsp:include page="./include/Home.jsp"></jsp:include>
+        <jsp:include page="WEB-INF/include/Home.jsp"></jsp:include>
 
         <!-- scroll up-->
         <div class="scrollup">
             <a href="#"><i class="fa fa-chevron-up"></i></a>
         </div>
         <!-- End off scroll up -->
-        <jsp:include page="./include/Bottom.jsp"></jsp:include>
+        <jsp:include page="WEB-INF/include/Bottom.jsp"></jsp:include>
     </div>
 
     <!-- JS includes -->

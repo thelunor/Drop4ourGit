@@ -34,10 +34,10 @@ font-size: 15px;
 
         <!-- Top jsp -->
         <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-            <jsp:include page="./include/Top.jsp"></jsp:include>
+            <jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
 
             <!-- Side jsp -->
-            <jsp:include page="./include/Side.jsp"></jsp:include>
+            <jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
         </nav>
         <!--Login Sections-->
 
@@ -59,11 +59,11 @@ font-size: 15px;
 									<label class="fancy-checkbox"><input type="checkbox">&nbsp;<b>이용약관, 개인정보 수집 및 이용, 위치정보 이용약관에 모두 동의합니다.</b></h6></label>
 									<br>
                                     </div>
-                                     <jsp:include page="./include/Agree1.jsp"></jsp:include>
+                                     <jsp:include page="WEB-INF/include/Agree1.jsp"></jsp:include>
                                      <br>
-                                     <jsp:include page="./include/Agree2.jsp"></jsp:include>
+                                     <jsp:include page="WEB-INF/include/Agree2.jsp"></jsp:include>
                                      <br>
-                                     <jsp:include page="./include/Agree3.jsp"></jsp:include>
+                                     <jsp:include page="WEB-INF/include/Agree3.jsp"></jsp:include>
 
 								<br>
 								<div class="form-group">
@@ -92,9 +92,9 @@ font-size: 15px;
         </section>
 
         <!-- scroll up-->
-        <jsp:include page="./include/ScrollUp.jsp"></jsp:include>
+        <jsp:include page="WEB-INF/include/ScrollUp.jsp"></jsp:include>
         <!-- End off scroll up -->
-        <jsp:include page="./include/Bottom.jsp"></jsp:include>
+        <jsp:include page="WEB-INF/include/Bottom.jsp"></jsp:include>
     </div>
 
     <!-- JS includes -->

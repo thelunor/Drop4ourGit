@@ -55,10 +55,10 @@ form-control {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="./include/Top.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
-			<jsp:include page="./include/Side.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
 		<!--Login Sections-->
 
@@ -201,9 +201,9 @@ form-control {
 		</section>
 
 		<!-- scroll up-->
-		<jsp:include page="./include/ScrollUp.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/include/ScrollUp.jsp"></jsp:include>
 		<!-- End off scroll up -->
-		<jsp:include page="./include/Bottom.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/include/Bottom.jsp"></jsp:include>
 	</div>
 
 	<!-- JS includes -->

@@ -108,9 +108,9 @@ table {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="./include/Top.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
 			<!-- Side jsp -->
-			<jsp:include page="./include/Side.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
 		<!--Join Sections-->
 		<section id="id" class="about roomy-100">
@@ -150,7 +150,7 @@ table {
 					<br>
 					<div class="row">
 						<div class="col-md-12">
-							<jsp:include page="./include/HouseList.jsp"></jsp:include>
+							<jsp:include page="WEB-INF/include/HouseList.jsp"></jsp:include>
 						</div>
 					</div>
 				</div>
@@ -161,9 +161,9 @@ table {
 
 
 		<!-- scroll up-->
-		<jsp:include page="./include/ScrollUp.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/include/ScrollUp.jsp"></jsp:include>
 		<!-- End off scroll up -->
-		<jsp:include page="./include/Bottom.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/include/Bottom.jsp"></jsp:include>
 	</div>
 
 	<!-- JS includes -->

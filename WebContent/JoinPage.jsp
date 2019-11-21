@@ -37,14 +37,14 @@ padding : 10px;
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="./include/Top.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
-			<jsp:include page="./include/Side.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
 		<!--Login Sections-->
 		<section id="id" class="about roomy-100">
-			<form action="Login_ok.jsp" method="post" name="loginForm">
+			<div action="Login_ok.jsp" method="post" name="loginForm">
 				<div class="container">
 					<div class="about_content">
 						<div class="row">
@@ -78,7 +78,7 @@ padding : 10px;
 								<br>
 									<h5><i class="fas fa-user"></i> 개인회원</h5>
 									<br><p>맞집의 다양한 정보와 서비스를 모두 이용하실 수 있습니다.</p><br>
-									<button type="submit" class="btn btn-primary btn-block btn-lg">Join</button>
+									<button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="location.href='JoinMember.jsp'">Join</button>
 								</div>
 
 							</div>
@@ -87,7 +87,7 @@ padding : 10px;
 								<br>
 									<h5><i class="fas fa-home"></i> 공인중개사회원</h5>
 									<br><p>맞집의 중개사 지원을 위한 서비스를 모두 이용하실 수 있습니다.</p><br>
-									<button type="submit" class="btn btn-primary btn-block btn-lg">Join</button>
+									<button type="submit" class="btn btn-primary btn-block btn-lg"  onclick="location.href='JoinREA.jsp'">Join</button>
 								</div>
 
 							</div>
@@ -97,14 +97,14 @@ padding : 10px;
 					<!--End off row-->
 				</div>
 				<!--End off container -->
-			</form>
+			</div>
 		</section>
 
 
 		<!-- scroll up-->
-		<jsp:include page="./include/ScrollUp.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/include/ScrollUp.jsp"></jsp:include>
 		<!-- End off scroll up -->
-		<jsp:include page="./include/Bottom.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/include/Bottom.jsp"></jsp:include>
 	</div>
 
 	<!-- JS includes -->

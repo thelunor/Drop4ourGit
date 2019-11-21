@@ -129,11 +129,14 @@ img.avatar {
 										<div class="row">&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" class="form-control" name="addr" id="addr"
 											required="required" placeholder="주소" style="width:72%;"> &nbsp;&nbsp;
-											<input type="button" onclick="searchAddr()" value="주소 검색"><br>
+											<input type="button" onclick="searchAddr()" value="주소 검색"><br><br>
 										</div>
+										<input type="text" class="form-control" name="detailAddr" id="detailAddr"
+											required="required" placeholder="상세주소" style="width:77%;"><br>
 										<div id="map"
 											style="width: 300px; height: 300px; margin-top: 10px; margin-left:17%;display: none"></div>
-									</div>
+									</div><br>
+									
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6">
