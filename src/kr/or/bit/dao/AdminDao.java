@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.or.bit.dto.GenericUser;
+import kr.or.bit.dto.REAImage;
 import kr.or.bit.dto.REAUser;
 import kr.or.bit.utils.DB_Close;
 
@@ -97,13 +98,14 @@ public class AdminDao {
 		return resultRow;
 	}
 
-	public int insertREAUser(REAUser user) { // 중개사회원 추가
+	public int insertREAUser(REAUser user, REAImage reaImg) { // 중개사회원 추가
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			//공인중개사 회원 db 저장 (10개 데이터)
+			conn.setAutoCommit(false); //트랜잭션 
+			//1. 공인중개사 회원 db 저장 (10개 데이터)
 			String sql_insert_reauser = "insert into REAUSER(reaId,reaPwd,reaName,reaPhoneNum,officeName,officeAddr,officeDetailAddr,officeHp,regNum,userCode)"
 					+ " values(?,?,?,?,?,?,?,?,?,(select usercode from usercode where usercode=?))";
 			pstmt = conn.prepareStatement(sql_insert_reauser);
@@ -120,8 +122,16 @@ public class AdminDao {
 			
 			resultRow = pstmt.executeUpdate();
 
+			String sql_insert_reaimg = "insert into reaimage(reaId, reaImgOriginName,reaImgSaveName) values(?,?,?)";
+			pstmt = conn.prepareStatement(sql_insert_reaimg);
+			pstmt.setString(1, reaImg.getReaId());
+			pstmt.setString(2, reaImg.getReaImgOriginName());
+			pstmt.setString(3, reaImg.getReaImgSaveName());
+			resultRow = pstmt.executeUpdate();
+
 			if(resultRow>0) {
-				System.out.println(" dao 완료");
+				System.out.println(" dao commit 완료");
+				conn.commit(); //2개의 insert 완료시
 			}
 			
 			

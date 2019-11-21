@@ -18,6 +18,7 @@ public class REAImageDao {
 
 	/* 공인중개사 이미지 넣기, 이미지 불러오기, 이미지 수정하기, 이미지 삭제(공인중개사 id로) */
 	public int insertREAImg(REAImage reaImg) { // 공인중개사 이미지 넣기
+			
 		return 0;
 	}
 

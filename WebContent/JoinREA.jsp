@@ -92,7 +92,7 @@ img.avatar {
 									<div class="form-group" style="text-align: center">
 										<img id="preview" src="images/profile.png"
 											style="width: 200px" alt="Profile"> <br> <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="filename"><br>
+										&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="filename" id="getfile" accept="image/*"><br>
 									</div>
 									<br> <br>
 									<div class="form-group">
@@ -242,6 +242,21 @@ img.avatar {
 				}
 			}).open();
 		}
+		
+		var file = document.querySelector('#getfile');
+
+		file.onchange = function () { 
+		    var fileList = file.files ;
+		    
+		    // 읽기
+		    var reader = new FileReader();
+		    reader.readAsDataURL(fileList [0]);
+
+		    //로드 한 후
+		    reader.onload = function  () {
+		        document.querySelector('#preview').src = reader.result ;
+		    }; 
+		};
 	</script>
 
 </body>
