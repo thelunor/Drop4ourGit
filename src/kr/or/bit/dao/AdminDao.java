@@ -28,8 +28,28 @@ public class AdminDao {
 		ds = (DataSource) context.lookup("java:comp/env/jdbc/oracle");
 	}
 
-	public boolean userLogin(String id, String pwd) { // 로그인
-		return false;
+	public boolean adminLogin(String adminId, String adminPwd) { // 관리자 로그인 191121 이정은
+	      boolean check = false;
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      System.out.println(check);
+	      try {
+	         conn = ds.getConnection();
+	         String sql = "select adminPwd from ADMIN where adminId=? and adminPwd=?";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, adminId);
+	         pstmt.setString(2, adminPwd);
+	         System.out.println(pstmt);
+	         rs = pstmt.executeQuery();
+	         if (rs.next()) {
+	            check = true;
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+
+	      return check;
 	}
 
 	
@@ -61,6 +81,7 @@ public class AdminDao {
 	public int insertGenericUser(GenericUser user) { // 일반회원 추가
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		System.out.println("얖");
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
