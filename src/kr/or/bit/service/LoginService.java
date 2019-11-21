@@ -16,52 +16,40 @@ public class LoginService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
-		
+
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		System.out.println(id);
-		System.out.println(pwd);
 
 		try {
-
-				AdminDao dao = new AdminDao();
-				boolean result = dao.adminLogin(id, pwd);
-
-				if (result) { // 로그인 완료		
-					forward.setPath("Main.jsp");
-					session.setAttribute("id", id);
-					
-					return forward;
-					
-				} else {
-					forward.setPath("Login.jsp");
-				}								
+			AdminDao aDao = new AdminDao();
+			boolean aResult = aDao.adminLogin(id, pwd);
+			if (aResult) { // 로그인 완료
+				forward.setPath("Main.jsp");
+				session.setAttribute("id", id);
+				return forward;
+			} else {
+				forward.setPath("Login.jsp");
+			}
 			
-
+			GenericUserDao gDao = new GenericUserDao();
+			String gResult = gDao.GenericUserLogin(id, pwd);
+			if (gResult.equals("black")) { // 로그인 완료
+				forward.setPath("Main.jsp");
+				session.setAttribute("id", id);
+				return forward;
+			} else {
+				forward.setPath("Login2.jsp");
+			}
 			
-				GenericUserDao gdao = new GenericUserDao();
-				boolean gresult = gdao.GenericUserLogin(id, pwd);
-				
-				if (gresult) { // 로그인 완료		
-					forward.setPath("Main.jsp");
-					session.setAttribute("id", id);
-					return forward;
-				} else {
-					forward.setPath("Login.jsp");
-					
-				}	
-				
-				REAUserDao rdao = new REAUserDao();
-				boolean rresult = rdao.REAUserLogin(id, pwd);
-				if (rresult) { // 로그인 완료		
-					forward.setPath("Main.jsp");
-					session.setAttribute("id", id);
-					return forward;
-				} else {
-					forward.setPath("Login.jsp");
-				}				
-
-
+			REAUserDao rDao = new REAUserDao();
+			boolean rResult = rDao.REAUserLogin(id, pwd);
+			if (rResult) { // 로그인 완료
+				forward.setPath("Main.jsp");
+				session.setAttribute("id", id);
+				return forward;
+			} else {
+				forward.setPath("Login.jsp");
+			}
 		} catch (Exception e) {
 			System.out.println("LoginService 예외");
 		}

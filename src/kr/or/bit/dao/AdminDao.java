@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import kr.or.bit.dto.Admin;
 import kr.or.bit.dto.GenericUser;
 import kr.or.bit.dto.REAImage;
 import kr.or.bit.dto.REAUser;
@@ -33,7 +34,6 @@ public class AdminDao {
 	      Connection conn = null;
 	      PreparedStatement pstmt = null;
 	      ResultSet rs = null;
-
 	      try {
 	         conn = ds.getConnection();
 	         String sql_adminLogin = "select adminPwd from Admin where adminId=? and adminPwd=?";
@@ -41,13 +41,14 @@ public class AdminDao {
 	         pstmt.setString(1, adminId);
 	         pstmt.setString(2, adminPwd);
 	         rs = pstmt.executeQuery();
+	        
 	         if (rs.next()) {
 	            check = true;
 	         }
 	      } catch (SQLException e) {
 	         e.printStackTrace();
 	      }
-
+	      
 	      return check;
 	}
 
