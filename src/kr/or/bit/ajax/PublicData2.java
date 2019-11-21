@@ -41,7 +41,7 @@ public class PublicData2 extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         parameter += "&" + "startmonth=201901";
-        parameter = parameter + "&" + "endmonth=201907";
+        parameter = parameter + "&" + "endmonth=201908";
         parameter = parameter + "&" + "region=11000";
         parameter = parameter + "&" + "contractType=1";  
 

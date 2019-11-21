@@ -50,19 +50,19 @@ $(function() {
 	                  arrTest.push(rsRow2[i]);
 	                 }
 	               });
-	               for(i=0; i<7; i++){
+	               for(i=0; i<8; i++){
 	                  microData.push(parseInt(arrTest[i]));
 	               }
-	               for(i=7; i<14; i++){
+	               for(i=7; i<16; i++){
 	                  smallData.push(parseInt(arrTest[i]));
 	               }
-	               for(i=14; i<21; i++){
+	               for(i=14; i<24; i++){
 	                  middleData.push(parseInt(arrTest[i]));
 	               }
-	               for(i=21; i<28; i++){
+	               for(i=21; i<32; i++){
 	                  middleBigData.push(parseInt(arrTest[i]));
 	               }
-	               for(i=28; i<35; i++){
+	               for(i=28; i<40; i++){
 	                  bigData.push(parseInt(arrTest[i]));
 	               }
 	               
@@ -75,7 +75,7 @@ $(function() {
 			var lineChartData = {
 
 				labels : ['2019.01', '2019.02', '2019.03', '2019.04',
-						'2019.05', '2019.06', '2019.07'],
+						'2019.05', '2019.06', '2019.07', '2019.08'],
 				datasets : [{
 					label : '초소형(24평 미만)',
 					borderColor : window.chartColors.red,

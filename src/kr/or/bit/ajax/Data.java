@@ -55,9 +55,9 @@ public class Data extends HttpServlet {
         lawd.add(11500); //강서구
         
         ArrayList<Integer> date = new ArrayList<>();
-        date.add(201908);
         date.add(201909);
         date.add(201910);
+        date.add(201911);
         
         datalist.append("[");
         for(int j = 0; j < date.size() ; j++) {
@@ -68,7 +68,6 @@ public class Data extends HttpServlet {
         	parameter2 += "&" + "LAWD_CD="+lawd.get(i);
                		
             addr = temp + parameter2+parameter3;
-            System.out.println(addr);
             
             URL url = new URL(addr);
             

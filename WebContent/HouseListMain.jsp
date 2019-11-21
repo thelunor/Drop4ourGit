@@ -7,12 +7,9 @@
 <title>Drop 4our bit</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css?family=Jua&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=668464eb0d779bb6eecda046a974a34b"></script>
+<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=668464eb0d779bb6eecda046a974a34b"></script>
 <jsp:include page="./css/css.jsp"></jsp:include>
 <style type="text/css">
 .input-group {
@@ -77,25 +74,6 @@ table {
 	border-spacing: 0;
 }
 
-.notice {
-	width: 100%;
-	height: 50px;
-	overflow: hidden;
-	background-color: #fff;
-
-}
-
-.rolling {
-	position: relative;
-	width: 100%;
-	height: auto;
-}
-
-.rolling li {
-	width: 100%;
-	height: 50px;
-	line-height: 50px;
-}
 </style>
 </head>
 <jsp:include page="./css/css.jsp"></jsp:include>
@@ -126,27 +104,14 @@ table {
 									<input type="text" placeholder="법정동 검색" id="member_search"
 										name="member_search" style="width: 200px; height: 50px;">
 								</form>
-
 								<div class="input-group-append ">
 									<button type="submit" class="btn btn-primary btn-block btn-lg">검색</button>
 								</div>
 							</div>
 							<br>
-							<p style="font-size: 18px; font-family: 'Jua', sans-serif;">
-								검색 결과 &nbsp;&nbsp;자치구 <i class="fas fa-angle-right"></i> 법정동
-							</p>
 						</div>
 					</div>
-					<br>
-					<div class="notice">
-						<ul class="rolling">
-							<li>&nbsp;&nbsp;&nbsp;공지사항 내용 1입니다.</li>
-							<li>&nbsp;&nbsp;&nbsp;공지사항 내용 2입니다.</li>
-							<li>&nbsp;&nbsp;&nbsp;공지사항 내용 3입니다.</li>
-							<li>&nbsp;&nbsp;&nbsp;공지사항 내용 4입니다.</li>
-							<li>&nbsp;&nbsp;&nbsp;공지사항 내용 5입니다.</li>
-						</ul>
-					</div>
+					<jsp:include page="Topic.jsp"></jsp:include>
 					<br>
 					<div class="row">
 						<div class="col-md-12">
@@ -168,32 +133,5 @@ table {
 
 	<!-- JS includes -->
 	<jsp:include page="./js/js.jsp"></jsp:include>
-	<script>
-		$(document).ready(function() {
-			var height = $(".notice").height();
-			var num = $(".rolling li").length;
-			var max = height * num;
-			var move = 0;
-			function noticeRolling() {
-				move += height;
-				$(".rolling").animate({
-					"top" : -move
-				}, 600, function() {
-					if (move >= max) {
-						$(this).css("top", 0);
-						move = 0;
-					}
-					;
-				});
-			}
-			;
-			noticeRollingOff = setInterval(noticeRolling, 1000);
-			$(".rolling").append($(".rolling li").first().clone());
-
-			$(".rolling_start").click(function() {
-				noticeRollingOff = setInterval(noticeRolling, 1000);
-			});
-		});
-	</script>
 </body>
 </html>
