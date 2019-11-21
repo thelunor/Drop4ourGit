@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
-import kr.or.bit.dao.UserDao;
+import kr.or.bit.dao.AdminDao;
 import kr.or.bit.dto.GenericUser;
 
 public class InsertGenericUserService implements Action {
@@ -15,22 +15,31 @@ public class InsertGenericUserService implements Action {
 		ActionForward forward = new ActionForward();
 
 		//1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr
-		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
-		String name = request.getParameter("name");
+		String userId = request.getParameter("userId");
+		String userPwd = request.getParameter("userPwd");
+		String userName = request.getParameter("userName");
 		String frontResNum = request.getParameter("frontResNum");
 		String backResNum = request.getParameter("backResNum");
-		String phoneNum = request.getParameter("phoneNum");
-		String addr = request.getParameter("addr");
-		String detailAddr = request.getParameter("detailAddr");
-		
+		String userPhoneNum = request.getParameter("userPhoneNum");
+		String userAddr = request.getParameter("userAddr");
+		String userDetailAddr = request.getParameter("userDetailAddr");
+		String userCode = request.getParameter("userCode");
 
 		//2. 객체에 데이터 저장
 		GenericUser user = new GenericUser();
+		user.setUserId(userId);
+		user.setUserPwd(userPwd);
+		user.setUserName(userName);
+		user.setFrontResNum(frontResNum);
+		user.setBackResNum(backResNum);
+		user.setUserPhoneNum(userPhoneNum);
+		user.setUserAddr(userAddr);
+		user.setUserDetailAddr(userDetailAddr);
 		
+		System.out.println(user.toString());
 		try {
 			//3. DB 저장
-			UserDao dao = new UserDao();
+			AdminDao dao = new AdminDao();
 			int result = dao.insertGenericUser(user);
 			if(result > 0) {
 				forward.setPath("Main.jsp");

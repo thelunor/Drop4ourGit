@@ -2,6 +2,8 @@ package kr.or.bit.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.naming.Context;
@@ -11,15 +13,16 @@ import javax.sql.DataSource;
 
 import kr.or.bit.dto.GenericUser;
 import kr.or.bit.dto.REAUser;
+import kr.or.bit.utils.DB_Close;
 
-public class UserDao {
+public class AdminDao {
 	/*
 	 * 로그인 체크, 모든 회원 검색, 타입별 회원 모두 검색, 아이디로 일반유저 찾기, 주민번호로 일반유저 찾기, 아이디로 중개사유저 찾기,
 	 * 사업자등록번호로 중개사유저 찾기, 일반회원 추가 삭제, 공인중개사 추가 삭제, 블랙리스트 추가 삭제 기능 클래스
 	 */
 	DataSource ds = null;
 
-	public UserDao() throws NamingException {
+	public AdminDao() throws NamingException {
 		Context context = new InitialContext();
 		ds = (DataSource) context.lookup("java:comp/env/jdbc/oracle");
 	}
@@ -59,12 +62,37 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		int resultRow = 0;
 		try {
-			conn = ds.getConnection();
-			String sql = "insert into usertable() ";
+			conn = ds.getConnection();			
+						
+			//2. 일반회원 db 저장 (9개 데이터)
+			String sql_insert_genericuser = "insert into genericuser(userid,userpwd,username,frontResNum,backResNum,userPhoneNum,useraddr,userDetailAddr,usercode)"
+			+"values(?,?,?,?,?,?,?,?,(select usercode from usercode where usertype=?))";
+			pstmt = conn.prepareStatement(sql_insert_genericuser);
+			pstmt.setString(1, user.getUserId());
+			pstmt.setString(2, user.getUserPwd());
+			pstmt.setString(3, user.getUserName());
+			pstmt.setString(4, user.getFrontResNum());
+			pstmt.setString(5, user.getBackResNum());
+			pstmt.setString(6, user.getUserPhoneNum());
+			pstmt.setString(7, user.getUserAddr());
+			pstmt.setString(8, user.getUserDetailAddr());
+			pstmt.setString(9, "개인회원");
+			resultRow = pstmt.executeUpdate();
+			System.out.println("resultRow "+resultRow);
+			if(resultRow>0) {
+				System.out.println(" dao 완료");
+			}
+			
+			
 		}catch(Exception e) {
-			
+			System.out.println("insert 일반 회원 DAO 오류");
 		}finally {
-			
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return resultRow;
 	}

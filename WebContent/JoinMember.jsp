@@ -91,13 +91,13 @@ img.avatar {
 
 									<div class="form-group">
 										<label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-										<input type="text" class="form-control" name="id"
-											id="od" required="required">
+										<input type="text" class="form-control" name="userId"
+											id="userId" required="required">
 									</div>
 									<div class="form-group">
 										<label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>
-										<input type="password" class="form-control" name="pwd"
-											id="pwd" required="required" placeholder="영문+숫자 7자 이상">
+										<input type="password" class="form-control" name="userPwd"
+											id="userPwd" required="required" placeholder="영문+숫자 7자 이상">
 									</div>
 									<div class="form-group">
 										<label>비밀번호 확인 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
@@ -106,8 +106,8 @@ img.avatar {
 									</div>
 									<div class="form-group">
 										<label>이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-										<input type="text" class="form-control" name="name"
-											id="name" required="required">
+										<input type="text" class="form-control" name="userName"
+											id="userName" required="required">
 									</div>
 									<div class="form-group">
 										<label>주민등록번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
@@ -117,21 +117,20 @@ img.avatar {
 												class="form-control" name="backResNum" id="backResNum"
 												required="required" style="width:41%;">
 										</div>
-
 									</div>
 									<div class="form-group">
 										<label>휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
-										<input type="text" class="form-control" name="phoneNum"
-											id="phoneNum" required="required" placeholder="010-0000-0000">
+										<input type="text" class="form-control" name="userPhoneNum"
+											id="userPhoneNum" required="required" placeholder="010-0000-0000">
 									</div>
 									<div class="form-group">
 										<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 										<div class="row">&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="text" class="form-control" name="addr" id="addr"
+										<input type="text" class="form-control" name="userAddr" id="userAddr"
 											required="required" placeholder="주소" style="width:72%;"> &nbsp;&nbsp;
 											<input type="button" onclick="searchAddr()" value="주소 검색"><br><br>
 										</div>
-										<input type="text" class="form-control" name="detailAddr" id="detailAddr"
+										<input type="text" class="form-control" name="userDetailAddr" id="userDetailAddr"
 											required="required" placeholder="상세주소" style="width:77%;"><br>
 										<div id="map"
 											style="width: 300px; height: 300px; margin-top: 10px; margin-left:17%;display: none"></div>

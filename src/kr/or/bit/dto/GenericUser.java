@@ -9,12 +9,12 @@ public class GenericUser{	//일반회원 DTO
 	private String userPhoneNum;
 	private String userAddr; //주소
 	private String userDetailAddr; //상세주소
-	private String userCode; //유저코드
+	private String userType;
 	
 	public GenericUser() {}
 
 	public GenericUser(String userId, String userPwd, String userName, String frontResNum, String backResNum,
-			String userPhoneNum, String userAddr, String userDetailAddr, String userCode) {
+			String userPhoneNum, String userAddr, String userDetailAddr, String userType) {
 		super();
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -24,7 +24,7 @@ public class GenericUser{	//일반회원 DTO
 		this.userPhoneNum = userPhoneNum;
 		this.userAddr = userAddr;
 		this.userDetailAddr = userDetailAddr;
-		this.userCode = userCode;
+		this.userType = userType;
 	}
 
 	public String getUserId() {
@@ -91,22 +91,23 @@ public class GenericUser{	//일반회원 DTO
 		this.userDetailAddr = userDetailAddr;
 	}
 
-	public String getUserCode() {
-		return userCode;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setUserCode(String userCode) {
-		this.userCode = userCode;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	@Override
 	public String toString() {
 		return "GenericUser [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", frontResNum="
 				+ frontResNum + ", backResNum=" + backResNum + ", userPhoneNum=" + userPhoneNum + ", userAddr="
-				+ userAddr + ", userDetailAddr=" + userDetailAddr + ", userCode=" + userCode + ", toString()="
+				+ userAddr + ", userDetailAddr=" + userDetailAddr + ", userType=" + userType + ", toString()="
 				+ super.toString() + "]";
 	}
-
+	
+	
 	
 
 	
