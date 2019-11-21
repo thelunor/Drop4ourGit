@@ -132,6 +132,7 @@ img.avatar {
 										</div>
 										<input type="text" class="form-control" name="userDetailAddr" id="userDetailAddr"
 											required="required" placeholder="상세주소" style="width:77%;"><br>
+										<input type="hidden" id="userCode" name="userCode" value="U01">
 										<div id="map"
 											style="width: 300px; height: 300px; margin-top: 10px; margin-left:17%;display: none"></div>
 									</div><br>

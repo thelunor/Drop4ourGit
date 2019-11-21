@@ -24,6 +24,8 @@ public class InsertGenericUserService implements Action {
 		String userAddr = request.getParameter("userAddr");
 		String userDetailAddr = request.getParameter("userDetailAddr");
 		String userCode = request.getParameter("userCode");
+		
+		
 
 		//2. 객체에 데이터 저장
 		GenericUser user = new GenericUser();
@@ -35,8 +37,10 @@ public class InsertGenericUserService implements Action {
 		user.setUserPhoneNum(userPhoneNum);
 		user.setUserAddr(userAddr);
 		user.setUserDetailAddr(userDetailAddr);
+		user.setUserCode(userCode);
 		
-		System.out.println(user.toString());
+		System.out.println("데이터" + user.toString());
+		
 		try {
 			//3. DB 저장
 			AdminDao dao = new AdminDao();

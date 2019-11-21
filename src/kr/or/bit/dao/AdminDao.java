@@ -62,11 +62,13 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		int resultRow = 0;
 		try {
-			conn = ds.getConnection();			
-						
+			conn = ds.getConnection();
+			
+			String userCode = "U01";
 			//2. 일반회원 db 저장 (9개 데이터)
-			String sql_insert_genericuser = "insert into genericuser(userid,userpwd,username,frontResNum,backResNum,userPhoneNum,useraddr,userDetailAddr,usercode)"
-			+"values(?,?,?,?,?,?,?,?,(select usercode from usercode where usertype=?))";
+			//String sql_insert_usercode = "insert into genericuser(usercode) values (select usercode from usercode where usercode=?)";
+			String sql_insert_genericuser = "insert into genericuser(userid,userpwd,username,frontResNum,backResNum,userPhoneNum,useraddr,userDetailAddr,userCode)"
+			+" values(?,?,?,?,?,?,?,?,(select usercode from usercode where usercode=?))";
 			pstmt = conn.prepareStatement(sql_insert_genericuser);
 			pstmt.setString(1, user.getUserId());
 			pstmt.setString(2, user.getUserPwd());
@@ -76,8 +78,11 @@ public class AdminDao {
 			pstmt.setString(6, user.getUserPhoneNum());
 			pstmt.setString(7, user.getUserAddr());
 			pstmt.setString(8, user.getUserDetailAddr());
-			pstmt.setString(9, "개인회원");
+			pstmt.setString(9, user.getUserCode());
+			
 			resultRow = pstmt.executeUpdate();
+			System.out.println("유저코드" + userCode);
+
 			System.out.println("resultRow "+resultRow);
 			if(resultRow>0) {
 				System.out.println(" dao 완료");
@@ -85,7 +90,8 @@ public class AdminDao {
 			
 			
 		}catch(Exception e) {
-			System.out.println("insert 일반 회원 DAO 오류");
+			System.out.println(e.getMessage());
+			
 		}finally {
 			DB_Close.close(pstmt);
 			try {
