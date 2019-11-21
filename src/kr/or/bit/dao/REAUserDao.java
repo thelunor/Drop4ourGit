@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.or.bit.dto.REAUser;
+import kr.or.bit.utils.DB_Close;
 
 public class REAUserDao {
 	DataSource ds = null;
@@ -49,8 +50,46 @@ public class REAUserDao {
 		return 0;
 	}
 	
-	public REAUser getREAMypage() { //중개사회원 마이페이지
-		
-		return null;
+	public REAUser getREAMypage(String reaId) { // 중개사회원 마이페이지
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		REAUser reaUser = null;
+		String sql = "select reaId, reaPwd, reaName, reaPhoneNum, officeName, officeAddr, officeDetailAddr, officeHp, regNum, userCode from REAUser where reaId=?";
+
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reaId);
+			reaUser = new REAUser();
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				reaUser.setReaId(rs.getString("reaId"));
+				reaUser.setReaPwd(rs.getString("reaPwd"));
+				reaUser.setReaName(rs.getString("reaName"));
+				reaUser.setReaPhoneNum(rs.getString("reaPhoneNum"));
+				reaUser.setOfficeName(rs.getString("officeName"));
+				reaUser.setOfficeAddr(rs.getString("officeAddr"));
+				reaUser.setOfficeDetailAddr(rs.getString("officeDetailAddr"));
+				reaUser.setOfficeHp(rs.getString("officeHp"));
+				reaUser.setRegNum(rs.getString("regNum"));
+				reaUser.setUserCode(rs.getString("userCode"));
+			}
+
+		} catch (Exception e) {
+			System.out.println("readEmp 오류");
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return reaUser;
 	}
 }

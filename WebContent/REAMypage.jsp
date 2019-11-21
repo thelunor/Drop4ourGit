@@ -1,3 +1,6 @@
+<%@page import="kr.or.bit.dto.REAImage"%>
+<%@page import="kr.or.bit.dto.REAUser"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
@@ -10,7 +13,11 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="./css/css.jsp"></jsp:include>
-
+<% 
+	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
+	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
+	System.out.println(reaImg.getReaImgSaveName());
+%>
 <style type="text/css">
 .input-group {
 	height: 50px;
@@ -50,7 +57,6 @@ input {
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
-
 	<div class="culmn">
 		<!--Home page style-->
 
@@ -73,22 +79,20 @@ input {
 					<br> <br>
 					<div class="row">
 						<div class="col-md-6" style="text-align: center">
-							<img id="preview" src="images/profile.png" style="width: 200px"
+							<img id="preview" src="images/<%=reaImg.getReaImgSaveName()%>" style="width: 200px"
 								alt="Profile"> <br> <br> <input type="text"
 								class="form-control" name="User_Id" id="User_Id"
-								required="required" placeholder="중개인 이름"> <br>
+								required="required"   value="<%=reaUser.getReaName()%>" readonly> <br>
 						</div>
 						<div class="col-md-6">
-							<label>사업자 등록번호 &nbsp;&nbsp;&nbsp;&nbsp;</label> <input
-								type="text" class="form-control" name="User_Id" id="User_Id"
-								required="required"> <label>사무소 이름
-								&nbsp;&nbsp;&nbsp;&nbsp;</label> <input type="text" class="form-control"
-								name="User_Id" id="User_Id" required="required"> <label>연락처
-								&nbsp;&nbsp;&nbsp;&nbsp;</label> <input type="text" class="form-control"
-								name="User_Id" id="User_Id" required="required"> <label>사무소
-								주소 &nbsp;&nbsp;&nbsp;&nbsp;</label> <input type="text"
-								class="form-control" name="User_Id" id="User_Id"
-								required="required"> <br>
+							<label>사업자 등록번호 &nbsp;&nbsp;&nbsp;&nbsp;</label>
+							<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="<%=reaUser.getRegNum()%>" readonly="readonly">
+						 	<label>사무소 이름&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="<%=reaUser.getOfficeName()%>" readonly>
+						 	<label>연락처&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="<%=reaUser.getOfficeHp()%>" readonly> 
+						 	<label>사무소 주소 &nbsp;&nbsp;&nbsp;&nbsp;</label>
+						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="<%=reaUser.getOfficeAddr() + " " + reaUser.getOfficeDetailAddr()%>" readonly> <br>
 						</div>
 					</div>
 					<hr>
