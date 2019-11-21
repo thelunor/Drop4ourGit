@@ -28,6 +28,7 @@ import kr.or.bit.service.GetGenericUserByIdService;
 import kr.or.bit.service.GetGenericUserByResService;
 import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroDataService;
+import kr.or.bit.service.GetREAMypageService;
 import kr.or.bit.service.GetREAScheduleListByDateService;
 import kr.or.bit.service.GetREAScheduleListByIdService;
 import kr.or.bit.service.GetREAScheduleListByScheNumService;
@@ -82,9 +83,9 @@ public class FrontController extends HttpServlet {
 
 		Action action = null;
 		ActionForward forward = null;
-		
-		//삭제=========================================
-		if (url_Command.equals("/DeleteBookMarkService.d4b")) { 
+
+		// 삭제=========================================
+		if (url_Command.equals("/DeleteBookMarkService.d4b")) {
 			action = new DeleteBookMarkService();
 			forward = action.execute(request, response);
 		} else if (url_Command.equals("/DeleteContractService.d4b")) {
@@ -157,8 +158,8 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
-		//Get =====================================
+		}
+		// Get =====================================
 		else if (url_Command.equals("/GetBookMarkService.d4b")) {
 			try {
 				action = new GetBookMarkService(); //
@@ -271,8 +272,15 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (url_Command.equals("/GetREAMypageService.d4b")) {
+			try {
+				action = new GetREAMypageService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} 
-		//insert=============================================
+		// insert=============================================
 		else if (url_Command.equals("/InsertBookMarkService.d4b")) {
 			try {
 				action = new InsertBookMarkService(); //
@@ -350,8 +358,8 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
-		//select ================================================
+		}
+		// select ================================================
 		else if (url_Command.equals("/SelectAllContractsService.d4b")) {
 			try {
 				action = new SelectAllContractsService(); //
@@ -367,7 +375,7 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		//update========================================
+		// update========================================
 		else if (url_Command.equals("/UpdateBlackService.d4b")) {
 			try {
 				action = new UpdateBlackService(); //
@@ -452,16 +460,10 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
-		//페이지 이동관련 ==========================================
-		
-		
-		
-		
-		
-		
-		
-		//dispatcher =================================================
+		}
+		// 페이지 이동관련 ==========================================
+
+		// dispatcher =================================================
 		if (forward != null) {
 			if (forward.isRedirect()) { // true
 				response.sendRedirect(forward.getPath());

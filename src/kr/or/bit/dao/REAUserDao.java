@@ -18,4 +18,9 @@ public class REAUserDao {
 	public int updateREAUser(REAUser user) { // 중개사회원 수정
 		return 0;
 	}
+	
+	public REAUser getREAMypage() { //중개사회원 마이페이지
+		
+		return null;
+	}
 }
