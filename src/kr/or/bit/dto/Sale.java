@@ -1,5 +1,7 @@
 package kr.or.bit.dto;
 
+import java.util.Arrays;
+
 public class Sale { //매물
 	private String aptNum; //매물번호
 	private String aptSize; //면적
@@ -7,7 +9,7 @@ public class Sale { //매물
 	private String addr; //주소
 	private String aptName; //아파트 이름
 	private String aptDong; //동
-	private String aptHo; //호수
+	private String aptHo; //호	
 	private int price; //거래금액
 	private String direction; //향
 	private String etc; //매물 특징
@@ -137,6 +139,7 @@ public class Sale { //매물
 				+ super.toString() + "]";
 	}
 
+	
 	
 	
 }

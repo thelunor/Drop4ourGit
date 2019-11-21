@@ -75,7 +75,7 @@ input {
 						<div class="col-md-6" style="text-align: center">
 							<img id="preview" src="images/profile.png" style="width: 200px"
 								alt="Profile"> <br> <br> <input type="text"
-								class="form-control" name="User_Id" id="User_Id"
+								class="form-control" name="reaId" id="reaId"
 								required="required" placeholder="중개인 이름"> <br>
 						</div>
 						<div class="col-md-6">
