@@ -17,6 +17,7 @@ public class InsertSaleService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
+		int result = 0;
 		//1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr
 		//String aptNum = request.getParameter("aptNum");
 		
@@ -44,7 +45,7 @@ public class InsertSaleService implements Action {
 		}
 		String etc = request.getParameter("etc");
 		String isContract = request.getParameter("isContract");
-		String id = (String) session.getId(); //reaId받아오기
+		String id = request.getParameter("reaId"); //reaId받아오기
 		
 
 		//2. 객체에 데이터 저장
@@ -67,7 +68,12 @@ public class InsertSaleService implements Action {
 		
 		try {
 			SaleDao dao = new SaleDao();
-			dao.insertSale(sale);
+			result = dao.insertSale(sale);
+			if(result > 0) {
+				forward.setPath("REAMypage.jsp");
+			}else {
+				forward.setPath("Main.jsp");
+			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("insertSaleService 실패");

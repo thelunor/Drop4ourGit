@@ -2,6 +2,7 @@ package kr.or.bit.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.naming.Context;
@@ -23,27 +24,15 @@ public class SaleDao {
 	public int insertSale(Sale sale) { // 매물 넣기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
 			conn.setAutoCommit(false); //트랜잭션 처리
-			//1. 거래유형에 거래유형 넣기
-			String sql_insert_type = "insert into type(type) values(?)";
-			pstmt = conn.prepareStatement(sql_insert_type);
-			pstmt.setString(1, sale.getType());
-			resultRow = pstmt.executeUpdate();
-			System.out.println("첫번째 쿼리문 완료");
 			
-			//2. 공인중개사 id 가져와서 객체에 넣기
-			//String sql_insert_sale = "insert into sale"
-			
-			//String sql_select_reaId = "select reaId from reaUser where reaId=?";
-			//pstmt = conn.prepareStatement(sql_select_reaId);
-			//pstmt.setString(1, "");
-					
-			//3. 매물 테이블에 객체 넣기
+			//매물 테이블에 객체 넣기
 			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" + 
-								"values(seq_aptNum.nextval, ?,?,?,?,?,?,?,?,?,?,?)";
+								" values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
 			pstmt = conn.prepareStatement(sql_insert_sale);
 			pstmt.setString(1, sale.getAptSize());
 			pstmt.setString(2, sale.getType());
@@ -57,8 +46,7 @@ public class SaleDao {
 			pstmt.setString(10, sale.getIsContract());
 			pstmt.setString(11, sale.getId());
 			resultRow = pstmt.executeUpdate();
-			System.out.println("두번째 쿼리문");
-			
+			System.out.println("resultRow" + resultRow);
 			if(resultRow>0) {
 				conn.commit();
 			}

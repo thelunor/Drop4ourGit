@@ -51,6 +51,7 @@ public class InsertGenericUserService implements Action {
 				forward.setPath("JoinMember.jsp");
 			}
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			System.out.println("회원가입 서비스 실패");
 		}
 		

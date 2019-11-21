@@ -49,7 +49,6 @@ form-control {
 	border: 1px solid #e5e5e5;
 }
 </style>
-
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
@@ -200,14 +199,14 @@ form-control {
 										</div>
 									</div>
 								</div>
-
+	
 								<br> <br> <br>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!--End off row-->
-
+				<input type="hidden" value="<%=session.getAttribute("reaId")%>" name="reaId" id="reaId" > 
 				<!--End off container -->
 			</form>
 		</section>
