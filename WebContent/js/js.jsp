@@ -9,6 +9,7 @@
 	<script src="assets/js/jquery.easing.1.3.js"></script>
 	<script src="assets/js/slick.min.js"></script>
 	<script src="assets/js/jquery.collapse.js"></script>
-	<script src="assets/js/bootsnav.js"></script>
+
 	<script src="assets/js/plugins.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="assets/js/bootsnav.js"></script>

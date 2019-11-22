@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Theme Made By www.w3schools.com -->
-<title>Bootstrap Theme Company Page</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <style type="text/css">
@@ -59,7 +52,7 @@ a.btn  {
 text-align: center;
 }
 </style>
-</head>
+
 <h6>300개 이상의 매물</h6>
 <p style="font-size: 13px">거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</p>
 <br>
@@ -324,6 +317,3 @@ $(function(){
 });
 	
 </script>
-
-</body>
-</html>
