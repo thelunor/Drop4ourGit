@@ -1,4 +1,4 @@
-package kr.or.bit.dto;
+ package kr.or.bit.dto;
 
 public class REAUser {	//중개사 DTO
 	private String reaId; 
