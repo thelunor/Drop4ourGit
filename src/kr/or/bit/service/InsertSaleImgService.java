@@ -11,9 +11,11 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
+import kr.or.bit.ajax.SaleImgUpload;
 import kr.or.bit.dao.AdminDao;
 import kr.or.bit.dto.REAImage;
 import kr.or.bit.dto.REAUser;
+import kr.or.bit.dto.SaleImage;
 
 public class InsertSaleImgService implements Action {
 
@@ -55,6 +57,7 @@ public class InsertSaleImgService implements Action {
 			reaImgSaveName3 = multi.getFilesystemName(file3);
 			reaImgOriginName3 = multi.getOriginalFileName(file3);
 			
+			SaleImage saleImg = new SaleImage();
 			
 			// 2. 객체에 데이터 저장
 			
