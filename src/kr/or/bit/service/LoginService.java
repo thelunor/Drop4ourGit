@@ -39,12 +39,12 @@ public class LoginService implements Action {
 				if(gResult.equals("U01")) {
 					session.setAttribute("genericUserId", id);
 					request.setAttribute("type", "U01"); //일반 회원
-					forward.setPath("User_Main.jsp");
+					forward.setPath("UserMain.jsp");
 					System.out.println("일반회원 로그인 성공");
 				}else {
 					session.setAttribute("reaUserId", id);
 					request.setAttribute("type", "U02"); //공인중개사 회원
-					forward.setPath("User_Main.jsp");
+					forward.setPath("UserMain.jsp");
 					System.out.println("공인중개사 회원 로그인 성공");
 
 				}

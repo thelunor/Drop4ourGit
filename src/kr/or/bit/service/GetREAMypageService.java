@@ -2,6 +2,7 @@ package kr.or.bit.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
@@ -19,8 +20,8 @@ public class GetREAMypageService implements Action {
 		REAImage reaImg=new REAImage();
 		REAUserDao reaDao = null;
 		REAImageDao imgDao=null;
-		String reaId = "aland";
-		//String reaId = request.getParameter("reaId");
+		HttpSession session = request.getSession();
+		String reaId = (String)session.getAttribute("reaUserId");
 		try {
 
 			forward = new ActionForward();
@@ -28,6 +29,8 @@ public class GetREAMypageService implements Action {
 			imgDao = new REAImageDao();
 			reaUser = reaDao.getREAMypage(reaId);
 			reaImg =imgDao.getREAImg(reaId);
+			System.out.println("사용자" + reaUser.toString());
+			System.out.println("사용자 이미지" + reaImg.toString());
 			
 			if (reaUser != null && reaImg != null) {
 				System.out.println("조회 성공");

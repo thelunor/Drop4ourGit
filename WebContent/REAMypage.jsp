@@ -1,6 +1,6 @@
 <%@page import="kr.or.bit.dto.REAImage"%>
 <%@page import="kr.or.bit.dto.REAUser"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
@@ -16,8 +16,11 @@
 <% 
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
-	System.out.println(reaImg.getReaImgSaveName());
+	//System.out.println(reaImg.getReaImgSaveName());
 %>
+<c:set var="reaUserData" value="<%=reaUser%>"></c:set>
+<c:set var="reaImgData" value="<%=reaImg%>"></c:set>
+
 <style type="text/css">
 .input-group {
 	height: 50px;
@@ -77,20 +80,20 @@ input {
 					<br> <br>
 					<div class="row">
 						<div class="col-md-6" style="text-align: center">
-							<img id="preview" src="images/<%=reaImg.getReaImgSaveName()%>" style="width: 200px"
+							<img id="preview" src="./reaimg/${reaImgData.reaImgSaveName}" style="width: 200px"
 								alt="Profile"> <br> <br> <input type="text"
 								class="form-control" name="User_Id" id="User_Id"
-								required="required"   value="<%=reaUser.getReaName()%>" readonly> <br>
+								required="required"   value="${reaUserData.reaName}" readonly> <br>
 						</div>
 						<div class="col-md-6">
 							<label>사업자 등록번호 &nbsp;&nbsp;&nbsp;&nbsp;</label>
-							<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="<%=reaUser.getRegNum()%>" readonly="readonly">
+							<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="${reaUserData.regNum}" readonly="readonly">
 						 	<label>사무소 이름&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="<%=reaUser.getOfficeName()%>" readonly>
+						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="${reaUserData.officeName}" readonly>
 						 	<label>연락처&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="<%=reaUser.getOfficeHp()%>" readonly> 
+						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="${reaUserData.officeHp}" readonly> 
 						 	<label>사무소 주소 &nbsp;&nbsp;&nbsp;&nbsp;</label>
-						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="<%=reaUser.getOfficeAddr() + " " + reaUser.getOfficeDetailAddr()%>" readonly> <br>
+						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="${reaUserData.officeAddr} ${reaUserData.officeDetailAddr}" readonly> <br>
 						</div>
 					</div>
 					<hr>
