@@ -66,66 +66,80 @@ form-control {
 		<!--Login Sections-->
 
 		<section id="join" class="about roomy-100">
-			<form action="InsertSaleService.d4b" method="post" name="loginForm">
-				<div class="container">
-					<div class="about_content">
+
+			<div class="container">
+				<div class="about_content">
+					<div class="row">
+						<div class="col-md-3"></div>
+						<div class="col-md-6">
+							<div class="signup-form">
+								<br> <br> <br>
+								<h2 style="text-align: center">매물 등록</h2>
+								<br>
+								<hr>
+								<br>
+							</div>
+						</div>
+					</div>
+					<div>
+						<form action="InsertSaleImgService.d4b"
+							enctype="multipart/form-data" id="fileUploadForm">
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;매물
+								사진</label>
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<img id="preview1" src="images/picture.png" alt="Profile">
+										<br> <br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+											type="file" name="files" id="getfile1"><br>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<img id="preview2" src="images/picture.png" alt="Profile">
+										<br> <br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+											type="file" name="files" id="getfile2"><br>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="form-group">
+										<img id="preview3" src="images/picture.png" alt="Profile">
+										<br> <br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+											type="file" name="files" id="getfile3"><br>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-5"></div>
+								<div class="col-sm-2">
+									<button type="submit" class="btn btn-primary btn-block btn-sm"
+										id="submitBtn" style="padding-left:32px;">사진 등록</button>
+								</div>
+								<div class="col-sm-5"></div>
+							</div>
+						</form>
+					</div>
+					<br><br>
+					<form action="InsertSaleService.d4b" enctype="multipart/form-data"
+						id="fileUploadForm">
 						<div class="row">
 							<div class="col-md-3"></div>
 							<div class="col-md-6">
-								<div class="signup-form">
-
-									<br> <br> <br>
-									<h2 style="text-align: center">매물 등록</h2>
-									<br>
-									<hr>
-									<br>
-								</div>
-							</div>
-						</div>
-						<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;매물
-							사진</label>
-						<div class="row">
-							<div class="col-md-4">
 								<div class="form-group">
-
-									<img id="preview1" src="images/picture.png" alt="Profile">
-									<br> <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-										type="file" name="filename" id="getfile1"><br>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<img id="preview2" src="images/picture.png" alt="Profile">
-									<br> <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-										type="file" name="filename" id="getfile2"><br>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<img id="preview3" src="images/picture.png" alt="Profile">
-									<br> <br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-										type="file" name="filename" id="getfile3"><br>
-								</div>
-								<br> <br>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-3"></div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>면적 선택 &nbsp;&nbsp;&nbsp;&nbsp;</label> 									
-									<select class="form-control" style="width: 95%" name="aptSize" id="aptSize">
+									<label>면적 선택 &nbsp;&nbsp;&nbsp;&nbsp;</label> <select
+										class="form-control" style="width: 95%" name="aptSize"
+										id="aptSize">
 										<option value="24">24평 (전용 59㎡)</option>
 										<option value="32">32평 (전용84.9㎡)</option>
 										<option value="42">42평 (전용 116㎡)</option>
 									</select>
 								</div>
 								<div class="form-group">
-									<label>거래 유형 &nbsp;&nbsp;&nbsp;&nbsp;</label> 
-									<select class="form-control" style="width: 95%" name="type" id="type">
+									<label>거래 유형 &nbsp;&nbsp;&nbsp;&nbsp;</label> <select
+										class="form-control" style="width: 95%" name="type" id="type">
 										<option value="sale">매매</option>
 										<option value="lease">전세</option>
 									</select>
@@ -164,12 +178,13 @@ form-control {
 								</div>
 								<div class="form-group">
 									<label>거래 금액 (매매가 | 보증금)&nbsp;&nbsp;&nbsp;&nbsp;</label> <input
-										type="password" class="form-control" name="price"
-										id="price" required="required" placeholder="0억 0000천 만원">
+										type="password" class="form-control" name="price" id="price"
+										required="required" placeholder="0억 0000천 만원">
 								</div>
 								<div class="form-group">
-									<label>향(선택) &nbsp;&nbsp;&nbsp;&nbsp;</label> 
-									<select class="form-control" style="width: 95%" name="direction" id="direction">
+									<label>향(선택) &nbsp;&nbsp;&nbsp;&nbsp;</label> <select
+										class="form-control" style="width: 95%" name="direction"
+										id="direction">
 										<option value="blank">-</option>
 										<option value="south">남향</option>
 										<option value="southEast">남동향</option>
@@ -184,31 +199,36 @@ form-control {
 								<div class="form-group">
 									<label>매물특징 &nbsp;&nbsp;&nbsp;&nbsp;</label>
 									<p>
-										<textarea cols="70" rows="3" placeholder="매물에 관한 부가적인 내용" name="etc" id="etc"></textarea>
+										<textarea cols="70" rows="3" placeholder="매물에 관한 부가적인 내용"
+											name="etc" id="etc"></textarea>
 									</p>
 								</div>
-								<input type="hidden" id="isContract" name="isContract" value="false">
+								<input type="hidden" id="isContract" name="isContract"
+									value="false">
 								<div class="form-group">
 									<div class="row">
 										<div class="col-sm-6">
 											<button type="submit"
-												class="btn btn-primary btn-block btn-lg">Register</button>
+												class="btn btn-primary btn-block btn-lg" id="submitBtn">Register</button>
 										</div>
 										<div class="col-sm-6">
 											<button type="reset" class="btn btn-primary btn-block btn-lg">Cancel</button>
 										</div>
 									</div>
 								</div>
-	
+
 								<br> <br> <br>
 							</div>
 						</div>
-					</div>
+					</form>
+
 				</div>
-				<!--End off row-->
-				<input type="hidden" value="<%=session.getAttribute("reaId")%>" name="reaId" id="reaId" > 
-				<!--End off container -->
-			</form>
+			</div>
+
+			<!--End off row-->
+			<input type="hidden" value="<%=session.getAttribute("reaId")%>"
+				name="reaId" id="reaId">
+			<!--End off container -->
 		</section>
 
 		<!-- scroll up-->
@@ -268,7 +288,7 @@ form-control {
 			}).open();
 		}
 
-				
+		//사진 미리보기
 		var file = document.querySelector('#getfile1');
 		file.onchange = function() {
 			var fileList = file.files;
@@ -280,7 +300,46 @@ form-control {
 				document.querySelector('#preview1').src = reader.result;
 			};
 		};
-		
+
+		//파일 업로드 비동기처리
+		$(document).ready(function() {
+
+			$("#submitBtn").click(function(event) {
+
+				//stop submit the form, we will post it manually.
+				event.preventDefault();
+				// Get form
+				var form = $('#fileUploadForm')[0];
+				// Create an FormData object 
+				var data = new FormData(form);
+				// If you want to add an extra field for the FormData
+				//data.append("CustomField", "This is some extra data, testing");
+				// disabled the submit button
+				$("#submitBtn").prop("disabled", true);
+				$.ajax({
+					type : "POST",
+					enctype : 'multipart/form-data',
+					url : "InsertSaleImgService.d4b",
+					data : data,
+					processData : false,
+					contentType : false,
+					cache : false,
+					timeout : 600000,
+					success : function(data) {
+						console.log("SUCCESS : ", data);
+						$("#submitBtn").prop("disabled", false);
+
+					},
+					error : function(e) {
+						console.log("ERROR : ", e);
+						$("#submitBtn").prop("disabled", false);
+
+					}
+				});
+
+			});
+
+		});
 	</script>
 
 </body>
