@@ -92,7 +92,7 @@ form-control {
 										<img id="preview1" src="images/picture.png" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" id="getfile1"><br>
+											type="file" name="files" id="getfile" onchange="imageURL1(this)"><br>
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -100,7 +100,7 @@ form-control {
 										<img id="preview2" src="images/picture.png" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" id="getfile2"><br>
+											type="file" name="files" id="getfile" onchange="imageURL2(this)"><br>
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -108,7 +108,7 @@ form-control {
 										<img id="preview3" src="images/picture.png" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" id="getfile3"><br>
+											type="file" name="files" class="getfile" onchange="imageURL3(this)"><br>
 									</div>
 								</div>
 							</div>
@@ -289,6 +289,7 @@ form-control {
 		}
 
 		//사진 미리보기
+		/* 
 		var file = document.querySelector('#getfile1');
 		file.onchange = function() {
 			var fileList = file.files;
@@ -300,7 +301,44 @@ form-control {
 				document.querySelector('#preview1').src = reader.result;
 			};
 		};
+ */
+ function imageURL1(input) {
+     if (input.files && input.files[0]) {
+         var reader = new FileReader();
 
+         reader.onload = function(e) {
+             $('#preview1').attr('src', e.target.result);
+         }
+
+         reader.readAsDataURL(input.files[0]);
+     }
+ }
+ function imageURL2(input) {
+     if (input.files && input.files[0]) {
+         var reader = new FileReader();
+
+         reader.onload = function(e) {
+             $('#preview2').attr('src', e.target.result);
+         }
+
+         reader.readAsDataURL(input.files[0]);
+     }
+ }
+ function imageURL3(input) {
+     if (input.files && input.files[0]) {
+         var reader = new FileReader();
+
+         reader.onload = function(e) {
+             $('#preview3').attr('src', e.target.result);
+         }
+
+         reader.readAsDataURL(input.files[0]);
+     }
+ }
+		
+		
+		
+		
 		//파일 업로드 비동기처리
 		$(document).ready(function() {
 
