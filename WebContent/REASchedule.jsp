@@ -120,7 +120,7 @@ h1, h3, #myUL {
 }
 
 .cal-table td.today {
-	background: #ff6863;
+	background: rgb(163, 194, 194, 0.6);
 	border-radius: 50%;
 	color: #fff;
 }
@@ -218,7 +218,7 @@ h1, h3, #myUL {
 	left: 50%;
 	margin-left: -25px;
 	background-color: #999999;
-	z-index: 100;
+	z-index: 1;
 	border-top-right-radius: 50%;
 	border-top-left-radius: 50%;
 	border-bottom-right-radius: 50%;
@@ -441,14 +441,14 @@ h1, h3, #myUL {
 <input type="text" id="myInput" placeholder="일정 추가" style="color : black;">
 </div>
 <div class="col-md-3">
-<button type="button" class="btn btn-primary" onclick="newElement()" >Add</button>
+<button type="button" class="btn btn-primary" onclick="newElement()" id="toDoBtn" >Add</button>
 </div>
 </div>
 </div>
 
 <ul id="myUL" style="font-size: 12px;">
-  <li>11/21 이혜리 - 삼성아파트 매매 계약 (양타)</li>
-  <li>11/22 김진호 - 상담 예약</li>
+  <li>12/02 17:00 이혜리 - 삼성아파트 매매 계약 (양타)</li>
+  <li>12/08 13:00 김진호 - 상담 예약</li>
 </ul>
 </div>
 						</div>
@@ -457,7 +457,7 @@ h1, h3, #myUL {
 							<div class="page-header">
 								<h3 id="timeline">이번 주 스케줄</h3>
 							</div>
-							<ul class="timeline">
+							<ul class="timeline" id="timetable">
 								<li>
 									<div class="timeline-badge">
 										<i class="fas fa-check"></i>
@@ -498,26 +498,16 @@ h1, h3, #myUL {
 									</div>
 								</li>
 								<li class="timeline-inverted">
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4 class="timeline-title">2019.11.22 15:15</h4>
-										</div>
-										<div class="timeline-body">
-											<p>이정은 - 현대아파트 매물 보기 예약</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="timeline-badge info">
+									<div class="timeline-badge success">
 										<i class="fas fa-check"></i>
 									</div>
 									<div class="timeline-panel">
 										<div class="timeline-heading">
-											<h4 class="timeline-title">2019.11.23 11:00</h4>
+											<h4 class="timeline-title">2019.11.21 18:30</h4>
 										</div>
 										<div class="timeline-body">
-											<p>오형남 - 현대 아파트 전세 계약(캠프부동산)</p>
-									</div>
+											<p>오형남 - 현대아파트 매매 계약 (양타)</p>
+										</div>
 									</div>
 								</li>								
 							</ul>
@@ -570,10 +560,54 @@ h1, h3, #myUL {
 	function newElement() {
 	  var li = document.createElement("li");
 	  var inputValue = document.getElementById("myInput").value;
+	  
+	  var count = $('#timetable').children().size();
+	  
+	  if(count%2==0){
+	      var schedule = "";
+	      schedule += "<li>";
+	      schedule += "<div class='timeline-badge'>";
+	      schedule += "	<i class='fas fa-check'></i>";
+	      schedule += "</div>";
+	      schedule += "<div class='timeline-panel'>";
+	      schedule += "	<div class='timeline-heading'>";
+	      schedule += "<h4 class='timeline-title'>2019."+inputValue.substr(0,2)+"."+inputValue.substr(3,3)
+	      												+" "+inputValue.substr(5,7)+"</h4>";
+	      schedule += "</div>";
+	      schedule += "<div class='timeline-body'>";
+	      schedule += "<p>"+inputValue+"</p>";
+	      schedule += "</div>";
+	      schedule += "</div>";
+	      schedule += "</li>";
+	      
+	      $('#timetable').append(schedule);   	
+	      
+	  }else if(count%2==1){		  	  
+	      var schedule = "";
+	      schedule += "<li class='timeline-inverted'>";
+	      schedule += "<div class='timeline-badge success'>";
+	      schedule += "	<i class='fas fa-check'></i>";
+	      schedule += "</div>";
+	      schedule += "<div class='timeline-panel'>";
+	      schedule += "	<div class='timeline-heading'>";
+	      schedule += "<h4 class='timeline-title'>2019."+inputValue.substr(0,2)+"."+inputValue.substr(3,3)
+														+" "+inputValue.substr(5,7)+"</h4>";
+	      schedule += "</div>";
+	      schedule += "<div class='timeline-body'>";
+	      schedule += "<p>"+inputValue+"</p>";
+	      schedule += "</div>";
+	      schedule += "</div>";
+	      schedule += "</li>";
+	      
+	      $('#timetable').append(schedule);      
+	  }
+	  
 	  var t = document.createTextNode(inputValue);
+	  
 	  li.appendChild(t);
+
 	  if (inputValue === '') {
-	    alert("You must write something!");
+	    alert("내용을 입력해주세요");
 	  } else {
 	    document.getElementById("myUL").appendChild(li);
 	  }
@@ -584,7 +618,7 @@ h1, h3, #myUL {
 	  span.className = "close";
 	  span.appendChild(txt);
 	  li.appendChild(span);
-
+     
 	  for (i = 0; i < close.length; i++) {
 	    close[i].onclick = function() {
 	      var div = this.parentElement;

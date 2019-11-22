@@ -56,7 +56,13 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 			close : function(event) { //자동완성창 닫아질때 호출
 			}
 		});
-
+							 
+	$("#submitbtn").click(function() {
+		var textVal= $("#searchInput").val();
+		console.log(textVal);		
+		location.href="'dd.d4b?searchInput=" + textVal + "'";
+	});
+	
 	});
 </script>
 <style type="text/css">
@@ -69,7 +75,7 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
   }
   
 </style>
-	<section id="hello" class="home bg-mega">
+<section id="hello" class="home bg-mega">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -81,12 +87,20 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 							</h1>
 							<br>
 						</div>
-		<div class="input-group">
-			<input class="form-control" id="searchInput" type="text" placeholder="법정명으로 검색"> 
-			<span class="input-group-addon" type="button"><i class="fa fa-search"></i></span>
-		</div>								
+
+						<div class="input-group">
+
+							<input class="form-control" id="searchInput" type="text"
+								placeholder="법정명으로 검색">
+							<div id="data">
+							<button type="submit" id="submitbtn">
+								<i class="fa fa-search"></i>
+							</button>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+</section>
