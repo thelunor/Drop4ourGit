@@ -25,7 +25,7 @@ public class LoginService implements Action {
 			boolean aResult = aDao.adminLogin(id, pwd);
 			if (aResult) { // 관리자 로그인 성공 시
 				forward.setPath("Main.jsp");
-				session.setAttribute("id", id);
+				session.setAttribute("adminId", id);
 				return forward;
 			}
 			GenericUserDao gDao = new GenericUserDao();
@@ -35,9 +35,19 @@ public class LoginService implements Action {
 			System.out.println("gResult: "  + gResult);
 			System.out.println("rResult: " +  rResult);
 			
-			if (gResult.equals("white") || rResult.equals("white")) { //블랙아닌 회원이 로그인했을 때
-				forward.setPath("Main.jsp");
-				session.setAttribute("id", id);
+			if (gResult.equals("U01") || rResult.equals("U02")) { //블랙아닌 회원이 로그인했을 때
+				if(gResult.equals("U01")) {
+					session.setAttribute("genericUserId", id);
+					request.setAttribute("type", "U01"); //일반 회원
+					forward.setPath("User_Main.jsp");
+					System.out.println("일반회원 로그인 성공");
+				}else {
+					session.setAttribute("reaUserId", id);
+					request.setAttribute("type", "U02"); //공인중개사 회원
+					forward.setPath("User_Main.jsp");
+					System.out.println("공인중개사 회원 로그인 성공");
+
+				}
 				return forward;
 			} else if (gResult.equals("black") || rResult.equals("black")) {//블랙회원이 로그인 했을 때
 				forward.setPath("BlackLogin.jsp");

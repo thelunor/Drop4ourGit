@@ -41,7 +41,7 @@ text-align: center;
 					<div class="list-group">
 						<a href="#" class="list-group-item">북마크</a> 
 						<a href="#" class="list-group-item">계약관리</a> 
-						<a href="#" class="list-group-item">정보수정</a>
+						<a href="GenericUserEdit.jsp" class="list-group-item">정보수정</a>
 					</div>
 				</div>
 				<div class="col-lg-1"></div>

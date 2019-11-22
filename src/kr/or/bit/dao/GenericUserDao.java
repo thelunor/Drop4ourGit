@@ -38,14 +38,13 @@ public class GenericUserDao {
 			System.out.println("GenericRS 호출 ****");
 			if (rs.next()) {
 				if (rs.getString("userCode").equals("B01")) {
-					userType = "black";
+					userType = "B01";
 				} else if (!rs.getString("userCode").equals("B01")) {
-					userType = "white";
+					userType = "U01";
 				}
 			} else {
 				userType = "false";
 			}
-			System.out.println(userType);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -53,7 +52,31 @@ public class GenericUserDao {
 	}
 
 	public int updateGenericUser(GenericUser user) { // 일반회원 수정
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			String sql_update_genericUser = "update GENERICUSER set userpwd=?, username=?, userphonenum=?,"
+					+"useraddr=?, userdetailAddr=? where userid=?";
+			
+			pstmt = conn.prepareStatement(sql_update_genericUser);
+			pstmt.setString(1, user.getUserPwd());
+			pstmt.setString(2, user.getUserName());
+			pstmt.setString(3, user.getUserPhoneNum());
+			pstmt.setString(4, user.getUserAddr());
+			pstmt.setString(5, user.getUserDetailAddr());
+			pstmt.setString(6, user.getUserId());
+			
+			resultRow = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			
+		}finally {
+			
+		}
+		return resultRow;
 	}
 
 }

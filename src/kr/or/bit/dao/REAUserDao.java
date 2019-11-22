@@ -37,9 +37,9 @@ public class REAUserDao {
 			System.out.println("REA RS 호출 ****");
 			if (rs.next()) {
 				if (rs.getString("userCode").equals("B02")) {
-					userType = "black";
+					userType = "B02";
 				} else if (!rs.getString("userCode").equals("B02")) {
-					userType = "white";
+					userType = "U02";
 				} 
 			}else {
 				userType = "false";
