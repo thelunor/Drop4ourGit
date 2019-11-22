@@ -1,5 +1,8 @@
 package kr.or.bit.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 
 import javax.naming.Context;
@@ -31,6 +34,33 @@ public class SaleImageDao {
 
 	public int deleteSaleImg(String aptNum) { // 매물 이미지 삭제 (매물 번호로)
 		return 0;
+	}
+
+	public int insertSaleImage(SaleImage saleImg) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			conn.setAutoCommit(false); //트랜잭션 처리
+			
+			//매물 테이블에 객체 넣기
+			String sql_insert_sale =
+			"insert into saleImage(saleImgNum, saleImgSaveName, saleImgOriginName, aptNum) values(seq_saleImg.nextval, ?, ?)";
+			pstmt = conn.prepareStatement(sql_insert_sale);
+			pstmt.setString(1, saleImg.getSaleImgSaveName());
+			pstmt.setString(2, saleImg.getSaleImgOriginName());
+			resultRow = pstmt.executeUpdate();
+			
+			if(resultRow>0) {
+				conn.commit();
+				System.out.println("commit완료");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return resultRow;
 	}
 
 }

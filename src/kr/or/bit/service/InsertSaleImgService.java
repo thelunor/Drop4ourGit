@@ -13,8 +13,11 @@ import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.ajax.SaleImgUpload;
 import kr.or.bit.dao.AdminDao;
+import kr.or.bit.dao.SaleDao;
+import kr.or.bit.dao.SaleImageDao;
 import kr.or.bit.dto.REAImage;
 import kr.or.bit.dto.REAUser;
+import kr.or.bit.dto.Sale;
 import kr.or.bit.dto.SaleImage;
 
 public class InsertSaleImgService implements Action {
@@ -35,35 +38,28 @@ public class InsertSaleImgService implements Action {
 					"UTF-8", new DefaultFileRenamePolicy() // 파일 중복(upload 폴더 안에:a.jpg -> a_1.jpg(업로드 파일 변경))
 			);
 			// 1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr
-
-		
-			String reaImgOriginName1 = ""; // 중개사 이미지 원본 파일명
-			String reaImgSaveName1 = ""; // 중개사 이미지 저장 파일명
-			String reaImgOriginName2 = ""; // 중개사 이미지 원본 파일명
-			String reaImgSaveName2 = ""; // 중개사 이미지 저장 파일명
-			String reaImgOriginName3 = ""; // 중개사 이미지 원본 파일명
-			String reaImgSaveName3 = ""; // 중개사 이미지 저장 파일명
-			
+			String saleImgSaveName="";
+			String saleImgOriginName="";
 			Enumeration filenames = multi.getFileNames();
-			String file1 = (String) filenames.nextElement();
-			reaImgSaveName1 = multi.getFilesystemName(file1);
-			reaImgOriginName1 = multi.getOriginalFileName(file1);
 			
-			String file2 = (String) filenames.nextElement();
-			reaImgSaveName2 = multi.getFilesystemName(file2);
-			reaImgOriginName2 = multi.getOriginalFileName(file2);
+			String file = (String) filenames.nextElement();
 			
-			String file3 = (String) filenames.nextElement();
-			reaImgSaveName3 = multi.getFilesystemName(file3);
-			reaImgOriginName3 = multi.getOriginalFileName(file3);
+			saleImgSaveName = multi.getFilesystemName(file);
+			saleImgOriginName = multi.getOriginalFileName(file);
 			
+			System.out.println(saleImgSaveName);
+			System.out.println(saleImgOriginName);
+			
+			SaleDao saleDao=new SaleDao();
 			SaleImage saleImg = new SaleImage();
-			
-			// 2. 객체에 데이터 저장
-			
-
-
-
+			saleImg.setSaleImgSaveName(saleImgSaveName);
+			saleImg.setSaleImgOriginName(saleImgOriginName);
+			int imgRow=saleDao.insertImg(saleImg);
+//			SaleImage saleImg = new SaleImage();
+//			SaleImageDao imgDao=new SaleImageDao();
+//			saleImg.setSaleImgSaveName(saleImgSaveName);
+//			saleImg.setSaleImgOriginName(saleImgOriginName);
+//			int imgRow=imgDao.insertSaleImage(saleImg);
 			try {
 				// 3. DB 저장
 				
