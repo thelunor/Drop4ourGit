@@ -1,5 +1,6 @@
 package kr.or.bit.dto;
 
+
 public class SaleImage { //매물이미지
 	private int saleImgNum; //매물 사진 번호
 	private String saleImgOriginName; //매물사진 원본 파일명
@@ -65,5 +66,8 @@ public class SaleImage { //매물이미지
 				+ saleImgSaveName + ", aptNum=" + aptNum + ", toString()=" + super.toString() + "]";
 	}
 
+
 	
+
+
 }

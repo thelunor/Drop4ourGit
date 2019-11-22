@@ -92,7 +92,8 @@ form-control {
 										<img id="preview1" src="images/picture.png" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" id="getfile" onchange="imageURL1(this)"><br>
+											type="file" name="files" id="getfile"
+											onchange="imageURL1(this)"><br>
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -100,7 +101,8 @@ form-control {
 										<img id="preview2" src="images/picture.png" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" id="getfile" onchange="imageURL2(this)"><br>
+											type="file" name="files" id="getfile"
+											onchange="imageURL2(this)"><br>
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -108,7 +110,8 @@ form-control {
 										<img id="preview3" src="images/picture.png" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" class="getfile" onchange="imageURL3(this)"><br>
+											type="file" name="files" class="getfile"
+											onchange="imageURL3(this)"><br>
 									</div>
 								</div>
 							</div>
@@ -116,13 +119,14 @@ form-control {
 								<div class="col-sm-5"></div>
 								<div class="col-sm-2">
 									<button type="submit" class="btn btn-primary btn-block btn-sm"
-										id="submitBtn" style="padding-left:32px;">사진 등록</button>
+										id="submitBtn" style="padding-left: 32px;">사진 등록</button>
 								</div>
 								<div class="col-sm-5"></div>
 							</div>
 						</form>
 					</div>
-					<br><br>
+					<br>
+					<br>
 					<form action="InsertSaleService.d4b" enctype="multipart/form-data"
 						id="fileUploadForm">
 						<div class="row">
@@ -288,96 +292,41 @@ form-control {
 			}).open();
 		}
 
-		//사진 미리보기
-		/* 
-		var file = document.querySelector('#getfile1');
-		file.onchange = function() {
-			var fileList = file.files;
-			// 읽기
-			var reader = new FileReader();
-			reader.readAsDataURL(fileList[0]);
-			//로드 한 후
-			reader.onload = function() {
-				document.querySelector('#preview1').src = reader.result;
-			};
-		};
- */
- function imageURL1(input) {
-     if (input.files && input.files[0]) {
-         var reader = new FileReader();
+		function imageURL1(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
 
-         reader.onload = function(e) {
-             $('#preview1').attr('src', e.target.result);
-         }
+				reader.onload = function(e) {
+					$('#preview1').attr('src', e.target.result);
+				}
 
-         reader.readAsDataURL(input.files[0]);
-     }
- }
- function imageURL2(input) {
-     if (input.files && input.files[0]) {
-         var reader = new FileReader();
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		function imageURL2(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
 
-         reader.onload = function(e) {
-             $('#preview2').attr('src', e.target.result);
-         }
+				reader.onload = function(e) {
+					$('#preview2').attr('src', e.target.result);
+				}
 
-         reader.readAsDataURL(input.files[0]);
-     }
- }
- function imageURL3(input) {
-     if (input.files && input.files[0]) {
-         var reader = new FileReader();
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+		function imageURL3(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
 
-         reader.onload = function(e) {
-             $('#preview3').attr('src', e.target.result);
-         }
+				reader.onload = function(e) {
+					$('#preview3').attr('src', e.target.result);
+				}
 
-         reader.readAsDataURL(input.files[0]);
-     }
- }
-		
-		
-		
-		
-		//파일 업로드 비동기처리
-		$(document).ready(function() {
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
 
-			$("#submitBtn").click(function(event) {
-
-				//stop submit the form, we will post it manually.
-				event.preventDefault();
-				// Get form
-				var form = $('#fileUploadForm')[0];
-				// Create an FormData object 
-				var data = new FormData(form);
-				// If you want to add an extra field for the FormData
-				//data.append("CustomField", "This is some extra data, testing");
-				// disabled the submit button
-				$("#submitBtn").prop("disabled", true);
-				$.ajax({
-					type : "POST",
-					enctype : 'multipart/form-data',
-					url : "InsertSaleImgService.d4b",
-					data : data,
-					processData : false,
-					contentType : false,
-					cache : false,
-					timeout : 600000,
-					success : function(data) {
-						console.log("SUCCESS : ", data);
-						$("#submitBtn").prop("disabled", false);
-
-					},
-					error : function(e) {
-						console.log("ERROR : ", e);
-						$("#submitBtn").prop("disabled", false);
-
-					}
-				});
-
-			});
-
-		});
+	
 	</script>
 
 </body>

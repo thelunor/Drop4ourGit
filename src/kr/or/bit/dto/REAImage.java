@@ -1,5 +1,7 @@
 package kr.or.bit.dto;
 
+import java.util.Arrays;
+
 public class REAImage {					//중개사 이미지 DTO
 	private String reaId;						//중개사 아이디
 	private String reaImgOriginName;	//중개사 이미지 원본 파일명
@@ -52,6 +54,7 @@ public class REAImage {					//중개사 이미지 DTO
 		return "REAImage [reaId=" + reaId + ", reaImgOriginName=" + reaImgOriginName + ", reaImgSaveName="
 				+ reaImgSaveName + ", toString()=" + super.toString() + "]";
 	}
+
 
 	
 	
