@@ -55,6 +55,8 @@ import kr.or.bit.service.InsertSaleService;
 import kr.or.bit.service.SelectAllContractsService;
 import kr.or.bit.service.SelectAllTypeUserService;
 import kr.or.bit.service.SelectAllUserService;
+import kr.or.bit.service.SelectGenericUserService;
+import kr.or.bit.service.SelectREAUserService;
 import kr.or.bit.service.UpdateBlackService;
 import kr.or.bit.service.UpdateContractService;
 import kr.or.bit.service.UpdateGenericUserService;
@@ -369,10 +371,33 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/SelectAllTypeUserService.d4b")) {
+		} else if (url_Command.equals("/SelectREAUserService.d4b")) { // 공인중개사회원 목록보기
 			try {
-				action = new SelectAllTypeUserService(); //
+				action = new SelectREAUserService(); //
 				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/SelectREAUserOk.d4b")) { // 공인중개사회원 목록보기
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/AdminMain.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/SelectGenericUserService.d4b")) { // 개인회원 목록보기
+			try {
+				action = new SelectGenericUserService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/SelectGenericUserOk.d4b")) { // 개인회원 목록보기
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/AdminMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

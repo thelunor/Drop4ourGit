@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -131,5 +133,41 @@ public class REAUserDao {
 			DB_Close.close(pstmt);
 		}
 		return reaUser;
+	}
+
+	public List<REAUser> getREAUserList() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<REAUser> rlist = null;
+		
+		try { 
+			conn = ds.getConnection();
+			String sql = "select reaId, reaName, reaPhoneNum, officeName, officeAddr, officeHP, regNum "
+						+ "from reauser where usercode=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "U02");
+			rs = pstmt.executeQuery();
+			rlist = new ArrayList<REAUser>();
+			
+			while (rs.next()) {
+				REAUser reauser = new REAUser();
+				
+				reauser.setReaId(rs.getString("reaId"));
+				reauser.setReaName(rs.getString("reaName"));
+				reauser.setReaPhoneNum(rs.getString("reaPhoneNum"));
+				reauser.setOfficeName(rs.getString("officeName"));
+				reauser.setOfficeAddr(rs.getString("officeAddr"));
+				reauser.setOfficeHp(rs.getString("officeHP"));
+				reauser.setRegNum(rs.getString("regNum"));
+				
+				rlist.add(reauser);
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return rlist;
 	}
 }

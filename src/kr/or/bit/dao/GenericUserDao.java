@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -78,5 +80,38 @@ public class GenericUserDao {
 		}
 		return resultRow;
 	}
-
+	
+	public List<GenericUser> getGenericUserList() { // 개인회원 목록보기 191122 김진호
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<GenericUser> glist = null;
+		
+		try { 
+			conn = ds.getConnection();
+			String sql = "select userId, userName, frontResNum, userPhoneNum, userAddr from genericuser where usercode=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "U01");
+			rs = pstmt.executeQuery();
+			glist = new ArrayList<GenericUser>();
+			
+			while (rs.next()) {
+				GenericUser genericuser = new GenericUser();
+				
+				genericuser.setUserId(rs.getString("userId"));
+				genericuser.setUserName(rs.getString("userName"));
+				genericuser.setFrontResNum(rs.getString("frontResNum"));
+				genericuser.setUserPhoneNum(rs.getString("userPhoneNum"));
+				genericuser.setUserAddr(rs.getString("userAddr"));
+				
+				glist.add(genericuser);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("guserdao 예외발생");
+			System.out.println(e.getMessage());
+		}
+		
+		return glist;
+	}
 }
