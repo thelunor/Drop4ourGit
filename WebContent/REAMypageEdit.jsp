@@ -25,7 +25,8 @@
 <% 
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
-	//System.out.println(reaImg.getReaImgSaveName());
+	System.out.println(reaUser.toString());
+	
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
 <c:set var="reaImgData" value="<%=reaImg%>"></c:set>
@@ -78,7 +79,7 @@ img.avatar {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/REAUser_Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
@@ -86,7 +87,7 @@ img.avatar {
 		<!--Login Sections-->
 
 		<section id="join" class="about roomy-100">
-			<form action="InsertREAUserService.d4b" method="post" name="loginForm" enctype="multipart/form-data">
+			<form action="UpdateREAUserService.d4b" method="post" name="loginForm" enctype="multipart/form-data">
 				<div class="container">
 					<div class="about_content">
 						<div class="row">
@@ -100,7 +101,9 @@ img.avatar {
 									<hr>
 									<div class="form-group" style="text-align: center">
 										<img id="preview" src="./reaimg/${reaImgData.reaImgSaveName}"
-											style="width: 200px" alt="Profile"> <br> <br>
+											style="width: 200px" alt="Profile">
+											<input type="hidden" name="reaId" value="${reaImgData.reaImgSaveName}">
+											 <br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="filename" id="getfile" accept="image/*"><br>
 									</div>
 									<br> <br>
@@ -151,12 +154,12 @@ img.avatar {
 										<label>사무소 전화번호 &nbsp;&nbsp;&nbsp;&nbsp;<span
 											id="tdId"></span></label> <input type="text" class="form-control"
 											name="officeHp" id="officeHp" required="required"
-											placeholder="02-0000-0000">
+											placeholder="02-0000-0000" value="${reaUserData.regNum}">
 									</div>
 									<div class="form-group">
 										<label>사업자등록번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
 										<input type="text" class="form-control" name="regNum"
-											id="regNum" required="required" placeholder="000-00-00000" value="${reaUserData.regNum}">
+											id="regNum" required="required" placeholder="000-00-00000" value="${reaUserData.officeHp}">
 									</div>
 									<input type="hidden" id="userCode" name="userCode" value="U02">
 
@@ -164,18 +167,15 @@ img.avatar {
 										<div class="row">
 											<div class="col-sm-6">
 												<button type="submit"
-													class="btn btn-primary btn-block btn-lg">Sign Up</button>
+													class="btn btn-primary btn-block btn-lg">수정 완료</button>
 											</div>
 											<div class="col-sm-6">
 												<button type="reset"
-													class="btn btn-primary btn-block btn-lg">Cancel</button>
+													class="btn btn-primary btn-block btn-lg">취소</button>
 											</div>
 										</div>
 									</div>
 									<br> <br>
-									<div class="text-center">
-										이미 회원이신가요? <a href="Login_form.jsp">Click here</a>
-									</div>
 
 									<br> <br> <br>
 								</div>

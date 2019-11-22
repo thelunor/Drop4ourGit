@@ -40,19 +40,60 @@ public class REAUserDao {
 					userType = "B02";
 				} else if (!rs.getString("userCode").equals("B02")) {
 					userType = "U02";
-				} 
-			}else {
+				}
+			} else {
 				userType = "false";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 
 		return userType;
 	}
 
-	public int updateREAUser(REAUser user) { // 중개사회원 수정
-		return 0;
+	public int updateREAUser(REAUser reaUser) { // 중개사회원 수정
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		System.out.println("reaUser.toString(): " + reaUser.toString());
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+			String sql = "update reaUser set reaPwd=?, reaName=?, reaPhoneNum=?, officeName=?, officeAddr=?,"
+					+ "officeDetailAddr=?, officeHp=?, regNum=?, userCode=?, where reaId=?";
+
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, reaUser.getReaPwd());
+			pstmt.setString(2, reaUser.getReaName());
+			pstmt.setString(3, reaUser.getReaPhoneNum());
+			pstmt.setString(4, reaUser.getOfficeName());
+			pstmt.setString(5, reaUser.getOfficeAddr());
+			pstmt.setString(6, reaUser.getOfficeDetailAddr());
+			pstmt.setString(7, reaUser.getOfficeHp());
+			pstmt.setString(8, reaUser.getRegNum());
+			pstmt.setString(9, reaUser.getUserCode());
+			pstmt.setString(10, reaUser.getReaId());
+
+			resultRow = pstmt.executeUpdate();
+
+			if (resultRow > 0) {
+				conn.commit();
+			}
+		} catch (Exception e) {
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("update 예외");
+			}
+
+		}
+		return resultRow;
 	}
 
 	public REAUser getREAMypage(String reaId) { // 중개사회원 마이페이지

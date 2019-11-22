@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String reaId = (String) session.getAttribute("reaId");
+	String reaId = (String) session.getAttribute("reaUserId");
 %>
 <!-- Start Atribute Navigation -->
 <div class="container">
@@ -9,7 +9,7 @@
 		<ul>
 			<li class="login">
 				<%
-					if (session.getAttribute("reaId") != null) {
+					if (session.getAttribute("reaUserId") != null) {
 						out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 					} else {
 						out.print("<a href ='Login.jsp'>로그인</a>");

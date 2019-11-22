@@ -62,7 +62,35 @@ public class REAImageDao {
 	}
 
 	public int updateREAImg(REAImage reaImg) { // 공인중개사 이미지 수정
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+			String sql = "update REAImage set reaImgSaveName=? where reaId=?";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reaImg.getReaImgSaveName());
+			pstmt.setString(2, reaImg.getReaId());
+			resultRow = pstmt.executeUpdate();
+			if (resultRow > 0) {
+				conn.commit();
+			}
+		} catch (Exception e) {
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("update 예외");
+			}
+
+		}
+		return resultRow;
 	}
 
 	public int deleteREAImg(String id) { // 공인중개사 이미지 삭제(공인중개사 id로)

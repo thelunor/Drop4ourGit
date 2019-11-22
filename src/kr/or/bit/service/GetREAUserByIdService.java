@@ -12,14 +12,34 @@ import kr.or.bit.dto.REAImage;
 import kr.or.bit.dto.REAUser;
 
 public class GetREAUserByIdService implements Action {
+	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
-		
-		String reaId=request.getParameter("reaId");
+		REAUser reaUser = new REAUser();
+		REAImage reaImg=new REAImage();
+		REAUserDao reaDao = null;
+		REAImageDao imgDao=null;
+		HttpSession session = request.getSession();
+		String reaId = (String)session.getAttribute("reaUserId");
 		try {
 
 			forward = new ActionForward();
+			reaDao = new REAUserDao();
+			imgDao = new REAImageDao();
+			reaUser = reaDao.getREAMypage(reaId);
+			reaImg =imgDao.getREAImg(reaId);
+			System.out.println("사용자" + reaUser.toString());
+			System.out.println("사용자 이미지" + reaImg.toString());
 			
+			if (reaUser != null && reaImg != null) {
+				System.out.println("조회 성공");
+				request.setAttribute("reaUser", reaUser);
+				request.setAttribute("reaImg", reaImg);
+				forward.setPath("REAMypageEdit.jsp");
+			} else {
+				System.out.println("조회 실패");
+				forward.setPath("/AdminMain.jsp");
+			}
 		} catch (Exception e) {
 
 		}
