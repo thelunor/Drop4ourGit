@@ -30,33 +30,31 @@ public class AdminDao {
 	}
 
 	public boolean adminLogin(String adminId, String adminPwd) { // 관리자 로그인 191121 이정은
-	      boolean check = false;
-	      Connection conn = null;
-	      PreparedStatement pstmt = null;
-	      ResultSet rs = null;
-	      try {
-	         conn = ds.getConnection();
-	         String sql_adminLogin = "select adminPwd from Admin where adminId=? and adminPwd=?";
-	         pstmt = conn.prepareStatement(sql_adminLogin);
-	         pstmt.setString(1, adminId);
-	         pstmt.setString(2, adminPwd);
-	         rs = pstmt.executeQuery();
-	        
-	         if (rs.next()) {
-	            check = true;
-	         }
-	      } catch (SQLException e) {
-	         e.printStackTrace();
-	      }
-	      
-	      return check;
+		boolean check = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = ds.getConnection();
+			String sql_adminLogin = "select adminPwd from Admin where adminId=? and adminPwd=?";
+			pstmt = conn.prepareStatement(sql_adminLogin);
+			pstmt.setString(1, adminId);
+			pstmt.setString(2, adminPwd);
+			rs = pstmt.executeQuery();
+			System.out.println("AdminRS 호출 ****");
+			if (rs.next()) {
+				check = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return check;
 	}
 
-	
 	public List<GenericUser> selectGenericUser() { // 일반 회원 검색
 		return null;
 	}
-	
+
 	public List<REAUser> selectREAUser() { // 공인중개사 회원 검색
 		return null;
 	}
@@ -85,9 +83,9 @@ public class AdminDao {
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			//개인회원 db 저장 (9개 데이터)
+			// 개인회원 db 저장 (9개 데이터)
 			String sql_insert_genericuser = "insert into genericuser(userid,userpwd,username,frontResNum,backResNum,userPhoneNum,useraddr,userDetailAddr,userCode)"
-			+" values(?,?,?,?,?,?,?,?,(select usercode from usercode where usercode=?))";
+					+ " values(?,?,?,?,?,?,?,?,(select usercode from usercode where usercode=?))";
 			pstmt = conn.prepareStatement(sql_insert_genericuser);
 			pstmt.setString(1, user.getUserId());
 			pstmt.setString(2, user.getUserPwd());
@@ -98,17 +96,16 @@ public class AdminDao {
 			pstmt.setString(7, user.getUserAddr());
 			pstmt.setString(8, user.getUserDetailAddr());
 			pstmt.setString(9, user.getUserCode());
-			
+
 			resultRow = pstmt.executeUpdate();
-			if(resultRow>0) {
+			if (resultRow > 0) {
 				System.out.println(" dao 완료");
 			}
-			
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			
-		}finally {
+
+		} finally {
 			DB_Close.close(pstmt);
 			try {
 				conn.close();
@@ -125,8 +122,8 @@ public class AdminDao {
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			conn.setAutoCommit(false); //트랜잭션 
-			//1. 공인중개사 회원 db 저장 (10개 데이터)
+			conn.setAutoCommit(false); // 트랜잭션
+			// 1. 공인중개사 회원 db 저장 (10개 데이터)
 			String sql_insert_reauser = "insert into REAUSER(reaId,reaPwd,reaName,reaPhoneNum,officeName,officeAddr,officeDetailAddr,officeHp,regNum,userCode)"
 					+ " values(?,?,?,?,?,?,?,?,?,(select usercode from usercode where usercode=?))";
 			pstmt = conn.prepareStatement(sql_insert_reauser);
@@ -140,7 +137,7 @@ public class AdminDao {
 			pstmt.setString(8, user.getOfficeHp());
 			pstmt.setString(9, user.getRegNum());
 			pstmt.setString(10, user.getUserCode());
-			
+
 			resultRow = pstmt.executeUpdate();
 
 			String sql_insert_reaimg = "insert into reaimage(reaId, reaImgOriginName,reaImgSaveName) values(?,?,?)";
@@ -150,16 +147,15 @@ public class AdminDao {
 			pstmt.setString(3, reaImg.getReaImgSaveName());
 			resultRow = pstmt.executeUpdate();
 
-			if(resultRow>0) {
+			if (resultRow > 0) {
 				System.out.println(" dao commit 완료");
-				conn.commit(); //2개의 insert 완료시
+				conn.commit(); // 2개의 insert 완료시
 			}
-			
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			
-		}finally {
+
+		} finally {
 			DB_Close.close(pstmt);
 			try {
 				conn.close();

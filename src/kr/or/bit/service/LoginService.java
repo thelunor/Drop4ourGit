@@ -23,32 +23,28 @@ public class LoginService implements Action {
 		try {
 			AdminDao aDao = new AdminDao();
 			boolean aResult = aDao.adminLogin(id, pwd);
-			if (aResult) { // 로그인 완료
+			if (aResult) { // 관리자 로그인 성공 시
 				forward.setPath("Main.jsp");
 				session.setAttribute("id", id);
 				return forward;
-			} else {
-				forward.setPath("Login.jsp");
 			}
-			
 			GenericUserDao gDao = new GenericUserDao();
-			String gResult = gDao.GenericUserLogin(id, pwd);
-			if (gResult.equals("black")) { // 로그인 완료
-				forward.setPath("Main.jsp");
-				session.setAttribute("id", id);
-				return forward;
-			} else {
-				forward.setPath("Login2.jsp");
-			}
-			
 			REAUserDao rDao = new REAUserDao();
-			boolean rResult = rDao.REAUserLogin(id, pwd);
-			if (rResult) { // 로그인 완료
+			String gResult = gDao.GenericUserLogin(id, pwd);
+			String rResult = rDao.REAUserLogin(id, pwd);
+			System.out.println("gResult: "  + gResult);
+			System.out.println("rResult: " +  rResult);
+			
+			if (gResult.equals("white") || rResult.equals("white")) { //블랙아닌 회원이 로그인했을 때
 				forward.setPath("Main.jsp");
 				session.setAttribute("id", id);
 				return forward;
+			} else if (gResult.equals("black") || rResult.equals("black")) {//블랙회원이 로그인 했을 때
+				forward.setPath("BlackLogin.jsp");
+				return forward;
 			} else {
-				forward.setPath("Login.jsp");
+				forward.setPath("Login.jsp");  //아이디 또는 비밀번호가 일치하지 않을 때
+				return forward;
 			}
 		} catch (Exception e) {
 			System.out.println("LoginService 예외");

@@ -11,6 +11,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.or.bit.dto.GenericUser;
+import kr.or.bit.utils.DB_Close;
 
 public class GenericUserDao {
 
@@ -34,21 +35,20 @@ public class GenericUserDao {
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPwd);
 			rs = pstmt.executeQuery();
-
-			if (rs.getString("userCode").equals("B01")) {
-				if (rs.next()) {
+			System.out.println("GenericRS 호출 ****");
+			if (rs.next()) {
+				if (rs.getString("userCode").equals("B01")) {
 					userType = "black";
-				}
-			} else {
-				if (rs.next()) {
+				} else if (!rs.getString("userCode").equals("B01")) {
 					userType = "white";
 				}
+			} else {
+				userType = "false";
 			}
-
+			System.out.println(userType);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return userType;
 	}
 
