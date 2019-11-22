@@ -3,6 +3,7 @@ package kr.or.bit.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.naming.Context;
@@ -12,6 +13,7 @@ import javax.sql.DataSource;
 
 import kr.or.bit.dto.Sale;
 import kr.or.bit.dto.SaleImage;
+import kr.or.bit.utils.DB_Close;
 
 public class SaleDao {
 
@@ -25,11 +27,9 @@ public class SaleDao {
 	public int insertSale(Sale sale) { // 매물 넣기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			conn.setAutoCommit(false); //트랜잭션 처리
 			
 			//매물 테이블에 객체 넣기
 			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" + 
@@ -49,53 +49,126 @@ public class SaleDao {
 			resultRow = pstmt.executeUpdate();
 			
 			
-			
-			System.out.println("resultRow" + resultRow);
-			if(resultRow>1) {
-				conn.commit();
+			if(resultRow>0) {
+				System.out.println("매물 정보 DB 등록 성공");
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return resultRow;
 	}
 	
-	public int insertImg(SaleImage saleImage) { // 매물 이미지 넣기
+//	public int insertImg(SaleImage saleImage) { // 매물 이미지 넣기
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		int resultRow = 0;
+//		try {
+//			conn = ds.getConnection();
+//			conn.setAutoCommit(false); //트랜잭션 처리
+//			
+//			//매물 테이블에 객체 넣기
+//			
+//			//1. 매물 테이블에서 매물 번호 가져오기 
+//			String sql_max_aptNum = "select max(aptnum) as maxNum from sale";
+//			pstmt = conn.prepareStatement(sql_max_aptNum);
+//			
+//			
+//			rs = pstmt.executeQuery();
+//			if(rs.next()) {
+//				String aptMax=rs.getString("maxNum");
+//				System.out.println(aptMax);
+//			} else {
+//				System.out.println("rs가 없어욤...");
+//			}
+//			
+//			System.out.println("resultRow: " + resultRow);
+//			if(resultRow>1) {
+//				conn.commit();
+//			}
+//		}catch(Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//		return resultRow;
+//	}
+
+	public Sale getSaleDataByAptNum(String aptNum) { // 매물 한개 읽기 (매물 번호로)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int resultRow = 0;
+		Sale sale = null;
 		try {
 			conn = ds.getConnection();
-			conn.setAutoCommit(false); //트랜잭션 처리
-			
-			//매물 테이블에 객체 넣기
-			
-			//1. 매물 테이블에서 매물 번호 가져오기 
-			String sql_max_aptNum = "select max(aptnum) as maxNum from sale";
-			pstmt = conn.prepareStatement(sql_max_aptNum);
-			
-			
+			String sql_select_aptInfo = "select aptnum, aptsize, type, addr, aptname, aptdong, aptho, price, direction, etc, iscontract, reaid from sale"
+					+" where aptnum=?";
+			pstmt = conn.prepareStatement(sql_select_aptInfo);
+			pstmt.setString(1, aptNum);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				String aptMax=rs.getString("maxNum");
-				System.out.println(aptMax);
-			} else {
-				System.out.println("rs가 없어욤...");
+			while(rs.next()) {
+				sale = new Sale();
+				sale.setAptNum(rs.getString("aptNum"));
+				sale.setAptSize(rs.getString("aptSize"));
+				sale.setType(rs.getString("type"));
+				sale.setAddr(rs.getString("addr"));
+				sale.setAptName(rs.getString("aptName"));
+				sale.setAptDong(rs.getString("aptDong"));
+				sale.setAptHo(rs.getString("aptHo"));
+				sale.setPrice(Integer.parseInt(rs.getString("price")));
+				sale.setDirection(rs.getString("direction"));
+				sale.setEtc(rs.getString("etc"));
+				sale.setIsContract(rs.getString("isContract"));
+				sale.setId(rs.getString("reaId"));
+
 			}
+			System.out.println("DB에서 온 아파트 정보" + sale.toString());
+
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return sale;
+	}
+	
+	public String getAptNumByAptInfo(String aptName, String aptDong, String aptHo) { // 매물 번호 읽기 (아파트 이름, 동, 호수로)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String aptNum = "";
+		try {
+			conn = ds.getConnection();
+			String sql_select_aptInfo = "select aptnum from sale where aptname=? and aptdong=? and aptho=?";
+			pstmt = conn.prepareStatement(sql_select_aptInfo);
+			pstmt.setString(1, aptName);
+			pstmt.setString(2, aptDong);
+			pstmt.setString(3, aptHo);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				aptNum = rs.getString("aptNum");
+			}
+			System.out.println(aptNum);
 			
-			System.out.println("resultRow: " + resultRow);
-			if(resultRow>1) {
-				conn.commit();
-			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return resultRow;
-	}
-
-	public Sale getSaleData(String aptNum) { // 매물 한개 읽기 (매물 번호로)
-		return null;
+		
+		return aptNum;
 	}
 
 	public List<Sale> getSaleList(String id) { // 매물 리스트 출력(공인중개사 아이디로)

@@ -99,7 +99,7 @@ input {
 					<hr>
 					<div class="row">
 						<div class="col-md-12">
-						<button type="submit" class="btn-group">매물 등록</button> &nbsp; <button type="submit" class="btn-group">지난 매물 보기</button> &nbsp; 
+						<button type="submit" class="btn-group" onclick="SaleAdd.jsp?${reaUserData.reaId}">매물 등록</button> &nbsp; <button type="submit" class="btn-group">지난 매물 보기</button> &nbsp; 
 						<button type="submit" class="btn-group">계약서 작성</button>&nbsp; <button type="submit" class="btn-group">계약 관리</button>
 							<br>	<br>
 							<jsp:include page="WEB-INF/include/TableList.jsp"></jsp:include>

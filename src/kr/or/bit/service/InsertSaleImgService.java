@@ -50,24 +50,24 @@ public class InsertSaleImgService implements Action {
 			System.out.println(saleImgSaveName);
 			System.out.println(saleImgOriginName);
 			
-			SaleDao saleDao=new SaleDao();
 			SaleImage saleImg = new SaleImage();
+			SaleImageDao imgDao=new SaleImageDao();
 			saleImg.setSaleImgSaveName(saleImgSaveName);
 			saleImg.setSaleImgOriginName(saleImgOriginName);
-			int imgRow=saleDao.insertImg(saleImg);
-//			SaleImage saleImg = new SaleImage();
-//			SaleImageDao imgDao=new SaleImageDao();
-//			saleImg.setSaleImgSaveName(saleImgSaveName);
-//			saleImg.setSaleImgOriginName(saleImgOriginName);
-//			int imgRow=imgDao.insertSaleImage(saleImg);
+			String aptNum =request.getParameter("aptNum");
+			
+			System.out.println("inserSaleImgService aptNum" + aptNum);
+			
+			int imgRow=imgDao.insertSaleImage(saleImg, aptNum);
+			
 			try {
 				// 3. DB 저장
 				
-				if (result > 0) {
-					forward.setPath("Main.jsp");
-				} else {
-					forward.setPath("JoinREA.jsp");
-				}
+//				if (result > 0) {
+//					forward.setPath("Main.jsp");
+//				} else {
+//					forward.setPath("JoinREA.jsp");
+//				}
 			} catch (Exception e) {
 				System.out.println("회원가입 서비스 실패");
 			}

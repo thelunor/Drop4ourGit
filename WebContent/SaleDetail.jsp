@@ -1,5 +1,15 @@
+<%@page import="kr.or.bit.dto.REAImage"%>
+<%@page import="kr.or.bit.dto.REAUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
+	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
+	//System.out.println(reaImg.getReaImgSaveName());
+%>
+<c:set var="reaUserData" value="<%=reaUser%>"></c:set>
+<c:set var="reaImgData" value="<%=reaImg%>"></c:set>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -221,7 +231,7 @@ a.btn  {
 				<div class="col-md-12">
 				<div class="houseDetail">
 					<div class="page-wrapper">
-					  <a class="btn trigger" href="#">Real Estate Agent</a>
+					  <a class="btn trigger" href="#">${reaUser.reaName}</a>
 					</div>
 					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;역삼래미안 아파트 &nbsp;<span>매매</span></h4> 										
 					<input type="text" class="form-control" name="userPassCheck"
@@ -285,7 +295,7 @@ a.btn  {
     <div class="content">
 				<div class="information">
 				<br>
-				<h3 style="text-align: center;">로얄 부동산</h3>
+				<h3 style="text-align: center;">${reaUser.reaName}</h3>
 				<br>
                  <div class="form-group" style="text-align : center">
                     <img id="preview" src="./images/profile.png" style="width:150px" alt="Profile">

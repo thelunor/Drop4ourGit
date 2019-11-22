@@ -81,54 +81,7 @@ form-control {
 							</div>
 						</div>
 					</div>
-					<div>
-						<form action="InsertSaleImgService.d4b"
-							enctype="multipart/form-data" id="fileUploadForm">
-							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;매물
-								사진</label>
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<img id="preview1" src="images/picture.png" alt="Profile">
-										<br> <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" id="getfile"
-											onchange="imageURL1(this)"><br>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<img id="preview2" src="images/picture.png" alt="Profile">
-										<br> <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" id="getfile"
-											onchange="imageURL2(this)"><br>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<img id="preview3" src="images/picture.png" alt="Profile">
-										<br> <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" class="getfile"
-											onchange="imageURL3(this)"><br>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-5"></div>
-								<div class="col-sm-2">
-									<button type="submit" class="btn btn-primary btn-block btn-sm"
-										id="submitBtn" style="padding-left: 32px;">사진 등록</button>
-								</div>
-								<div class="col-sm-5"></div>
-							</div>
-						</form>
-					</div>
-					<br>
-					<br>
-					<form action="InsertSaleService.d4b" enctype="multipart/form-data"
-						id="fileUploadForm">
+					<form action="InsertSaleService.d4b" id="saleForm">
 						<div class="row">
 							<div class="col-md-3"></div>
 							<div class="col-md-6">
@@ -148,8 +101,6 @@ form-control {
 										<option value="lease">전세</option>
 									</select>
 								</div>
-
-
 								<div class="form-group">
 									<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 									<div class="row">
@@ -209,28 +160,27 @@ form-control {
 								</div>
 								<input type="hidden" id="isContract" name="isContract"
 									value="false">
+									<br><br>
 								<div class="form-group">
 									<div class="row">
-										<div class="col-sm-6">
-											<button type="submit"
-												class="btn btn-primary btn-block btn-lg" id="submitBtn">Register</button>
+										<div class="col-sm-4">
 										</div>
-										<div class="col-sm-6">
-											<button type="reset" class="btn btn-primary btn-block btn-lg">Cancel</button>
+										<div class="col-sm-4">
+											<button type="submit" class="btn btn-primary btn-block btn-lg">Next</button>
+										</div>
+										<div class="col-sm-4">
 										</div>
 									</div>
 								</div>
-
 								<br> <br> <br>
 							</div>
 						</div>
 					</form>
-
 				</div>
 			</div>
 
 			<!--End off row-->
-			<input type="hidden" value="<%=session.getAttribute("reaId")%>"
+			<input type="hidden" value="<%=session.getAttribute("reaUserId")%>"
 				name="reaId" id="reaId">
 			<!--End off container -->
 		</section>
@@ -292,41 +242,6 @@ form-control {
 			}).open();
 		}
 
-		function imageURL1(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					$('#preview1').attr('src', e.target.result);
-				}
-
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-		function imageURL2(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					$('#preview2').attr('src', e.target.result);
-				}
-
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-		function imageURL3(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-
-				reader.onload = function(e) {
-					$('#preview3').attr('src', e.target.result);
-				}
-
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-
-	
 	</script>
 
 </body>

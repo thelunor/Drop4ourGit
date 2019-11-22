@@ -36,7 +36,7 @@ public class SaleImageDao {
 		return 0;
 	}
 
-	public int insertSaleImage(SaleImage saleImg) {
+	public int insertSaleImage(SaleImage saleImg, String aptNum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -45,13 +45,17 @@ public class SaleImageDao {
 			conn = ds.getConnection();
 			conn.setAutoCommit(false); //트랜잭션 처리
 			
-			//매물 테이블에 객체 넣기
+			
+			//1. 매물 사진 테이블에 객체 저장(aptNum 제외)
 			String sql_insert_sale =
-			"insert into saleImage(saleImgNum, saleImgSaveName, saleImgOriginName, aptNum) values(seq_saleImg.nextval, ?, ?)";
+			"insert into saleImage(saleImgNum, saleImgSaveName, saleImgOriginName) values(seq_saleImg.nextval, ?, ?)";
 			pstmt = conn.prepareStatement(sql_insert_sale);
 			pstmt.setString(1, saleImg.getSaleImgSaveName());
 			pstmt.setString(2, saleImg.getSaleImgOriginName());
 			resultRow = pstmt.executeUpdate();
+			
+			//2. sale 테이블에서 아파트 이름, 동, 호수 가져오기
+			String sql_select_aptInfo = "";
 			
 			if(resultRow>0) {
 				conn.commit();

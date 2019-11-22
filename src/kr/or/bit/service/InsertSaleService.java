@@ -16,21 +16,20 @@ public class InsertSaleService implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
-		HttpSession session = request.getSession();
 		int result = 0;
-		//1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr
-		//String aptNum = request.getParameter("aptNum");
-		
-		String aptSize = "";		
+		// 1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr
+		// String aptNum = request.getParameter("aptNum");
+
+		String aptSize = "";
 		String[] aptSizes = request.getParameterValues("aptSize");
-		
-		for(String value : aptSizes) {
+
+		for (String value : aptSizes) {
 			aptSize = value;
 		}
-		//System.out.println("면적" + aptSize);
+		// System.out.println("면적" + aptSize);
 		String type = "";
 		String[] types = request.getParameterValues("type");
-		for(String value : types) {
+		for (String value : types) {
 			type = value;
 		}
 		String addr = request.getParameter("addr");
@@ -40,45 +39,46 @@ public class InsertSaleService implements Action {
 		int price = Integer.parseInt(request.getParameter("price"));
 		String directions[] = request.getParameterValues("direction");
 		String direction = "";
-		for(String value : directions) {
+		for (String value : directions) {
 			direction = value;
 		}
 		String etc = request.getParameter("etc");
 		String isContract = request.getParameter("isContract");
-		String id = request.getParameter("reaId"); //reaId받아오기
-		
+		String id = request.getParameter("reaId"); // reaId받아오기
 
-		//2. 객체에 데이터 저장
-		
-		Sale sale = new Sale(); 
-		sale.setAptSize(aptSize); 
+		// 2. 객체에 데이터 저장
+
+		Sale sale = new Sale();
+		sale.setAptSize(aptSize);
 		sale.setType(type);
-		sale.setAddr(addr); 
+		sale.setAddr(addr);
 		sale.setAptName(aptName);
 		sale.setAptDong(aptDong);
-		sale.setAptHo(aptHo); 
-		sale.setPrice(price); 
+		sale.setAptHo(aptHo);
+		sale.setPrice(price);
 		sale.setDirection(direction);
-		sale.setEtc(etc); 
+		sale.setEtc(etc);
 		sale.setIsContract(isContract);
 		sale.setId(id);
-		
-		
-		System.out.println("데이터" + sale.toString());
-		
+
 		try {
 			SaleDao dao = new SaleDao();
 			result = dao.insertSale(sale);
-			if(result > 0) {
-				forward.setPath("REAMypage.jsp");
-			}else {
+			String aptNum = dao.getAptNumByAptInfo(sale.getAptName(), sale.getAptDong(), sale.getAptHo());
+			Sale sale2 = dao.getSaleDataByAptNum(aptNum);
+						
+			if (result > 0) {
+				forward.setPath("SaleAdd2.jsp");
+				request.setAttribute("sale", sale2);
+
+			} else {
 				forward.setPath("Main.jsp");
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("insertSaleService 실패");
 		}
-		
+
 		return forward;
 	}
 }
