@@ -10,6 +10,7 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.jsp.jstl.sql.Result;
 import javax.sql.DataSource;
 
 import kr.or.bit.dto.Sale;
@@ -28,11 +29,20 @@ public class SaleDao {
 	public int insertSale(Sale sale) { // 매물 넣기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs=null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
 			
 			//매물 테이블에 객체 넣기
+//			String sql = "SELECT aptnum INTO salecopy FROM sale";
+//			pstmt=conn.prepareStatement(sql);
+//			rs=pstmt.executeQuery();
+//			String maxNum=rs.getString("maxNum");
+//			System.out.println("maxNum: 맥스넘~ " + maxNum);
+			
+			
+			
 			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" + 
 								" values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
 			pstmt = conn.prepareStatement(sql_insert_sale);
@@ -46,7 +56,7 @@ public class SaleDao {
 			pstmt.setString(8, sale.getDirection());
 			pstmt.setString(9, sale.getEtc());
 			pstmt.setString(10, sale.getIsContract());
-			pstmt.setString(11, sale.getId());
+			pstmt.setString(11, sale.getReaId());
 			resultRow = pstmt.executeUpdate();
 			
 			
@@ -54,7 +64,7 @@ public class SaleDao {
 				System.out.println("매물 정보 DB 등록 성공");
 			}
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("e.getMessage(): " + e.getMessage());
 		}finally {
 			DB_Close.close(pstmt);
 			try {
@@ -126,10 +136,10 @@ public class SaleDao {
 				sale.setDirection(rs.getString("direction"));
 				sale.setEtc(rs.getString("etc"));
 				sale.setIsContract(rs.getString("isContract"));
-				sale.setId(rs.getString("reaId"));
+				sale.setReaId(rs.getString("reaId"));
 
 			}
-			System.out.println("DB에서 온 아파트 정보" + sale.toString());
+			
 
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

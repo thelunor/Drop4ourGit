@@ -14,12 +14,11 @@ public class Sale { //매물
 	private String direction; //향
 	private String etc; //매물 특징
 	private String isContract; //계약 여부
-	private String id; //공인중개사 아이디
+	private String reaId; //공인중개사 아이디
+	private String maxNum;
 	
-	public Sale() {}
-
 	public Sale(String aptNum, String aptSize, String type, String addr, String aptName, String aptDong, String aptHo,
-			int price, String direction, String etc, String isContract, String id) {
+			int price, String direction, String etc, String isContract, String reaId, String maxNum) {
 		super();
 		this.aptNum = aptNum;
 		this.aptSize = aptSize;
@@ -32,8 +31,21 @@ public class Sale { //매물
 		this.direction = direction;
 		this.etc = etc;
 		this.isContract = isContract;
-		this.id = id;
+		this.reaId = reaId;
+		this.maxNum = maxNum;
 	}
+	
+	public Sale() {}
+
+	public String getMaxNum() {
+		return maxNum;
+	}
+
+	public void setMaxNum(String maxNum) {
+		this.maxNum = maxNum;
+	}
+
+
 
 	public String getAptNum() {
 		return aptNum;
@@ -123,20 +135,20 @@ public class Sale { //매물
 		this.isContract = isContract;
 	}
 
-	public String getId() {
-		return id;
+	public String getReaId() {
+		return reaId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setReaId(String reaId) {
+		this.reaId = reaId;
 	}
 
 	@Override
 	public String toString() {
 		return "Sale [aptNum=" + aptNum + ", aptSize=" + aptSize + ", type=" + type + ", addr=" + addr + ", aptName="
 				+ aptName + ", aptDong=" + aptDong + ", aptHo=" + aptHo + ", price=" + price + ", direction="
-				+ direction + ", etc=" + etc + ", isContract=" + isContract + ", id=" + id + ", toString()="
-				+ super.toString() + "]";
+				+ direction + ", etc=" + etc + ", isContract=" + isContract + ", reaId=" + reaId + ", maxNum=" + maxNum
+				+ "]";
 	}
 
 	

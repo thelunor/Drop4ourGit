@@ -64,7 +64,7 @@ form-control {
 			<jsp:include page="./WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
 		<!--Login Sections-->
-
+		<%String reaId=request.getParameter("reaId"); %>
 		<section id="join" class="about roomy-100">
 
 			<div class="container">
@@ -161,6 +161,8 @@ form-control {
 								<input type="hidden" id="isContract" name="isContract"
 									value="false">
 									<br><br>
+									<input type="hidden" value="<%=reaId%>"
+											name="reaId" id="reaId">
 								<div class="form-group">
 									<div class="row">
 										<div class="col-sm-4">
@@ -180,8 +182,7 @@ form-control {
 			</div>
 
 			<!--End off row-->
-			<input type="hidden" value="<%=session.getAttribute("reaUserId")%>"
-				name="reaId" id="reaId">
+			
 			<!--End off container -->
 		</section>
 
