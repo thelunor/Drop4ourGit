@@ -69,6 +69,8 @@ h2 {
 					<br>
 					<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;매물
 								사진</label>
+				<form action="InsertSaleImgService.d4b" method="post" id="ajaxForm" enctype="multipart/form-data">
+								
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group">
@@ -98,6 +100,20 @@ h2 {
 									</div>
 								</div>
 							</div>
+							<br><br>
+							<div class="form-group">
+									<div class="row">
+										<div class="col-sm-4">
+										</div>
+										<div class="col-sm-4">
+											<button type="submit" id="ajaxBtn" class="btn btn-primary btn-block btn-lg">사진 등록</button>
+										</div>
+										<div class="col-sm-4">
+										</div>
+									</div>
+								</div>
+							</form>
+							
 						<form action="InsertSaleService.d4b" method="post" id="UploadForm">
 							<br> <br>
 							<div class="row">
@@ -247,6 +263,24 @@ h2 {
 	        document.querySelector('#preview3').src = reader.result ;
 	    }; 
 	}; 
+	
+	
+	$(function(){
+		$("#ajaxBtn").click(function(){
+		 
+			$.ajax({
+				url : 'InsertSaleImgService.d4b',
+				data : formData,
+				processData: false,
+		        contentType: false,
+		        type: 'POST',
+		        success: function (data) {
+		            alert("이미지 업로드 성공");
+		        }
+				
+			});
+		});
+	});
 	</script>
 
 </body>

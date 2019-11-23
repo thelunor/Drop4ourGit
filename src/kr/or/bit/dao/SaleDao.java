@@ -56,7 +56,7 @@ public class SaleDao {
 			pstmt.setString(8, sale.getDirection());
 			pstmt.setString(9, sale.getEtc());
 			pstmt.setString(10, sale.getIsContract());
-			pstmt.setString(11, sale.getReaId());
+			pstmt.setString(11, sale.getId());
 			resultRow = pstmt.executeUpdate();
 			
 			
@@ -136,7 +136,7 @@ public class SaleDao {
 				sale.setDirection(rs.getString("direction"));
 				sale.setEtc(rs.getString("etc"));
 				sale.setIsContract(rs.getString("isContract"));
-				sale.setReaId(rs.getString("reaId"));
+				sale.setId(rs.getString("reaId"));
 
 			}
 			

@@ -374,7 +374,7 @@ public class FrontController extends HttpServlet {
 		// select ================================================
 		else if (url_Command.equals("/SelectAllContractsService.d4b")) {
 			try {
-				action = new SelectAllContractsService(); //
+				action = new SelectAllContractsService();
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

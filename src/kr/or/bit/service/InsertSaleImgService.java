@@ -38,25 +38,32 @@ public class InsertSaleImgService implements Action {
 					"UTF-8", new DefaultFileRenamePolicy() // 파일 중복(upload 폴더 안에:a.jpg -> a_1.jpg(업로드 파일 변경))
 			);
 			// 1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr
-			String saleImgSaveName="";
-			String saleImgOriginName="";
+			String saleImgSaveName1="";
+			String saleImgOriginName1="";
+			String saleImgSaveName2="";
+			String saleImgOriginName2="";
+			String saleImgSaveName3="";
+			String saleImgOriginName3="";
+			
+			
 			Enumeration filenames = multi.getFileNames();
 			
 			String file = (String) filenames.nextElement();
+			saleImgSaveName1 = multi.getFilesystemName(file);
+			saleImgOriginName1 = multi.getOriginalFileName(file);
 			
-			saleImgSaveName = multi.getFilesystemName(file);
-			saleImgOriginName = multi.getOriginalFileName(file);
+			String file2 = (String) filenames.nextElement();
+			saleImgSaveName2 = multi.getFilesystemName(file2);
+			saleImgOriginName2 = multi.getOriginalFileName(file2);
 			
-			System.out.println(saleImgSaveName);
-			System.out.println(saleImgOriginName);
+			String file3 = (String) filenames.nextElement();
+			saleImgSaveName3 = multi.getFilesystemName(file3);
+			saleImgOriginName3 = multi.getOriginalFileName(file3);
 			
 			SaleImage saleImg = new SaleImage();
 			SaleImageDao imgDao=new SaleImageDao();
-			saleImg.setSaleImgSaveName(saleImgSaveName);
-			saleImg.setSaleImgOriginName(saleImgOriginName);
-			String aptNum =request.getParameter("aptNum");
+
 			
-			System.out.println("inserSaleImgService aptNum" + aptNum);
 			
 			int imgRow=imgDao.insertSaleImage(saleImg, aptNum);
 			

@@ -78,12 +78,9 @@ public class InsertSaleService2 implements Action {
 			sale.setAptNum(aptNum);
 			System.out.println("매물 등록 후" + sale.getAptNum());
 			
-						
 			if (result > 0) {
-				forward.setPath("SaleAdd2.jsp");
-
-			} else {
 				forward.setPath("Main.jsp");
+
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
