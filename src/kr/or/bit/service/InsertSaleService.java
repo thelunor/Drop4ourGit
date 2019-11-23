@@ -70,9 +70,7 @@ public class InsertSaleService implements Action {
 						
 			if (result > 0) {
 				forward.setPath("SaleAdd2.jsp");
-				request.setAttribute("sale", sale2);
-				System.out.println("sale2.toString(): ㅡㅡ " + sale2.toString());
-
+				request.setAttribute("sale2", sale2);
 			} else {
 				forward.setPath("Main.jsp");
 			}

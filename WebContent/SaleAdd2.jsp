@@ -5,11 +5,11 @@
 
 <!doctype html>
 <%
-	Sale sale = new Sale();
-	sale = (Sale) request.getAttribute("sale2");
-	System.out.println(sale.toString());
+	Sale sale2=(Sale)request.getAttribute("sale2");
+	System.out.println("sale2입니당: " + sale2);
+	
 %>
-<c:set var="saleData" value="<%=sale%>"></c:set>
+<c:set var="saleData" value="<%=sale2%>"></c:set>
 <html class="no-js" lang="en">
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap"
 	rel="stylesheet">
