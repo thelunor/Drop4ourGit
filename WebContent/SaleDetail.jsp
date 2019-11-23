@@ -231,7 +231,7 @@ a.btn  {
 				<div class="col-md-12">
 				<div class="houseDetail">
 					<div class="page-wrapper">
-					  <a class="btn trigger" href="#">${reaUser.reaName}</a>
+					  <a class="btn trigger" href="#">담당 부동산</a>
 					</div>
 					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;역삼래미안 아파트 &nbsp;<span>매매</span></h4> 										
 					<input type="text" class="form-control" name="userPassCheck"
