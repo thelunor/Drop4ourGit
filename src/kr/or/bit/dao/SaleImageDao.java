@@ -3,6 +3,7 @@ package kr.or.bit.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.naming.Context;
@@ -11,6 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.or.bit.dto.SaleImage;
+import kr.or.bit.utils.DB_Close;
 
 public class SaleImageDao {
 	DataSource ds = null;
@@ -21,8 +23,39 @@ public class SaleImageDao {
 	}
 
 	public int insertSaleImg(SaleImage saleImg) { // 매물 이미지 DB 넣기
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			String sql_insert_saleImg = "insert into saleimage(saleimgnum, saleImgOriginName, saleImgSaveName, aptnum)"
+			+ " values(?,?,?,(select aptnum from sale where aptnum=?))";
+			pstmt = conn.prepareStatement(sql_insert_saleImg);
+			pstmt.setInt(1, saleImg.getSaleImgNum());
+			pstmt.setString(2, saleImg.getSaleImgOriginName());
+			pstmt.setString(3, saleImg.getSaleImgSaveName());
+			pstmt.setString(4, saleImg.getAptNum());
+			
+			resultRow = pstmt.executeUpdate();
+			
+			if(resultRow > 0) {
+				System.out.println("매물 이미지 사진 넣기 성공");
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return resultRow;
 	}
+	
 
 	public List<SaleImage> getSaleImg(String aptNum) { // 매물 이미지 불러오기 (매물 번호로)
 		return null;

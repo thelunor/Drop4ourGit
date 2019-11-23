@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
-import kr.or.bit.service.LoginService;
-import kr.or.bit.service.LogoutService;
 import kr.or.bit.service.DeleteBookMarkService;
 import kr.or.bit.service.DeleteContractService;
 import kr.or.bit.service.DeleteGenericUserService;
@@ -52,10 +50,10 @@ import kr.or.bit.service.InsertREAUserService;
 import kr.or.bit.service.InsertReviewComService;
 import kr.or.bit.service.InsertReviewService;
 import kr.or.bit.service.InsertSaleImgService;
-import kr.or.bit.service.InsertSaleService;
+import kr.or.bit.service.InsertSaleService2;
+import kr.or.bit.service.LoginService;
+import kr.or.bit.service.LogoutService;
 import kr.or.bit.service.SelectAllContractsService;
-import kr.or.bit.service.SelectAllTypeUserService;
-import kr.or.bit.service.SelectAllUserService;
 import kr.or.bit.service.SelectGenericUserService;
 import kr.or.bit.service.SelectREAUserService;
 import kr.or.bit.service.UpdateBlackService;
@@ -69,7 +67,6 @@ import kr.or.bit.service.UpdateReviewComService;
 import kr.or.bit.service.UpdateReviewService;
 import kr.or.bit.service.UpdateSaleImgService;
 import kr.or.bit.service.UpdateSaleService;
-import kr.or.bit.service.UserLoginService;
 import kr.or.bit.service.selectAtpListService;
 
 @WebServlet("*.d4b")
@@ -368,7 +365,7 @@ public class FrontController extends HttpServlet {
 			}
 		} else if (url_Command.equals("/InsertSaleService.d4b")) {
 			try {
-				action = new InsertSaleService(); //
+				action = new InsertSaleService2(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

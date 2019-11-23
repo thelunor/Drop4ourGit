@@ -78,44 +78,6 @@ h2 {
 							</div>
 						</form>
 					<br> <br>
-
-
-
-						<!-- 						<form action="InsertSaleImgService.d4b"
-							enctype="multipart/form-data" id="fileUploadForm">
-							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;매물
-								사진</label>
-							<div class="row">
-								<div class="col-md-4">
-									<div class="form-group">
-										<img id="preview1" src="images/picture.png" alt="Profile">
-										<br> <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" id="getfile"
-											onchange="imageURL1(this)"><br>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<img id="preview2" src="images/picture.png" alt="Profile">
-										<br> <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" id="getfile"
-											onchange="imageURL2(this)"><br>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="form-group">
-										<img id="preview3" src="images/picture.png" alt="Profile">
-										<br> <br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
-											type="file" name="files" class="getfile"
-											onchange="imageURL3(this)"><br><br> <br> <br>
-									</div>
-								</div>
-							</div>
-							
-						</form> -->
 					</div>
 					<br> <br>
 

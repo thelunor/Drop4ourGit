@@ -31,7 +31,6 @@ public class InsertREAUserService implements Action {
 					size, // 10M
 					"UTF-8", new DefaultFileRenamePolicy() // 파일 중복(upload 폴더 안에:a.jpg -> a_1.jpg(업로드 파일 변경))
 			);
-			System.out.println("기다려주실래요?");
 			// 1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr
 
 			String reaId = multi.getParameter("reaId");
