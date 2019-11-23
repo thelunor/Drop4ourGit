@@ -7,6 +7,7 @@
 <%
 	Sale sale = new Sale();
 	sale = (Sale) request.getAttribute("sale2");
+	System.out.println(sale.toString());
 %>
 <c:set var="saleData" value="<%=sale%>"></c:set>
 <html class="no-js" lang="en">

@@ -74,6 +74,7 @@ input {
 		</nav>
 		<!--Join Sections-->
 		<section id="id" class="about roomy-100">
+		<form action="SaleAdd.jsp?reaId=${reaUserData.reaId}" method="post" >
 			<div class="container">
 				<div class="about_content">
 					<h2>My Page</h2>
@@ -99,7 +100,7 @@ input {
 					<hr>
 					<div class="row">
 						<div class="col-md-12">
-						<button type="submit" class="btn-group" onclick="SaleAdd.jsp?${reaUserData.reaId}">매물 등록</button> &nbsp; <button type="submit" class="btn-group">지난 매물 보기</button> &nbsp; 
+						<input type="submit" class="btn-group" value="매물 등록"> &nbsp; <button type="submit" class="btn-group">지난 매물 보기</button> &nbsp; 
 						<button type="submit" class="btn-group">계약서 작성</button>&nbsp; <button type="submit" class="btn-group">계약 관리</button>
 							<br>	<br>
 							<jsp:include page="WEB-INF/include/TableList.jsp"></jsp:include>
@@ -108,7 +109,7 @@ input {
 
 				</div>
 			</div>
-
+		</form>
 			<!--End off container -->
 		</section>
 
