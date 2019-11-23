@@ -69,6 +69,7 @@ import kr.or.bit.service.UpdateReviewService;
 import kr.or.bit.service.UpdateSaleImgService;
 import kr.or.bit.service.UpdateSaleService;
 import kr.or.bit.service.UserLoginService;
+import kr.or.bit.service.selectAtpListService;
 
 @WebServlet("*.d4b")
 public class FrontController extends HttpServlet {
@@ -401,7 +402,15 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (url_Command.equals("/SelectaptListService.d4b")) { // 아파트 목록보기
+			try {
+	            action = new selectAtpListService();
+	            forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 		// update========================================
 		else if (url_Command.equals("/UpdateBlackService.d4b")) {
 			try {

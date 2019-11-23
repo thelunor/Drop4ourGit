@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
@@ -16,7 +15,6 @@ public class selectAtpListService implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
-		HttpSession session = request.getSession();
 
 		String addr = request.getParameter("addr");	
 		
@@ -29,7 +27,7 @@ public class selectAtpListService implements Action{
 			e.printStackTrace();
 		}
 		forward = new ActionForward();
-		forward.setPath("/ListOk.d4b");
+		forward.setPath("SelectaptListService.d4b");
 		return forward;
 	}
 
