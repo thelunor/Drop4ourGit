@@ -1,5 +1,8 @@
 package kr.or.bit.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import javax.naming.Context;
@@ -21,7 +24,34 @@ public class ReviewDao {
 	   }
 
 	public int insertReview(Review review) {
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int row = 0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql = "INSERT INTO REVIEW (REVIEWNUM, USERID, REVIEWCONTENT, REVIEWDATE)" + 
+						" VALUES (SEQ_REVIEW.NEXTVAL, (SELECT USERID FROM GENERICUSER WHERE USERID=?), ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, review.getUserId());
+			pstmt.setString(2, review.getReviewContent());
+			pstmt.setDate(3,(Date) review.getReviewDate());
+			
+			row = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("리뷰등록 dao 예외발생");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("review dao 예외발생2");
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return row;
 	}
 
 	public List<Review> getReviewList(String id) { // 리뷰 리스트 가져오기(공인중개사 id로)
