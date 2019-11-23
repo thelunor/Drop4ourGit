@@ -117,7 +117,7 @@ img.avatar {
 									</div>
 									<div class="form-group">
 										<label>휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
-										<input type="password" class="form-control" name="reaPhoneNum"
+										<input type="text" class="form-control" name="reaPhoneNum"
 											id="reaPhoneNum" required="required" placeholder="010-0000-0000">
 									</div>
 									<div class="form-group">

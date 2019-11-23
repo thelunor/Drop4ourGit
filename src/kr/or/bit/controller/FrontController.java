@@ -28,6 +28,7 @@ import kr.or.bit.service.GetBookMarkService;
 import kr.or.bit.service.GetContractService;
 import kr.or.bit.service.GetGenericUserByIdService;
 import kr.or.bit.service.GetGenericUserByResService;
+import kr.or.bit.service.GetGenericUserMypageService;
 import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroDataService;
 import kr.or.bit.service.GetREAMypageService;
@@ -193,6 +194,15 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
+		} else if (url_Command.equals("/GetGenericUserMypageService.d4b")) {
+			try {
+				action = new GetGenericUserMypageService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		} else if (url_Command.equals("/GetREAImgService.d4b")) {
 			try {
 				action = new GetREAImgService(); //
@@ -284,7 +294,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
+		}
 		// insert=============================================
 		else if (url_Command.equals("/InsertBookMarkService.d4b")) {
 			try {
@@ -404,13 +414,13 @@ public class FrontController extends HttpServlet {
 			}
 		} else if (url_Command.equals("/SelectaptListService.d4b")) { // 아파트 목록보기
 			try {
-	            action = new selectAtpListService();
-	            forward = action.execute(request, response);
+				action = new selectAtpListService();
+				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		// update========================================
 		else if (url_Command.equals("/UpdateBlackService.d4b")) {
 			try {
@@ -490,16 +500,16 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		//로그인 관련  controller 191121 이정은
-		else if (url_Command.equals("/LoginService.d4b")) {
-				action = new LoginService(); //
-				forward = action.execute(request, response);
 
-		}else if (url_Command.equals("/LogoutService.d4b")) {
-	         action = new LogoutService();
-	         forward = action.execute(request, response);
-		}     
+		// 로그인 관련 controller 191121 이정은
+		else if (url_Command.equals("/LoginService.d4b")) {
+			action = new LoginService(); //
+			forward = action.execute(request, response);
+
+		} else if (url_Command.equals("/LogoutService.d4b")) {
+			action = new LogoutService();
+			forward = action.execute(request, response);
+		}
 		// 페이지 이동관련 ==========================================
 
 		// dispatcher =================================================

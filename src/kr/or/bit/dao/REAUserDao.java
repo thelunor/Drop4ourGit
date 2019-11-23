@@ -131,6 +131,12 @@ public class REAUserDao {
 		} finally {
 			DB_Close.close(rs);
 			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return reaUser;
 	}

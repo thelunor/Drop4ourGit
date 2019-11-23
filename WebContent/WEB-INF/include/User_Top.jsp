@@ -23,7 +23,7 @@
 			<li class='mypage'>
 				<%
 					if (request.getAttribute("type").equals("U01")) {
-						out.print("<a href='Main.jsp'>마이페이지</a>");
+						out.print("<a href='MypageMain.jsp'>마이페이지</a>");
 					} else if (request.getAttribute("type").equals("U02")) {
 						out.print("<a href='GetREAMypageService.d4b'>마이페이지</a>");
 					}

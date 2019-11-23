@@ -114,4 +114,45 @@ public class GenericUserDao {
 		
 		return glist;
 	}
+	
+	public GenericUser getGenericMypage(String genericUserId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		GenericUser user = null;
+		try {
+			conn = ds.getConnection();
+			String sql_select_user = "select userid, userpwd, username, frontresnum, backresnum, userphonenum, useraddr, userdetailaddr, usercode from genericuser "
+					+"where userid=?";
+			pstmt = conn.prepareStatement(sql_select_user);
+			pstmt.setString(1, genericUserId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				user = new GenericUser();
+				user.setUserId(rs.getString("userid"));
+				user.setUserPwd(rs.getString("userpwd"));
+				user.setUserName(rs.getString("userName"));
+				user.setFrontResNum(rs.getString("frontResNum"));
+				user.setBackResNum(rs.getString("backResNum"));
+				user.setUserPhoneNum(rs.getString("userPhoneNum"));
+				user.setUserAddr(rs.getString("useraddr"));
+				user.setUserDetailAddr(rs.getString("userDetailAddr"));
+				user.setUserCode(rs.getString("userCode"));
+			}
+			System.out.println("DB USER 정보" + user.toString());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("genericuserdao 오류");
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return user;
+	}
 }
