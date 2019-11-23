@@ -69,7 +69,7 @@ public class InsertSaleService implements Action {
 			Sale sale2 = dao.getSaleDataByAptNum(aptNum);
 						
 			if (result > 0) {
-				forward.setPath("SaleAdd2.jsp");
+				forward.setPath("SaleAdd2_2.jsp");
 				request.setAttribute("sale2", sale2);
 			} else {
 				forward.setPath("Main.jsp");

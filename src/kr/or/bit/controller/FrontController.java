@@ -50,9 +50,7 @@ import kr.or.bit.service.InsertREAUserService;
 import kr.or.bit.service.InsertReviewComService;
 import kr.or.bit.service.InsertReviewService;
 import kr.or.bit.service.InsertSaleImgService;
-import kr.or.bit.service.InsertSaleImgService2;
 import kr.or.bit.service.InsertSaleService;
-import kr.or.bit.service.InsertSaleService2;
 import kr.or.bit.service.LoginService;
 import kr.or.bit.service.LogoutService;
 import kr.or.bit.service.SelectAllContractsService;
@@ -365,23 +363,9 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (url_Command.equals("/InsertSaleImgService2.d4b")) {
-			try {
-				action = new InsertSaleImgService2(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/InsertSaleService.d4b")) {
+		}else if (url_Command.equals("/InsertSaleService.d4b")) {
 			try {
 				action = new InsertSaleService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else if (url_Command.equals("/InsertSaleService2.d4b")) {
-			try {
-				action = new InsertSaleService2(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

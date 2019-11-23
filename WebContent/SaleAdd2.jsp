@@ -67,17 +67,20 @@ h2 {
 						</div>
 					</div>
 					<div>
-						<form action="InsertSaleImgService.d4b" class="dropzone">
+						<form action="InsertSaleImgService.d4b?aptNum=${saleData.aptNum}" class="dropzone">
 							<%-- <input type="hidden" name="aptNum" value="<%=aptNum%>"> --%>
-							<div class="row">
+							<br><br><br>
+							<button type="submit" class="btn btn-primary btn-block btn-lg"
+										id="submitBtn" style="padding-left: 32px;">사진 등록 완료</button>
+						</form><br><br>
+						<div class="row">
 								<div class="col-sm-5"></div>
 								<div class="col-sm-2">
-									<button type="submit" class="btn btn-primary btn-block btn-sm"
-										id="submitBtn" style="padding-left: 32px;">${saleData.aptNum}</button>
+									<button type="submit" class="btn btn-primary btn-block btn-lg"
+										id="submitBtn" style="padding-left: 32px;">사진 등록 완료</button>
 								</div>
 								<div class="col-sm-5"></div>
 							</div>
-						</form>
 					<br> <br>
 					</div>
 					<br> <br>
@@ -98,7 +101,13 @@ h2 {
 	<!-- JS includes -->
 	<jsp:include page="./js/js.jsp"></jsp:include>
 	<script>
-		
+		$(function(){
+			$("#submitBtn").click(function(){
+				$.ajax({
+					
+				});
+			});
+		});
 	</script>
 
 </body>

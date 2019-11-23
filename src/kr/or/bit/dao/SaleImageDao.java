@@ -29,12 +29,11 @@ public class SaleImageDao {
 		try {
 			conn = ds.getConnection();
 			String sql_insert_saleImg = "insert into saleimage(saleimgnum, saleImgOriginName, saleImgSaveName, aptnum)"
-			+ " values(?,?,?,(select aptnum from sale where aptnum=?))";
+			+ " values(seq_saleImg.nextval,?,?,(select aptnum from sale where aptnum=?))";
 			pstmt = conn.prepareStatement(sql_insert_saleImg);
-			pstmt.setInt(1, saleImg.getSaleImgNum());
-			pstmt.setString(2, saleImg.getSaleImgOriginName());
-			pstmt.setString(3, saleImg.getSaleImgSaveName());
-			pstmt.setString(4, saleImg.getAptNum());
+			pstmt.setString(1, saleImg.getSaleImgOriginName());
+			pstmt.setString(2, saleImg.getSaleImgSaveName());
+			pstmt.setString(3, saleImg.getAptNum());
 			
 			resultRow = pstmt.executeUpdate();
 			
