@@ -168,7 +168,7 @@ form-control {
 										<div class="col-sm-4">
 										</div>
 										<div class="col-sm-4">
-											<button type="submit" class="btn btn-primary btn-block btn-lg">Next</button>
+											<input type="submit" class="btn btn-primary btn-block btn-lg"  value="Next">
 										</div>
 										<div class="col-sm-4">
 										</div>

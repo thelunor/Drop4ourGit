@@ -363,7 +363,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/InsertSaleService.d4b")) {
+		} else if (url_Command.equals("/InsertSaleService2.d4b")) {
 			try {
 				action = new InsertSaleService2(); //
 				forward = action.execute(request, response);

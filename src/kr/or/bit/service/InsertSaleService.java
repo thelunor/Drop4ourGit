@@ -64,12 +64,14 @@ public class InsertSaleService implements Action {
 		try {
 			SaleDao dao = new SaleDao();
 			result = dao.insertSale(sale);
+			System.out.println("result : " + result);
 			String aptNum = dao.getAptNumByAptInfo(sale.getAptName(), sale.getAptDong(), sale.getAptHo());
 			Sale sale2 = dao.getSaleDataByAptNum(aptNum);
 						
 			if (result > 0) {
 				forward.setPath("SaleAdd2.jsp");
 				request.setAttribute("sale", sale2);
+				System.out.println("sale2.toString(): ㅡㅡ " + sale2.toString());
 
 			} else {
 				forward.setPath("Main.jsp");
