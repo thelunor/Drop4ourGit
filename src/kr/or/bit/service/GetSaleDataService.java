@@ -16,21 +16,23 @@ public class GetSaleDataService implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		ActionForward forward = null;
-		String aptName =request.getParameter("aptName");
-
-		List<Sale> saleList = null;		
+		ActionForward forward = new ActionForward();
+		String aptNum =request.getParameter("aptNum");
+		System.out.println("아파트 매물 번호"+aptNum);
+		Sale sale = null;		
 		try {
 			SaleDao dao = new SaleDao();
-			saleList = dao.getSaleDetail(aptName);
-			request.setAttribute("saleList", saleList);
+			sale = new Sale();
+			sale = dao.getSaleDetail(aptNum);
+			if(sale !=null) {
+				request.setAttribute("saleData", sale);
+				forward.setPath("GetSaleDataServiceOk.d4b");
+				
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		forward = new ActionForward();
-		//session.setAttribute("address", address);		
-		forward.setPath("GetSaleDataServiceOk.d4b");
 		return forward;
 	}
 

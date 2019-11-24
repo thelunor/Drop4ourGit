@@ -200,7 +200,7 @@ public class SaleDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Sale> saleList = null;
-		String sql_select_aptList = "select aptname, aptdong, price from sale where addr=?";
+		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize from sale where addr=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_select_aptList);
@@ -212,7 +212,9 @@ public class SaleDao {
 				Sale sale = new Sale();
 				sale.setAptName(rs.getString("aptName")); // 아파트 이름
 				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
-				sale.setPrice(rs.getInt("price"));
+				sale.setPrice(rs.getInt("price")); //가격
+				sale.setAptNum(rs.getString("aptNum")); //매물번호
+				sale.setAptSize(rs.getString("aptSize")); //아파트 사이즈
 
 				saleList.add(sale);
 			}
@@ -234,21 +236,19 @@ public class SaleDao {
 	}
 	
 	
-	public ArrayList<Sale> getSaleDetail(String aptName) { // 아파트 이름과 거래유형으로 매물 정보 및 공인중개사 정보 가져오기 (SaleDetail 페이지)
+	public Sale getSaleDetail(String aptNum) { // 아파트 이름과 거래유형으로 매물 정보 및 공인중개사 정보 가져오기 (SaleDetail 페이지)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Sale sale = new Sale();
-		
-		String sql_get_saleDetail = "select type, addr, aptDong, price, aptSize, direction, etc from sale where aptName =?";
+		Sale sale = null;
+		String sql_get_saleDetail = "select type, addr, aptDong, price, aptSize, direction, etc from sale where aptNum =?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_get_saleDetail);
-			pstmt.setString(1, aptName);
+			pstmt.setString(1, aptNum);
 			rs = pstmt.executeQuery();
-			saleList = new ArrayList<Sale>();
 			while (rs.next()) {
-				Sale sale = new Sale();
+				sale = new Sale();
 				sale.setType(rs.getString("type")); //매물 유형
 				sale.setAddr(rs.getString("addr")); //매물 도로명주소
 				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
@@ -257,7 +257,6 @@ public class SaleDao {
 				sale.setDirection(rs.getString("direction")); //아파트 향
 				sale.setEtc(rs.getString("etc"));
 				
-				saleList.add(sale);
 			}
 		
 		} catch (Exception e) {
@@ -271,7 +270,7 @@ public class SaleDao {
 				e.printStackTrace();
 			}
 		}
-		return saleList;
+		return sale;
 	}
 
 }

@@ -62,21 +62,22 @@ a.btn  {
 text-align: center;
 }
 </style>
-<%ArrayList<Sale> list = (ArrayList<Sale>) request.getAttribute("saleList");
-ArrayList<String> priceList=new ArrayList<String>();
-String stringPrice=null;
- Map<Sale, String> saleMap=new HashMap<Sale, String>();
+<%
+	ArrayList<Sale> list = (ArrayList<Sale>) request.getAttribute("saleList");
+	ArrayList<String> priceList=new ArrayList<String>();
+	String stringPrice=null;
+	Map<Sale, String> saleMap=new HashMap<Sale, String>();
  
- for(Sale sale : list){
-	double num = 79830;
-	int price= sale.getPrice();
-	double price2= num / price * 100; 
-	stringPrice = Double.toString(price2)+ "%";
- 	saleMap.put(sale, stringPrice);
- }
- 
- List<Sale> keyList=new ArrayList<Sale>();
- keyList.addAll(saleMap.keySet());
+	 for(Sale sale : list){
+		double num = 79830;
+		int price= sale.getPrice();
+		double price2= num / price * 100; 
+		stringPrice = Double.toString(price2)+ "%";
+	 	saleMap.put(sale, stringPrice);
+	 }
+	 
+	 List<Sale> keyList=new ArrayList<Sale>();
+	 keyList.addAll(saleMap.keySet());
 
  
 //  Collections.sort(keyList, new Comparator() {
@@ -145,7 +146,7 @@ String stringPrice=null;
 						</div>
 						<!-- End Skill Bar -->
 					</div>						
-				 <a class="btn" href="GetSaleDataService.d4b?aptName=${sale.key.aptName}">See the Details</a>		
+				 <a class="btn" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>		
 				 </div>
 			</div>
 		</div>
