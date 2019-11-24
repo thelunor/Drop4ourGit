@@ -38,6 +38,7 @@ public class GenericUserDao {
 			pstmt.setString(2, userPwd);
 			rs = pstmt.executeQuery();
 			System.out.println("GenericRS 호출 ****");
+			System.out.println(rs.getString("userCode"));
 			if (rs.next()) {
 				if (rs.getString("userCode").equals("B01")) {
 					userType = "B01";

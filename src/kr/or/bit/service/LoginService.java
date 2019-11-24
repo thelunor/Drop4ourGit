@@ -22,16 +22,22 @@ public class LoginService implements Action {
 
 		try {
 			AdminDao aDao = new AdminDao();
-			boolean aResult = aDao.adminLogin(id, pwd);
-			if (aResult) { // 관리자 로그인 성공 시
+			GenericUserDao gDao = new GenericUserDao();
+			REAUserDao rDao = new REAUserDao();
+			String gResult = null;
+			String rResult=null;
+			
+			if (aDao.adminLogin(id, pwd)) { // 관리자 로그인 성공 시
 				forward.setPath("Main.jsp");
 				session.setAttribute("adminId", id);
 				return forward;
 			}
-			GenericUserDao gDao = new GenericUserDao();
-			REAUserDao rDao = new REAUserDao();
-			String gResult = gDao.GenericUserLogin(id, pwd);
-			String rResult = rDao.REAUserLogin(id, pwd);
+			
+			
+			if(gDao.GenericUserLogin(id, pwd).equals(null)) {
+				gResult = gDao.GenericUserLogin(id, pwd);
+			}
+			rResult= rDao.REAUserLogin(id, pwd);
 			System.out.println("gResult: "  + gResult);
 			System.out.println("rResult: " +  rResult);
 			
