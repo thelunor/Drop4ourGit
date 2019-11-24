@@ -58,7 +58,7 @@ form-control {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="./WEB-INF/include/Top.jsp"></jsp:include>
+			<jsp:include page="./WEB-INF/include/REAUser_Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
 			<jsp:include page="./WEB-INF/include/Side.jsp"></jsp:include>
@@ -159,7 +159,7 @@ form-control {
 									</p>
 								</div>
 								<input type="hidden" id="isContract" name="isContract"
-									value="false">
+									value="무">
 									<br><br>
 									<input type="hidden" value="<%=reaId%>"
 											name="reaId" id="reaId">

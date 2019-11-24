@@ -177,16 +177,41 @@ public class SaleDao2 {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<Sale> saleList = new ArrayList<Sale>();
+		List<Sale> saleList = null;
+		
 		try {
 			conn = ds.getConnection();
-			String sql_select_sale = "";
+			String sql_select_sale = "select aptnum,aptsize,type,addr,aptname,aptdong,aptho,price,iscontract from sale where reaid=?";
+			pstmt = conn.prepareStatement(sql_select_sale);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			saleList = new ArrayList<Sale>();
+			while(rs.next()) {
+				Sale sale = new Sale();
+				sale.setAptNum(rs.getString("aptNum")); //매물번호				
+				sale.setAptSize(rs.getString("aptSize")); //면적
+				sale.setType(rs.getString("type")); //유형
+				sale.setAddr(rs.getString("addr")); //주소
+				sale.setAptName(rs.getString("aptName")); //아파트이름
+				sale.setAptDong(rs.getString("aptDong")); //동
+				sale.setAptHo(rs.getString("aptHo")); //호수
+				sale.setPrice(Integer.parseInt(rs.getString("price"))); //매매가
+				sale.setIsContract(rs.getString("isContract"));
+				saleList.add(sale);
+				System.out.println("saleDao2 완료");
+			}
 		}catch(Exception e) {
 			
 		}finally {
 			DB_Close.close(pstmt);
+			DB_Close.close(rs);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		return null;
+		return saleList;
 	}
 
 	public int updateSale(Sale sale) { // 매물 수정

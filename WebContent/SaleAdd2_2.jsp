@@ -49,7 +49,7 @@ text-align: center;
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="./WEB-INF/include/Top.jsp"></jsp:include>
+			<jsp:include page="./WEB-INF/include/REAUser_Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
 			<jsp:include page="./WEB-INF/include/Side.jsp"></jsp:include>
@@ -101,7 +101,6 @@ text-align: center;
 											onchange="imageURL3()"><br>
 									</div>
 								</div>
-								<input type="hidden" id="aptNum" name="aptNum" value="${saleData.aptNum}">
 							</div>
 							<br><br>
 						<div class="row">

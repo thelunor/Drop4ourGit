@@ -1,3 +1,7 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.or.bit.dto.Sale"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.or.bit.dao.SaleDao2"%>
 <%@page import="kr.or.bit.dto.REAImage"%>
 <%@page import="kr.or.bit.dto.REAUser"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,9 +17,13 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <jsp:include page="./css/css.jsp"></jsp:include>
-<% 
+<%
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
+	String id = (String) session.getAttribute("reaUserId");
+	SaleDao2 dao = new SaleDao2();
+	List<Sale> saleList = new ArrayList<Sale>();
+	saleList = dao.getSaleList(id); //reaId로 리스트 불러오기
 	//System.out.println(reaImg.getReaImgSaveName());
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
@@ -42,19 +50,20 @@ h2 {
 input {
 	text-align: center;
 }
+
 .btn-group:hover {
-   background-color: #eee;
-   border-color: #eee;
-   border: 0.5px solid #eee;
-   color: #ff6863;
+	background-color: #eee;
+	border-color: #eee;
+	border: 0.5px solid #eee;
+	color: #ff6863;
 }
 
 .btn-group {
-   color: #fff;
-   background-color: #ff6863;
-   border-color: #ff6863;
-   border: 2px solid #eee;
-   padding: 0.5rem 1rem;
+	color: #fff;
+	background-color: #ff6863;
+	border-color: #ff6863;
+	border: 2px solid #eee;
+	padding: 0.5rem 1rem;
 }
 </style>
 </head>
@@ -74,46 +83,103 @@ input {
 		</nav>
 		<!--Join Sections-->
 		<section id="id" class="about roomy-100">
-		<form action="SaleAdd.jsp?reaId=${reaUserData.reaId}" method="post" >
-			<div class="container">
-				<div class="about_content">
-					<h2>My Page</h2>
-					<br> <br>
-					<div class="row">
-						<div class="col-md-6" style="text-align: center">
-							<img id="preview" src="./reaimg/${reaImgData.reaImgSaveName}" style="width: 200px"
-								alt="Profile"> <br> <br> <input type="text"
-								class="form-control" name="User_Id" id="User_Id"
-								required="required"   value="${reaUserData.reaName}" readonly> <br>
+			<form action="SaleAdd.jsp?reaId=${reaUserData.reaId}" method="post">
+				<div class="container">
+					<div class="about_content">
+						<h2>My Page</h2>
+						<br> <br>
+						<div class="row">
+							<div class="col-md-6" style="text-align: center">
+								<img id="preview" src="./reaimg/${reaImgData.reaImgSaveName}"
+									style="width: 200px" alt="Profile"> <br> <br> <input
+									type="text" class="form-control" name="User_Id" id="User_Id"
+									required="required" value="${reaUserData.reaName}" readonly>
+								<br>
+							</div>
+							<div class="col-md-6">
+								<label>사업자 등록번호 &nbsp;&nbsp;&nbsp;&nbsp;</label> <input
+									type="text" class="form-control" name="User_Id" id="User_Id"
+									required="required" value="${reaUserData.regNum}"
+									readonly="readonly"> <label>사무소
+									이름&nbsp;&nbsp;&nbsp;&nbsp;</label> <input type="text"
+									class="form-control" name="User_Id" id="User_Id"
+									required="required" value="${reaUserData.officeName}" readonly>
+								<label>연락처&nbsp;&nbsp;&nbsp;&nbsp;</label> <input type="text"
+									class="form-control" name="User_Id" id="User_Id"
+									required="required" value="${reaUserData.officeHp}" readonly>
+								<label>사무소 주소 &nbsp;&nbsp;&nbsp;&nbsp;</label> <input
+									type="text" class="form-control" name="User_Id" id="User_Id"
+									required="required"
+									value="${reaUserData.officeAddr} ${reaUserData.officeDetailAddr}"
+									readonly> <br>
+							</div>
 						</div>
-						<div class="col-md-6">
-							<label>사업자 등록번호 &nbsp;&nbsp;&nbsp;&nbsp;</label>
-							<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="${reaUserData.regNum}" readonly="readonly">
-						 	<label>사무소 이름&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="${reaUserData.officeName}" readonly>
-						 	<label>연락처&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="${reaUserData.officeHp}" readonly> 
-						 	<label>사무소 주소 &nbsp;&nbsp;&nbsp;&nbsp;</label>
-						 	<input type="text" class="form-control" name="User_Id" id="User_Id" required="required" value="${reaUserData.officeAddr} ${reaUserData.officeDetailAddr}" readonly> <br>
-						</div>
-					</div>
-					<hr>
-					<div class="row">
-						<div class="col-md-12">
-						<input type="submit" class="btn-group" value="매물 등록"> &nbsp; <button type="submit" class="btn-group">지난 매물 보기</button> &nbsp; 
-						<button type="submit" class="btn-group">계약서 작성</button>&nbsp; <button type="submit" class="btn-group">계약 관리</button>
-							<br>	<br>
-							<jsp:include page="WEB-INF/include/TableList.jsp"></jsp:include>
-						</div>
-					</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-12">
+								<input type="submit" class="btn-group" value="매물 등록">
+								&nbsp;
+								<button type="submit" class="btn-group">지난 매물 보기</button>
+								&nbsp;
+								<button type="submit" class="btn-group">계약서 작성</button>
+								&nbsp;
+								<button type="submit" class="btn-group">계약 관리</button>
+								<br> <br>
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">매물 관리</h6>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered" id="dataTable"
+											width="100%" cellspacing="0">
+											<thead>
+												<tr>
+													<th>면적</th>
+													<th>유형</th>
+													<th>주소</th>
+													<th>아파트이름</th>
+													<th>동</th>
+													<th>호수</th>
+													<th>매매가</th>
+													<th>계약여부</th>
+													<th>수정</th>
+													<th>삭제</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="saleData" items="<%=saleList%>"
+													varStatus="status">
+													<tr>
+														<td>${saleData.aptSize}</td>
+														<td>${saleData.type}</td>
+														<td>${saleData.addr}</td>
+														<td>${saleData.aptName}</td>
+														<td>${saleData.aptDong}</td>
+														<td>${saleData.aptHo}</td>
+														<td>${saleData.price}</td>
+														<td>${saleData.isContract}</td>
+														<td><a href="SaleEdit.jsp?aptNum=${saleData.aptNum}">
+																수정</a></td>
+														<td><a href="SaleEdit.jsp?aptNum=${saleData.aptNum}">
+																삭제</a></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+								</div>
 
+
+
+
+							</div>
+						</div>
+
+					</div>
 				</div>
-			</div>
-		</form>
+			</form>
 			<!--End off container -->
 		</section>
-
-
 		<!-- scroll up-->
 		<jsp:include page="WEB-INF/include/ScrollUp.jsp"></jsp:include>
 		<!-- End off scroll up -->

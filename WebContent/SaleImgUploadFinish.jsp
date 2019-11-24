@@ -18,20 +18,19 @@
 					</h2>
 					<hr>
 					<br>
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<div class="row">
 							<div class="col-sm-3"></div>
 							<div class="col-sm-6">
 								<button type="submit" class="btn btn-primary btn-block btn-lg"
-									onclick="location.href='REAMypage.jsp'">마이페이지</button>
+									onclick="location.href='GetREAUserByIdService.d4b?<%=reaId%>'">마이페이지</button>
 							</div>
 							<div class="col-sm-3"></div>
 						</div>
-					</div>
+					</div> --%>
 					<br> <br> <br> <br>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--End off row-->
 </div>

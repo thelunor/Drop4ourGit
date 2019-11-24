@@ -35,7 +35,7 @@ public class GetREAUserByIdService implements Action {
 				System.out.println("조회 성공");
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);
-				forward.setPath("REAMypageEdit.jsp");
+				forward.setPath("REAMypage.jsp");
 			} else {
 				System.out.println("조회 실패");
 				forward.setPath("/AdminMain.jsp");
