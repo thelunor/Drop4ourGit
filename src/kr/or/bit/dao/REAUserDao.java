@@ -179,36 +179,31 @@ public class REAUserDao {
 		return rlist;
 	}
 	
-	public ArrayList<REAUser> getREAUserInfo(String reaId) {
+	public REAUser getREAUserInfo(String reaId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<REAUser> rlist = null;
+		REAUser reaUser = null;
 
-		String sql_get_REAInfo = "select officeName, officeDetailAddr, officeHp where reaId=?";
+		String sql_get_REAInfo = "select officeName, officeDetailAddr, officeHp from reauser where reaId=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_get_REAInfo);
 			pstmt.setString(1, reaId);
 			rs = pstmt.executeQuery();
-			rlist = new ArrayList<REAUser>();
-
+			reaUser = new REAUser();
 
 			while (rs.next()) {
-				REAUser reauser = new REAUser();
-				reauser.setOfficeName(rs.getString("officeName"));
-				reauser.setOfficeAddr(rs.getString("officeAddr"));
-				reauser.setOfficeHp(rs.getString("officeHP"));
-				rlist.add(reauser);
+				reaUser.setOfficeName(rs.getString("officeName"));
+				reaUser.setOfficeDetailAddr(rs.getString("officeDetailAddr"));
+				reaUser.setOfficeHp(rs.getString("officeHP"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return rlist;
+		return reaUser;
 	}
 	
 	
-	public REAUser getREAUserInfoByAptNum(String aptNum) {  //아파트 매물 번호로 공인중개사 아이디 찾기
-		return null;
-	}
+	
 }

@@ -236,12 +236,13 @@ public class SaleDao {
 	}
 	
 	
-	public Sale getSaleDetail(String aptNum) { // 아파트 이름과 거래유형으로 매물 정보 및 공인중개사 정보 가져오기 (SaleDetail 페이지)
+	public Sale getSaleDetail(String aptNum) { // 아파트 매물 번호로 매물 정보 가져오기 (SaleDetail 페이지)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Sale sale = null;
-		String sql_get_saleDetail = "select type, addr, aptDong, price, aptSize, direction, etc from sale where aptNum =?";
+		String sql_get_saleDetail = "select aptName,aptSize,Type,aptDong,price,Direction,etc, reaId from sale where aptNum=?";
+		
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_get_saleDetail);
@@ -249,14 +250,14 @@ public class SaleDao {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				sale = new Sale();
+				sale.setAptName(rs.getString("aptName")); //아파트 이름
+				sale.setAptSize(rs.getString("aptSize")); //아파트 면적
 				sale.setType(rs.getString("type")); //매물 유형
-				sale.setAddr(rs.getString("addr")); //매물 도로명주소
 				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
 				sale.setPrice(rs.getInt("price")); //매매가격
-				sale.setAptSize(rs.getString("aptSize")); //아파트 면적
 				sale.setDirection(rs.getString("direction")); //아파트 향
-				sale.setEtc(rs.getString("etc"));
-				
+				sale.setEtc(rs.getString("etc")); //특징
+				sale.setId(rs.getString("reaId")); //공인중개사 아이디
 			}
 		
 		} catch (Exception e) {

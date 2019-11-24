@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
 	Sale sale = (Sale) request.getAttribute("saleData");
+	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 %>
 
 <!doctype html>
@@ -192,6 +193,7 @@ a.btn  {
 		</nav>
 		<!--Detail Sections-->	
 <c:set var="saleData" value="<%=sale%>"/>			
+<c:set var="reaData" value="<%=reaUser%>"/>			
 		<div class="container-fluid">
 			<div class="main_featured m-top-100">
 				<h2 style="text-align: center;">매물 상세 페이지</h2>
@@ -294,17 +296,17 @@ a.btn  {
     <div class="content">
 				<div class="information">
 				<br>
-				<h3 style="text-align: center;">${reaUser.reaName}</h3>
+				<h3 style="text-align: center;">${reaData.reaName}</h3>
 				<br>
                  <div class="form-group" style="text-align : center">
                     <img id="preview" src="./images/profile.png" style="width:150px" alt="Profile">
                  </div>		
 				<br>
-				<a href="#" data-toggle="tooltip" title="010-1234-1234" style="float:right; color:#ff6863;">전화번호 &nbsp;&nbsp;&nbsp; &nbsp;</a>
+				<a href="#" data-toggle="tooltip" title="${reaData.officeHp}" style="float:right; color:#ff6863;">전화번호 &nbsp;&nbsp;&nbsp; &nbsp;</a>
 				<br><br>
 				<div class="form-group">
 					<label>사무소 주소 </label> 
-					<input type="text" class="form-control" required="required" placeholder="주소" style="width:320px">
+					<input type="text" class="form-control" required="required" placeholder="주소" style="width:320px" value="${reaData.officeDetailAddr}">
 				</div>
 				<br>			
 				<div class="form-group">
