@@ -257,7 +257,23 @@
 												</div>
 												<div style="margin-top: 12px;">
 													<div>
-														방은 좋고 예쁜데 클렌징폼이랑 빗같은건 구비되어 있지 않아서 참고하셔야할것같아요.
+														방은 좋고
+													</div>
+												</div>
+											</div>
+											<div style="margin-top: 20px; margin-bottom: 20px;">
+												<hr>
+											</div>
+											<div>
+												<div style="margin-top: 24px; margin-bottom: 24px;">
+													<span>2019.01.01.</span>
+													<div style="float: right;">
+														작성자: 김김김
+													</div>
+												</div>
+												<div style="margin-top: 12px;">
+													<div>
+														방은 좋고
 													</div>
 												</div>
 											</div>

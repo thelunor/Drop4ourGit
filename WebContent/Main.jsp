@@ -55,35 +55,7 @@
 
 		</nav>
 		<!--Home Sections-->
-	<jsp:include page="WEB-INF/include/Home.jsp"></jsp:include>
-	<br>
-	<br>
-	<br>
-	<br>
-	<section>
-		<div class="container-fulid">
-			<div class="row">
-				<div class="about_bottom_content">
-					<div class="col-md-6">				
-						<br>
-						<jsp:include page="Chart_0.jsp"></jsp:include>
-						<br> <br> <br>
-						<jsp:include page="barChart.jsp"></jsp:include>
-					</div>
-					<div class="col-md-6">
-						<br>
-						<jsp:include page="Chart_1.jsp"></jsp:include>
-						<br> <br> <br>
-						<p>혜리부분</p>
-					</div>
-				</div>
-			</div>
-			<!--End off row-->
-		</div>
-		<!--End off container -->
-		<br> <br> <br> <br>
-	</section>
-	<!--End off About section -->	
+	<jsp:include page="WEB-INF/include/Home.jsp"></jsp:include>	
 	
 		<!-- scroll up-->
 		<div class="scrollup">

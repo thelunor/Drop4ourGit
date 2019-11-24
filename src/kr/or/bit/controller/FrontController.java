@@ -192,14 +192,6 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (url_Command.equals("/GetGenericUserMypageService.d4b")) {
-			try {
-				action = new GetGenericUserMypageService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
 		} else if (url_Command.equals("/GetREAImgService.d4b")) {
 			try {
 				action = new GetREAImgService(); //
@@ -413,6 +405,13 @@ public class FrontController extends HttpServlet {
 			try {
 				action = new selectAtpListService();
 				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/SelectaptListServiceOk.d4b")) { // 아파트 목록보기
+			try {
+				forward = new ActionForward();
+				forward.setPath("/HouseListMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

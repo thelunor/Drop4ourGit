@@ -1,10 +1,8 @@
+<%@page import="kr.or.bit.dto.Sale"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Scrolling Notice</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style type="text/css">
 .notice {
@@ -406,10 +404,16 @@ $(function() {
        
   }); 
 </script>
-</head>
-<body>
-	<p style="font-size: 18px; font-family: 'Jua', sans-serif;"> 검색 결과 &nbsp;&nbsp; <span id="topic">강남구</span>
-	<i class="fas fa-angle-right"></i> 법정동</p>		
+<%
+	List<Sale> saleList =(List<Sale>)request.getAttribute("saleList");
+	//System.out.println("saleList.toString(): " + saleList.toString());
+	String search=(String)request.getAttribute("search");
+	//System.out.println("search: " + search);
+	String[] searchSplit = search.split(" ");
+	//System.out.println(searchSplit[0]);
+%>
+	<p style="font-size: 18px; font-family: 'Jua', sans-serif;"> 검색 결과 &nbsp;&nbsp; <span id="topic"><%=searchSplit[0] %></span>
+	<i class="fas fa-angle-right"></i> <%=searchSplit[1] %></p>		
 
 	<br>
 	<div class="notice">
@@ -417,6 +421,3 @@ $(function() {
 		
 		</ul>
 	</div>
-					
-</body>
-</html>

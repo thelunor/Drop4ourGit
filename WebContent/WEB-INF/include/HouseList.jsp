@@ -1,3 +1,6 @@
+<%@page import="kr.or.bit.dto.Sale"%>
+<%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
@@ -52,13 +55,40 @@ a.btn  {
 text-align: center;
 }
 </style>
+<%ArrayList<Sale> list = (ArrayList<Sale>) request.getAttribute("saleList");
+ArrayList<String> priceList=new ArrayList<String>();
+String stringPrice=null;
 
+	for(Sale listString : list){
+		//System.out.println(listString.toString());
+		double num = 79830;
+		int price= listString.getPrice();
+		double price2= num /price * 100;
+		stringPrice = Double.toString(price2)+ "%";
+		priceList.add(stringPrice);
+		//System.out.println(stringPrice);
+		//System.out.println(79830 / price *100); //79830/sale.price*100
+	}
+	for(String st : priceList){
+		System.out.println(st);
+	}
+ 	int listLength = priceList.size()-1;
+ 	//System.out.println("listLength: " + listLength);
+ 	System.out.println("stringPrice: " + stringPrice);
+ 	
+%>
 <h6>300개 이상의 매물</h6>
 <p style="font-size: 13px">거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</p>
 <br>
 <div class="row">
 	<div class="col-lg-7" id="items">
-
+ <form action="SelectaptListService.d4b" method="post">
+ <c:set var="priceList" value="priceList"></c:set>
+ <c:set var="stringPrice" value="stringPrice"></c:set>
+ <c:set var="listLength" value="listLength"></c:set>
+ <c:set var="sale" value="list"></c:set>
+<c:forEach var="sale" items="<%=list%>" varStatus="status">
+<%--  <c:forEach var="i" begin="0" end="<%=listLength %>" step="1"> --%>
 		<!-- items inner -->
 		<div class="row">
 			<div class="col-lg-1"></div>
@@ -78,182 +108,12 @@ text-align: center;
 			<!-- 내용 -->
 			<div class="col-lg-4">
 			<div class="detail" style="text-align: center;">
-				<h5>역삼래미안 아파트</h5>
-				<input type="text" class="form-control"
-					name="userPassCheck" id="userPassCheck" required="required"
-					placeholder="000동">			
+				<h5>${sale.aptName}</h5>
+				<input type="text" class="form-control"	value="전용면적   ${sale.aptSize}㎡">			
 					<br>
 					<div class="skill_bar sm-m-top-50">
-						<div class="teamskillbar clearfix m-top-20" data-percent="80%">
-							<h6>거래 가격 : 0억 0000천 만원 </h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
-
-						<div class="teamskillbar clearfix m-top-50" data-percent="30%">
-							<h6>교통 편리함</h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
-					</div>						
-				 <a class="btn" href="1Detail2.jsp">See the Details</a>		
-				 </div>
-			</div>
-		</div>
-		<hr>
-		<div class="row">
-			<div class="col-lg-1"></div>
-			<div class="col-lg-7">
-				<div class="slick-items">
-					<div>
-						<img src="./images/xi1.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi2.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi3.jpg" alt="New York" width="500" height="220">
-					</div>
-				</div>
-			</div>
-			<!-- 내용 -->
-			<div class="col-lg-4">
-			<div class="detail" style="text-align: center;">
-				<h5>역삼래미안 아파트</h5>
-				<input type="text" class="form-control"
-					name="userPassCheck" id="userPassCheck" required="required"
-					placeholder="000동">			
-					<br>
-					<div class="skill_bar sm-m-top-50">
-						<div class="teamskillbar clearfix m-top-20" data-percent="80%">
-							<h6>거래 가격 : 0억 0000천 만원 </h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
-
-						<div class="teamskillbar clearfix m-top-50" data-percent="30%">
-							<h6>교통 편리함</h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
-					</div>						
-				 <a class="btn" href="1Detail2.jsp">See the Details</a>		
-				 </div>
-			</div>
-		</div>
-
-		<hr>
-
-		<div class="row">
-			<div class="col-lg-1"></div>
-			<div class="col-lg-7">
-				<div class="slick-items">
-					<div>
-						<img src="./images/xi1.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi2.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi3.jpg" alt="New York" width="500" height="220">
-					</div>
-				</div>
-			</div>
-			<!-- 내용 -->
-			<div class="col-lg-4">
-			<div class="detail" style="text-align: center;">
-				<h5>역삼래미안 아파트</h5>
-				<input type="text" class="form-control"
-					name="userPassCheck" id="userPassCheck" required="required"
-					placeholder="000동">			
-					<br>
-					<div class="skill_bar sm-m-top-50">
-						<div class="teamskillbar clearfix m-top-20" data-percent="80%">
-							<h6>거래 가격 : 0억 0000천 만원 </h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
-
-						<div class="teamskillbar clearfix m-top-50" data-percent="30%">
-							<h6>교통 편리함</h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
-					</div>						
-				 <a class="btn" href="1Detail2.jsp">See the Details</a>		
-				 </div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="row">
-			<div class="col-lg-1"></div>
-			<div class="col-lg-7">
-				<div class="slick-items">
-					<div>
-						<img src="./images/xi1.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi2.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi3.jpg" alt="New York" width="500" height="220">
-					</div>
-				</div>
-			</div>
-			<!-- 내용 -->
-			<div class="col-lg-4">
-			<div class="detail" style="text-align: center;">
-				<h5>역삼래미안 아파트</h5>
-				<input type="text" class="form-control"
-					name="userPassCheck" id="userPassCheck" required="required"
-					placeholder="000동">			
-					<br>
-					<div class="skill_bar sm-m-top-50">
-						<div class="teamskillbar clearfix m-top-20" data-percent="80%">
-							<h6>거래 가격 : 0억 0000천 만원 </h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
-
-						<div class="teamskillbar clearfix m-top-50" data-percent="30%">
-							<h6>교통 편리함</h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
-					</div>						
-				 <a class="btn" href="1Detail2.jsp">See the Details</a>		
-				 </div>
-			</div>
-		</div>
-		<hr>
-
-		<div class="row">
-			<div class="col-lg-1"></div>
-			<div class="col-lg-7">
-				<div class="slick-items">
-					<div>
-						<img src="./images/xi1.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi2.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi3.jpg" alt="New York" width="500" height="220">
-					</div>
-				</div>
-			</div>
-			<!-- 내용 -->
-			<div class="col-lg-4">
-			<div class="detail" style="text-align: center;">
-				<h5>역삼래미안 아파트</h5>
-				<input type="text" class="form-control"
-					name="userPassCheck" id="userPassCheck" required="required"
-					placeholder="000동">			
-					<br>
-					<div class="skill_bar sm-m-top-50">
-						<div class="teamskillbar clearfix m-top-20" data-percent="80%">
-							<h6>거래 가격 : 0억 0000천 만원 </h6>
+						<div class="teamskillbar clearfix m-top-20" data-percent="<%=stringPrice %>">>
+							<h6>거래 가격 : ${sale.price}</h6>
 							<div class="teamskillbar-bar"></div>
 						</div>
 						<!-- End Skill Bar -->
@@ -268,6 +128,9 @@ text-align: center;
 				 </div>
 			</div>
 		</div>
+		<hr>
+	</c:forEach>	
+	</form>
 	</div>
 
 	<!-- map -->
@@ -314,6 +177,7 @@ $(function(){
 		slidesToScroll : 1,
 		fade : false
 	});
+
 });
 	
 </script>

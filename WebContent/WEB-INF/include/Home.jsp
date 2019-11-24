@@ -56,11 +56,12 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 			close : function(event) { //자동완성창 닫아질때 호출
 			}
 		});
-							 
+	
 	$("#submitbtn").click(function() {
-		var textVal= $("#searchInput").val();
-		console.log(textVal);		
-		location.href="'dd.d4b?searchInput=" + textVal + "'";
+		var address= $("#searchInput").val().trim();
+		//console.log(address[0]+address[1]+address[2]);	
+// 		location.href="'SelectaptListService.d4b?address="+address[0]+address[1]+address[2];
+		location.href='SelectaptListService.d4b?search=' + address
 	});
 	
 	});
@@ -89,11 +90,10 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 						</div>
 
 						<div class="input-group">
-
 							<input class="form-control" id="searchInput" type="text"
-								placeholder="법정명으로 검색">
+								placeholder="동으로 검색">
 							<div id="data">
-							<button type="submit" id="submitbtn">
+							<button type="submit" id="submitbtn" style="height: 45px;" > <!-- onclick="location.href='SelectaptListService.d4b?search='" -->
 								<i class="fa fa-search"></i>
 							</button>
 							</div>

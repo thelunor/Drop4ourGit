@@ -9,7 +9,7 @@
 	rel="stylesheet">
 <%
 	GenericUser genericUser = (GenericUser)request.getAttribute("genericUser");
-	System.out.println("하이" + genericUser.toString());
+	
 %>
 <c:set var="userData" value="<%=genericUser%>"></c:set>
 
@@ -76,7 +76,7 @@ img.avatar {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="WEB-INF/include/GenericUser_Top.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/User_Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
@@ -131,8 +131,8 @@ img.avatar {
 										<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 										<div class="row">&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" class="form-control" name="userAddr" id="userAddr"
-											required="required" placeholder="주소" style="width:72%;" value="${userData.userAddr}"> &nbsp;&nbsp;
-											<input type="button" onclick="searchAddr()" value="주소 검색"><br><br>
+											required="required" placeholder="주소" style="width:72%;"> &nbsp;&nbsp;
+											<input type="button" onclick="searchAddr()" value="주소 검색" value="${userData.userAddr}"><br><br>
 										</div>
 										<input type="text" class="form-control" name="userDetailAddr" id="userDetailAddr"
 											required="required" placeholder="상세주소" style="width:77%;" value="${userData.userDetailAddr}"><br>

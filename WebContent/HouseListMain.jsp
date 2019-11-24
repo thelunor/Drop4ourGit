@@ -1,3 +1,5 @@
+<%@page import="kr.or.bit.dto.Sale"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
@@ -100,10 +102,8 @@ table {
 					<div class="row">
 						<div class="col-md-8">
 							<div class="input-group">
-								<form action="1Detail2.jsp" method="post">
 									<input type="text" placeholder="법정동 검색" id="member_search"
 										name="member_search" style="width: 200px; height: 50px;">
-								</form>
 								<div class="input-group-append ">
 									<button type="submit" class="btn btn-primary btn-block btn-lg">검색</button>
 								</div>
