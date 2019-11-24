@@ -429,14 +429,14 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
-		} else if (url_Command.equals("/SelectReviewService.d4b")) { // 개인회원 목록보기
+		} else if (url_Command.equals("/SelectReviewService.d4b")) { // 중개사 후기글 목록보기
 			try {
 				action = new SelectGenericUserService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/SelectReviewOk.d4b")) { // 개인회원 목록보기
+		} else if (url_Command.equals("/SelectReviewOk.d4b")) { // 중개사 후기글 목록보기
 			try {
 				forward = new ActionForward();
 				forward.setRedirect(false);
