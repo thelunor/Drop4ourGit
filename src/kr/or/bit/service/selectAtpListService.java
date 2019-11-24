@@ -11,7 +11,7 @@ import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.SaleDao;
 import kr.or.bit.dto.Sale;
 
-public class selectAtpListService implements Action{
+public class SelectAtpListService implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -31,7 +31,7 @@ public class selectAtpListService implements Action{
 		}
 		forward = new ActionForward();
 		//session.setAttribute("address", address);		
-		forward.setPath("SelectaptListServiceOk.d4b");
+		forward.setPath("SelectAptListServiceOk.d4b");
 		return forward;
 	}
 

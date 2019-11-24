@@ -67,7 +67,7 @@ import kr.or.bit.service.UpdateReviewComService;
 import kr.or.bit.service.UpdateReviewService;
 import kr.or.bit.service.UpdateSaleImgService;
 import kr.or.bit.service.UpdateSaleService;
-import kr.or.bit.service.selectAtpListService;
+import kr.or.bit.service.SelectAtpListService;
 
 @WebServlet("*.d4b")
 public class FrontController extends HttpServlet {
@@ -401,17 +401,17 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/SelectaptListService.d4b")) { // 아파트 목록보기
+		} else if (url_Command.equals("/SelectAptListService.d4b")) { // 아파트 목록보기
 			try {
-				action = new selectAtpListService();
+				action = new SelectAtpListService();
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/SelectaptListServiceOk.d4b")) { // 아파트 목록보기
+		} else if (url_Command.equals("/SelectAptListServiceOk.d4b")) { // 아파트 목록보기
 			try {
 				forward = new ActionForward();
-				forward.setPath("/HouseListMain.jsp");
+				forward.setPath("/SaleListMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
