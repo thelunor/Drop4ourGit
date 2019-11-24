@@ -65,6 +65,24 @@ input {
 	border: 2px solid #eee;
 	padding: 0.5rem 1rem;
 }
+.btn-group-sm:hover {
+   background-color: #eee;
+   border-color: #eee;
+   border: 0.5px solid #eee;
+   color: #ff6863;
+}
+
+.btn-group-sm {
+   color: #fff;
+   background-color: #ff6863;
+   border-color: #ff6863;
+   border: 2px solid #eee;
+   padding: 0.5rem 1rem;
+}
+.input-group {
+   height: 50px;
+}
+
 </style>
 </head>
 
@@ -166,10 +184,6 @@ input {
 										</table>
 									</div>
 								</div>
-
-
-
-
 							</div>
 						</div>
 
