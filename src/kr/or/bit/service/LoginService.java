@@ -40,20 +40,22 @@ public class LoginService implements Action {
 					session.setAttribute("genericUserId", id);
 					request.setAttribute("type", "U01"); //일반 회원
 					forward.setPath("UserMain.jsp");
-					System.out.println("일반회원 로그인 성공");
+					System.out.println("일반회원 로그인");
+					return forward;
 				}else {
 					session.setAttribute("reaUserId", id);
 					request.setAttribute("type", "U02"); //공인중개사 회원
 					forward.setPath("UserMain.jsp");
-					System.out.println("공인중개사 회원 로그인 성공");
-
+					System.out.println("공인중개사 회원 로그인");
+					return forward;
 				}
-				return forward;
-			} else if (gResult.equals("black") || rResult.equals("black")) {//블랙회원이 로그인 했을 때
+			} else if (gResult.equals("B01") || rResult.equals("B02")) {//블랙회원이 로그인 했을 때
 				forward.setPath("BlackLogin.jsp");
+				System.out.println("블랙 회원 로그인");
 				return forward;
 			} else {
 				forward.setPath("Login.jsp");  //아이디 또는 비밀번호가 일치하지 않을 때
+				System.out.println("로그인 실패");
 				return forward;
 			}
 		} catch (Exception e) {

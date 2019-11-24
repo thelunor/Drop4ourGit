@@ -84,6 +84,7 @@ public class REAUserDao {
 				conn.commit();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			DB_Close.close(rs);
 			DB_Close.close(pstmt);
@@ -146,19 +147,19 @@ public class REAUserDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<REAUser> rlist = null;
-		
-		try { 
+
+		try {
 			conn = ds.getConnection();
 			String sql = "select reaId, reaName, reaPhoneNum, officeName, officeAddr, officeHP, regNum "
-						+ "from reauser where usercode=?";
+					+ "from reauser where usercode=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "U02");
 			rs = pstmt.executeQuery();
 			rlist = new ArrayList<REAUser>();
-			
+
 			while (rs.next()) {
 				REAUser reauser = new REAUser();
-				
+
 				reauser.setReaId(rs.getString("reaId"));
 				reauser.setReaName(rs.getString("reaName"));
 				reauser.setReaPhoneNum(rs.getString("reaPhoneNum"));
@@ -166,14 +167,14 @@ public class REAUserDao {
 				reauser.setOfficeAddr(rs.getString("officeAddr"));
 				reauser.setOfficeHp(rs.getString("officeHP"));
 				reauser.setRegNum(rs.getString("regNum"));
-				
+
 				rlist.add(reauser);
 			}
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		return rlist;
 	}
 }

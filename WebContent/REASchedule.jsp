@@ -401,7 +401,7 @@ h1, h3, #myUL {
 							<div class="my-calendar clearfix">
 								<div class="clicked-date">
 									<div class="cal-day"></div>
-									<div class="cal-date"></div>
+									<div class="cal-date" id="check"></div>
 								</div>
 								<div class="calendar-box">
 									<div class="ctr-box clearfix">
@@ -435,6 +435,7 @@ h1, h3, #myUL {
 <div id="myDIV" class="header">
 <div class="page-header">
 	<h3 id="timeline">To Do List</h3>
+	
 </div>
 <div class="row" style="text-align: center">
 <div class="col-md-9">
@@ -581,6 +582,7 @@ h1, h3, #myUL {
 	      schedule += "</li>";
 	      
 	      $('#timetable').append(schedule);   	
+
 	      
 	  }else if(count%2==1){		  	  
 	      var schedule = "";
@@ -636,7 +638,7 @@ dayList: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sat
 today: new Date(),
 monForChange: new Date().getMonth(),
 activeDate: new Date(),
-getFirstDay: (yy, mm) => new Date(yy, mm, 1),
+getFirstDay: (yy, mm) =>new Date(yy, mm, 1),
 getLastDay: (yy, mm) =>new Date(yy, mm + 1, 0),
 nextMonth: function () {
  let d = new Date();
@@ -674,6 +676,11 @@ const $btnPrev = document.querySelector('.btn-cal.prev');
 function loadDate (date, dayIn) {
 document.querySelector('.cal-date').textContent = date;
 document.querySelector('.cal-day').textContent = init.dayList[dayIn];
+console.log(init.dayList[dayIn]);
+	if(init.dayList[dayIn]=='Sunday'){ 
+		 $('#timetable').empty();  
+		 $('#myUL').empty(); 
+	}
 }
 
 /**
@@ -748,7 +755,7 @@ loadDate(init.today.getDate(), init.today.getDay());
 $btnNext.addEventListener('click', ()=> loadYYMM(init.nextMonth()));
 $btnPrev.addEventListener('click', ()=> loadYYMM(init.prevMonth()));
 
-$calBody.addEventListener('click', (e)=> {
+$calBody.addEventListener('click', (e)=>{
 if (e.target.classList.contains('day')) {
  if (init.activeDTag) {
    init.activeDTag.classList.remove('day-active');

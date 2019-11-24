@@ -49,6 +49,16 @@ public class GenericUserDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("update 예외");
+			}
+
 		}
 		return userType;
 	}

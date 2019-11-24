@@ -44,9 +44,20 @@ public class AdminDao {
 			System.out.println("AdminRS 호출 ****");
 			if (rs.next()) {
 				check = true;
+				System.out.println("Admin 로그인 성공");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("update 예외");
+			}
+
 		}
 		return check;
 	}
