@@ -10,6 +10,8 @@
 <%
 	List<SaleImage> saleImgList = new ArrayList<SaleImage>();
 	saleImgList = (List)request.getAttribute("saleImgList");
+	System.out.println("saleImgList 투스트링 ㅡㅅㅡ : " + saleImgList.toString());
+	System.out.println("SaleEdit2 입성임돠~");
 	
 %>
 <html class="no-js" lang="en">
