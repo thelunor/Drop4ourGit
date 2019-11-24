@@ -11,6 +11,8 @@
 <html class="no-js" lang="en">
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap"
 	rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <head>
 <meta charset="utf-8">
 <title>Drop 4our bit</title>
@@ -177,11 +179,12 @@ input {
 														<td>${saleData.price}</td>
 														<td>${saleData.isContract}</td>
 														<td><button type='button' class='btn-group-sm' id='edit_btn' onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
-														<td><button type='button' class='btn-group-sm' id='edit_btn' onclick="location.href='DeleteSaleService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
+														<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='DeleteSaleService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
 													</tr>
 												</c:forEach>
 											</tbody>
 										</table>
+										
 									</div>
 								</div>
 							</div>
@@ -200,7 +203,14 @@ input {
 
 	<!-- JS includes -->
 	<jsp:include page="./js/js.jsp"></jsp:include>
-
+<script>
+	$(function(){
+		$("#delete_btn").click(function(){
+			
+			alert("삭제 되었습니다.");
+		});
+	});
+</script>
 
 </body>
 </html>

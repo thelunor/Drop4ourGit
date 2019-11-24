@@ -21,7 +21,7 @@ import kr.or.bit.service.DeleteREAUserService;
 import kr.or.bit.service.DeleteReviewComService;
 import kr.or.bit.service.DeleteReviewService;
 import kr.or.bit.service.DeleteSaleImgService;
-import kr.or.bit.service.DeleteSaleService;
+import kr.or.bit.service.DeleteSaleService2;
 import kr.or.bit.service.GetBookMarkService;
 import kr.or.bit.service.GetContractService;
 import kr.or.bit.service.GetGenericUserByIdService;
@@ -157,7 +157,7 @@ public class FrontController extends HttpServlet {
 			}
 		} else if (url_Command.equals("/DeleteSaleService.d4b")) {
 			try {
-				action = new DeleteSaleService(); //
+				action = new DeleteSaleService2(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
