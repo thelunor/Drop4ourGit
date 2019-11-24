@@ -180,7 +180,7 @@ form-control {
 										<div class="col-sm-4">
 										</div>
 										<div class="col-sm-4">
-											<button type="submit" class="btn btn-primary btn-block btn-lg">Next</button>
+											<button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='GetSaleImgService.d4b?aptNum=<%=aptNum%>'">Next</button>
 										</div>
 										<div class="col-sm-4">
 										</div>

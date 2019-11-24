@@ -8,6 +8,7 @@
 <% 
 	Sale sale = (Sale) request.getAttribute("saleData");
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
+	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
 %>
 
 <!doctype html>
@@ -194,6 +195,7 @@ a.btn  {
 		<!--Detail Sections-->	
 <c:set var="saleData" value="<%=sale%>"/>			
 <c:set var="reaData" value="<%=reaUser%>"/>			
+<c:set var="reaImg" value="<%=reaImg%>"/>			
 		<div class="container-fluid">
 			<div class="main_featured m-top-100">
 				<h2 style="text-align: center;">매물 상세 페이지</h2>
@@ -299,7 +301,7 @@ a.btn  {
 				<h3 style="text-align: center;">${reaData.reaName}</h3>
 				<br>
                  <div class="form-group" style="text-align : center">
-                    <img id="preview" src="./images/profile.png" style="width:150px" alt="Profile">
+                    <img id="preview" src="./reaimg/${reaImg.reaImgSaveName} " style="width:150px" alt="Profile">
                  </div>		
 				<br>
 				<a href="#" data-toggle="tooltip" title="${reaData.officeHp}" style="float:right; color:#ff6863;">전화번호 &nbsp;&nbsp;&nbsp; &nbsp;</a>

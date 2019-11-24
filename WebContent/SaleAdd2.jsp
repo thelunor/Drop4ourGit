@@ -6,7 +6,6 @@
 <!doctype html>
 <%
 	Sale sale2=(Sale)request.getAttribute("sale2");
-	System.out.println("sale2입니당: " + sale2);
 	
 %>
 <c:set var="saleData" value="<%=sale2%>"></c:set>

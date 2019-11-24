@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -56,9 +57,35 @@ public class SaleImageDao {
 	}
 	
 
-	public List<SaleImage> getSaleImg(String aptNum) { // 매물 이미지 불러오기 (매물 번호로)
-		return null;
+	public List<SaleImage> getSaleImgList(String aptNum) { // 매물 이미지 불러오기 (매물 번호로)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		SaleImage saleImg = null;
+		List<SaleImage> saleImgList = null;
+		try {
+			conn = ds.getConnection();
+			String sql_select_img = "select saleimgsavename from saleImage where aptnum=?";
+			pstmt = conn.prepareStatement(sql_select_img);
+			pstmt.setString(1, aptNum);
+			rs = pstmt.executeQuery();
+			saleImgList = new ArrayList<SaleImage>();
+			while(rs.next()) {
+				saleImg = new SaleImage();
+				saleImg.setSaleImgSaveName(rs.getString("saleimgsavename"));
+				saleImgList.add(saleImg);
+				System.out.println("rsrs성공");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			
+		}
+		
+		return saleImgList;
 	}
+	
+	
 
 	public int updateSaleImg(SaleImage saleImg) { // 매물 이미지 수정
 		return 0;

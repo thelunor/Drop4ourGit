@@ -141,14 +141,14 @@ form-control {
 										class="form-control" style="width: 95%" name="direction"
 										id="direction">
 										<option value="blank">-</option>
-										<option value="south">남향</option>
-										<option value="southEast">남동향</option>
-										<option value="southWest">남서향</option>
-										<option value="east">동향</option>
-										<option value="west">서향</option>
-										<option value="north">북향</option>
-										<option value="northEast">북동향</option>
-										<option value="northWest">북서향</option>
+										<option value="남향">남향</option>
+										<option value="남동향">남동향</option>
+										<option value="남서향">남서향</option>
+										<option value="동향">동향</option>
+										<option value="서향">서향</option>
+										<option value="북향">북향</option>
+										<option value="북동향">북동향</option>
+										<option value="북서향">북서향</option>
 									</select>
 								</div>
 								<div class="form-group">
