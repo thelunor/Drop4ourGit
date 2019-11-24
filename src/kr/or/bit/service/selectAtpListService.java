@@ -31,7 +31,7 @@ public class SelectAtpListService implements Action{
 		}
 		forward = new ActionForward();
 		//session.setAttribute("address", address);		
-		forward.setPath("SelectAptListServiceOk.d4b");
+		forward.setPath("SaleDetail.jsp");
 		return forward;
 	}
 
