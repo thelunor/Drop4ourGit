@@ -30,9 +30,15 @@
 
 <jsp:include page="./css/css.jsp"></jsp:include>
 <style>
-h2 {
-	font-family: 'Jua', sans-serif;
+.input-group {
+	height: 50px;
 }
+
+h2{
+font-family: 'Jua', sans-serif;
+text-align: center;
+}
+
 </style>
 </head>
 
@@ -51,8 +57,7 @@ h2 {
 		<!--Login Sections-->
 
 		<section id="join" class="about roomy-100">
-
-			<div class="container">
+			<div class="container" id="imgUpload">
 				<div class="about_content">
 					<div class="row">
 						<div class="col-md-3"></div>
@@ -102,7 +107,7 @@ h2 {
 						<div class="row">
 								<div class="col-sm-5"></div>
 								<div class="col-sm-2">
-									<button type="submit" class="btn btn-primary btn-block btn-lg"
+									<button type="button" class="btn btn-primary btn-block btn-lg"
 										id="submitBtn" style="padding-left: 32px;">사진 등록 완료</button>
 								</div>
 								<div class="col-sm-5"></div>
@@ -117,8 +122,6 @@ h2 {
 
 	</section>
 	</div>
-
-
 
 	<!-- scroll up-->
 	<jsp:include page="./WEB-INF/include/ScrollUp.jsp"></jsp:include>
@@ -162,32 +165,30 @@ h2 {
 	    }; 
 	}; 
 	
-	function uploadFile(){
-		var aptNum = $("#aptNum").val();
-	 	console.log(aptNum);
-	 	var form = $("#myForm")[0];
-	 	var formData = new FormData(form);
-	 	
-	 	$.ajax({
-	 		url : 'InsertSaleImgService.d4b',
-	 		enctype : "multipart/form-data",
-	 		type : 'post',
-	 		data : formData,
-	 		contentType : false,
-	 		processData : false,
-	 		success:function(data){
-	 		
-	 			alert(data);
-	 		}
-	 		
-	 	});
-	};
 	$(function(){
-		$("#submitBtn").on('click',function(){
-			uploadFile();
+		$("#submitBtn").click(function(){
+			var form = $("#myForm")[0];
+		 	var formData = new FormData(form);
+		 	
+		 	$.ajax({
+		 		url : 'InsertSaleImgService.d4b',
+		 		enctype : "multipart/form-data",
+		 		type : 'post',
+		 		data : formData,
+		 		dataType:'html',
+		 		contentType : false,
+		 		processData : false,
+		 		success:function(data){
+		 			//console.log(data);
+		 			$("#imgUpload").empty();
+		 			$("#imgUpload").append(data);
+		 		}
+		 	});
+		});
+			
+		
 		});
 		 	
-	});
 	</script>
 
 </body>

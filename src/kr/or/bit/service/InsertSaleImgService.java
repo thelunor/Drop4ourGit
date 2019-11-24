@@ -73,10 +73,8 @@ public class InsertSaleImgService implements Action {
          result = dao.insertSaleImg(saleImg2);
          result = dao.insertSaleImg(saleImg3);
          
-         System.out.println("제발"+result);
-         
- 		PrintWriter out = response.getWriter();
- 		out.print("휴");
+        
+         forward.setPath("SaleImgUploadFinish.jsp");
 
       }catch (Exception e) {
 

@@ -174,6 +174,18 @@ public class SaleDao2 {
 	}
 
 	public List<Sale> getSaleList(String id) { // 매물 리스트 출력(공인중개사 아이디로)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Sale> saleList = new ArrayList<Sale>();
+		try {
+			conn = ds.getConnection();
+			String sql_select_sale = "";
+		}catch(Exception e) {
+			
+		}finally {
+			DB_Close.close(pstmt);
+		}
 		return null;
 	}
 
