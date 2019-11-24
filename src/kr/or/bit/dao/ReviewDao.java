@@ -3,6 +3,9 @@ package kr.or.bit.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -11,6 +14,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.or.bit.dto.Review;
+import kr.or.bit.utils.DB_Close;
 
 public class ReviewDao {
 	/*
@@ -30,12 +34,14 @@ public class ReviewDao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "INSERT INTO REVIEW (REVIEWNUM, USERID, REVIEWCONTENT, REVIEWDATE)" + 
-						" VALUES (SEQ_REVIEW.NEXTVAL, (SELECT USERID FROM GENERICUSER WHERE USERID=?), ?, ?)";
+			String sql = "INSERT INTO REVIEW (REVIEWNUM, USERID, REVIEWCONTENT, REVIEWDATE, REAID)" + 
+						" VALUES (SEQ_REVIEW.NEXTVAL, (SELECT USERID FROM GENERICUSER WHERE USERID=?), ?, ?, "
+						+ "SELECT REAID FROM REAUSER WHERE REAID=?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, review.getUserId());
 			pstmt.setString(2, review.getReviewContent());
 			pstmt.setDate(3,(Date) review.getReviewDate());
+			pstmt.setString(4, review.getReaid());
 			
 			row = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -56,8 +62,48 @@ public class ReviewDao {
 
 	public List<Review> getReviewList(String id) { // 리뷰 리스트 가져오기(공인중개사 id로)
 		/* 리뷰 리스트 가져올 때 댓글도 가져오기! */
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Review> rvlist = null;
+		
+		try {
+			conn = ds.getConnection();
+			String review_sql = "SELECT R.USERID, R.REVIEWCONTENT, R.REVIEWDATE " + 
+								"FROM REVIEW R JOIN REAUSER RU " + 
+								"ON R.REAID = RU.REAID " + 
+								"WHERE R.REAID=?";
+			pstmt = conn.prepareStatement(review_sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			rvlist = new ArrayList<Review>();
+			while (rs.next()) {
+				int reviewNum = rs.getInt("reviewnum");
+				String userId = rs.getString("review_writer");
+				String reviewContent = rs.getString("reviewContent");
+				java.sql.Date reviewDate = rs.getDate("reviewDate");
+				String reaId = rs.getString("reaId");
+				
+				Review reviewdto = new Review(reviewNum, userId, reviewContent, reviewDate, reaId);
+				rvlist.add(reviewdto);
+			}
+		} catch (Exception e) {
+			System.out.println("review dao 예외발생");
+			System.out.println(e.getMessage());
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
 
-		return null;
+			try {
+				conn.close();
+			} catch (Exception e) {
+				System.out.println("listreview dao 예외");
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return rvlist;
 	}
 
 	public int updateReview(Review review) { // 리뷰 수정

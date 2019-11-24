@@ -428,9 +428,23 @@ public class FrontController extends HttpServlet {
 				forward.setPath("/SaleListMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
+			} 
+		} else if (url_Command.equals("/SelectReviewService.d4b")) { // 개인회원 목록보기
+			try {
+				action = new SelectGenericUserService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/SelectReviewOk.d4b")) { // 개인회원 목록보기
+			try {
+				forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("/REAIntro.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
-
 		// update========================================
 		else if (url_Command.equals("/UpdateBlackService.d4b")) {
 			try {
