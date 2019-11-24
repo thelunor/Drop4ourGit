@@ -1,10 +1,3 @@
-<%@page import="java.util.Comparator"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Collections"%>
-<%@page import="java.util.Collection"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.TreeMap"%>
-<%@page import="java.util.Map"%>
 <%@page import="kr.or.bit.dto.Sale"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -65,36 +58,24 @@ text-align: center;
 <%ArrayList<Sale> list = (ArrayList<Sale>) request.getAttribute("saleList");
 ArrayList<String> priceList=new ArrayList<String>();
 String stringPrice=null;
- Map<Sale, String> saleMap=new HashMap<Sale, String>();
- 
- for(Sale sale : list){
-	double num = 79830;
-	int price= sale.getPrice();
-	double price2= num / price * 100; 
-	stringPrice = Double.toString(price2)+ "%";
- 	saleMap.put(sale, stringPrice);
- }
- 
- List<Sale> keyList=new ArrayList<Sale>();
- keyList.addAll(saleMap.keySet());
 
- 
-//  Collections.sort(keyList, new Comparator() {
-// 		public int compare(Object o1, Object o2) {
-// 			Object v1 = saleMap.get(o1);
-// 			Object v2 = saleMap.get(o2);
-// 			return ((Comparable) v2).compareTo(v1);
-// 		}
-// 	});
- 
- 
- 
-//  for(Sale str : keyList){
-// 	 System.out.println(str);
-//  }
- 
-//  System.out.println(saleMap.toString());
-//  System.out.println(saleMap.values());
+	for(Sale listString : list){
+		//System.out.println(listString.toString());
+		double num = 79830;
+		int price= listString.getPrice();
+		double price2= num /price * 100;
+		stringPrice = Double.toString(price2)+ "%";
+		priceList.add(stringPrice);
+		//System.out.println(stringPrice);
+		//System.out.println(79830 / price *100); //79830/sale.price*100
+	}
+	for(String st : priceList){
+		System.out.println(st);
+	}
+ 	int listLength = priceList.size()-1;
+ 	//System.out.println("listLength: " + listLength);
+ 	System.out.println("stringPrice: " + stringPrice);
+ 	
 %>
 <h6>300개 이상의 매물</h6>
 <p style="font-size: 13px">거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</p>
@@ -108,7 +89,7 @@ String stringPrice=null;
  <c:set var="sale" value="list"></c:set>
 <%-- <c:forEach var="sale" items="<%=list%>" varStatus="status"> --%>
 <%--  <c:forEach var="i" begin="0" end="<%=listLength %>" step="1"> --%>
-<c:forEach var="sale" items="<%=saleMap%>" varStatus="status">
+<%for(int i=0; i<list.size(); i++){ %>
 		<!-- items inner -->
 		<div class="row">
 			<div class="col-lg-1"></div>
@@ -128,12 +109,12 @@ String stringPrice=null;
 			<!-- 내용 -->
 			<div class="col-lg-4">
 			<div class="detail" style="text-align: center;">
-				<h5>${sale.key.aptName}</h5>
-				<input type="text" class="form-control"	value="전용면적   ${sale.key.aptSize}㎡">			
+				<h5><%=list.get(i).getAptName() %></h5>
+				<input type="text" class="form-control"	value="전용면적   <%=list.get(i).getAptSize()%>㎡">	
 					<br>
 					<div class="skill_bar sm-m-top-50">
-						<div class="teamskillbar clearfix m-top-20" data-percent="${sale.value}">>
-							<h6>거래 가격 : ${sale.key.price}</h6>
+						<div class="teamskillbar clearfix m-top-20" data-percent="<%=stringPrice %>">
+							<h6>거래 가격 : ${sale.price}</h6>
 							<div class="teamskillbar-bar"></div>
 						</div>
 						<!-- End Skill Bar -->
@@ -149,7 +130,8 @@ String stringPrice=null;
 			</div>
 		</div>
 		<hr>
-	</c:forEach>	
+<%-- 	</c:forEach>	 --%>
+<%} %>
 	</form>
 	</div>
 
