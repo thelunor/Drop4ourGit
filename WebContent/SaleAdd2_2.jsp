@@ -6,7 +6,9 @@
 <!doctype html>
 <%
 	Sale sale2=(Sale)request.getAttribute("sale2");
+	String aptNum=(String)request.getAttribute("aptNum");
 	System.out.println("sale2입니당: " + sale2);
+	System.out.println("에이피티넘아 넘어와주겠니?: " + aptNum);
 	
 %>
 <c:set var="saleData" value="<%=sale2%>"></c:set>
@@ -168,9 +170,10 @@ text-align: center;
 		$("#submitBtn").click(function(){
 			var form = $("#myForm")[0];
 		 	var formData = new FormData(form);
-		 	
+		 	var aptNum=<%=aptNum%>;
+		 	//console.log('InsertSaleImgService.d4b?aptnum='+aptNum);
 		 	$.ajax({
-		 		url : 'InsertSaleImgService.d4b',
+		 		url : 'InsertSaleImgService.d4b?aptNum='+aptNum,
 		 		enctype : "multipart/form-data",
 		 		type : 'post',
 		 		data : formData,

@@ -75,8 +75,10 @@ public class InsertSaleService implements Action {
 			if (result > 0) {
 				forward.setPath("SaleAdd2_2.jsp");
 				request.setAttribute("sale2", sale2);
+				request.setAttribute("aptNum", aptNum);
 			} else {
 				forward.setPath("Main.jsp");
+				System.out.println("result가 빵개 입니다.");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

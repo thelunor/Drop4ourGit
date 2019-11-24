@@ -51,7 +51,7 @@ public class InsertSaleImgService implements Action {
          }
 
          String aptNum =request.getParameter("aptNum");
-
+         System.out.println("에이피티넘: " + aptNum);
          SaleImage saleImg1 = new SaleImage();
 		 saleImg1.setSaleImgSaveName(saleImgSaveNames.get(0));
 		 saleImg1.setSaleImgOriginName(saleImgOriginNames.get(0));
