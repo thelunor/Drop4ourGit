@@ -255,7 +255,39 @@ public class SaleDao2 {
 	}
 
 	public int deleteSale(String aptNum) { // 매물 삭제(매물 번호로)
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+			
+			String sql_delete_sale = "delete from sale where aptnum=?";
+			String sql_delete_saleImg = "delete from saleImage where aptnum=?";
+			
+			pstmt = conn.prepareStatement(sql_delete_sale);
+			pstmt.setString(1, aptNum);
+			resultRow = pstmt.executeUpdate();
+			
+			pstmt = conn.prepareStatement(sql_delete_saleImg);
+			pstmt.setString(1, aptNum);
+			resultRow = pstmt.executeUpdate();
+			
+			if(resultRow>0) {
+				conn.commit();
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("delete sale dao 오류");
+		}finally {
+			 DB_Close.close(pstmt);
+	         try {
+	            conn.close();
+	         } catch (SQLException e) {
+	            e.printStackTrace();
+	         }
+		}
+		return resultRow;
 	}
 	
 	public ArrayList<Sale> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)

@@ -158,10 +158,8 @@ input {
 														<td>${saleData.aptHo}</td>
 														<td>${saleData.price}</td>
 														<td>${saleData.isContract}</td>
-														<td><a href="GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}">
-																수정</a></td>
-														<td><a href="SaleEdit.jsp?aptNum=${saleData.aptNum}">
-																삭제</a></td>
+														<td><button type='button' class='btn-group-sm' id='edit_btn' onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
+														<td><button type='button' class='btn-group-sm' id='edit_btn' onclick="location.href='DeleteSaleService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
 													</tr>
 												</c:forEach>
 											</tbody>
