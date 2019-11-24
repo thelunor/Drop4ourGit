@@ -97,8 +97,8 @@ form-control {
 								<div class="form-group">
 									<label>거래 유형 &nbsp;&nbsp;&nbsp;&nbsp;</label> <select
 										class="form-control" style="width: 95%" name="type" id="type">
-										<option value="sale" selected>매매</option>
-										<option value="lease">전세</option>
+										<option value="매매" selected>매매</option>
+										<option value="전세">전세</option>
 									</select>
 								</div>
 								<div class="form-group">

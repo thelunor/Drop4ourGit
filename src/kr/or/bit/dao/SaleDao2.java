@@ -39,7 +39,6 @@ public class SaleDao2 {
 			pstmt = conn.prepareStatement(sql_insert_sale);
 			pstmt.setString(1, sale.getAptSize());
 			pstmt.setString(2, sale.getType());
-			
 			pstmt.setString(3, sale.getAddr());
 			pstmt.setString(4, sale.getAptName());
 			pstmt.setString(5, sale.getAptDong());
