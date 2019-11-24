@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.or.bit.dao.GenericUserDao;
-import kr.or.bit.dto.GenericUser;
+import kr.or.bit.dao.ReviewDao;
+import kr.or.bit.dto.Review;
 import net.sf.json.JSONArray;
 
 @WebServlet("/SelectReview")
@@ -29,20 +29,20 @@ public class SelectReview extends HttpServlet {
     	response.setContentType("text/html;charset=UTF-8");
     	
     	PrintWriter out = response.getWriter();
-    	String userCode = request.getParameter("userCode");
-    	GenericUserDao gdao = null;
-    	List<GenericUser> glist = null;
+    	String reaId = request.getParameter("reaId");
+    	ReviewDao rvdao = null;
+    	List<Review> rvlist = null;
     	
     	try {
-    		gdao = new GenericUserDao();
-    		glist = new ArrayList<GenericUser>();
-    		
-    		glist = gdao.getGenericUserList();
-    		JSONArray jsonlist = JSONArray.fromObject(glist);
+    		rvdao = new ReviewDao();
+    		rvlist = new ArrayList<Review>();
+
+    		rvlist = rvdao.getReviewList(reaId);
+    		JSONArray jsonlist = JSONArray.fromObject(rvlist);
     		out.print(jsonlist);
     		
     	} catch (Exception e) {
-    		System.out.println("genericuser ajax 예외발생");
+    		System.out.println("review ajax 예외발생");
 			System.out.println(e.getMessage());
 		}
     }

@@ -57,6 +57,7 @@ import kr.or.bit.service.SelectAllContractsService;
 import kr.or.bit.service.SelectAtpListService;
 import kr.or.bit.service.SelectGenericUserService;
 import kr.or.bit.service.SelectREAUserService;
+import kr.or.bit.service.SelectReviewService;
 import kr.or.bit.service.UpdateBlackService;
 import kr.or.bit.service.UpdateContractService;
 import kr.or.bit.service.UpdateGenericUserService;
@@ -431,7 +432,7 @@ public class FrontController extends HttpServlet {
 			} 
 		} else if (url_Command.equals("/SelectReviewService.d4b")) { // 중개사 후기글 목록보기
 			try {
-				action = new SelectGenericUserService(); //
+				action = new SelectReviewService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

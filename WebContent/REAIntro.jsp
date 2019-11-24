@@ -1,5 +1,10 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.or.bit.dto.Review"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
@@ -47,6 +52,10 @@
 		}
 	</style>
 	
+	<%
+		List<Review> review = (ArrayList<Review>) request.getAttribute("rvList");
+	%>
+	
 	<script type="text/javascript">
 		$.noConflict();
 		/* jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
@@ -87,6 +96,8 @@
 	</script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
+	
+	
 	<div class="culmn">
 		<!--Home page style-->
 
@@ -252,7 +263,7 @@
 													</table>
 												</form> -->
 												
-												<form name="review" action="" method="post">
+												<form name="review" action="SelectReviewService.d4b" method="post">
 													<table width="95%">
 									                    <tr>
 									                        <td align="left">날짜:&nbsp;</td>
@@ -269,7 +280,8 @@
 									                    </tr>
 									                    <tr>
 									                    	<td colspan="4" align="right">
-									                    		<input type="button" id="insert_review" name="insert_review" value="확인" onclick="insert_review()">
+									                    		<input type="button" id="insert_review" name="insert_review" 
+									                    			value="확인" onclick="">
 									                    	</td>
 									                    </tr>
 								                    </table>
@@ -278,38 +290,22 @@
 											<div style="margin-top: 20px; margin-bottom: 20px;">
 												<hr>
 											</div>
-											<table style="width: 100%;">
-												<tr>
-													<td align="left" width="70%">
-														<span>2019.01.01.</span>
-													</td>
-													<td align="right">
-														작성자: <span>김김김</span>
-													</td>
-												</tr>
-												<tr>
-													<td colspan="2" style="border: 1px solid #d2d0d0; height: 120px;">
-														방은 좋고
-													</td>
-												</tr>
-											</table>
-											<div style="margin-top: 20px; margin-bottom: 20px;">
-												<hr>
-											</div>
-											<table style="width: 100%;">
-												<tr>
-													<td align="left">
-														<span>2019.01.01.</span>
-													</td>
-													<td align="right">
-														작성자: <span>김김김</span>
-													</td>
-												</tr>
-												<tr>
-													<td colspan="2" style="border: 1px solid #d2d0d0; height: 120px;">
-														방은 좋고
-													</td>
-												</tr>
+											<table id="review_table" style="width: 100%;">
+												<c:forEach var="reviewList" items="<%=review%>" varStatus="status">
+													<tr>
+														<td align="left" width="70%">
+															<span>${review.reveiw_date}</span>
+														</td>
+														<td align="right">
+															작성자: <span>${review.review_writer}</span>
+														</td>
+													</tr>
+													<tr>
+														<td colspan="2" style="border: 1px solid #d2d0d0; height: 120px;">
+															${review.review_content}
+														</td>
+													</tr>
+												</c:forEach>
 											</table>
 											<div style="margin-top: 20px; margin-bottom: 20px;">
 												<hr>
@@ -353,19 +349,36 @@
 	
 	<!-- JS includes -->
 	<jsp:include page="js/js.jsp" />
-	
+	<c:set var="review" value="<%=review%>"></c:set>
 	<script type="text/javascript">
 		$(function() {
 			$('#insert_review').click(function() {
 				var frm = document.review;
-				
-				if (frm.reveiw_wrtier.value == ""
-						|| frm.review_content.value == ""
-						|| frm.review_date.value == "") {
+
+					$.ajax({
+						url: 'SelectReview', // kr.or.bit.ajax
+						type: 'post',
+						dataType: 'json',
+						success: function(data) {
+							console.log(data);
+							$.each(data, function(index, element) {
+								var rv = "";
+									rv += "<tr>";
+									rv += "<td align='left' width='70%'>" + element.review_date + "</td>";
+									rv += "<td align='right'>" + element.review_writer + "</td>";
+									rv += "<td colspan='2' style='border: 1px solid #d2d0d0; height: 120px;'>" + element.review_content + "</td>";
+									rv += "<tr>";
+									
+									$('#review_table').append(rv);
+							})
+						}
+						
+					})
 					
-				}
+					frm.submit();
 			})
 		})
 	</script>
+
 </body>
 </html>

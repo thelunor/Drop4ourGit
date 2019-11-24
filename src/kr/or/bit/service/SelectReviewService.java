@@ -26,6 +26,7 @@ public class SelectReviewService implements Action {
 			ReviewDao rvdao = new ReviewDao();
 			
 			rvlist = rvdao.getReviewList(id);
+			request.setAttribute("rvList", rvlist);
 			
 		} catch (Exception e) {
 			System.out.println("review service 예외발생");
