@@ -18,13 +18,11 @@ public class GetSaleDataService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		String aptName =request.getParameter("aptName");
-		String type = request.getParameter("type");
-		
-		List<Sale> saleList = null;
-		
+
+		List<Sale> saleList = null;		
 		try {
 			SaleDao dao = new SaleDao();
-			saleList = dao.getSaleDetail(aptName, type);
+			saleList = dao.getSaleDetail(aptName);
 			request.setAttribute("saleList", saleList);
 
 		} catch (Exception e) {
@@ -32,7 +30,7 @@ public class GetSaleDataService implements Action {
 		}
 		forward = new ActionForward();
 		//session.setAttribute("address", address);		
-		forward.setPath("GetSaleDataOk.d4b");
+		forward.setPath("GetSaleDataServiceOk.d4b");
 		return forward;
 	}
 

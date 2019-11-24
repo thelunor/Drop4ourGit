@@ -105,6 +105,7 @@ String stringPrice=null;
  <c:set var="priceList" value="priceList"></c:set>
  <c:set var="stringPrice" value="stringPrice"></c:set>
  <c:set var="listLength" value="listLength"></c:set>
+  <c:set var="listLength" value="listLength"></c:set>
  <c:set var="sale" value="list"></c:set>
 <%-- <c:forEach var="sale" items="<%=list%>" varStatus="status"> --%>
 <%--  <c:forEach var="i" begin="0" end="<%=listLength %>" step="1"> --%>
@@ -144,7 +145,7 @@ String stringPrice=null;
 						</div>
 						<!-- End Skill Bar -->
 					</div>						
-				 <a class="btn" href="SaleDetail.jsp">See the Details</a>		
+				 <a class="btn" href="GetSaleDataService.d4b?aptName=${sale.key.aptName}">See the Details</a>		
 				 </div>
 			</div>
 		</div>

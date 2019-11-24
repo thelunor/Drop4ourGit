@@ -1,15 +1,14 @@
+<%@page import="kr.or.bit.dto.Sale"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.bit.dto.REAImage"%>
 <%@page import="kr.or.bit.dto.REAUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
-	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
-	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
-	//System.out.println(reaImg.getReaImgSaveName());
+ArrayList<Sale> list = (ArrayList<Sale>) request.getAttribute("saleList");
 %>
-<c:set var="reaUserData" value="<%=reaUser%>"></c:set>
-<c:set var="reaImgData" value="<%=reaImg%>"></c:set>
+
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -191,13 +190,13 @@ a.btn  {
 			<!-- Side jsp -->
 			<jsp:include page="./WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
-		<!--Detail Sections-->
+		<!--Detail Sections-->	
+<c:forEach var="sale" items="<%=list%>" varStatus="status">			
 		<div class="container-fluid">
 			<div class="main_featured m-top-100">
 				<h2 style="text-align: center;">매물 상세 페이지</h2>
 				<br>
 			</div>
-
 			<div class="featured_slider">
 				<div>
 					<div class="featured_img">
@@ -233,9 +232,9 @@ a.btn  {
 					<div class="page-wrapper">
 					  <a class="btn trigger" href="#">담당 부동산</a>
 					</div>
-					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">한강맨션</span> 아파트 &nbsp;매매</h4> 										
+					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${sale.aptName}</span> 아파트 &nbsp;매매</h4> 										
 					<input type="text" class="form-control" name="address"
-						id="address" required="required" placeholder="도로명 주소"  value="서울 서초구 신반포로 270">
+						id="address" required="required" placeholder="도로명 주소"  value="서울 강남구 도곡로13길 19">
 						<br>
 					<!-- Button -->
 					<p style="font-size: 20px; font-family: 'Jua', sans-serif;">방
@@ -246,33 +245,34 @@ a.btn  {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>동 </label> <input type="text" class="form-control"
-										required="required" placeholder="동">
+										required="required" value="${sale.aptDong}">
 								</div>
 								<div class="form-group">
-									<label>유형 </label> <input type="text" class="form-control" value="매매">
+									<label>유형 </label> <input type="text" class="form-control" value="${sale.type}">
 								</div>
 								<div class="form-group">
 									<label>방향 </label> <input type="text" class="form-control"
-										required="required" placeholder="방향">
+										required="required" value="${sale.direction}">
 								</div>								
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>매매가 </label> <input type="text" class="form-control"
-										required="required" placeholder="매매가">
+										required="required" value="${sale.price}">
 								</div>
 								<div class="form-group">
 									<label>면적 </label> <input type="text" class="form-control" 
-									required="required" placeholder="면적">
+									required="required" value="${sale.aptSize}">
 								</div>
 								<div class="form-group">
 									<label>특징 </label> <input type="text" class="form-control"
-										required="required" placeholder="특징">
+										required="required" value="${sale.etc}">
 								</div>																
 							</div>
 						</div>
 					</div>
 					<br>
+
 					<p style="font-size: 15px; font-family: 'Jua', sans-serif;"><i class="fas fa-subway"></i> 5분 거리 &nbsp; &nbsp;| &nbsp; &nbsp;
 					<i class="fas fa-school"></i> 10분 거리 &nbsp; &nbsp;| &nbsp; &nbsp; <i class="fas fa-tree"></i> 5분 거리 </p>
 				 <div id="map" style="width: 100%; height: 380px;"></div>	
@@ -281,6 +281,7 @@ a.btn  {
 				</div>
 			</div>
 		</div>
+		</c:forEach>
 		<!-- End off featured slider -->
 		
 <!-- Modal -->						

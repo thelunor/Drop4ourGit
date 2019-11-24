@@ -26,7 +26,6 @@ import kr.or.bit.service.GetBookMarkService;
 import kr.or.bit.service.GetContractService;
 import kr.or.bit.service.GetGenericUserByIdService;
 import kr.or.bit.service.GetGenericUserByResService;
-import kr.or.bit.service.GetGenericUserMypageService;
 import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroDataService;
 import kr.or.bit.service.GetREAMypageService;
@@ -55,6 +54,7 @@ import kr.or.bit.service.InsertSaleService;
 import kr.or.bit.service.LoginService;
 import kr.or.bit.service.LogoutService;
 import kr.or.bit.service.SelectAllContractsService;
+import kr.or.bit.service.SelectAtpListService;
 import kr.or.bit.service.SelectGenericUserService;
 import kr.or.bit.service.SelectREAUserService;
 import kr.or.bit.service.UpdateBlackService;
@@ -68,7 +68,6 @@ import kr.or.bit.service.UpdateReviewComService;
 import kr.or.bit.service.UpdateReviewService;
 import kr.or.bit.service.UpdateSaleImgService;
 import kr.or.bit.service.UpdateSaleService;
-import kr.or.bit.service.SelectAtpListService;
 
 @WebServlet("*.d4b")
 public class FrontController extends HttpServlet {
@@ -263,7 +262,14 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/GetSaleImgService.d4b")) {
+		}else if (url_Command.equals("/GetSaleDataServiceOk.d4b")) {
+			try {
+				forward = new ActionForward();
+				forward.setPath("/SaleDetail.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (url_Command.equals("/GetSaleImgService.d4b")) {
 			try {
 				action = new GetSaleImgService(); //
 				forward = action.execute(request, response);
