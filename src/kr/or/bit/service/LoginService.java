@@ -32,9 +32,7 @@ public class LoginService implements Action {
 				session.setAttribute("adminId", id);
 				return forward;
 			}
-			if (gDao.GenericUserLogin(id, pwd).equals(null)) {
-				gResult = gDao.GenericUserLogin(id, pwd);
-			}
+			gResult = gDao.GenericUserLogin(id, pwd);
 			rResult = rDao.REAUserLogin(id, pwd);
 			System.out.println("gResult: " + gResult);
 			System.out.println("rResult: " + rResult);
