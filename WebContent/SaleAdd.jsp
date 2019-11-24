@@ -89,7 +89,7 @@ form-control {
 									<label>면적 선택 &nbsp;&nbsp;&nbsp;&nbsp;</label> <select
 										class="form-control" style="width: 95%" name="aptSize"
 										id="aptSize">
-										<option value="24">24평 (전용 59㎡)</option>
+										<option value="24" selected>24평 (전용 59㎡)</option>
 										<option value="32">32평 (전용84.9㎡)</option>
 										<option value="42">42평 (전용 116㎡)</option>
 									</select>
@@ -97,7 +97,7 @@ form-control {
 								<div class="form-group">
 									<label>거래 유형 &nbsp;&nbsp;&nbsp;&nbsp;</label> <select
 										class="form-control" style="width: 95%" name="type" id="type">
-										<option value="sale">매매</option>
+										<option value="sale" selected>매매</option>
 										<option value="lease">전세</option>
 									</select>
 								</div>

@@ -28,7 +28,6 @@ public class SaleDao2 {
 	public int insertSale(Sale sale) { // 매물 넣기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
@@ -214,8 +213,44 @@ public class SaleDao2 {
 		return saleList;
 	}
 
-	public int updateSale(Sale sale) { // 매물 수정
-		return 0;
+	public int updateSale(Sale sale) { // 매물 수정 (2019/11/24/알파카)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			
+			//매물 테이블에 객체 넣기
+			String sql_update_sale = "update sale set aptsize=?,type=(select type from type where type=?),addr=?,aptname=?,aptdong=?,aptho=?,price=?,direction=?,etc=?,iscontract=?"
+					+" where aptnum=?";
+			pstmt = conn.prepareStatement(sql_update_sale);
+			pstmt.setString(1, sale.getAptSize());
+			pstmt.setString(2, sale.getType());
+			pstmt.setString(3, sale.getAddr());
+			pstmt.setString(4, sale.getAptName());
+			pstmt.setString(5, sale.getAptDong());
+			pstmt.setString(6, sale.getAptHo());
+			pstmt.setInt(7, sale.getPrice());
+			pstmt.setString(8, sale.getDirection());
+			pstmt.setString(9, sale.getEtc());
+			pstmt.setString(10, sale.getIsContract());
+			pstmt.setString(11, sale.getAptNum());
+			resultRow = pstmt.executeUpdate();
+			
+			if(resultRow>0) {
+				System.out.println("매물 정보 DB 수정 성공");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultRow;
 	}
 
 	public int deleteSale(String aptNum) { // 매물 삭제(매물 번호로)

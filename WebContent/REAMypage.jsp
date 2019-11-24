@@ -158,7 +158,7 @@ input {
 														<td>${saleData.aptHo}</td>
 														<td>${saleData.price}</td>
 														<td>${saleData.isContract}</td>
-														<td><a href="SaleEdit.jsp?aptNum=${saleData.aptNum}">
+														<td><a href="GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}">
 																수정</a></td>
 														<td><a href="SaleEdit.jsp?aptNum=${saleData.aptNum}">
 																삭제</a></td>

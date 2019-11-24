@@ -38,6 +38,7 @@ import kr.or.bit.service.GetREAUserByRegService;
 import kr.or.bit.service.GetReviewComDataService;
 import kr.or.bit.service.GetReviewListService;
 import kr.or.bit.service.GetSaleDataService;
+import kr.or.bit.service.GetSaleEditPageService;
 import kr.or.bit.service.GetSaleImgService;
 import kr.or.bit.service.GetSaleListService;
 import kr.or.bit.service.InsertBookMarkService;
@@ -272,6 +273,13 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/GetSaleListService.d4b")) {
 			try {
 				action = new GetSaleListService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/GetSaleEditPageService.d4b")) {
+			try {
+				action = new GetSaleEditPageService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
