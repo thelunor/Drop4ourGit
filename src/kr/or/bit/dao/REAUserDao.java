@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.or.bit.dto.REAUser;
+import kr.or.bit.dto.Sale;
 import kr.or.bit.utils.DB_Close;
 
 public class REAUserDao {
@@ -175,6 +176,34 @@ public class REAUserDao {
 			System.out.println(e.getMessage());
 		}
 
+		return rlist;
+	}
+	
+	public ArrayList<REAUser> getREAUserInfo(String reaId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<REAUser> rlist = null;
+
+		String sql_get_REAInfo = "select officeName, officeDetailAddr, officeHp where reaId=?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql_get_REAInfo);
+			pstmt.setString(1, reaId);
+			rs = pstmt.executeQuery();
+			rlist = new ArrayList<REAUser>();
+
+
+			while (rs.next()) {
+				REAUser reauser = new REAUser();
+				reauser.setOfficeName(rs.getString("officeName"));
+				reauser.setOfficeAddr(rs.getString("officeAddr"));
+				reauser.setOfficeHp(rs.getString("officeHP"));
+				rlist.add(reauser);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return rlist;
 	}
 }

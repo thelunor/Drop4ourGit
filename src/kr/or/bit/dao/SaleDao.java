@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import javax.servlet.jsp.jstl.sql.Result;
 import javax.sql.DataSource;
 
+import kr.or.bit.dto.REAUser;
 import kr.or.bit.dto.Sale;
 import kr.or.bit.dto.SaleImage;
 import kr.or.bit.utils.DB_Close;
@@ -230,6 +231,49 @@ public class SaleDao {
 		}
 		return saleList;
 
+	}
+	
+	
+	public ArrayList<Sale> getSaleDetail(String aptName, String type) { // 아파트 이름과 거래유형으로 매물 정보 및 공인중개사 정보 가져오기 (SaleDetail 페이지)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Sale> saleList = null;
+		
+		String sql_get_saleDetail = "select reaId, addr, aptDong, price, aptSize, direction, NVL(s.etc,'없음') from sale where aptName =? and type=?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql_get_saleDetail);
+			pstmt.setString(1, aptName);
+			pstmt.setString(2, type);
+			rs = pstmt.executeQuery();
+			saleList = new ArrayList<Sale>();
+
+			while (rs.next()) {
+				Sale sale = new Sale();
+				
+				sale.setAddr(rs.getString("addr")); //매물 도로명주소
+				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
+				sale.setPrice(rs.getInt("price")); //매매가격
+				sale.setAptSize(rs.getString("aptSize")); //아파트 면적
+				sale.setDirection(rs.getString("direction")); //아파트 향
+				sale.setEtc(rs.getString("etc")); //매물 특징
+			}
+		System.out.println(saleList);	
+
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return saleList;
 	}
 
 }

@@ -19,7 +19,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1381779640e5bfb90acf9a443e18cee4&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=668464eb0d779bb6eecda046a974a34b&libraries=services"></script>
 <jsp:include page="./css/css.jsp"></jsp:include>
 <style type="text/css">
 h2, h4, h6, h3{
@@ -233,9 +233,9 @@ a.btn  {
 					<div class="page-wrapper">
 					  <a class="btn trigger" href="#">담당 부동산</a>
 					</div>
-					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">한강맨션</span> 아파트 &nbsp;매매</h4> 										
+					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">역삼래미안</span> 아파트 &nbsp;전세</h4> 										
 					<input type="text" class="form-control" name="address"
-						id="address" required="required" placeholder="도로명 주소"  value="서울 서초구 신반포로 270">
+						id="address" required="required" placeholder="도로명 주소" value="서울 강남구 선릉로69길 19">
 						<br>
 					<!-- Button -->
 					<p style="font-size: 20px; font-family: 'Jua', sans-serif;">방
@@ -245,11 +245,11 @@ a.btn  {
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>동 </label> <input type="text" class="form-control"
-										required="required" placeholder="동">
+									<label>면적 </label> <input type="text" class="form-control"
+										required="required" placeholder="면적">
 								</div>
 								<div class="form-group">
-									<label>유형 </label> <input type="text" class="form-control" value="매매">
+									<label>유형 </label> <input type="text" class="form-control" value="전세">
 								</div>
 								<div class="form-group">
 									<label>방향 </label> <input type="text" class="form-control"
@@ -258,12 +258,11 @@ a.btn  {
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>매매가 </label> <input type="text" class="form-control"
-										required="required" placeholder="매매가">
+									<label>매매가 </label> <input type="text" class="form-control" 	value="0">
 								</div>
 								<div class="form-group">
-									<label>면적 </label> <input type="text" class="form-control" 
-									required="required" placeholder="면적">
+									<label>보증금 </label> <input type="text" class="form-control"
+										required="required" placeholder="보증금">
 								</div>
 								<div class="form-group">
 									<label>특징 </label> <input type="text" class="form-control"
@@ -352,9 +351,9 @@ geocoder.addressSearch($('#address').val(), function(result, status) {
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
-        console.log(coords);
     } 
 }); 
+
 
 
 var drawingFlag = false; // 원이 그려지고 있는 상태를 가지고 있을 변수입니다
