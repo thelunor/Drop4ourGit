@@ -28,16 +28,18 @@ public class SaleDao2 {
 	public int insertSale(Sale sale) { // 매물 넣기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		System.out.println("타앙아아아아입: "+sale.toString());
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
 			
 			//매물 테이블에 객체 넣기
 			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" + 
-								" values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
+								"values(seq_aptNum.nextval,?,(select type from type where type=?),?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
 			pstmt = conn.prepareStatement(sql_insert_sale);
 			pstmt.setString(1, sale.getAptSize());
 			pstmt.setString(2, sale.getType());
+			
 			pstmt.setString(3, sale.getAddr());
 			pstmt.setString(4, sale.getAptName());
 			pstmt.setString(5, sale.getAptDong());
