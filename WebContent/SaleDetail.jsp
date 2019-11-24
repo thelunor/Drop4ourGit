@@ -6,7 +6,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
-ArrayList<Sale> list = (ArrayList<Sale>) request.getAttribute("saleList");
+	Sale sale = (ArrayList<Sale>) request.getAttribute("saleList");
 %>
 
 <!doctype html>
@@ -191,7 +191,7 @@ a.btn  {
 			<jsp:include page="./WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
 		<!--Detail Sections-->	
-<c:forEach var="sale" items="<%=list%>" varStatus="status">			
+<c:set var="sale" value="<%=list %>">			
 		<div class="container-fluid">
 			<div class="main_featured m-top-100">
 				<h2 style="text-align: center;">매물 상세 페이지</h2>

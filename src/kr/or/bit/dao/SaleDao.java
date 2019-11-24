@@ -238,7 +238,7 @@ public class SaleDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Sale> saleList = null;
+		Sale sale = new Sale();
 		
 		String sql_get_saleDetail = "select type, addr, aptDong, price, aptSize, direction, etc from sale where aptName =?";
 		try {
