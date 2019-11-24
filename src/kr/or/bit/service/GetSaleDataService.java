@@ -21,9 +21,9 @@ public class GetSaleDataService implements Action {
 		System.out.println("아파트 매물 번호"+aptNum);
 		Sale sale = null;		
 		try {
-			SaleDao dao = new SaleDao();
+			SaleDao saleDao = new SaleDao();
 			sale = new Sale();
-			sale = dao.getSaleDetail(aptNum);
+			sale = saleDao.getSaleDetail(aptNum); //매물 정보 가져오기
 			if(sale !=null) {
 				request.setAttribute("saleData", sale);
 				forward.setPath("GetSaleDataServiceOk.d4b");

@@ -206,4 +206,9 @@ public class REAUserDao {
 		}
 		return rlist;
 	}
+	
+	
+	public REAUser getREAUserInfoByAptNum(String aptNum) {  //아파트 매물 번호로 공인중개사 아이디 찾기
+		return null;
+	}
 }

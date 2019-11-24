@@ -6,7 +6,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
-	Sale sale = (ArrayList<Sale>) request.getAttribute("saleList");
+	Sale sale = (Sale) request.getAttribute("saleData");
 %>
 
 <!doctype html>
@@ -191,7 +191,7 @@ a.btn  {
 			<jsp:include page="./WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
 		<!--Detail Sections-->	
-<c:set var="sale" value="<%=list %>">			
+<c:set var="saleData" value="<%=sale%>"/>			
 		<div class="container-fluid">
 			<div class="main_featured m-top-100">
 				<h2 style="text-align: center;">매물 상세 페이지</h2>
@@ -232,7 +232,7 @@ a.btn  {
 					<div class="page-wrapper">
 					  <a class="btn trigger" href="#">담당 부동산</a>
 					</div>
-					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${sale.aptName}</span> 아파트 &nbsp;매매</h4> 										
+					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${saleData.aptName}</span> 아파트 &nbsp;매매</h4> 										
 					<input type="text" class="form-control" name="address"
 						id="address" required="required" placeholder="도로명 주소"  value="서울 강남구 도곡로13길 19">
 						<br>
@@ -245,28 +245,28 @@ a.btn  {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>동 </label> <input type="text" class="form-control"
-										required="required" value="${sale.aptDong}">
+										required="required" value="${saleData.aptDong}">
 								</div>
 								<div class="form-group">
-									<label>유형 </label> <input type="text" class="form-control" value="${sale.type}">
+									<label>유형 </label> <input type="text" class="form-control" value="${saleData.type}">
 								</div>
 								<div class="form-group">
 									<label>방향 </label> <input type="text" class="form-control"
-										required="required" value="${sale.direction}">
+										required="required" value="${saleData.direction}">
 								</div>								
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>매매가 </label> <input type="text" class="form-control"
-										required="required" value="${sale.price}">
+										required="required" value="${saleData.price}">
 								</div>
 								<div class="form-group">
 									<label>면적 </label> <input type="text" class="form-control" 
-									required="required" value="${sale.aptSize}">
+									required="required" value="${saleData.aptSize}">
 								</div>
 								<div class="form-group">
 									<label>특징 </label> <input type="text" class="form-control"
-										required="required" value="${sale.etc}">
+										required="required" value="${saleData.etc}">
 								</div>																
 							</div>
 						</div>
@@ -281,7 +281,6 @@ a.btn  {
 				</div>
 			</div>
 		</div>
-		</c:forEach>
 		<!-- End off featured slider -->
 		
 <!-- Modal -->						

@@ -303,7 +303,7 @@ a.btn  {
 				<br><br>
 				<div class="form-group">
 					<label>사무소 주소 </label> 
-					<input type="text" class="form-control" required="required" placeholder="주소" style="width:320px">
+					<input type="text" class="form-control" required="required" placeholder="주소" style="width:320px" value="${reaUser.officeAddr}">
 				</div>
 				<br>			
 				<div class="form-group">
