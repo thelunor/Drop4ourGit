@@ -75,12 +75,12 @@ public class ReviewDao {
 			pstmt = conn.prepareStatement(review_sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			
 			rvList = new ArrayList<Review>();
+			
 			while (rs.next()) {
 				System.out.println("ReviewDao 성공");
-				java.sql.Date reviewDate = rs.getDate("reviewDate");
 				Review review = new Review();
+				java.sql.Date reviewDate = rs.getDate("reviewDate");
 				
 				review.setReviewNum(rs.getInt("reviewNum"));
 				review.setUserId(rs.getString("userId"));

@@ -35,7 +35,6 @@
 	
 <c:set var="reviewList" value="<%=reviewList%>"></c:set>
 
-
 <script type="text/javascript">
 </script>
 	

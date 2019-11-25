@@ -24,7 +24,7 @@ public class GetReviewListService implements Action {
 		REAUserDao readao = null;
 		REAUser reaUser = null;
 		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("reaId");
+		String reaId = (String) session.getAttribute("reaUserId");
 		ReviewDao rvdao = null;
 		List<Review> reviewList = null;
 		
@@ -38,6 +38,8 @@ public class GetReviewListService implements Action {
 			reviewList = rvdao.getReviewList(reaId);
 			
 			request.setAttribute("reaId", reaId);
+			System.out.println(reviewList.toString());
+			System.out.println(reaId);
 			if (reaUser != null) {
 				System.out.println("reaUser 성공");
 				System.out.println(reaUser);
