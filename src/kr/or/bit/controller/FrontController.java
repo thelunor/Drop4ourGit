@@ -435,7 +435,7 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/SelectAptListServiceOk.d4b")) { // 아파트 목록보기
 			try {
 				forward = new ActionForward();
-				forward.setPath("/SaleListMain.jsp");
+				forward.setPath("/HouseListMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
