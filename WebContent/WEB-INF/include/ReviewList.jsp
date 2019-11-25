@@ -30,7 +30,12 @@
 	
 <%	
 	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
-	System.out.println("reviewList: " + reviewList);
+	
+	String reaId = (String) request.getAttribute("reaId");
+	String userId = (String) request.getAttribute("userId");
+	java.sql.Date reviewDate = (java.sql.Date) request.getAttribute("reviewDate");
+	String reviewContent = (String) request.getAttribute("reviewContent");
+	int reviewNum = (Integer) request.getAttribute("reviewNum"); 
 %>
 	
 <c:set var="reviewList" value="<%=reviewList%>"></c:set>
@@ -48,8 +53,8 @@
 				<div class="card-body">
 					<div class="table-responsive">
 						
-						<form action="SelectReviewService.d4b" method="post">
-							<table class="table table-bordered" id="dataTable"
+						<form action="InsertReviewService.d4b" method="post">
+							<table class="table table-bordered" id="reviewTable"
 								style="text-align: center; margin: auto; width: 100%; border: none;">
 			                    <tr>
 			                        <td style="padding: 0;"><div align="left" style="padding-left: 10px;">날짜:&nbsp;
@@ -67,7 +72,7 @@
 											rows="5" style="resize: none; width: 100%; border: 1px solid #d2d0d0;"></textarea>
 									<div align="right">
 			                    		<input type="button" id="insert_review" name="insert_review"  
-			                    			value="확인" onclick="insert_review()">
+			                    			value="확인">
 									</div></td>
 			                    </tr>
 		                   </table>
@@ -124,17 +129,9 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#insert_review').click(function() {
-			var reaId = "";
-			$.ajax({
-				url: 'InsertReviewService.d4b?reaId=' + reaId,
-				type: 'post',
-				dataType: 'json',
-				success: function() {
-					
-				}
-			})
-		})
+		function insert_review() {
+			
+		}
 	})
 </script>
 
