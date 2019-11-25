@@ -9,6 +9,7 @@ import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.AdminDao;
 import kr.or.bit.dao.SaleDao;
 import kr.or.bit.dao.SaleDao2;
+import kr.or.bit.dao.SaleDao3;
 import kr.or.bit.dto.GenericUser;
 import kr.or.bit.dto.Sale;
 
@@ -18,7 +19,7 @@ public class InsertSaleService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		int result = 0;
-		// 1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr
+		// 1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr, roadAddr
 		// String aptNum = request.getParameter("aptNum");
 
 		String aptSize = "";
@@ -36,6 +37,7 @@ public class InsertSaleService implements Action {
 
 		String addr = request.getParameter("addr");
 		String roadAddr = request.getParameter("roadAddr");
+		System.out.println(roadAddr);
 		String aptName = request.getParameter("aptName");
 		String aptDong = request.getParameter("aptDong");
 		String aptHo = request.getParameter("aptHo");
@@ -68,7 +70,7 @@ public class InsertSaleService implements Action {
 		System.out.println("sale 받았당~~"+sale.toString());
 
 		try {
-			SaleDao2 dao = new SaleDao2();
+			SaleDao3 dao = new SaleDao3();
 			result = dao.insertSale(sale);
 			System.out.println("result : " + result);
 			String aptNum = dao.getAptNumByAptInfo(sale.getAptName(), sale.getAptDong(), sale.getAptHo());

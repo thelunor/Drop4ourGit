@@ -29,40 +29,43 @@ public class SaleDao3 {
 	public int insertSale(Sale sale) { // 매물 넣기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet rs=null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-
-			// 매물 테이블에 객체 넣기
+			
+			//매물 테이블에 객체 넣기
 //			String sql = "SELECT aptnum INTO salecopy FROM sale";
 //			pstmt=conn.prepareStatement(sql);
 //			rs=pstmt.executeQuery();
 //			String maxNum=rs.getString("maxNum");
 //			System.out.println("maxNum: 맥스넘~ " + maxNum);
-
-			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)"
-					+ " values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
+			
+					
+			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, roadAddr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" + 
+								" values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
 			pstmt = conn.prepareStatement(sql_insert_sale);
 			pstmt.setString(1, sale.getAptSize());
 			pstmt.setString(2, sale.getType());
 			pstmt.setString(3, sale.getAddr());
-			pstmt.setString(4, sale.getAptName());
-			pstmt.setString(5, sale.getAptDong());
-			pstmt.setString(6, sale.getAptHo());
-			pstmt.setString(7, sale.getPrice());
-			pstmt.setString(8, sale.getDirection());
-			pstmt.setString(9, sale.getEtc());
-			pstmt.setString(10, sale.getIsContract());
-			pstmt.setString(11, sale.getId());
+			pstmt.setString(4, sale.getRoadAddr());
+			pstmt.setString(5, sale.getAptName());
+			pstmt.setString(6, sale.getAptDong());
+			pstmt.setString(7, sale.getAptHo());
+			pstmt.setString(8, sale.getPrice());
+			pstmt.setString(9, sale.getDirection());
+			pstmt.setString(10, sale.getEtc());
+			pstmt.setString(11, sale.getIsContract());
+			pstmt.setString(12, sale.getId());
 			resultRow = pstmt.executeUpdate();
-
-			if (resultRow > 0) {
+			
+			
+			if(resultRow>0) {
 				System.out.println("매물 정보 DB 등록 성공");
 			}
-		} catch (Exception e) {
+		}catch(Exception e) {
 			System.out.println("e.getMessage(): " + e.getMessage());
-		} finally {
+		}finally {
 			DB_Close.close(pstmt);
 			try {
 				conn.close();
