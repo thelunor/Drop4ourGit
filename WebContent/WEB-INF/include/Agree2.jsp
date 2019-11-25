@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="form-group">
-	<label class="fancy-checkbox"><input type="checkbox" name="check" id="check">&nbsp;개인정보 수집 및 이용에 대한 안내 동의<span>(필수)</span></label>
+	<label class="fancy-checkbox"><input type="checkbox" name="check2" id="check2">&nbsp;개인정보 수집 및 이용에 대한 안내 동의<span>(필수)</span></label>
 
 	<p>
 		<textarea cols="73" rows="5">정보통신망법 규정에 따라 맞집에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
