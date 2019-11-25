@@ -77,7 +77,7 @@ function checkAll(){
 								<div class="form-group">
 								<div class="row">
 								<div class="col-sm-6">
-						            <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='JoinMember.jsp'">Agree</button>
+						            <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='JoinGeneric.jsp'">Agree</button>
 						        </div>
 						        <div class="col-sm-6">
 						        	 <button type="reset" class="btn btn-primary btn-block btn-lg" onclick="location.href='Main.jsp'">Cancel</button>
