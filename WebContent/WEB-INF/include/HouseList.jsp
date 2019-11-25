@@ -67,15 +67,14 @@ text-align: center;
 	ArrayList<String> priceList=new ArrayList<String>();
 	String stringPrice=null;
 	Map<Sale, String> saleMap=new HashMap<Sale, String>();
- 
+ 	
 	 for(Sale sale : list){
 		double num = 79830;
-		int price= sale.getPrice();
+		int price= Integer.parseInt(sale.getPrice()); 
 		double price2= num / price * 100; 
 		stringPrice = Double.toString(price2)+ "%";
 	 	saleMap.put(sale, stringPrice);
 	 }
-	 
 	 List<Sale> keyList=new ArrayList<Sale>();
 	 keyList.addAll(saleMap.keySet());
 
