@@ -74,6 +74,7 @@ public class SaleImageDao {
 				saleImg = new SaleImage();
 				saleImg.setSaleImgSaveName(rs.getString("saleimgsavename"));
 				saleImgList.add(saleImg);
+				
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

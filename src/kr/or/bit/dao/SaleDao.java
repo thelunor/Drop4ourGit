@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -273,18 +275,21 @@ public class SaleDao {
 		return resultRow;
 	}
 	
-	public ArrayList<Sale> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
+	public Map<Sale, List<SaleImage>> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Sale> saleList = null;
+		Map<Sale, List<SaleImage>> saleMap = null;
 		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize from sale where addr=?";
+		SaleImageDao imgDao=null;
+		
 		try {
+			imgDao = new SaleImageDao();
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_select_aptList);
 			pstmt.setString(1, addr);
 			rs = pstmt.executeQuery();
-			saleList = new ArrayList<Sale>();
+			saleMap = new HashMap<Sale, List<SaleImage>>();
 				while (rs.next()) {
 					Sale sale = new Sale();
 					sale.setAptName(rs.getString("aptName")); // 아파트 이름
@@ -292,11 +297,9 @@ public class SaleDao {
 					sale.setPrice(rs.getString("price")); 			//가격
 					sale.setAptNum(rs.getString("aptNum")); //매물번호
 					sale.setAptSize(rs.getString("aptSize")); //아파트 사이즈
-
-					saleList.add(sale);
-					System.out.println("saleList는 널이 아니외다");
+					saleMap.put(sale, imgDao.getSaleImgList(sale.getAptNum()));
+					System.out.println(saleMap.values());
 				}
-		System.out.println(saleList);	
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -309,7 +312,7 @@ public class SaleDao {
 				e.printStackTrace();
 			}
 		}
-		return saleList;
+		return saleMap;
 
 	}
 	

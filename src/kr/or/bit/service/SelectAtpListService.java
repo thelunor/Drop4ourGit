@@ -1,6 +1,7 @@
 package kr.or.bit.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.SaleDao;
+import kr.or.bit.dao.SaleImageDao;
 import kr.or.bit.dto.Sale;
+import kr.or.bit.dto.SaleImage;
 
 public class SelectAtpListService implements Action{
 
@@ -18,19 +21,20 @@ public class SelectAtpListService implements Action{
 		ActionForward forward = null;
 		//HttpSession session = request.getSession();
 		String search=request.getParameter("search");
-		List<Sale> saleList = null;
+		Map<Sale, List<SaleImage>> saleMap = null;
 		//String address = request.getParameter("address");
 		
 		try {
 			SaleDao dao = new SaleDao();
-			saleList = dao.selectAtpList(search);
-			if(saleList!=null) {
+			saleMap = dao.selectAtpList(search);
+			System.out.println(saleMap.toString());
+			if(saleMap!=null) {
 				System.out.println("saleList!=null");
-				request.setAttribute("saleList", saleList);
+				request.setAttribute("saleList", saleMap);
 				request.setAttribute("search", search);
 			} else {
 				System.out.println("saleList!=null 가 아니란 말이오~");
-				request.setAttribute("saleList", saleList);
+				request.setAttribute("saleList", saleMap);
 				request.setAttribute("search", "법정구 법정동");
 			}
 			

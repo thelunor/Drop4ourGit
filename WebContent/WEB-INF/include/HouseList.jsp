@@ -75,8 +75,6 @@ text-align: center;
 		stringPrice = Double.toString(price2)+ "%";
 	 	saleMap.put(sale, stringPrice);
 	 }
-	 List<Sale> keyList=new ArrayList<Sale>();
-	 keyList.addAll(saleMap.keySet());
 
  
 //  Collections.sort(keyList, new Comparator() {
