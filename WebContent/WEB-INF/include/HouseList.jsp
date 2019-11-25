@@ -65,19 +65,8 @@ text-align: center;
 </style>
 <%
 
-	
-	Map<Sale, List<SaleImage>> saleMap = (Map<Sale, List<SaleImage>>)request.getAttribute("saleList");
-	ArrayList<String> priceList=new ArrayList<String>();
-	String stringPrice=null;
-	Map<Sale, String> saleMap=new HashMap<Sale, String>();
- 	
-	 for(Sale sale : list){
-		double num = 79830;
-		int price= Integer.parseInt(sale.getPrice()); 
-		double price2= num / price * 100; 
-		stringPrice = Double.toString(price2)+ "%";
-	 	saleMap.put(sale, stringPrice);
-	 }
+
+
 
  
 //  Collections.sort(keyList, new Comparator() {
@@ -110,57 +99,57 @@ text-align: center;
  <c:set var="sale" value="list"></c:set>
 <%-- <c:forEach var="sale" items="<%=list%>" varStatus="status"> --%>
 <%--  <c:forEach var="i" begin="0" end="<%=listLength %>" step="1"> --%>
-<c:forEach var="sale" items="<%=saleMap%>" varStatus="status">
-		<!-- items inner -->
-		<div class="row">
-			<div class="col-lg-1"></div>
-			<div class="col-lg-7">
-				<div class="slick-items">
-					<div>
-						<img src="./images/xi1.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi2.jpg" alt="New York" width="500" height="220">
-					</div>
-					<div>
-						<img src="./images/xi3.jpg" alt="New York" width="500" height="220">
-					</div>
-				</div>
-			</div>
-			<!-- 내용 -->
-			<div class="col-lg-4">
-			<div class="detail" style="text-align: center;">
-				<h5>${sale.key.aptName}</h5>
-				<input type="text" class="form-control"	value="전용면적   ${sale.key.aptSize}㎡">			
-					<br>
-					<div class="skill_bar sm-m-top-50">
-						<div class="teamskillbar clearfix m-top-20" data-percent="${sale.value}">>
-							<h6>거래 가격 : ${sale.key.price}</h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
+<%-- <c:forEach var="sale" items="<%=saleMap%>" varStatus="status"> --%>
+<!-- 		<!-- items inner --> -->
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-lg-1"></div> -->
+<!-- 			<div class="col-lg-7"> -->
+<!-- 				<div class="slick-items"> -->
+<!-- 					<div> -->
+<!-- 						<img src="./images/xi1.jpg" alt="New York" width="500" height="220"> -->
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 						<img src="./images/xi2.jpg" alt="New York" width="500" height="220"> -->
+<!-- 					</div> -->
+<!-- 					<div> -->
+<!-- 						<img src="./images/xi3.jpg" alt="New York" width="500" height="220"> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<!-- 내용 --> -->
+<!-- 			<div class="col-lg-4"> -->
+<!-- 			<div class="detail" style="text-align: center;"> -->
+<%-- 				<h5>${sale.key.aptName}</h5> --%>
+<%-- 				<input type="text" class="form-control"	value="전용면적   ${sale.key.aptSize}㎡">			 --%>
+<!-- 					<br> -->
+<!-- 					<div class="skill_bar sm-m-top-50"> -->
+<%-- 						<div class="teamskillbar clearfix m-top-20" data-percent="${sale.value}">> --%>
+<%-- 							<h6>거래 가격 : ${sale.key.price}</h6> --%>
+<!-- 							<div class="teamskillbar-bar"></div> -->
+<!-- 						</div> -->
+<!-- 						End Skill Bar -->
 
-						<div class="teamskillbar clearfix m-top-50" data-percent="30%">
-							<h6>교통 편리함</h6>
-							<div class="teamskillbar-bar"></div>
-						</div>
-						<!-- End Skill Bar -->
-					</div>						
-				 <a class="btn" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>		
-				 </div>
-			</div>
-		</div>
-		<hr>
-	</c:forEach>	
-	</form>
-	</div>
+<!-- 						<div class="teamskillbar clearfix m-top-50" data-percent="30%"> -->
+<!-- 							<h6>교통 편리함</h6> -->
+<!-- 							<div class="teamskillbar-bar"></div> -->
+<!-- 						</div> -->
+<!-- 						End Skill Bar -->
+<!-- 					</div>						 -->
+<%-- 				 <a class="btn" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>		 --%>
+<!-- 				 </div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<hr> -->
+<%-- 	</c:forEach>	 --%>
+<!-- 	</form> -->
+<!-- 	</div> -->
 
-	<!-- map -->
-	<div class="col-lg-5">
-		<div id="map" style="width: 100%; height: 100%;"></div>
-	</div>
+<!-- 	<!-- map --> -->
+<!-- 	<div class="col-lg-5"> -->
+<!-- 		<div id="map" style="width: 100%; height: 100%;"></div> -->
+<!-- 	</div> -->
 
-</div>
+<!-- </div> -->
 
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

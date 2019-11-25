@@ -105,7 +105,6 @@ public class SaleDao {
 				sale.setEtc(rs.getString("etc"));
 				sale.setIsContract(rs.getString("isContract"));
 				sale.setId(rs.getString("reaId"));
-
 			}
 			System.out.println("DB에서 온 아파트 정보" + sale.toString());
 
@@ -303,8 +302,10 @@ public class SaleDao {
 					System.out.println(imgList.toString());
 					
 					mapList.put(sale,imgList);
-					System.out.println("다오 끝");
+					
+					System.out.println(mapList.values());
 				}
+				System.out.println("다오 끝");
 		
 		} catch (Exception e) {
 			e.printStackTrace();

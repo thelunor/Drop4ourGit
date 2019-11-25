@@ -1,5 +1,7 @@
 package kr.or.bit.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,27 +24,28 @@ public class SelectAtpListService implements Action {
 		// HttpSession session = request.getSession();
 		String search = request.getParameter("search");
 		System.out.println(search);
-		Map<Sale, List<SaleImage>> saleMap = null;
+		Map<Sale, List<SaleImage>> saleMap = new HashMap<Sale, List<SaleImage>>();
+		
 		// String address = request.getParameter("address");
 
 		try {
 			SaleDao dao = new SaleDao();
 			saleMap = dao.selectAtpList(search);
-			System.out.println(saleMap.toString());
+			//System.out.println(saleMap.toString());
 			if (saleMap != null) {
-				request.setAttribute("saleList", saleMap);
+				request.setAttribute("saleMap", saleMap);
 				request.setAttribute("search", search);
 			} else {
-				request.setAttribute("saleList", saleMap);
+				request.setAttribute("saleMap", saleMap);
 				request.setAttribute("search", "법정구 법정동");
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		forward = new ActionForward();
 		// session.setAttribute("address", address);
 		forward.setPath("SelectAptListServiceOk.d4b");
+		System.out.println("여기?1");
 		return forward;
 	}
 
