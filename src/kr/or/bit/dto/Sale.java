@@ -4,7 +4,8 @@ public class Sale { //매물
 	private String aptNum; //매물번호
 	private String aptSize; //면적
 	private String type; //거래유형
-	private String addr; //주소
+	private String addr; //지번주소
+	private String roadAddr; //도로명주소
 	private String aptName; //아파트 이름
 	private String aptDong; //동
 	private String aptHo; //호	
@@ -15,14 +16,15 @@ public class Sale { //매물
 	private String id; //공인중개사 아이디
 	
 	public Sale() {}
-
-	public Sale(String aptNum, String aptSize, String type, String addr, String aptName, String aptDong, String aptHo,
-			String price, String direction, String etc, String isContract, String id) {
+	
+	public Sale(String aptNum, String aptSize, String type, String addr, String roadAddr, String aptName,
+			String aptDong, String aptHo, String price, String direction, String etc, String isContract, String id) {
 		super();
 		this.aptNum = aptNum;
 		this.aptSize = aptSize;
 		this.type = type;
 		this.addr = addr;
+		this.roadAddr = roadAddr;
 		this.aptName = aptName;
 		this.aptDong = aptDong;
 		this.aptHo = aptHo;
@@ -128,17 +130,22 @@ public class Sale { //매물
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	
+	public String getRoadAddr() {
+		return roadAddr;
+	}
+
+	public void setRoadAddr(String roadAddr) {
+		this.roadAddr = roadAddr;
+	}
 
 	@Override
 	public String toString() {
-		return "Sale [aptNum=" + aptNum + ", aptSize=" + aptSize + ", type=" + type + ", addr=" + addr + ", aptName="
-				+ aptName + ", aptDong=" + aptDong + ", aptHo=" + aptHo + ", price=" + price + ", direction="
-				+ direction + ", etc=" + etc + ", isContract=" + isContract + ", id=" + id + ", toString()="
-				+ super.toString() + "]";
+		return "Sale [aptNum=" + aptNum + ", aptSize=" + aptSize + ", type=" + type + ", addr=" + addr + ", roadAddr="
+				+ roadAddr + ", aptName=" + aptName + ", aptDong=" + aptDong + ", aptHo=" + aptHo + ", price=" + price
+				+ ", direction=" + direction + ", etc=" + etc + ", isContract=" + isContract + ", id=" + id + "]";
 	}
-	
-	
-	
 	
 	
 }

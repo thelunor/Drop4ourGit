@@ -238,7 +238,7 @@ a.btn  {
 					</div>
 					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${saleData.aptName}</span> 아파트 &nbsp;매매</h4> 										
 					<input type="text" class="form-control" name="address"
-						id="address" required="required" placeholder="도로명 주소"  value="서울 강남구 도곡로13길 19">
+						id="address" required="required" placeholder="도로명 주소"  value="서울 강남구 역삼동 757">
 						<br>
 					<!-- Button -->
 					<p style="font-size: 20px; font-family: 'Jua', sans-serif;">방

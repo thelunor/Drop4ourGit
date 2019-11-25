@@ -323,7 +323,7 @@ public class SaleDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Sale sale = null;
-		String sql_get_saleDetail = "select aptName,aptSize,Type,aptDong,price,Direction,etc, reaId from sale where aptNum=?";
+		String sql_get_saleDetail = "select roadAddr, aptName,aptSize,Type,aptDong,price,Direction,etc, reaId from sale where aptNum=?";
 		
 		try {
 			conn = ds.getConnection();
@@ -332,6 +332,7 @@ public class SaleDao {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				sale = new Sale();
+				sale.setRoadAddr(rs.getString("roadAddr")); //아파트 지번 주소
 				sale.setAptName(rs.getString("aptName")); //아파트 이름
 				sale.setAptSize(rs.getString("aptSize")); //아파트 면적
 				sale.setType(rs.getString("type")); //매물 유형
