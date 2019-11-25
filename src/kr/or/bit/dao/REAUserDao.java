@@ -204,6 +204,38 @@ public class REAUserDao {
 		return reaUser;
 	}
 	
+	public int REAUserIdCheck(String userId) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			conn = ds.getConnection();
+			String sql = "select reaId from reauser where reaId=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result=1; //아이디가 이미있으면
+			}
+			System.out.println(result);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("reauserdao id check 오류");
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	
 	
 }

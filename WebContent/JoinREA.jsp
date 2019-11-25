@@ -60,6 +60,46 @@ img.avatar {
 }
 </style>
 
+<script type="text/javascript">
+$(function() {
+	// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+		$("#reaId").blur(function() {
+			// id = "id_reg" / name = "reaId"
+			var reaId = $('#reaId').val();
+			var idReg = /^[a-zA-Z0-9]{4,12}$/;
+			$.ajax({
+				url : 'JoinIdCheck?userId='+ reaId,
+				type : 'get',
+				success : function(data) {
+					console.log("1 = 중복o / 0 = 중복x : "+ data);							
+					if (data == 1) {
+							// 1 : 아이디가 중복되는 문구
+							$("#id_check").text("사용중인 아이디입니다.");
+							$("#id_check").css("color", "red");
+							$("#signUp").attr("disabled", true);
+						} else {
+							if(!idReg.test(reaId)){
+								// 0 : 아이디 길이 / 문자열 검사
+								$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다.");
+								$('#id_check').css('color', 'red');
+								$("#signUp").attr("disabled", false);
+							} else if(reaId == ""){
+								$('#id_check').text('아이디를 입력해주세요.');
+								$('#id_check').css('color', 'red');
+								$("#signUp").attr("disabled", true);				
+							} else{
+								$('#id_check').text('사용가능한 아이디입니다.');
+								$('#id_check').css('color', 'green');
+								$("#signUp").attr("disabled", true);
+							}
+						}
+					}, error : function() {
+							console.log("실패");
+					}
+				});
+			});
+	});
+</script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
@@ -99,6 +139,7 @@ img.avatar {
 										<label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
 										<input type="text" class="form-control" name="reaId" id="reaId"
 											required="required">
+											<div id="id_check"></div>
 									</div>
 									<div class="form-group">
 										<label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>
@@ -160,7 +201,7 @@ img.avatar {
 										<div class="row">
 											<div class="col-sm-6">
 												<button type="submit"
-													class="btn btn-primary btn-block btn-lg">Sign Up</button>
+													class="btn btn-primary btn-block btn-lg" id="signUp">Sign Up</button>
 											</div>
 											<div class="col-sm-6">
 												<button type="reset"

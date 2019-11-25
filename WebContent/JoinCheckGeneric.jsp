@@ -87,7 +87,6 @@ function checkAll(){
 								<br>
 								<br>
                                     <div class="text-center">이미 회원이신가요? <a href="Login_form.jsp">Click here</a></div>
-
                                     <br> <br> <br>
                                 </div>
                             </div>
