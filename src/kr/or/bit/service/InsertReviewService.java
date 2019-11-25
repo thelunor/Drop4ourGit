@@ -27,10 +27,10 @@ public class InsertReviewService implements Action {
 			reviewDate = (Date) new SimpleDateFormat().parse(request.getParameter("reviewDate"));
 		} catch (ParseException e1) {
 			System.out.println("reviewDate 예외발생");
-			e1.printStackTrace();
+			System.out.println(e1.getMessage());
 		}
 		String reaId = request.getParameter("reaId");
-		
+		System.out.println("InsertReview reaId: " + reaId);
 		// 객체에 데이터 저장
 		Review review = new Review();
 		review.setReviewNum(reviewNum);

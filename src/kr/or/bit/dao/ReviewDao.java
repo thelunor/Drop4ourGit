@@ -44,6 +44,8 @@ public class ReviewDao {
 			pstmt.setString(4, review.getReaid());
 			
 			row = pstmt.executeUpdate();
+			System.out.println("row: " + row);
+			System.out.println("row까지 성공");
 		} catch (Exception e) {
 			System.out.println("리뷰등록 dao 예외발생");
 			System.out.println(e.getMessage());
