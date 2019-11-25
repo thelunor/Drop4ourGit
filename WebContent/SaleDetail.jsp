@@ -236,13 +236,30 @@ a.btn  {
 					<div class="page-wrapper">
 					  <a class="btn trigger" href="#">담당 부동산</a>
 					</div>
-					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${saleData.aptName}</span> 아파트 &nbsp;매매</h4> 										
+					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${saleData.aptName}</span> 아파트 &nbsp;${saleData.type}</h4> 										
 					<input type="text" class="form-control" name="address"
 						id="address" required="required" placeholder="도로명 주소"  value="${saleData.roadAddr}">
 						<br>
 					<!-- Button -->
-					<p style="font-size: 20px; font-family: 'Jua', sans-serif;">방
-						4개 &nbsp;|&nbsp; 욕실 1개 &nbsp;|&nbsp; 화장실 1개 &nbsp;|&nbsp; 드레스룸 1개</p>
+					<%
+                      if(sale.getType()=="24") {
+                     %>
+					<p style="font-size: 20px; font-family: 'Jua', sans-serif;">
+					방 2개 &nbsp;|&nbsp; 욕실 1개 </p>
+					<%
+                      }else if(sale.getType()=="32"){
+					%>
+					<p style="font-size: 20px; font-family: 'Jua', sans-serif;">
+					방 3개 &nbsp;|&nbsp; 욕실 1개 &nbsp;|&nbsp; 화장실 1개 </p>
+					<%
+                     }else if(sale.getType()=="42"){
+     					%>
+   					<p style="font-size: 20px; font-family: 'Jua', sans-serif;">
+   					방 4개 &nbsp;|&nbsp; 욕실 1개 &nbsp;|&nbsp; 화장실 1개 &nbsp;|&nbsp; 드레스룸 1개</p>
+   					<%
+                     }
+   					%>
+
 					<br>
 					<div class="box">
 						<div class="row">

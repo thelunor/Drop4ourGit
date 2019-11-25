@@ -12,7 +12,7 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
         dataType : 'json',
         success : function(data) { 
      	$.each(data, function(index, element) {
-     		if(addrList.indexOf((element.addr.split(" ")[0] + " " + element.addr.split(" ")[1])) == -1 ) addrList.push(element.addr.split(" ")[0] + " " + element.addr.split(" ")[1]);
+     		if(addrList.indexOf((element.addr.split(" ")[1] + " " + element.addr.split(" ")[2])) == -1 ) addrList.push(element.addr.split(" ")[1] + " " + element.addr.split(" ")[2]);
 
      	});
 
@@ -29,7 +29,7 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 			classes : { //잘 모르겠음
 				"ui-autocomplete" : "highlight"
 			},
-			delay : 200, //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+			delay : 100, //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 			//            disabled: true, //자동완성 기능 끄기
 			position : {
 				my : "right top",
