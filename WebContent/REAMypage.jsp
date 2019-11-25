@@ -179,7 +179,8 @@ input {
 														<td>${saleData.price}</td>
 														<td>${saleData.isContract}</td>
 														<td><button type='button' class='btn-group-sm' id='edit_btn' onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
-														<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='DeleteSaleService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
+														<td><button type='button' class='btn-group-sm' id='delete_btn'>삭제</button></td>
+														<input type="hidden" id="aptNum" value="${saleData.aptNum}">
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -206,8 +207,25 @@ input {
 <script>
 	$(function(){
 		$("#delete_btn").click(function(){
-			
+			/*location.href='DeleteSaleService.d4b?aptNum=${saleData.aptNum}*/
+					
 			alert("삭제 되었습니다.");
+			var aptNum = $("#aptNum").val();
+			console.log(aptNum);
+			/* $.ajax({
+		 		url : 'DeleteSaleService.d4b?aptNum=${saleData.aptNum}',
+		 		enctype : "multipart/form-data",
+		 		type : 'post',
+		 		data : formData,
+		 		dataType:'html',
+		 		contentType : false,
+		 		processData : false,
+		 		success:function(data){
+		 			console.log(data);
+		 			$("#imgUpload").empty();
+		 			$("#imgUpload").append(data);
+		 		}
+		 	}); */
 		});
 	});
 </script>

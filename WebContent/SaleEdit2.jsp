@@ -9,9 +9,8 @@
 <!doctype html>
 <%
 	List<SaleImage> saleImgList = new ArrayList<SaleImage>();
-	saleImgList = (List)request.getAttribute("saleImgList");
-	System.out.println("saleImgList 투스트링 ㅡㅅㅡ : " + saleImgList.toString());
-	System.out.println("SaleEdit2 입성임돠~");
+	saleImgList = (List)request.getAttribute("saleImgList"); 
+	String aptNum = request.getParameter("aptNum");
 	
 %>
 <html class="no-js" lang="en">
@@ -68,20 +67,19 @@ text-align: center;
 						<div class="col-md-6">
 							<div class="signup-form">
 								<br> <br> <br>
-								<h2 style="text-align: center">매물 사진 등록</h2>
+								<h2 style="text-align: center">매물 사진 수정</h2>
 								<br>
 								<hr>
 								<br>
 							</div>
 						</div>
 					</div>
-					<div>
+					<div>					
 						<form id="myForm">
-					<c:forEach var="saleImgData" items="<%=saleImgList%>">
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<img id="preview1" src="reaimg/${saleImgData.saleImgSaveName}" alt="Profile">
+										<img id="preview1" src="reaimg/<%=saleImgList.get(0).getSaleImgSaveName()%>" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="file" name="filename1" id="getfile1"
@@ -90,7 +88,7 @@ text-align: center;
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<img id="preview2" src="reaimg/${saleImgData.saleImgSaveName}" alt="Profile">
+										<img id="preview2" src="reaimg/<%=saleImgList.get(1).getSaleImgSaveName()%>" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="file" name="filename2" id="getfile2"
@@ -99,7 +97,7 @@ text-align: center;
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<img id="preview3" src="reaimg/${saleImgData.saleImgSaveName}" alt="Profile">
+										<img id="preview3" src="reaimg/<%=saleImgList.get(2).getSaleImgSaveName()%>" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="file" name="filename3" id="getfile3"
@@ -108,12 +106,11 @@ text-align: center;
 								</div>
 							</div>
 							<br><br>
-							</c:forEach>
 						<div class="row">
 								<div class="col-sm-5"></div>
 								<div class="col-sm-2">
 									<button type="button" class="btn btn-primary btn-block btn-lg"
-										id="submitBtn" style="padding-left: 32px;">사진 등록 완료</button>
+										id="submitBtn" style="padding-left: 32px;">사진 수정 완료</button>
 								</div>
 								<div class="col-sm-5"></div>
 							</div>
@@ -170,14 +167,15 @@ text-align: center;
 	    }; 
 	}; 
 	
-	<%-- $(function(){
+	 $(function(){
 		$("#submitBtn").click(function(){
+			var aptNum = <%=aptNum%>;
+			//console.log(aptNum);
 			var form = $("#myForm")[0];
 		 	var formData = new FormData(form);
-		 	var aptNum=<%=aptNum%>;
-		 	//console.log('InsertSaleImgService.d4b?aptnum='+aptNum);
-		 	$.ajax({
-		 		url : 'InsertSaleImgService.d4b?aptNum='+aptNum,
+		 	
+		 	 $.ajax({
+		 		url : 'UpdateSaleImgService.d4b?aptNum='+aptNum,
 		 		enctype : "multipart/form-data",
 		 		type : 'post',
 		 		data : formData,
@@ -185,7 +183,7 @@ text-align: center;
 		 		contentType : false,
 		 		processData : false,
 		 		success:function(data){
-		 			//console.log(data);
+		 			console.log(data);
 		 			$("#imgUpload").empty();
 		 			$("#imgUpload").append(data);
 		 		}
@@ -193,10 +191,9 @@ text-align: center;
 		});
 			
 		
-		}); --%>
+		});
 		 	
-	</script>
-
+</script>
 </body>
 
 </html>

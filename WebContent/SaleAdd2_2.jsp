@@ -171,6 +171,7 @@ text-align: center;
 			var form = $("#myForm")[0];
 		 	var formData = new FormData(form);
 		 	var aptNum=<%=aptNum%>;
+		 	
 		 	//console.log('InsertSaleImgService.d4b?aptnum='+aptNum);
 		 	$.ajax({
 		 		url : 'InsertSaleImgService.d4b?aptNum='+aptNum,

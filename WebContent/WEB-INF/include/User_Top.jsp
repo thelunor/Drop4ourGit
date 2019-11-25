@@ -4,7 +4,6 @@
 	String reaId = null;
 	String type = null;
 	genericUserId = (String) session.getAttribute("genericUserId");
-
 	reaId = (String) session.getAttribute("reaId");
 	type = (String) request.getAttribute("type");
  %>
@@ -21,7 +20,13 @@
 					}
 				%>
 			</li>
-			<li class="join"><a href="JoinPage.jsp">회원가입</a></li>
+			<li class="join">
+				<%
+					if (request.getAttribute("type") == null) {
+						out.print("<a href='JoinPage.jsp'>회원가입</a>");
+					} 
+				%>							
+			</li>
 			<li class='mypage'>
 				<%
 					if (type.equals("U01")) {
@@ -54,7 +59,7 @@
 			data-target="#navbar-menu"></button>
 
 		<a class="navbar-brand" href="./Main.jsp"> <img
-			src="./images/logo1.png" class="logo logo-display m-top-10" alt="">
+			src="./images/logo2.png" class="logo logo-display m-top-10" alt="">
 			<img src="./images/logo.jpg" class="logo logo-scrolled" alt="">
 		</a>
 	</div>

@@ -51,6 +51,7 @@ public class UpdateSaleService implements Action {
 		// 2. 객체에 데이터 저장
 
 		Sale sale = new Sale();
+		
 		sale.setAptSize(aptSize);
 		sale.setType(type);
 		sale.setAddr(addr);

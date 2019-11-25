@@ -74,12 +74,18 @@ public class SaleImageDao {
 				saleImg = new SaleImage();
 				saleImg.setSaleImgSaveName(rs.getString("saleimgsavename"));
 				saleImgList.add(saleImg);
-				System.out.println("rsrs성공");
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}finally {
-			
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return saleImgList;
@@ -88,7 +94,34 @@ public class SaleImageDao {
 	
 
 	public int updateSaleImg(SaleImage saleImg) { // 매물 이미지 수정
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			String sql_update_saleImg = "update saleImage set saleImgoriginName=?, saleImgsaveName=? where aptNum=?";
+			pstmt = conn.prepareStatement(sql_update_saleImg);
+			pstmt.setString(1, saleImg.getSaleImgOriginName());
+			pstmt.setString(2, saleImg.getSaleImgSaveName());
+			pstmt.setString(3, saleImg.getAptNum());
+			resultRow = pstmt.executeUpdate();
+			if(resultRow > 0) {
+				System.out.println("매물 사진"+resultRow);
+				System.out.println("매물 사진 업데이트 완료");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return resultRow;
 	}
 
 	public int deleteSaleImg(String aptNum) { // 매물 이미지 삭제 (매물 번호로)

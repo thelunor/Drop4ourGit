@@ -88,7 +88,7 @@ form-control {
 							</div>
 						</div>
 					</div>
-					<form action="UpdateSaleService.d4b" id="saleForm" method="post">
+					<form action="UpdateSaleService.d4b?aptNum=${saleData.aptNum}" id="saleForm" method="post">
 						<div class="row">
 							<div class="col-md-3"></div>
 							<div class="col-md-6">
