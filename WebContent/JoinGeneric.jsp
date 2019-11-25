@@ -91,7 +91,7 @@ $(function() {
 						} else{
 							$('#id_check').text('사용가능한 아이디입니다.');
 							$('#id_check').css('color', 'green');
-							$("#signUp").attr("disabled", true);
+							$("#signUp").attr("disabled", false);
 						}
 					}
 				}, error : function() {
