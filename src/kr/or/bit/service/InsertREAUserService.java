@@ -77,7 +77,8 @@ public class InsertREAUserService implements Action {
 				AdminDao dao = new AdminDao();
 				int result = dao.insertREAUser(user, reaImg);
 				if (result > 0) {
-					forward.setPath("UserMain.jsp");
+					forward.setPath("Main.jsp");
+					request.setAttribute("type", userCode);
 				} else {
 					forward.setPath("JoinREA.jsp");
 				}

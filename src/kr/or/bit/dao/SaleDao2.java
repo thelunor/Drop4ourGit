@@ -68,40 +68,6 @@ public class SaleDao2 {
 		return resultRow;
 	}
 	
-//	public int insertImg(SaleImage saleImage) { // 매물 이미지 넣기
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		int resultRow = 0;
-///		try {
-//			conn = ds.getConnection();
-//			conn.setAutoCommit(false); //트랜잭션 처리
-//			
-//			//매물 테이블에 객체 넣기
-//			
-//			//1. 매물 테이블에서 매물 번호 가져오기 
-//			String sql_max_aptNum = "select max(aptnum) as maxNum from sale";
-//			pstmt = conn.prepareStatement(sql_max_aptNum);
-//			
-//			
-//			rs = pstmt.executeQuery();
-//			if(rs.next()) {
-//				String aptMax=rs.getString("maxNum");
-//				System.out.println(aptMax);
-//			} else {
-//				System.out.println("rs가 없어욤...");
-//			}
-//			
-//			System.out.println("resultRow: " + resultRow);
-//			if(resultRow>1) {
-//				conn.commit();
-//			}
-//		}catch(Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//		return resultRow;
-//	}
-
 	public Sale getSaleDataByAptNum(String aptNum) { // 매물 한개 읽기 (매물 번호로)
 		Connection conn = null;
 		PreparedStatement pstmt = null;

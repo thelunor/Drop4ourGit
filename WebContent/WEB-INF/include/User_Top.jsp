@@ -4,8 +4,11 @@
 	String reaId = null;
 	String type = null;
 	genericUserId = (String) session.getAttribute("genericUserId");
-	reaId = (String) session.getAttribute("reaId");
+	
+	reaId = (String) session.getAttribute("reaUserId");
 	type = (String) request.getAttribute("type");
+	System.out.println("타입"+type);
+	System.out.println("유저아이디"+genericUserId);
  %>
 <!-- Start Atribute Navigation -->
 <div class="container">
@@ -30,9 +33,9 @@
 			<li class='mypage'>
 				<%
 					if (type.equals("U01")) {
-						out.print("<a href='Main.jsp'>마이페이지</a>");
+						out.print("<a href='GetGenericUserMypageService.d4b?userId="+genericUserId+"'>마이페이지</a>");
 					} else if (type.equals("U02")) {
-						out.print("<a href='GetREAMypageService.d4b'>마이페이지</a>");
+						out.print("<a href='GetREAMypageService.d4b?reaId="+reaId+"'>마이페이지</a>");
 					}
 				%>
 			</li>
