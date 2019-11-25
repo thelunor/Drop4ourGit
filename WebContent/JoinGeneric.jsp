@@ -60,6 +60,47 @@ img.avatar {
 }
 </style>
 
+<script>
+$(function() {
+	
+
+// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+	$("#userId").blur(function() {
+		// id = "id_reg" / name = "userId"
+		var userId = $('#userId').val();
+		$.ajax({
+			url : 'JoinIdCheck?userId='+ userId,
+			type : 'get',
+			success : function(data) {
+				console.log("1 = 중복o / 0 = 중복x : "+ data);							
+				
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#id_check").text("사용중인 아이디입니다 :p");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					} else {
+						if(idJ.test(userId)){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#id_check").text("");
+							$("#reg_submit").attr("disabled", false);
+						} else if(userId == ""){
+							$('#id_check').text('아이디를 입력해주세요 :)');
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+						} else {
+							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);
+						}
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+});
+</script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
 	<div class="culmn">
@@ -93,6 +134,7 @@ img.avatar {
 										<label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
 										<input type="text" class="form-control" name="userId"
 											id="userId" required="required">
+										<div id="id_check"></div>
 									</div>
 									<div class="form-group">
 										<label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>

@@ -114,7 +114,7 @@ public class AdminDao {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("InsertDao 실패 : " + e.getMessage());
 
 		} finally {
 			DB_Close.close(pstmt);

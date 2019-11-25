@@ -263,14 +263,14 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (url_Command.equals("/GetSaleDataServiceOk.d4b")) {
+		} else if (url_Command.equals("/GetSaleDataServiceOk.d4b")) {
 			try {
 				forward = new ActionForward();
 				forward.setPath("/SaleDetail.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (url_Command.equals("/GetSaleImgService.d4b")) {
+		} else if (url_Command.equals("/GetSaleImgService.d4b")) {
 			try {
 				action = new GetSaleImgService(); //
 				forward = action.execute(request, response);
@@ -370,7 +370,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (url_Command.equals("/InsertSaleService.d4b")) {
+		} else if (url_Command.equals("/InsertSaleService.d4b")) {
 			try {
 				action = new InsertSaleService(); //
 				forward = action.execute(request, response);
@@ -429,7 +429,7 @@ public class FrontController extends HttpServlet {
 				forward.setPath("/SaleListMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
-			} 
+			}
 		} else if (url_Command.equals("/SelectReviewService.d4b")) { // 중개사 후기글 목록보기
 			try {
 				action = new SelectReviewService(); //
