@@ -12,10 +12,8 @@ import java.util.Map;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.servlet.jsp.jstl.sql.Result;
 import javax.sql.DataSource;
 
-import kr.or.bit.dto.REAUser;
 import kr.or.bit.dto.Sale;
 import kr.or.bit.dto.SaleImage;
 import kr.or.bit.utils.DB_Close;
@@ -44,22 +42,22 @@ public class SaleDao {
 //			String maxNum=rs.getString("maxNum");
 //			System.out.println("maxNum: 맥스넘~ " + maxNum);
 			
-			
-			
-			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" + 
-								" values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
+					
+			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, roadAddr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" + 
+								" values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
 			pstmt = conn.prepareStatement(sql_insert_sale);
 			pstmt.setString(1, sale.getAptSize());
 			pstmt.setString(2, sale.getType());
 			pstmt.setString(3, sale.getAddr());
-			pstmt.setString(4, sale.getAptName());
-			pstmt.setString(5, sale.getAptDong());
-			pstmt.setString(6, sale.getAptHo());
-			pstmt.setString(7, sale.getPrice());
-			pstmt.setString(8, sale.getDirection());
-			pstmt.setString(9, sale.getEtc());
-			pstmt.setString(10, sale.getIsContract());
-			pstmt.setString(11, sale.getId());
+			pstmt.setString(4, sale.getRoadAddr());
+			pstmt.setString(5, sale.getAptName());
+			pstmt.setString(6, sale.getAptDong());
+			pstmt.setString(7, sale.getAptHo());
+			pstmt.setString(8, sale.getPrice());
+			pstmt.setString(9, sale.getDirection());
+			pstmt.setString(10, sale.getEtc());
+			pstmt.setString(11, sale.getIsContract());
+			pstmt.setString(12, sale.getId());
 			resultRow = pstmt.executeUpdate();
 			
 			
