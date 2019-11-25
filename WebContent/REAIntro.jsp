@@ -52,10 +52,6 @@
 		}
 	</style>
 	
-	<%
-		List<Review> review = (ArrayList<Review>) request.getAttribute("rvList");
-	%>
-	
 	<script type="text/javascript">
 		$.noConflict();
 		/* jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작

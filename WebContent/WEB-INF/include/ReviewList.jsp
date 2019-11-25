@@ -1,3 +1,7 @@
+<%@page import="sun.reflect.generics.visitor.Reifier"%>
+<%@page import="kr.or.bit.dao.ReviewDao"%>
+<%@page import="kr.or.bit.dto.REAImage"%>
+<%@page import="kr.or.bit.dto.REAUser"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.bit.dto.Review"%>
 <%@page import="java.util.List"%>
@@ -24,15 +28,17 @@
 
 	<jsp:include page="../../css/css.jsp" />
 	
-<%
+<%	
 	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
-	String reaId = (String) request.getAttribute("reaId");
+	System.out.println(reviewList);
 %>
-	<script type="text/javascript">
-		console.log(reviewList);
-	</script>
+	
 <c:set var="reviewList" value="<%=reviewList%>"></c:set>
 
+
+<script type="text/javascript">
+</script>
+	
 <section id="id" class="about">
 	<div class="container">
 		<div class="about_content">
@@ -89,7 +95,7 @@
 							</div>
 						</c:forEach>
 						
-						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
+<%-- 						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
 						<c:if test="${cpage>1}">
 							<a href="board_list.jsp?cp=${cpage-1}&ps=${pagesize}">이전</a>
 						</c:if> 
@@ -105,7 +111,7 @@
 							</c:choose>
 						</c:forEach> <!--다음 링크 --> <c:if test="${cpage<pagecount}">
 							<a href="board_list.jsp?cp=${cpage+1}&ps=${pagesize}">다음</a>
-						</c:if>
+						</c:if> --%>
 			
 					</div>
 				</div>
@@ -120,7 +126,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#insert_review').click(function() {
-			var reaId = <%=reaId%>;
+			var reaId = "";
 			$.ajax({
 				url: 'InsertReviewService.d4b?reaId=' + reaId,
 				type: 'post',

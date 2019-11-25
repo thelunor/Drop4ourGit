@@ -1,5 +1,6 @@
 package kr.or.bit.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,31 +21,37 @@ public class GetReviewListService implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
-		REAUser reaUser = new REAUser();
-		REAImage reaImg = new REAImage();
-		REAUserDao rdao = null;
-		REAImageDao imgdao = null;
-		ReviewDao rvdao = null;
-		List<Review> rvlist = null;
+		REAUserDao readao = null;
+		REAUser reaUser = null;
 		HttpSession session = request.getSession();
 		String reaId = (String) session.getAttribute("reaId");
+		ReviewDao rvdao = null;
+		List<Review> reviewList = null;
 		
 		try {
 			forward = new ActionForward();
-			rdao = new REAUserDao();
-			imgdao = new REAImageDao();
+			readao = new REAUserDao();
+			reaUser = new REAUser();
+			reaUser = readao.getREAMypage(reaId);
 			rvdao = new ReviewDao();
-			reaUser = rdao.getREAUserInfo(reaId);
-			reaImg = imgdao.getREAImg(reaId);
-			rvlist = rvdao.getReviewList(reaId);
-			request.setAttribute("rvList", rvlist);
+			reviewList = new ArrayList<Review>();
+			reviewList = rvdao.getReviewList(reaId);
+			
+			request.setAttribute("reaId", reaId);
+			if (reaUser != null) {
+				System.out.println("reaUser 성공");
+				System.out.println(reaUser);
+				request.setAttribute("reviewList", reviewList);
+				System.out.println(reviewList);
+				forward.setPath("GetReviewListServiceOk.d4b");
+			} else {
+				System.out.println("reviewList 실패");
+				forward.setPath("Main.jsp"); // 임시
+			}
 		} catch (Exception e) {
-			System.out.println("review service 예외발생");
+			System.out.println("getReviewListService 예외발생");
 			System.out.println(e.getMessage());
 		}
-		forward = new ActionForward();
-		forward.setPath("SelectReviewOk.d4b");
-		
 		return forward;
 	}
 

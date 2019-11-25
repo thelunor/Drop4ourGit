@@ -64,31 +64,35 @@ public class ReviewDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<Review> rvlist = null;
+		List<Review> rvList = null;
 		
 		try {
 			conn = ds.getConnection();
-			String review_sql = "SELECT R.USERID, R.REVIEWCONTENT, R.REVIEWDATE " + 
-								"FROM REVIEW R JOIN REAUSER RU " + 
-								"ON R.REAID = RU.REAID " + 
-								"WHERE R.REAID=?";
+			String review_sql = "SELECT RV.USERID, RV.REVIEWCONTENT, RV.REVIEWDATE " + 
+								"FROM REVIEW RV JOIN REAUSER RU " + 
+								"ON RV.REAID = RU.REAID " + 
+								"WHERE RV.REAID=?";
 			pstmt = conn.prepareStatement(review_sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
-			rvlist = new ArrayList<Review>();
+			rvList = new ArrayList<Review>();
 			while (rs.next()) {
-				int reviewNum = rs.getInt("reviewNum");
-				String userId = rs.getString("userId");
-				String reviewContent = rs.getString("reviewContent");
+				System.out.println("ReviewDao 성공");
 				java.sql.Date reviewDate = rs.getDate("reviewDate");
-				String reaId = rs.getString("reaId");
+				Review review = new Review();
 				
-				Review reviewdto = new Review(reviewNum, userId, reviewContent, reviewDate, reaId);
-				rvlist.add(reviewdto);
+				review.setReviewNum(rs.getInt("reviewNum"));
+				review.setUserId(rs.getString("userId"));
+				review.setReviewContent(rs.getString("reviewContent"));
+				review.setReviewDate(reviewDate);
+				review.setReaid(rs.getString("reaId"));
+				
+				rvList.add(review);
+				System.out.println("reviewList: " + rvList);
 			}
 		} catch (Exception e) {
-			System.out.println("ReviewList dao 예외발생");
+			System.out.println("Review dao 예외발생");
 			System.out.println(e.getMessage());
 		} finally {
 			DB_Close.close(rs);
@@ -97,12 +101,12 @@ public class ReviewDao {
 			try {
 				conn.close();
 			} catch (Exception e) {
-				System.out.println("ReviewList dao 예외발생2");
+				System.out.println("Review dao 예외발생2");
 				System.out.println(e.getMessage());
 			}
 		}
 		
-		return rvlist;
+		return rvList;
 	}
 
 	public int updateReview(Review review) { // 리뷰 수정
