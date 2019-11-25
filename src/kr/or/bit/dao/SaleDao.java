@@ -288,11 +288,8 @@ public class SaleDao {
 			rs = pstmt.executeQuery();
 			
 			imgDao = new SaleImageDao();
-			System.out.println("요기?1 ");
 			mapList= new HashMap<Sale, List<SaleImage>>();
-			System.out.println("요기?2 ");
 				while (rs.next()) {
-					System.out.println("요기?3 ");
 					Sale sale = new Sale();
 					sale.setAptName(rs.getString("aptName")); // 아파트 이름
 					sale.setAptDong(rs.getString("aptDong")); // 아파트 동
@@ -303,8 +300,8 @@ public class SaleDao {
 					System.out.println("aptNum 띠요오오옹: " + aptNum);
 					List<SaleImage> imgList = new ArrayList<SaleImage>();
 					imgList = imgDao.getSaleImgList(aptNum);
-							
 					System.out.println(imgList.toString());
+					
 					mapList.put(sale,imgList);
 					System.out.println("다오 끝");
 				}

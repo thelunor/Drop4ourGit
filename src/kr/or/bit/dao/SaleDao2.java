@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -138,6 +140,9 @@ public class SaleDao2 {
 		
 		return aptNum;
 	}
+	
+	
+	
 
 	public List<Sale> getSaleList(String id) { // 매물 리스트 출력(공인중개사 아이디로)
 		Connection conn = null;

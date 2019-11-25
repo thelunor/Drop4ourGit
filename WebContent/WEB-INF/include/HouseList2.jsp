@@ -69,7 +69,6 @@ text-align: center;
 	Map<Sale, List<SaleImage>> saleMap = (Map<Sale, List<SaleImage>>)request.getAttribute("saleList");
 	ArrayList<String> priceList=new ArrayList<String>();
 	String stringPrice=null;
-	Map<Sale, String> saleMap=new HashMap<Sale, String>();
  	
 	 for(Sale sale : list){
 		double num = 79830;

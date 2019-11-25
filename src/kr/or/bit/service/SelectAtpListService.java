@@ -21,7 +21,7 @@ public class SelectAtpListService implements Action {
 		ActionForward forward = null;
 		// HttpSession session = request.getSession();
 		String search = request.getParameter("search");
-		System.out.println("찍힘");
+		System.out.println(search);
 		Map<Sale, List<SaleImage>> saleMap = null;
 		// String address = request.getParameter("address");
 
