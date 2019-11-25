@@ -50,7 +50,7 @@ public class SaleDao3 {
 			pstmt.setString(4, sale.getAptName());
 			pstmt.setString(5, sale.getAptDong());
 			pstmt.setString(6, sale.getAptHo());
-			pstmt.setInt(7, sale.getPrice());
+			pstmt.setString(7, sale.getPrice());
 			pstmt.setString(8, sale.getDirection());
 			pstmt.setString(9, sale.getEtc());
 			pstmt.setString(10, sale.getIsContract());
@@ -129,7 +129,7 @@ public class SaleDao3 {
 				sale.setAptName(rs.getString("aptName"));
 				sale.setAptDong(rs.getString("aptDong"));
 				sale.setAptHo(rs.getString("aptHo"));
-				sale.setPrice(Integer.parseInt(rs.getString("price")));
+				sale.setPrice(rs.getString("price"));
 				sale.setDirection(rs.getString("direction"));
 				sale.setEtc(rs.getString("etc"));
 				sale.setIsContract(rs.getString("isContract"));
@@ -220,7 +220,7 @@ public class SaleDao3 {
 				Sale sale = new Sale();
 				sale.setAptName(rs.getString("aptName")); // 아파트 이름
 				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
-				sale.setPrice(rs.getInt("price"));
+				sale.setPrice(rs.getString("price"));
 
 				saleList.add(sale);
 			}

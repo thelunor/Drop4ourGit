@@ -35,7 +35,7 @@ public class UpdateSaleService implements Action {
 		String aptName = request.getParameter("aptName");
 		String aptDong = request.getParameter("aptDong");
 		String aptHo = request.getParameter("aptHo");
-		int price = Integer.parseInt(request.getParameter("price"));
+		String price = request.getParameter("price");
 		String directions[] = request.getParameterValues("direction");
 		String direction = "";
 		for (String value : directions) {

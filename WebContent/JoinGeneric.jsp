@@ -68,7 +68,6 @@ $(function() {
 	$("#userId").blur(function() {
 		// id = "id_reg" / name = "userId"
 		var userId = $('#userId').val();
-		var idReg = /^[a-zA-Z0-9]{4,12}$/;
 		$.ajax({
 			url : 'JoinIdCheck?userId='+ userId,
 			type : 'get',
@@ -77,23 +76,22 @@ $(function() {
 				
 				if (data == 1) {
 						// 1 : 아이디가 중복되는 문구
-						$("#id_check").text("사용중인 아이디입니다.");
+						$("#id_check").text("사용중인 아이디입니다 :p");
 						$("#id_check").css("color", "red");
-						$("#signUp").attr("disabled", true);
+						$("#reg_submit").attr("disabled", true);
 					} else {
-						if(!idReg.test(userId)){
+						if(idJ.test(userId)){
 							// 0 : 아이디 길이 / 문자열 검사
-							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다.");
-							$('#id_check').css('color', 'red');
-							$("#signUp").attr("disabled", false);
+							$("#id_check").text("");
+							$("#reg_submit").attr("disabled", false);
 						} else if(userId == ""){
-							$('#id_check').text('아이디를 입력해주세요.');
+							$('#id_check').text('아이디를 입력해주세요 :)');
 							$('#id_check').css('color', 'red');
-							$("#signUp").attr("disabled", true);				
-						} else{
-							$('#id_check').text('사용가능한 아이디입니다.');
-							$('#id_check').css('color', 'green');
-							$("#signUp").attr("disabled", true);
+							$("#reg_submit").attr("disabled", true);				
+						} else {
+							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다 :) :)");
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);
 						}
 					}
 				}, error : function() {
@@ -184,7 +182,7 @@ $(function() {
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6">
-												<button type="submit" id="signUp"
+												<button type="submit"
 													class="btn btn-primary btn-block btn-lg">Sign Up</button>
 											</div>
 											<div class="col-sm-6">
@@ -244,7 +242,7 @@ $(function() {
 					var addr = data.address; // 최종 주소 변수
 
 					// 주소 정보를 해당 필드에 넣는다.
-					document.getElementById("userAddr").value = addr;
+					document.getElementById("addr").value = addr;
 					// 주소로 상세 정보를 검색
 					geocoder.addressSearch(data.address, function(results,
 							status) {

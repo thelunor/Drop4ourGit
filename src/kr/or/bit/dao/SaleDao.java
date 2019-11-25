@@ -53,7 +53,7 @@ public class SaleDao {
 			pstmt.setString(4, sale.getAptName());
 			pstmt.setString(5, sale.getAptDong());
 			pstmt.setString(6, sale.getAptHo());
-			pstmt.setInt(7, sale.getPrice());
+			pstmt.setString(7, sale.getPrice());
 			pstmt.setString(8, sale.getDirection());
 			pstmt.setString(9, sale.getEtc());
 			pstmt.setString(10, sale.getIsContract());
@@ -133,7 +133,7 @@ public class SaleDao {
 				sale.setAptName(rs.getString("aptName"));
 				sale.setAptDong(rs.getString("aptDong"));
 				sale.setAptHo(rs.getString("aptHo"));
-				sale.setPrice(Integer.parseInt(rs.getString("price")));
+				sale.setPrice(rs.getString("price"));
 				sale.setDirection(rs.getString("direction"));
 				sale.setEtc(rs.getString("etc"));
 				sale.setIsContract(rs.getString("isContract"));
@@ -212,7 +212,7 @@ public class SaleDao {
 				Sale sale = new Sale();
 				sale.setAptName(rs.getString("aptName")); // 아파트 이름
 				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
-				sale.setPrice(rs.getInt("price")); //가격
+				sale.setPrice(rs.getString("price")); //가격
 				sale.setAptNum(rs.getString("aptNum")); //매물번호
 				sale.setAptSize(rs.getString("aptSize")); //아파트 사이즈
 
@@ -254,7 +254,7 @@ public class SaleDao {
 				sale.setAptSize(rs.getString("aptSize")); //아파트 면적
 				sale.setType(rs.getString("type")); //매물 유형
 				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
-				sale.setPrice(rs.getInt("price")); //매매가격
+				sale.setPrice(rs.getString("price")); //매매가격
 				sale.setDirection(rs.getString("direction")); //아파트 향
 				sale.setEtc(rs.getString("etc")); //특징
 				sale.setId(rs.getString("reaId")); //공인중개사 아이디
