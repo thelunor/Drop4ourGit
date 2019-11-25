@@ -16,7 +16,7 @@
 					}
 				%>
 			</li>
-			<li class="main"><a href="JoinPage.jsp">메인</a></li>
+			<li class="main"><a href="UserMain.jsp">메인</a></li>
 			<li class="main"><a href="GetREAUserByIdService.d4b?reaUserId=?<%=reaId%>">마이페이지</a></li>
 		</ul>
 	</div>
