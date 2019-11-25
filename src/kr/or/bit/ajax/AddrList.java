@@ -34,7 +34,6 @@ public class AddrList extends HttpServlet {
 		  ArrayList<Sale> addrList = dao.getAddr();
 	  	  JSONArray jsonlist = JSONArray.fromObject(addrList);
 	  	  out.print(jsonlist);
-	  	  System.out.println(jsonlist);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

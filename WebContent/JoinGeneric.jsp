@@ -38,10 +38,10 @@ form-control {
 	height: 40px;
 }
 
-#tdId, #tdEmail, #tdPw, #tdCh {
+#id_check, #tdEmail, #tdPw, #tdCh {
 	font-size: 13px;
 	font-family: 'Jua', sans-serif;
-	color: #ff6600;
+	color: #ff6863;
 }
 
 .form-group input[type="text"], input[type="email"], input[type="password"]
@@ -74,21 +74,21 @@ $(function() {
 				if (data == 1) {
 						// 1 : 아이디가 중복되는 문구
 						$("#id_check").text("사용중인 아이디입니다.");
-						$("#id_check").css("color", "red");
+						$("#id_check").css("color", "#ff6863");
 						$("#signUp").attr("disabled", true);
 					} else {
 						if(!idReg.test(userId)){
 							// 0 : 아이디 길이 / 문자열 검사
 							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다.");
-							$('#id_check').css('color', 'red');
+							$('#id_check').css('color', '#ff6863');
 							$("#signUp").attr("disabled", false);
 						} else if(userId == ""){
 							$('#id_check').text('아이디를 입력해주세요.');
-							$('#id_check').css('color', 'red');
+							$('#id_check').css('color', '#ff6863');
 							$("#signUp").attr("disabled", true);				
 						} else{
 							$('#id_check').text('사용가능한 아이디입니다.');
-							$('#id_check').css('color', 'green');
+							$('#id_check').css('color', '#669999');
 							$("#signUp").attr("disabled", false);
 						}
 					}
@@ -129,20 +129,20 @@ $(function() {
 									<hr>
 
 									<div class="form-group">
-										<label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
+										<label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="id_check"></span></label>
 										<input type="text" class="form-control" name="userId"
 											id="userId" required="required">
-										<div id="id_check"></div>
+										
 									</div>
 									<div class="form-group">
 										<label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>
 										<input type="password" class="form-control" name="userPwd"
-											id="userPwd" required="required" placeholder="영문+숫자 7자 이상">
+											id="userPwd" required="required">
 									</div>
 									<div class="form-group">
 										<label>비밀번호 확인 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 										<input type="password" class="form-control" name="pwdCheck"
-											id="pwdCheck" required="required" placeholder="영문+숫자 7자 이상">
+											id="pwdCheck" required="required">
 									</div>
 									<div class="form-group">
 										<label>이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
