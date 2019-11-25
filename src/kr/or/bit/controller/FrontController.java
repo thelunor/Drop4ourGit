@@ -58,7 +58,6 @@ import kr.or.bit.service.SelectAllContractsService;
 import kr.or.bit.service.SelectAtpListService;
 import kr.or.bit.service.SelectGenericUserService;
 import kr.or.bit.service.SelectREAUserService;
-import kr.or.bit.service.SelectReviewService;
 import kr.or.bit.service.UpdateBlackService;
 import kr.or.bit.service.UpdateContractService;
 import kr.or.bit.service.UpdateGenericUserService;
@@ -265,6 +264,13 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (url_Command.equals("/GetReviewListServiceOk.d4b")) {
+			try {
+				forward = new ActionForward();
+				forward.setPath("/REAIntro.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (url_Command.equals("/GetSaleDataService.d4b")) {
 			try {
 				action = new GetSaleDataService(); //
@@ -439,22 +445,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/SelectReviewService.d4b")) { // 중개사 후기글 목록보기
-			try {
-				action = new SelectReviewService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/SelectReviewOk.d4b")) { // 중개사 후기글 목록보기
-			try {
-				forward = new ActionForward();
-				forward.setRedirect(false);
-				forward.setPath("/REAIntro.jsp");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 		// update========================================
 		else if (url_Command.equals("/UpdateBlackService.d4b")) {
 			try {

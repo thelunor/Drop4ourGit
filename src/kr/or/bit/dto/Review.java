@@ -2,9 +2,9 @@ package kr.or.bit.dto;
 
 import java.util.Date;
 
-public class Review {					//후기 DTO
+public class Review {				//후기 DTO
 	private int reviewNum;			//후기 번호
-	private String userId;			    //후기 작성자 아이디
+	private String userId;			//후기 작성자 아이디
 	private String reviewContent;	//후기 내용
 	private Date reviewDate;		//후기 작성 시간
 	private String reaId;			//공인중개사 아이디

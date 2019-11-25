@@ -139,7 +139,6 @@
 						<div class="col-md-9" style="margin-left: 240px;">
 							<div style="margin-left: 80px;">
 								<!-- 첫 소개 글머리 -->
-								<div>
 									<section>
 										<div style="margin-bottom: 32px;">
 											<div>
@@ -154,10 +153,8 @@
 											</div>
 										</div>
 									</section>
-								</div>
 								
 								<!-- 두 번째 소개 -->
-								<div>
 									<section>
 										<div style="width: 40px; height: 40px; margin-top: 10px; margin-bottom: 10px;">
 											<img alt="house" src="./images/house.png">
@@ -169,10 +166,8 @@
 									<div style="margin-top: 20px; margin-bottom: 20px;">
 										<hr>
 									</div>
-								</div>
 								
 								<!-- 세 번째 매물 -->
-								<div>
 									<section>
 										<div class="container-fluid">
 											<div class="col-lg-12 text-center" style="background-color: #cccccc;">
@@ -217,14 +212,14 @@
 									<div style="margin-top: 20px; margin-bottom: 20px;">
 										<hr>
 									</div>
-								</div>
 								
 								<!-- 네 번째 후기 -->
 								<div>
 									<jsp:include page="./WEB-INF/include/ReviewList.jsp" />
 								</div>
-						<!-- Right End -->
-						
+								<!-- Right End -->
+							</div>	
+						</div>
 					</div>
 				</div>
 			</div>
@@ -239,36 +234,6 @@
 	
 	<!-- JS includes -->
 	<jsp:include page="js/js.jsp" />
-	<c:set var="review" value="<%=review%>"></c:set>
-	<script type="text/javascript">
-		$(function() {
-			$('#insert_review').click(function() {
-				var frm = document.review;
-
-					$.ajax({
-						url: 'SelectReview', // kr.or.bit.ajax
-						type: 'post',
-						dataType: 'json',
-						success: function(data) {
-							console.log(data);
-							$.each(data, function(index, element) {
-								var rv = "";
-									rv += "<tr>";
-									rv += "<td align='left' width='70%'>" + element.review_date + "</td>";
-									rv += "<td align='right'>" + element.review_writer + "</td>";
-									rv += "<td colspan='2' style='border: 1px solid #d2d0d0; height: 120px;'>" + element.review_content + "</td>";
-									rv += "<tr>";
-									
-									$('#review_table').append(rv);
-							})
-						}
-						
-					})
-					
-					frm.submit();
-			})
-		})
-	</script>
 
 </body>
 </html>

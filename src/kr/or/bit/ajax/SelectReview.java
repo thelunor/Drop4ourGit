@@ -42,7 +42,7 @@ public class SelectReview extends HttpServlet {
     		out.print(jsonlist);
     		
     	} catch (Exception e) {
-    		System.out.println("review ajax 예외발생");
+    		System.out.println("Review ajax 예외발생");
 			System.out.println(e.getMessage());
 		}
     }

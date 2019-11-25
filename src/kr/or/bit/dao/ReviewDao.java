@@ -34,13 +34,13 @@ public class ReviewDao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "INSERT INTO REVIEW (REVIEWNUM, USERID, REVIEWCONTENT, REVIEWDATE, REAID)" + 
-						" VALUES (SEQ_REVIEW.NEXTVAL, (SELECT USERID FROM GENERICUSER WHERE USERID=?), ?, ?, "
-						+ "SELECT REAID FROM REAUSER WHERE REAID=?)";
+			String sql = "INSERT INTO REVIEW (REVIEWNUM, USERID, REVIEWCONTENT, REVIEWDATE, REAID)" 
+						+ " VALUES (SEQ_REVIEW.NEXTVAL, (SELECT USERID FROM GENERICUSER WHERE USERID=?), ?, ?, "
+						+ " SELECT REAID FROM REAUSER WHERE REAID=?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, review.getUserId());
 			pstmt.setString(2, review.getReviewContent());
-			pstmt.setDate(3,(Date) review.getReviewDate());
+			pstmt.setDate(3, (Date) review.getReviewDate());
 			pstmt.setString(4, review.getReaid());
 			
 			row = pstmt.executeUpdate();
@@ -52,11 +52,10 @@ public class ReviewDao {
 				pstmt.close();
 				conn.close();
 			} catch (Exception e) {
-				System.out.println("review dao 예외발생2");
+				System.out.println("리뷰등록 dao 예외발생2");
 				System.out.println(e.getMessage());
 			}
 		}
-		
 		return row;
 	}
 
@@ -79,8 +78,8 @@ public class ReviewDao {
 			
 			rvlist = new ArrayList<Review>();
 			while (rs.next()) {
-				int reviewNum = rs.getInt("reviewnum");
-				String userId = rs.getString("review_writer");
+				int reviewNum = rs.getInt("reviewNum");
+				String userId = rs.getString("userId");
 				String reviewContent = rs.getString("reviewContent");
 				java.sql.Date reviewDate = rs.getDate("reviewDate");
 				String reaId = rs.getString("reaId");
@@ -89,7 +88,7 @@ public class ReviewDao {
 				rvlist.add(reviewdto);
 			}
 		} catch (Exception e) {
-			System.out.println("review dao 예외발생");
+			System.out.println("ReviewList dao 예외발생");
 			System.out.println(e.getMessage());
 		} finally {
 			DB_Close.close(rs);
@@ -98,7 +97,7 @@ public class ReviewDao {
 			try {
 				conn.close();
 			} catch (Exception e) {
-				System.out.println("listreview dao 예외");
+				System.out.println("ReviewList dao 예외발생2");
 				System.out.println(e.getMessage());
 			}
 		}

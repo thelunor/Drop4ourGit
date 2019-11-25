@@ -25,20 +25,15 @@
 	<jsp:include page="../../css/css.jsp" />
 	
 <%
-	List<Review> review = (ArrayList<Review>) request.getAttribute("rvList");
+	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
+	String reaId = (String) request.getAttribute("reaId");
 %>
-	
-<script>
-	$(function() {
-		$('#insert_review').click(function() {
-			
-		})
-	})
-</script>
+	<script type="text/javascript">
+		console.log(reviewList);
+	</script>
+<c:set var="reviewList" value="<%=reviewList%>"></c:set>
 
-<c:set var="reviewList" value="<%=review%>"></c:set>
-
-<section id="id" class="about roomy-100">
+<section id="id" class="about">
 	<div class="container">
 		<div class="about_content">
 			<div class="container-fluid">
@@ -48,22 +43,22 @@
 				<div class="card-body">
 					<div class="table-responsive">
 						
-						<form name="review" action="" method="post">
+						<form action="SelectReviewService.d4b" method="post">
 							<table class="table table-bordered" id="dataTable"
 								style="text-align: center; margin: auto; width: 100%; border: none;">
 			                    <tr>
 			                        <td style="padding: 0;"><div align="left" style="padding-left: 10px;">날짜:&nbsp;
-			                        	<input type="text" id="review_date" name="review_date" placeholder="날짜입력" 
+			                        	<input type="text" id="reviewDate" name="reviewDate" placeholder="날짜입력" 
 			                        		style="border: 1px solid #d2d0d0; display: inline; width: 50%; padding: 0;">
 										<input type="hidden" id="reviewNum" name="reviewNum" value=""></div></td>
 			                       	<td style="padding: 0;"><div align="right" style="padding-right: 10px;">작성자:&nbsp;
-			                       		<input type="text" id="review_writer" name="review_writer" placeholder="작성자아이디" 
+			                       		<input type="text" id="userId" name="userId" placeholder="작성자아이디" 
 			                       			style="border: 1px solid #d2d0d0; display: inline; width: 50%; padding: 0;">
 			                       		<input type="hidden" id="reaId" name="reaId" value=""></div></td>
 			                    </tr>
 			                    <tr>
 			                    	<td colspan="4" align="left">
-			                    		<textarea id="summernote" name="review_content" class="ckeditor"
+			                    		<textarea id="reviewContent" name="reviewContent" class="ckeditor"
 											rows="5" style="resize: none; width: 100%; border: 1px solid #d2d0d0;"></textarea>
 									<div align="right">
 			                    		<input type="button" id="insert_review" name="insert_review"  
@@ -76,42 +71,23 @@
 						<div style="margin-top: 20px; margin-bottom: 20px;">
 							<hr>
 						</div>
-						<table style="width: 100%;">
-							<tr>
-								<td align="left" width="70%">
-									<span>2019.01.01.</span>
-								</td>
-								<td align="right">
-									작성자: <span>김김김</span>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" style="border: 1px solid #d2d0d0; height: 120px;">
-									방은 좋고
-								</td>
-							</tr>
-						</table>
-						<div style="margin-top: 20px; margin-bottom: 20px;">
-							<hr>
-						</div>
-						<table style="width: 100%;">
-							<tr>
-								<td align="left">
-									<span>2019.01.01.</span>
-								</td>
-								<td align="right">
-									작성자: <span>김김김</span>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" style="border: 1px solid #d2d0d0; height: 120px;">
-									방은 좋고
-								</td>
-							</tr>
-						</table>
-						<div style="margin-top: 20px; margin-bottom: 20px;">
-							<hr>
-						</div>
+						<c:forEach var="reviewTable" items="<%=reviewList%>" varStatus="status">
+							<table style="width: 100%;">
+								<tr>
+									<td align="left" width="70%">
+										<span>${reviewTable.reviewDate}</span></td>
+									<td align="right">
+										작성자: <span>${reviewTable.userId}</span></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="border: 1px solid #d2d0d0; height: 120px;">
+										${reviewTable.reviewContent}</td>
+								</tr>
+							</table>
+							<div style="margin-top: 20px; margin-bottom: 20px;">
+								<hr>
+							</div>
+						</c:forEach>
 						
 						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
 						<c:if test="${cpage>1}">
@@ -140,6 +116,25 @@
 
 <!-- scroll up-->
 <jsp:include page="./ScrollUp.jsp"></jsp:include>
-	
+
+<script type="text/javascript">
+	$(function() {
+		$('#insert_review').click(function() {
+			var reaId = <%=reaId%>;
+			$.ajax({
+				url: 'InsertReviewService.d4b?reaId=' + reaId,
+				type: 'post',
+				dataType: 'json',
+				success: function() {
+					
+				}
+			})
+		})
+	})
+</script>
+
+
+
+
 	
 	
