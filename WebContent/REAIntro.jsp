@@ -8,7 +8,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
-	REAImage reaImg = (REAImage) request.getAttribute("reaImg");	
+	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
+	
 %>
 <<c:set var="reaUserData" value="<%=reaUser %>"/>
 <<c:set var="reaImgData" value="<%=reaImg %>"/>

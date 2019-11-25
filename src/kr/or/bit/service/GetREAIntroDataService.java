@@ -26,7 +26,7 @@ public class GetREAIntroDataService implements Action {
 		REAUserDao readao = null;
 		REAImageDao imgdao = null;
 		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("reaUserId");
+		String reaId = (String) session.getAttribute("reaUserId");											
 		List<Review> rvList = null;
 		ReviewDao rvdao = null;
 		

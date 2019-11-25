@@ -27,6 +27,7 @@ public class SaleDao2 {
 		ds = (DataSource) context.lookup("java:comp/env/jdbc/oracle");
 	}
 
+	
 	public int insertSale(Sale sale) { // 매물 넣기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -68,6 +69,113 @@ public class SaleDao2 {
 			}
 		}
 		return resultRow;
+	} 
+	
+	/*
+	
+	public Map<String, List<SaleImage>> selectAptList(String addr){ //주소로 map 객체 만들기
+		//1. String 배열에 매물 번호 넣기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String[] a = String[] {3};
+		List<String> aptNum = new ArrayList<String>(); //addr로 aptNum 찾기
+		List<SaleImage> saleImgList = new ArrayList<SaleImage>();
+		try {
+			conn = ds.getConnection();
+			String sql_select_aptNum = "select s.aptnum, i.saleimgsavename from sale s join saleimage i on (s.aptNum=i.aptNum) where addr like ?";
+			pstmt = conn.prepareStatement(sql_select_aptNum);
+			pstmt.setString(1, "%"+addr+"%");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				SaleImage saleImg = new SaleImage();
+				
+				aptNum.add(rs.getString(1));
+				saleImg.setSaleImgSaveName(rs.getString(2));
+				saleImgList.add(saleImg);
+			}
+		
+			
+			
+		}catch(Exception e) {
+			
+		}finally {
+			
+		}
+		
+		//2. List에 sale 넣기
+		return null;
+	}
+	*/
+	
+	public Map<List<String>, List<SaleImage>> selectAptImgList(String addr, String aptNum){ //주소로 map 객체 만들기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Map<List<String>, List<SaleImage>> mapList = new Map<List<String>, List<SaleImage>>();
+		List<SaleImage> saleImgList = new ArrayList<SaleImage>();
+		String inputAptNum = "";
+		try {
+			conn = ds.getConnection();
+			String sql_select_aptNum = "select s.aptnum, i.saleimgsavename from sale s join saleimage i on (s.aptNum=i.aptNum) where addr like ? and s.aptNum=?";
+			pstmt = conn.prepareStatement(sql_select_aptNum);
+			pstmt.setString(1, "%"+addr+"%");
+			pstmt.setString(2, aptNum);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				SaleImage saleImg = new SaleImage();
+				inputAptNum = rs.getString(1);//매물 번호 KEY값으로 저장
+				saleImg.setSaleImgSaveName(rs.getString(2));
+				saleImgList.add(saleImg);				
+				mapList.put(rs.getString(1), saleImgList);
+			}
+			System.out.println(mapList.containsKey(inputAptNum));
+			System.out.println(mapList.get(inputAptNum));
+				
+		}catch(Exception e) {
+			
+		}finally {
+			
+		}
+		
+		//2. List에 sale 넣기
+		return null;
+	}
+	
+	public List<String> getAptNumByAddr(String addr) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<String> aptNumList = new ArrayList<String>();
+		String aptNum="";
+		try {
+			conn = ds.getConnection();
+			String sql = "select aptNum from sale where addr like ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+addr+"%");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				aptNum = rs.getString("aptNum");
+				aptNumList.add(aptNum);
+			}
+			System.out.println("매물 번호1"+aptNumList.get(0));
+			System.out.println("매물 번호2"+aptNumList.get(1));
+
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return aptNumList;
 	}
 	
 	public Sale getSaleDataByAptNum(String aptNum) { // 매물 한개 읽기 (매물 번호로)
