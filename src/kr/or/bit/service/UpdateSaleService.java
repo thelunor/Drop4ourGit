@@ -44,6 +44,7 @@ public class UpdateSaleService implements Action {
 		String etc = request.getParameter("etc");
 		String isContract = request.getParameter("isContract");
 		String aptNum = request.getParameter("aptNum"); // aptNum받아오기
+		System.out.println("매물 번호"+aptNum);
 		HttpSession session = request.getSession();
 		String reaId = (String) session.getAttribute("reaUserId");
 
@@ -66,16 +67,15 @@ public class UpdateSaleService implements Action {
 			SaleDao2 dao = new SaleDao2();
 			
 			result = dao.updateSale(sale);
-			System.out.println("result : " + result);
 						
 			if (result > 0) {
-				forward.setPath("GetREAUserByIdService.d4b?"+reaId);
+				forward.setPath("GetSaleImgService.d4b?aptNum="+aptNum);
 			} else {
 				forward.setPath("Main.jsp");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println("insertSaleService 실패");
+			System.out.println("updateSaleService 실패");
 		}
 
 		return forward;

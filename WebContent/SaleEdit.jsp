@@ -88,7 +88,7 @@ form-control {
 							</div>
 						</div>
 					</div>
-					<form action="UpdateSaleService.d4b" id="saleForm">
+					<form action="UpdateSaleService.d4b" id="saleForm" method="post">
 						<div class="row">
 							<div class="col-md-3"></div>
 							<div class="col-md-6">
@@ -169,10 +169,7 @@ form-control {
 									</p>
 								</div>
 								<input type="hidden" id="isContract" name="isContract" value="무">
-								<input type="hidden" id="dbAptSize" value="${saleData.aptSize }">
-								<input type="hidden" id="dbType" value="${saleData.type}">
-								<input type="hidden" id="dbDirection" value="${saleData.direction}">
-									
+								<input type="hidden" id="aptNum" name="aptNum" value="${saleData.aptNum}">
 									
 									<br><br>
 								<div class="form-group">
@@ -180,7 +177,7 @@ form-control {
 										<div class="col-sm-4">
 										</div>
 										<div class="col-sm-4">
-											<button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='GetSaleImgService.d4b?aptNum=<%=aptNum%>'">Next</button>
+											<button type="submit" class="btn btn-primary btn-block btn-lg">Next</button>
 										</div>
 										<div class="col-sm-4">
 										</div>
