@@ -18,7 +18,6 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d0c0a21e3bf46994d7f7a41d9cc729f&libraries=services"></script>
 
 <jsp:include page="./css/css.jsp"></jsp:include>
-<jsp:include page="ValidationCheck.jsp"></jsp:include>
 
 
 <style type="text/css">
@@ -197,18 +196,16 @@ $(function() {
 									</div>
 									<input type="hidden" id="userCode" name="userCode" value="U02">
 
-									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6">
-												<button type="submit"
-													class="btn btn-primary btn-block btn-lg" id="signUp">Sign Up</button>
+												<input type="submit"
+													class="btn btn-primary btn-block btn-lg" id="signUp">Sign Up
 											</div>
 											<div class="col-sm-6">
 												<button type="reset"
 													class="btn btn-primary btn-block btn-lg">Cancel</button>
 											</div>
 										</div>
-									</div>
 									<br> <br>
 									<div class="text-center">
 										이미 회원이신가요? <a href="Login_form.jsp">Click here</a>

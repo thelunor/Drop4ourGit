@@ -19,8 +19,6 @@
 
 <jsp:include page="./css/css.jsp"></jsp:include>
 
-<jsp:include page="ValidationCheck.jsp"></jsp:include>
-
 <style type="text/css">
 h2 {
 	font-family: 'Jua', sans-serif;
