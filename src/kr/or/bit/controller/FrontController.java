@@ -26,6 +26,7 @@ import kr.or.bit.service.GetBookMarkService;
 import kr.or.bit.service.GetContractService;
 import kr.or.bit.service.GetGenericUserByIdService;
 import kr.or.bit.service.GetGenericUserByResService;
+import kr.or.bit.service.GetGenericUserMypageService;
 import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroDataService;
 import kr.or.bit.service.GetREAMypageService;
@@ -178,6 +179,14 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (url_Command.equals("/GetGenericUserMypageService.d4b")) {
+			try {
+				action = new GetGenericUserMypageService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		} else if (url_Command.equals("/GetGenericUserByIdService.d4b")) {
 			try {
 				action = new GetGenericUserByIdService(); //
@@ -426,7 +435,7 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/SelectAptListServiceOk.d4b")) { // 아파트 목록보기
 			try {
 				forward = new ActionForward();
-				forward.setPath("/SaleListMain.jsp");
+				forward.setPath("/HouseListMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
