@@ -126,9 +126,9 @@ h2 {
 										value="주소 검색">
 										</label>
 										<input type="text" class="form-control" name="addr" id="addr"
-											required="required" placeholder="지번 주소"> 
+											required="required" placeholder="지번 주소" style="width: 95%"> 
 										<input type="text" class="form-control" name="roadAddr" id="roadAddr"
-											required="required" placeholder="도로명 주소">
+											required="required" placeholder="도로명 주소" style="width: 95%">
 									</div>
 									</div>																
 								</div>
