@@ -6,6 +6,7 @@
 	genericUserId = (String) session.getAttribute("genericUserId");
 	reaId = (String) session.getAttribute("reaId");
 	type = (String) request.getAttribute("type");
+	System.out.println(type);
  %>
 <!-- Start Atribute Navigation -->
 <div class="container">
