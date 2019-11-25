@@ -167,30 +167,42 @@ text-align: center;
 	}; 
 	
 	$(function(){
-		$("#submitBtn").click(function(){
-			var form = $("#myForm")[0];
-		 	var formData = new FormData(form);
-		 	var aptNum=<%=aptNum%>;
-		 	
-		 	//console.log('InsertSaleImgService.d4b?aptnum='+aptNum);
-		 	$.ajax({
-		 		url : 'InsertSaleImgService.d4b?aptNum='+aptNum,
-		 		enctype : "multipart/form-data",
-		 		type : 'post',
-		 		data : formData,
-		 		dataType:'html',
-		 		contentType : false,
-		 		processData : false,
-		 		success:function(data){
-		 			//console.log(data);
-		 			$("#imgUpload").empty();
-		 			$("#imgUpload").append(data);
-		 		}
-		 	});
+		$("#submitBtn").click(function(event){
+			
+			if( $("#getfile1").val()=="" || $("#getfile2").val()=="" || $("#getfile3").val()==""){
+				alert("매물 사진을 등록해주세요");
+				e.preventdefault();
+			} else {
+				var form = $("#myForm")[0];
+			 	var formData = new FormData(form);
+			 	var aptNum=<%=aptNum%>;
+			 	
+			 	//console.log('InsertSaleImgService.d4b?aptnum='+aptNum);
+			 	$.ajax({
+			 		url : 'InsertSaleImgService.d4b?aptNum='+aptNum,
+			 		enctype : "multipart/form-data",
+			 		type : 'post',
+			 		data : formData,
+			 		dataType:'html',
+			 		contentType : false,
+			 		processData : false,
+			 		success:function(data){
+			 			//console.log(data);
+			 			$("#imgUpload").empty();
+			 			$("#imgUpload").append(data);
+			 		}
+			 	});
+			}
+			
+			
 		});
 			
 		
+		
+		
+		
 		});
+	
 		 	
 	</script>
 
