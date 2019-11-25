@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <div class="form-group">
-	<label class="fancy-checkbox"><input type="checkbox" name="check">&nbsp;위치정보 이용약관 동의<span>(필수)</span></label>
+	<label class="fancy-checkbox"><input type="checkbox" name="check" id="check">&nbsp;위치정보 이용약관 동의<span>(필수)</span></label>
 	<p>
 		<textarea cols="73" rows="5">위치정보 이용약관에 동의하시면, 위치를 활용한 광고 정보 수신 등을 포함하는 맞집 위치기반 서비스를 이용할 수 있습니다.
 		

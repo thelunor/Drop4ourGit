@@ -106,7 +106,9 @@ function checkAll(){
     <!-- JS includes -->
     <jsp:include page="./js/js.jsp"></jsp:include>
 
+<script>
 
+</script>
 </body>
 
 </html>
