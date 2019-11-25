@@ -46,7 +46,7 @@
 					<h3 class="h3 mb-2 text-gray-800">회원 관리</h3>
 					<div class="row">
 						<div class="col-md-12">
-							<jsp:include page="./UserList.jsp" />
+							<jsp:include page="./WEB-INF/include/UserList.jsp" />
 						</div>
 					</div>
 				</div>

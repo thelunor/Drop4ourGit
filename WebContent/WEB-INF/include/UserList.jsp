@@ -245,6 +245,6 @@
 </section>
 <!-- The Modal -->
 <!-- scroll up-->
-<jsp:include page="WEB-INF/include/ScrollUp.jsp"></jsp:include>
+<jsp:include page="./ScrollUp.jsp"></jsp:include>
 
 
