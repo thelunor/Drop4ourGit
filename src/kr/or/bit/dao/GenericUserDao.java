@@ -38,7 +38,6 @@ public class GenericUserDao {
 			pstmt.setString(2, userPwd);
 			rs = pstmt.executeQuery();
 			System.out.println("GenericRS 호출 ****");
-			System.out.println(rs.getString("userCode"));
 			if (rs.next()) {
 				if (rs.getString("userCode").equals("B01")) {
 					userType = "B01";
@@ -57,7 +56,7 @@ public class GenericUserDao {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				System.out.println("update 예외");
+				System.out.println("GenericUserLogin 예외");
 			}
 
 		}

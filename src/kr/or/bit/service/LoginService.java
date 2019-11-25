@@ -28,6 +28,7 @@ public class LoginService implements Action {
 			String rResult = null;
 
 			if (aDao.adminLogin(id, pwd)) { // 관리자 로그인 성공 시
+				System.out.println(aDao.adminLogin(id, pwd));
 				forward.setPath("Main.jsp");
 				session.setAttribute("adminId", id);
 				return forward;
