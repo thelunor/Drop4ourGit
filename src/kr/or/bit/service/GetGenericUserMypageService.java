@@ -25,10 +25,12 @@ public class GetGenericUserMypageService implements Action {
 			forward = new ActionForward();
 			dao = new GenericUserDao();
 			user = dao.getGenericMypage(genericUserId);
+			String type=user.getUserCode();
 			
 			if (user != null) {
 				System.out.println("일반 회원 정보 조회 성공");
 				request.setAttribute("genericUser", user);
+				request.setAttribute("type",type);
 				forward.setPath("GenericUserEdit.jsp");
 			} else {
 				System.out.println("조회 실패");
