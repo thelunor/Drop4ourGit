@@ -198,7 +198,6 @@ public class SaleDao2 {
 				sale.setPrice(Integer.parseInt(rs.getString("price"))); //매매가
 				sale.setIsContract(rs.getString("isContract"));
 				saleList.add(sale);
-				System.out.println("saleDao2 완료");
 			}
 		}catch(Exception e) {
 			
@@ -254,7 +253,7 @@ public class SaleDao2 {
 		return resultRow;
 	}
 
-	public int deleteSale(String aptNum) { // 매물 삭제(매물 번호로)
+	public int deleteSale(String aptNum) { // 매물 삭제(매물 번호로) 1125월/알파카
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int resultRow = 0;
@@ -262,19 +261,25 @@ public class SaleDao2 {
 			conn = ds.getConnection();
 			conn.setAutoCommit(false);
 			
-			String sql_delete_sale = "delete from sale where aptnum=?";
 			String sql_delete_saleImg = "delete from saleImage where aptnum=?";
-			
-			pstmt = conn.prepareStatement(sql_delete_sale);
-			pstmt.setString(1, aptNum);
-			resultRow = pstmt.executeUpdate();
+			String sql_delete_sale = "delete from sale where aptnum=?";
 			
 			pstmt = conn.prepareStatement(sql_delete_saleImg);
 			pstmt.setString(1, aptNum);
 			resultRow = pstmt.executeUpdate();
+			System.out.println("resultRow 1 "+resultRow);
+						
+			pstmt = conn.prepareStatement(sql_delete_sale);
+			pstmt.setString(1, aptNum);
+			resultRow = pstmt.executeUpdate();
+			System.out.println("resultRow 2 "+resultRow);
+
+
 			
 			if(resultRow>0) {
 				conn.commit();
+				System.out.println("매물 삭제 완료");
+
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
