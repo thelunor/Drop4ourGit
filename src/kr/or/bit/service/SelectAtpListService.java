@@ -24,8 +24,16 @@ public class SelectAtpListService implements Action{
 		try {
 			SaleDao dao = new SaleDao();
 			saleList = dao.selectAtpList(search);
-			request.setAttribute("saleList", saleList);
-			request.setAttribute("search", search);
+			if(saleList!=null) {
+				System.out.println("saleList!=null");
+				request.setAttribute("saleList", saleList);
+				request.setAttribute("search", search);
+			} else {
+				System.out.println("saleList!=null 가 아니란 말이오~");
+				request.setAttribute("saleList", saleList);
+				request.setAttribute("search", "법정구 법정동");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

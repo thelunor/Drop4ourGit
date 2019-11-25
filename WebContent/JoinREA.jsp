@@ -198,8 +198,8 @@ $(function() {
 
 										<div class="row">
 											<div class="col-sm-6">
-												<input type="submit"
-													class="btn btn-primary btn-block btn-lg" id="signUp">Sign Up
+												<button type="submit"
+													class="btn btn-primary btn-block btn-lg" id="signUp">Sign Up</button> 
 											</div>
 											<div class="col-sm-6">
 												<button type="reset"
