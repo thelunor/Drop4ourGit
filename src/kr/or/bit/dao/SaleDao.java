@@ -43,21 +43,21 @@ public class SaleDao {
 //			System.out.println("maxNum: 맥스넘~ " + maxNum);
 			
 					
-			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, roadAddr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" + 
-								" values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
+            String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, roadAddr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" +  
+                    " values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
 			pstmt = conn.prepareStatement(sql_insert_sale);
 			pstmt.setString(1, sale.getAptSize());
 			pstmt.setString(2, sale.getType());
 			pstmt.setString(3, sale.getAddr());
-			pstmt.setString(4, sale.getRoadAddr());
-			pstmt.setString(5, sale.getAptName());
-			pstmt.setString(6, sale.getAptDong());
-			pstmt.setString(7, sale.getAptHo());
-			pstmt.setString(8, sale.getPrice());
-			pstmt.setString(9, sale.getDirection());
-			pstmt.setString(10, sale.getEtc());
-			pstmt.setString(11, sale.getIsContract());
-			pstmt.setString(12, sale.getId());
+            pstmt.setString(4, sale.getRoadAddr());
+            pstmt.setString(5, sale.getAptName());
+            pstmt.setString(6, sale.getAptDong());
+            pstmt.setString(7, sale.getAptHo());
+            pstmt.setString(8, sale.getPrice());
+            pstmt.setString(9, sale.getDirection());
+            pstmt.setString(10, sale.getEtc());
+            pstmt.setString(11, sale.getIsContract());
+            pstmt.setString(12, sale.getId());
 			resultRow = pstmt.executeUpdate();
 			
 			
