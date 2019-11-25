@@ -26,7 +26,8 @@ import kr.or.bit.service.GetBookMarkService;
 import kr.or.bit.service.GetContractService;
 import kr.or.bit.service.GetGenericUserByIdService;
 import kr.or.bit.service.GetGenericUserByResService;
-import kr.or.bit.service.GetGenericUserMypageService;
+import kr.or.bit.service.GetGenericUserMypageMainService;
+import kr.or.bit.service.GetGenericUserEditService;
 import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroDataService;
 import kr.or.bit.service.GetREAMypageService;
@@ -178,9 +179,17 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/GetGenericUserMypageService.d4b")) {
+		} else if (url_Command.equals("/GetGenericUserEditService.d4b")) {
 			try {
-				action = new GetGenericUserMypageService(); //
+				action = new GetGenericUserEditService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else if(url_Command.equals("/GetGenericUserMypageMainService.d4b")) {
+			try {
+				action = new GetGenericUserMypageMainService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

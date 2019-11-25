@@ -2,6 +2,7 @@ package kr.or.bit.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
@@ -14,6 +15,9 @@ public class UpdateGenericUserService implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
+		HttpSession session = request.getSession();
+		String genericUserId = (String)session.getAttribute("genericUserId");
+
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		String userName = request.getParameter("userName");
@@ -40,10 +44,13 @@ public class UpdateGenericUserService implements Action {
 			//3. DB 저장
 			GenericUserDao dao = new GenericUserDao();
 			int result = dao.updateGenericUser(user);
+			String type = user.getUserCode();
 			if(result > 0) {
-				forward.setPath("MypageMain.jsp");
+				request.setAttribute("type",type);
+				forward.setPath("GenericUserEditOk.jsp");
+				System.out.println("db 수정완료");
 			}else {
-				forward.setPath("GenericUserEdit.jsp");
+				forward.setPath("GetGenericUserMypageMainService.d4b?genericUserId="+genericUserId);
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

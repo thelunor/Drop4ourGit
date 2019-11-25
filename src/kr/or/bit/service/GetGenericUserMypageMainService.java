@@ -7,11 +7,9 @@ import javax.servlet.http.HttpSession;
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.GenericUserDao;
-import kr.or.bit.dao.REAImageDao;
-import kr.or.bit.dao.REAUserDao;
 import kr.or.bit.dto.GenericUser;
 
-public class GetGenericUserMypageService implements Action {
+public class GetGenericUserMypageMainService implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -28,13 +26,13 @@ public class GetGenericUserMypageService implements Action {
 			String type=user.getUserCode();
 			
 			if (user != null) {
-				System.out.println("일반 회원 정보 조회 성공");
+				System.out.println("일반 회원 마이페이지 페이지!!!!");
 				request.setAttribute("genericUser", user);
 				request.setAttribute("type",type);
-				forward.setPath("GenericUserEdit.jsp");
+				forward.setPath("MypageMain.jsp");
 			} else {
 				System.out.println("조회 실패");
-				forward.setPath("MypageMain.jsp");
+				forward.setPath("Main.jsp");
 			}
 		} catch (Exception e) {
 

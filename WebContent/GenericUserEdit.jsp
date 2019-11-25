@@ -11,7 +11,7 @@
 	GenericUser genericUser = (GenericUser)request.getAttribute("genericUser");
 	
 %>
-<c:set var="userData" value="<%=genericUser%>"></c:set>
+<c:set var="userData" value="<%=genericUser%>"/>
 
 <head>
 <meta charset="utf-8">
@@ -27,7 +27,6 @@
 
 <jsp:include page="./css/css.jsp"></jsp:include>
 
-<jsp:include page="ValidationCheck.jsp"></jsp:include>
 
 <style type="text/css">
 h2 {
@@ -131,8 +130,8 @@ img.avatar {
 										<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 										<div class="row">&nbsp;&nbsp;&nbsp;&nbsp;
 										<input type="text" class="form-control" name="userAddr" id="userAddr"
-											required="required" placeholder="주소" style="width:72%;"> &nbsp;&nbsp;
-											<input type="button" onclick="searchAddr()" value="주소 검색" value="${userData.userAddr}"><br><br>
+											required="required" placeholder="주소" style="width:72%;"  value="${userData.userAddr}"> &nbsp;&nbsp;
+											<input type="button" onclick="searchAddr()" value="주소 검색"><br><br>
 										</div>
 										<input type="text" class="form-control" name="userDetailAddr" id="userDetailAddr"
 											required="required" placeholder="상세주소" style="width:77%;" value="${userData.userDetailAddr}"><br>
@@ -149,7 +148,7 @@ img.avatar {
 											</div>
 											<div class="col-sm-6">
 												<button type="reset"
-													class="btn btn-primary btn-block btn-lg" onclick="location.href='MypageMain.jsp'">취소</button>
+													class="btn btn-primary btn-block btn-lg" onclick="location.href='GetGenericUserMypageMainService.d4b?genericUserId=${userData.userId}'">취소</button>
 											</div>
 										</div>
 									</div>

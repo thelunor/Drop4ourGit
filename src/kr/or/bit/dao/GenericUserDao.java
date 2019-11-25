@@ -64,12 +64,11 @@ public class GenericUserDao {
 	public int updateGenericUser(GenericUser user) { // 일반회원 수정
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			String sql_update_genericUser = "update GENERICUSER set userpwd=?, username=?, userphonenum=?,"
-					+ "useraddr=?, userdetailAddr=? where userid=?";
+			String sql_update_genericUser = "update GENERICUSER set userpwd=?, username=?, userphonenum=?, userAddr=?, userdetailAddr=?"
+					+ " where userid=?";
 
 			pstmt = conn.prepareStatement(sql_update_genericUser);
 			pstmt.setString(1, user.getUserPwd());
@@ -82,9 +81,15 @@ public class GenericUserDao {
 			resultRow = pstmt.executeUpdate();
 
 		} catch (Exception e) {
-
+			System.out.println(e.getMessage());
+			System.out.println("user update 실패");
 		} finally {
-
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return resultRow;
 	}
@@ -136,6 +141,7 @@ public class GenericUserDao {
 			pstmt.setString(1, genericUserId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
+				System.out.println("다오 가져오기 성공");
 				user = new GenericUser();
 				user.setUserId(rs.getString("userid"));
 				user.setUserPwd(rs.getString("userpwd"));
@@ -146,8 +152,8 @@ public class GenericUserDao {
 				user.setUserAddr(rs.getString("useraddr"));
 				user.setUserDetailAddr(rs.getString("userDetailAddr"));
 				user.setUserCode(rs.getString("userCode"));
+				System.out.println("DB에서 온 정보");
 			}
-			System.out.println("DB USER 정보" + user.toString());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("genericuserdao 오류");
