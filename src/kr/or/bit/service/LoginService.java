@@ -29,8 +29,9 @@ public class LoginService implements Action {
 
 			if (aDao.adminLogin(id, pwd)) { // 관리자 로그인 성공 시
 				System.out.println(aDao.adminLogin(id, pwd));
-				forward.setPath("Main.jsp");
+				forward.setPath("UserMain.jsp");
 				session.setAttribute("adminId", id);
+				request.setAttribute("type", "A00");
 				return forward;
 			}
 			gResult = gDao.GenericUserLogin(id, pwd);
