@@ -35,6 +35,7 @@ public class InsertSaleService implements Action {
 		}
 
 		String addr = request.getParameter("addr");
+		String roadAddr = request.getParameter("roadAddr");
 		String aptName = request.getParameter("aptName");
 		String aptDong = request.getParameter("aptDong");
 		String aptHo = request.getParameter("aptHo");
@@ -54,6 +55,7 @@ public class InsertSaleService implements Action {
 		sale.setAptSize(aptSize);
 		sale.setType(type);
 		sale.setAddr(addr);
+		sale.setRoadAddr(roadAddr);
 		sale.setAptName(aptName);
 		sale.setAptDong(aptDong);
 		sale.setAptHo(aptHo);
