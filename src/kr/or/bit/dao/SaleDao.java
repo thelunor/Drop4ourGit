@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -275,21 +273,18 @@ public class SaleDao {
 		return resultRow;
 	}
 	
-	public Map<Sale, List<SaleImage>> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
+	public ArrayList<Sale> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Map<Sale, List<SaleImage>> saleMap = null;
-		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize from sale where addr=?";
-		SaleImageDao imgDao=null;
-		
+		ArrayList<Sale> saleList = null;
+		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize from sale where addr=? or ";
 		try {
-			imgDao = new SaleImageDao();
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_select_aptList);
 			pstmt.setString(1, addr);
 			rs = pstmt.executeQuery();
-			saleMap = new HashMap<Sale, List<SaleImage>>();
+			saleList = new ArrayList<Sale>();
 				while (rs.next()) {
 					Sale sale = new Sale();
 					sale.setAptName(rs.getString("aptName")); // 아파트 이름
@@ -297,9 +292,11 @@ public class SaleDao {
 					sale.setPrice(rs.getString("price")); 			//가격
 					sale.setAptNum(rs.getString("aptNum")); //매물번호
 					sale.setAptSize(rs.getString("aptSize")); //아파트 사이즈
-					saleMap.put(sale, imgDao.getSaleImgList(sale.getAptNum()));
-					System.out.println(saleMap.values());
+
+					saleList.add(sale);
+					System.out.println("saleList는 널이 아니외다");
 				}
+		System.out.println(saleList);	
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -312,7 +309,7 @@ public class SaleDao {
 				e.printStackTrace();
 			}
 		}
-		return saleMap;
+		return saleList;
 
 	}
 	
@@ -355,5 +352,39 @@ public class SaleDao {
 		}
 		return sale;
 	}
+	
+	
+	public ArrayList<Sale> getAddr() { // 주소가져오기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Sale> saleList = null;
+		String sql_get_addr = "select addr from sale";		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql_get_addr);
+			rs = pstmt.executeQuery();
+			saleList = new ArrayList<Sale>();
+				while (rs.next()) {
+					Sale sale = new Sale();
+					sale.setAddr(rs.getString("addr"));				
+					saleList.add(sale);
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return saleList;
+	}
+	
+
+	
 
 }

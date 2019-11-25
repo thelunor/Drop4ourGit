@@ -58,7 +58,11 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 		});
 	
 	$("#submitbtn").click(function() {
+		
 		var address= $("#searchInput").val().trim();
+		var addrSplit =[];
+		addrSplit= address.split(" ");
+		console.log(addrSplit[0]);
 		//console.log(address[0]+address[1]+address[2]);	
 // 		location.href="'SelectaptListService.d4b?address="+address[0]+address[1]+address[2];
 		location.href='SelectAptListService.d4b?search=' + address
@@ -73,8 +77,7 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
     overflow-x: hidden;
     font-family: 'Noto Sans KR', sans-serif;
     background-color: rgba( 255, 255, 255, 0.5);
-  }
-  
+  }  
 </style>
 <section id="hello" class="home bg-mega">
 		<div class="overlay"></div>
