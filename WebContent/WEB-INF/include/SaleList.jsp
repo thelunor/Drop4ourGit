@@ -1,3 +1,4 @@
+<%@page import="kr.or.bit.dao.SaleDao"%>
 <%@page import="kr.or.bit.dao.SaleDao2"%>
 <%@page import="kr.or.bit.service.GetSaleDataService"%>
 <%@page import="java.util.ArrayList"%>
@@ -10,9 +11,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	String aptNum = request.getParameter("aptNum");
 	List<Sale> saleList = new ArrayList<Sale>();
+    String reaId = (String) request.getAttribute("reaUserId");
+    int result = 0;
 	saleList = (List) request.getAttribute("saleList");
 	System.out.print("여기여기");
+	SaleDao dao = new SaleDao();
+	result = dao.deleteSale(aptNum);
+	saleList = dao.getSaleList(reaId);
+	if(result > 0) {
+		System.out.println("여기 타니?");
+		request.setAttribute("reaUserId", reaId);
+		request.setAttribute("saleList", saleList);
+	}
+	
+	
 %>
 <!DOCTYPE html>
 <html>

@@ -144,6 +144,7 @@ public class SaleDao2 {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Sale> saleList = null;
+		Sale sale = null;
 		
 		try {
 			conn = ds.getConnection();
@@ -153,7 +154,7 @@ public class SaleDao2 {
 			rs = pstmt.executeQuery();
 			saleList = new ArrayList<Sale>();
 			while(rs.next()) {
-				Sale sale = new Sale();
+				sale = new Sale();
 				sale.setAptNum(rs.getString("aptNum")); //매물번호				
 				sale.setAptSize(rs.getString("aptSize")); //면적
 				sale.setType(rs.getString("type")); //유형
@@ -165,6 +166,8 @@ public class SaleDao2 {
 				sale.setIsContract(rs.getString("isContract"));
 				saleList.add(sale);
 			}
+			System.out.println("몇개야?"+saleList.size());
+
 		}catch(Exception e) {
 			
 		}finally {

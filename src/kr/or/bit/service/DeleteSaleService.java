@@ -1,12 +1,16 @@
 package kr.or.bit.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
-import kr.or.bit.dao.SaleDao2;
+import kr.or.bit.dao.SaleDao;
+import kr.or.bit.dto.Sale;
 
 public class DeleteSaleService implements Action {
 
@@ -17,12 +21,18 @@ public class DeleteSaleService implements Action {
 	    HttpSession session = request.getSession();
 	    String reaId = (String) request.getAttribute("reaUserId");
 	    int result = 0;
+	    List<Sale> saleList = new ArrayList<Sale>();
 	    try {
-	    	SaleDao2 dao = new SaleDao2();
+	    	SaleDao dao = new SaleDao();
 	    	result = dao.deleteSale(aptNum);
+	    	saleList = dao.getSaleList(reaId);
 	    	if(result > 0) {
+	    		System.out.println("여기 타니?");
 	    		forward = new ActionForward();
-	    		forward.setPath("Main.jsp");
+	    		request.setAttribute("reaUserId", reaId);
+	    		request.setAttribute("saleList", saleList);
+	    		
+	    		forward.setPath("WEB-INF/include/SaleList.jsp");
 	    		/*GetREAUserByIdService.d4b?reaUserId=?"+reaId*/
 	    	}
 	    }catch(Exception e) {

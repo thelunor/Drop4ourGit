@@ -26,6 +26,7 @@
 	SaleDao2 dao = new SaleDao2();
 	List<Sale> saleList = new ArrayList<Sale>();
 	saleList = dao.getSaleList(id); //reaId로 리스트 불러오기
+	System.out.println(saleList.toString());
 	//System.out.println(reaImg.getReaImgSaveName());
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
@@ -145,12 +146,13 @@ input {
 								&nbsp;
 								<button type="submit" class="btn-group">계약 관리</button>
 								<br> <br>
+								<div id="saleList">
 								<div class="card-header py-3">
 									<h6 class="m-0 font-weight-bold text-primary">매물 관리</h6>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
-										<table class="table table-bordered" id="dataTable"
+										<table class="table table-bordered"
 											width="100%" cellspacing="0">
 											<thead>
 												<tr>
@@ -166,9 +168,10 @@ input {
 													<th>삭제</th>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody id="tbody">
 												<c:forEach var="saleData" items="<%=saleList%>"
 													varStatus="status">
+													<input type="hidden" id="aptNum" value="${saleData.aptNum}">
 													<tr>
 														<td>${saleData.aptSize}</td>
 														<td>${saleData.type}</td>
@@ -180,7 +183,6 @@ input {
 														<td>${saleData.isContract}</td>
 														<td><button type='button' class='btn-group-sm' id='edit_btn' onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
 														<td><button type='button' class='btn-group-sm' id='delete_btn'>삭제</button></td>
-														<input type="hidden" id="aptNum" value="${saleData.aptNum}">
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -188,6 +190,7 @@ input {
 										
 									</div>
 								</div>
+							</div>
 							</div>
 						</div>
 
@@ -206,26 +209,38 @@ input {
 	<jsp:include page="./js/js.jsp"></jsp:include>
 <script>
 	$(function(){
+		
 		$("#delete_btn").click(function(){
-			/*location.href='DeleteSaleService.d4b?aptNum=${saleData.aptNum}*/
-					
-			alert("삭제 되었습니다.");
 			var aptNum = $("#aptNum").val();
 			console.log(aptNum);
-			/* $.ajax({
-		 		url : 'DeleteSaleService.d4b?aptNum=${saleData.aptNum}',
-		 		enctype : "multipart/form-data",
+			//alert("삭제 되었습니다.");
+			  $.ajax({
+		 		url : 'SaleDelete?aptNum='+aptNum,
 		 		type : 'post',
-		 		data : formData,
-		 		dataType:'html',
-		 		contentType : false,
-		 		processData : false,
+		 		dataType:'json',
 		 		success:function(data){
-		 			console.log(data);
-		 			$("#imgUpload").empty();
-		 			$("#imgUpload").append(data);
+		 			$.each(data,function(index, element){
+		 				console.log(element);
+		 				$("#tbody").empty();
+		 				var table = "";
+		                table += "<tr>";
+		                table += "<td>" + element.aptSize + "</td>";
+		                table += "<td>" + element.type + "</td>";
+		                table += "<td>" + element.addr + "</td>";
+		                table += "<td>" + element.aptName + "</td>";
+		                table += "<td>" + element.aptDong + "</td>";
+		                table += "<td>" + element.aptHo + "</td>";
+		                table += "<td>" + element.price + "</td>";
+		                table += "<td>" + element.isContract + "</td>";
+		                table += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "GetSaleEditPageService.d4b?aptNum="+element.aptNum+"'>수정</button>" + "</td>";
+		                table += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn'>삭제</button>" + "</td>";
+		                table += "</tr>";
+		                $('#tbody').append(table);
+		 			});
+		 			//$("#tbody").empty();
+		 			//$("#saleList").append(data);
 		 		}
-		 	}); */
+		 	});
 		});
 	});
 </script>

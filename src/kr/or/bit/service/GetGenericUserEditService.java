@@ -26,7 +26,6 @@ public class GetGenericUserEditService implements Action {
 			dao = new GenericUserDao();
 			user = dao.getGenericMypage(genericUserId);
 			String type=user.getUserCode();
-			System.out.println(user.toString());
 			
 			if (user != null) {
 				request.setAttribute("genericUser", user);

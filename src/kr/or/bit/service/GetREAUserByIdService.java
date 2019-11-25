@@ -28,8 +28,6 @@ public class GetREAUserByIdService implements Action {
 			imgDao = new REAImageDao();
 			reaUser = reaDao.getREAMypage(reaId);
 			reaImg =imgDao.getREAImg(reaId);
-			System.out.println("사용자" + reaUser.toString());
-			System.out.println("사용자 이미지" + reaImg.toString());
 			
 			if (reaUser != null && reaImg != null) {
 				System.out.println("조회 성공");
