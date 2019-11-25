@@ -30,7 +30,7 @@
 	
 <%	
 	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
-	Review reviewdto = (Review) request.getAttribute("reviewdto");
+	System.out.println("reviewList: " + reviewList);
 %>
 	
 <c:set var="reviewList" value="<%=reviewList%>"></c:set>
@@ -48,7 +48,7 @@
 				<div class="card-body">
 					<div class="table-responsive">
 						
-						<form action="InsertReviewService.d4b" method="post" name="review" id="review">
+						<form action="SelectReviewService.d4b" method="post">
 							<table class="table table-bordered" id="dataTable"
 								style="text-align: center; margin: auto; width: 100%; border: none;">
 			                    <tr>
@@ -124,51 +124,18 @@
 
 <script type="text/javascript">
 	$(function() {
-		getReviewList();
-		addReview();
-	})
-	
-	function getReviewList() {
-		$.ajax({
-			url: 'GetReviewListService.d4b',
-			type: 'post',
-			dataType: 'json',
-			data: 'reviewList',
-			success: function(data) {
-				jsonarray = JSON.parse(data);
-				
-			}
-			
-		})		
-	}
-	
-	function addReview() {
 		$('#insert_review').click(function() {
-			var frm = document.review;
-			if (frm.userId.value == ""
-					|| frm.reviewDate == ""
-					|| frm.reviewContent == "") {
-				alert("내용을 입력하세요.");
-				return false;
-			}
-			var data = {
-					"userId" : <%= reviewdto.getUserId() %>,
-					"reviewContent" : <%= reviewdto.getReviewContent() %>,
-					"reviewDate" : <%= reviewdto.getReviewDate() %>,
-					"reviewNum" : <%= reviewdto.getReviewNum() %>,
-					"reaId" : <%= reviewdto.getReaid() %>
-			}
+			var reaId = "";
 			$.ajax({
-				url: 'InsertReviewService.d4b?reaId=' + reviewdto.reaId,
+				url: 'InsertReviewService.d4b?reaId=' + reaId,
 				type: 'post',
 				dataType: 'json',
-				data: data,
 				success: function() {
-					console.log(data);
+					
 				}
 			})
 		})
-	}
+	})
 </script>
 
 

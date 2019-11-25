@@ -45,6 +45,7 @@ public class GetREAIntroDataService implements Action {
 			request.setAttribute("reaUser", reaUser);
 			request.setAttribute("reaImg", reaImg);
 			request.setAttribute("rvList", rvList);
+			System.out.println("정상진행");
 		} catch (Exception e) {
 			System.out.println("getREAIntroService 예외발생");
 			System.out.println(e.getMessage());
