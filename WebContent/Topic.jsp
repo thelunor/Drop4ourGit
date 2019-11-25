@@ -1,4 +1,3 @@
-<%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.bit.dto.Sale"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -407,19 +406,23 @@ $(function() {
 </script>
 <%
 	String search=(String)request.getAttribute("search");
-	List<Sale> saleList = ArrayList<Sale>();
-	if(!search.equals("법정구 법정동")){
-		(List<Sale>)request.getAttribute("saleList");
-	}
-	
+	List<Sale> saleList =(List<Sale>)request.getAttribute("saleList");
 	System.out.println("saleList.toString(): " + saleList.toString());
 	
 	//System.out.println("search: " + search);
-	String[] searchSplit = search.split(" ");
+	
 	//System.out.println(searchSplit[0]);
 %>
-	<p style="font-size: 18px; font-family: 'Jua', sans-serif;"> 검색 결과 &nbsp;&nbsp; <span id="topic"><%=searchSplit[0] %></span>
-	<i class="fas fa-angle-right"></i> <%=searchSplit[1] %></p>		
+	<% 
+	if(!saleList.isEmpty()){
+		String[] searchSplit = search.split(" ");
+	%>
+	<p style="font-size: 18px; font-family: 'Jua', sans-serif;">"<%=search %>" 검색 결과 &nbsp;&nbsp; <span id="topic"><%=searchSplit[0] %></span>
+	<i class="fas fa-angle-right"></i> <%=searchSplit[1] %></p>	
+	<%}else{
+		%>
+		<p style="font-size: 18px; font-family: 'Jua', sans-serif;"> "<%=search %>" 검색 결과가 없습니다.
+	<%} %>	
 	<br>
 	<div class="notice">
 		<ul class="rolling" id="roll">

@@ -285,7 +285,6 @@ public class SaleDao {
 			pstmt.setString(1, addr);
 			rs = pstmt.executeQuery();
 			saleList = new ArrayList<Sale>();
-			if(rs.next()) {
 				while (rs.next()) {
 					Sale sale = new Sale();
 					sale.setAptName(rs.getString("aptName")); // 아파트 이름
@@ -295,11 +294,8 @@ public class SaleDao {
 					sale.setAptSize(rs.getString("aptSize")); //아파트 사이즈
 
 					saleList.add(sale);
+					System.out.println("saleList는 널이 아니외다");
 				}
-			}else {
-				saleList=null;
-			}
-
 		System.out.println(saleList);	
 		
 		} catch (Exception e) {
