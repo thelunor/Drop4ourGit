@@ -41,16 +41,19 @@ public class GetREAIntroDataService implements Action {
 			reaImg = imgdao.getREAImg(reaId);
 			rvList = rvdao.getReviewList(reaId);
 			System.out.println(rvList.toString());
+			if(reaUser !=null && reaImg !=null && rvList !=null) {
+				request.setAttribute("reaUser", reaUser);
+				request.setAttribute("reaImg", reaImg);
+				request.setAttribute("rvList", rvList);
+				forward.setPath("REAIntro.jsp");
+
+			}
 			
-			request.setAttribute("reaUser", reaUser);
-			request.setAttribute("reaImg", reaImg);
-			request.setAttribute("rvList", rvList);
 			System.out.println("정상진행");
 		} catch (Exception e) {
 			System.out.println("getREAIntroService 예외발생");
 			System.out.println(e.getMessage());
 		}
-		forward.setPath("GetReviewListService.d4b");
 		
 		return forward;
 	}

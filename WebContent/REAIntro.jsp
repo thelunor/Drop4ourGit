@@ -1,10 +1,17 @@
+<%@page import="kr.or.bit.dto.REAImage"%>
+<%@page import="kr.or.bit.dto.REAUser"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.bit.dto.Review"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%
+	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
+	REAImage reaImg = (REAImage) request.getAttribute("reaImg");	
+%>
+<<c:set var="reaUserData" value="<%=reaUser %>"/>
+<<c:set var="reaImgData" value="<%=reaImg %>"/>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
@@ -53,7 +60,6 @@
 	</style>
 	
 	<script type="text/javascript">
-		$.noConflict();
 		/* jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 			// 두 줄은 충돌방지
 			
@@ -113,7 +119,7 @@
 						<div class="col-md-3" style="border: 1px solid rgb(211, 211, 211); padding-top: 15px; padding-bottom: 15px; height: 500px; width: 200px; position: fixed;">
 							<div class="signup-form">
 								<div class="form-group" style="text-align : center">
-									<img id="preview" src="./images/profile.png" style="width:200px" alt="Profile">
+									<img id="preview" src="./reaimg/${reaImgData.reaImgSaveName}" style="width:200px" alt="Profile">
 								</div>
 							</div>
 							<div style="margin-top: 10px; margin-bottom: 10px;">
@@ -140,7 +146,7 @@
 											<div>
 												<div>
 													<h4>
-														안녕하세요. 비트 부동산에 오신 것을 환영합니다.
+														안녕하세요. ${reaUserData.officeName}에 오신 것을 환영합니다.
 													</h4>
 												</div>
 												<div style="margin-top: 8px;">
@@ -156,7 +162,7 @@
 											<img alt="house" src="./images/house.png">
 										</div>
 										<div>
-											서울 강남구 비트부동산 010-1234-5678
+											${reaUserData.officeName} ${reaUserData.officeHp}
 										</div>
 									</section>
 									<div style="margin-top: 20px; margin-bottom: 20px;">
