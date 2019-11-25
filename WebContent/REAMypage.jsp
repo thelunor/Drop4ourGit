@@ -22,11 +22,12 @@
 <%
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
+	System.out.println(reaUser);
 	String id = (String) session.getAttribute("reaUserId");
 	SaleDao2 dao = new SaleDao2();
 	List<Sale> saleList = new ArrayList<Sale>();
 	saleList = dao.getSaleList(id); //reaId로 리스트 불러오기
-	System.out.println(saleList.toString());
+	System.out.println("saleList.toString(): " + saleList.toString());
 	//System.out.println(reaImg.getReaImgSaveName());
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
@@ -182,7 +183,7 @@ input {
 														<td>${saleData.price}</td>
 														<td>${saleData.isContract}</td>
 														<td><button type='button' class='btn-group-sm' id='edit_btn' onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
-														<td><button type='button' class='btn-group-sm' id='delete_btn'>삭제</button></td>
+														<td><button type='button' class='btn-group-sm' id='delete_btn' value="${saleData.aptNum}" >삭제</button></td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -208,37 +209,37 @@ input {
 	<!-- JS includes -->
 	<jsp:include page="./js/js.jsp"></jsp:include>
 <script>
+
+
+	
 	$(function(){
+		//var size = $("#size").val();
 		
-		$("#delete_btn").click(function(){
-			var aptNum = $("#aptNum").val();
-			console.log(aptNum);
-			//alert("삭제 되었습니다.");
-			  $.ajax({
+		//var aptNum= $("#delete_btn").val();
+		$("#delete_btn").click(function(event){
+			var aptNum = event.target.value;
+			 $.ajax({
 		 		url : 'SaleDelete?aptNum='+aptNum,
 		 		type : 'post',
 		 		dataType:'json',
-		 		success:function(data){
-		 			$.each(data,function(index, element){
-		 				console.log(element);
-		 				$("#tbody").empty();
-		 				var table = "";
+		 		success:function(data){ //data는 object!
+	 				$("#tbody").empty();
+		 			$.each(data,function(key,value){
+		 				var table="";
 		                table += "<tr>";
-		                table += "<td>" + element.aptSize + "</td>";
-		                table += "<td>" + element.type + "</td>";
-		                table += "<td>" + element.addr + "</td>";
-		                table += "<td>" + element.aptName + "</td>";
-		                table += "<td>" + element.aptDong + "</td>";
-		                table += "<td>" + element.aptHo + "</td>";
-		                table += "<td>" + element.price + "</td>";
-		                table += "<td>" + element.isContract + "</td>";
-		                table += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "GetSaleEditPageService.d4b?aptNum="+element.aptNum+"'>수정</button>" + "</td>";
+		                table += "<td>" + value.aptSize + "</td>";
+		                table += "<td>" + value.type + "</td>";
+		                table += "<td>" + value.addr + "</td>";
+		                table += "<td>" + value.aptName + "</td>";
+		                table += "<td>" + value.aptDong + "</td>";
+		                table += "<td>" + value.aptHo + "</td>";
+		                table += "<td>" + value.price + "</td>";
+		                table += "<td>" + value.isContract + "</td>";
+		                table += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "GetSaleEditPageService.d4b?aptNum="+value.aptNum+"'>수정</button>" + "</td>";
 		                table += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn'>삭제</button>" + "</td>";
 		                table += "</tr>";
 		                $('#tbody').append(table);
 		 			});
-		 			//$("#tbody").empty();
-		 			//$("#saleList").append(data);
 		 		}
 		 	});
 		});
