@@ -536,7 +536,7 @@ h1, h3, #myUL {
 	  var txt = document.createTextNode("\u00D7");
 	  span.className = "close";
 	  span.appendChild(txt);
-	  myNodelist[i].appendChild(span);
+	  myNodelist.appendChild(span);
 	}
 
 	// Click on a close button to hide the current list item
