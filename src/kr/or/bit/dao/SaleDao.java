@@ -278,7 +278,7 @@ public class SaleDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Sale> saleList = null;
-		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize from sale where addr=? or ";
+		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize from sale where addr=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_select_aptList);
