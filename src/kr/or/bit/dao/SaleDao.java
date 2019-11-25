@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -273,30 +275,41 @@ public class SaleDao {
 		return resultRow;
 	}
 	
-	public ArrayList<Sale> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
+	public Map<Sale, List<SaleImage>> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Sale> saleList = null;
+		
+		Map<Sale, List<SaleImage>> mapList = null;
+		SaleImageDao imgDao=null;
 		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize from sale where addr=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_select_aptList);
 			pstmt.setString(1, addr);
 			rs = pstmt.executeQuery();
-			saleList = new ArrayList<Sale>();
+			
+			imgDao = new SaleImageDao();
+			System.out.println("요기?1 ");
+			mapList= new HashMap<Sale, List<SaleImage>>();
+			System.out.println("요기?2 ");
 				while (rs.next()) {
+					System.out.println("요기?3 ");
 					Sale sale = new Sale();
 					sale.setAptName(rs.getString("aptName")); // 아파트 이름
 					sale.setAptDong(rs.getString("aptDong")); // 아파트 동
 					sale.setPrice(rs.getString("price")); 			//가격
 					sale.setAptNum(rs.getString("aptNum")); //매물번호
 					sale.setAptSize(rs.getString("aptSize")); //아파트 사이즈
-
-					saleList.add(sale);
-					System.out.println("saleList는 널이 아니외다");
+					String aptNum = rs.getString("aptNum");
+					System.out.println("aptNum 띠요오오옹: " + aptNum);
+					List<SaleImage> imgList = new ArrayList<SaleImage>();
+					imgList = imgDao.getSaleImgList(aptNum);
+							
+					System.out.println(imgList.toString());
+					mapList.put(sale,imgList);
+					System.out.println("다오 끝");
 				}
-		System.out.println(saleList);	
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -309,7 +322,7 @@ public class SaleDao {
 				e.printStackTrace();
 			}
 		}
-		return saleList;
+		return mapList;
 
 	}
 	
