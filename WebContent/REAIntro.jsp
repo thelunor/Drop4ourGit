@@ -99,7 +99,7 @@
 
 		<nav class="navbar navbar-light navbar-expand-lg navbar-fixed ivory no-background bootsnav">
 		<!-- Top jsp -->
-			<jsp:include page="WEB-INF/include/Admin_top.jsp" />
+			<jsp:include page="WEB-INF/include/REAUser_Top.jsp" />
 
 		<!-- Side jsp -->
 			<jsp:include page="WEB-INF/include/Side.jsp" />

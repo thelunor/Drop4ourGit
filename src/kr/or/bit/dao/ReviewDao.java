@@ -68,7 +68,7 @@ public class ReviewDao {
 		
 		try {
 			conn = ds.getConnection();
-			String review_sql = "SELECT RV.USERID, RV.REVIEWCONTENT, RV.REVIEWDATE " + 
+			String review_sql = "SELECT RV.REVIEWNUM, RV.USERID, RV.REVIEWCONTENT, RV.REVIEWDATE, RV.REAID " + 
 								"FROM REVIEW RV JOIN REAUSER RU " + 
 								"ON RV.REAID = RU.REAID " + 
 								"WHERE RV.REAID=?";
@@ -78,21 +78,18 @@ public class ReviewDao {
 			rvList = new ArrayList<Review>();
 			
 			while (rs.next()) {
-				System.out.println("ReviewDao 성공");
+				System.out.println("ReviewDao rs 성공");
 				Review review = new Review();
 				java.sql.Date reviewDate = rs.getDate("reviewDate");
-				
 				review.setReviewNum(rs.getInt("reviewNum"));
 				review.setUserId(rs.getString("userId"));
 				review.setReviewContent(rs.getString("reviewContent"));
 				review.setReviewDate(reviewDate);
 				review.setReaid(rs.getString("reaId"));
-				
 				rvList.add(review);
-				System.out.println("reviewList: " + rvList);
 			}
 		} catch (Exception e) {
-			System.out.println("Review dao 예외발생");
+			System.out.println("ReviewDao 예외발생");
 			System.out.println(e.getMessage());
 		} finally {
 			DB_Close.close(rs);
@@ -101,7 +98,7 @@ public class ReviewDao {
 			try {
 				conn.close();
 			} catch (Exception e) {
-				System.out.println("Review dao 예외발생2");
+				System.out.println("ReviewDao 예외발생2");
 				System.out.println(e.getMessage());
 			}
 		}

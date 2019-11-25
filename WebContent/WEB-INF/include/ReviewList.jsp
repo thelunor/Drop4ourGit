@@ -30,7 +30,7 @@
 	
 <%	
 	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
-	System.out.println(reviewList);
+	System.out.println("reviewList: " + reviewList);
 %>
 	
 <c:set var="reviewList" value="<%=reviewList%>"></c:set>
