@@ -28,7 +28,7 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
         dataType : 'json',
         success : function(data) { 
      	$.each(data, function(index, element) {
-     		if(addrList.indexOf((element.addr.split(" ")[0] + " " + element.addr.split(" ")[1])) == -1 ) addrList.push(element.addr.split(" ")[0] + " " + element.addr.split(" ")[1]);
+     		if(addrList.indexOf((element.addr.split(" ")[1] + " " + element.addr.split(" ")[2])) == -1 ) addrList.push(element.addr.split(" ")[1] + " " + element.addr.split(" ")[2]);
 
      	});
 

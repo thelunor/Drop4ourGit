@@ -16,7 +16,7 @@
 					<h2 style="font-size: 18px;">
 						마이페이지에서<br>등록하신 매물 리스트를 확인할 수 있습니다.
 					</h2>
-					<hr>
+					<br>
 					<br>
 					<%-- <div class="form-group">
 						<div class="row">

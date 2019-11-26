@@ -444,8 +444,8 @@ $(function() {
 //    if(!saleList.isEmpty()){
 //       String[] searchSplit = search.split(" ");
    %>
-   <p style="font-size: 18px; font-family: 'Jua', sans-serif;">"<%=search %>" 검색 결과 &nbsp;&nbsp; <span id="topic"><%=searchSplit[0] %></span>
-   <i class="fas fa-angle-right"></i> <%=searchSplit[1] %></p>   
+   <p style="font-size: 18px; font-family: 'Jua', sans-serif;">"<%=search %>" 검색 결과 &nbsp;&nbsp; <span id="topic"><%=searchSplit[1] %></span>
+   <i class="fas fa-angle-right"></i> <%=searchSplit[2] %></p>   
    <%}else{
       %>
       <p style="font-size: 18px; font-family: 'Jua', sans-serif;"> "<%=search %>" 검색 결과가 없습니다.
