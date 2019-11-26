@@ -18,15 +18,16 @@ public class GetSaleImgService implements Action {
 		ActionForward forward = new ActionForward();
 		String aptNum = request.getParameter("aptNum"); //매물 번호 받아오기
 		SaleImage saleImg = new SaleImage();
+		
 		try {
 			SaleImageDao dao = new SaleImageDao();
 			saleImg = dao.getSaleImg(aptNum);
-
-			if(saleImg!=null) {
+			System.out.println("GetSaleimgService");
+			//if(saleImg!=null) {			연습주석
 				System.out.println("매물 사진 가져오기 성공");
 				request.setAttribute("saleImg", saleImg);
 				forward.setPath("SaleEdit2.jsp?aptNum="+aptNum);
-			}
+			//}
 			
 			
 		}catch(Exception e) {
