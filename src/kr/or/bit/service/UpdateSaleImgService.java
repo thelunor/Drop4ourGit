@@ -43,31 +43,24 @@ public class UpdateSaleImgService implements Action {
 	             saleImgOriginNames.add(multi.getOriginalFileName(name));
 	         }
 
-	         String aptNum =request.getParameter("aptNum"); //매물 번호 가져오기
-	         
-	         SaleImage saleImg1 = new SaleImage();
-			 saleImg1.setSaleImgSaveName(saleImgSaveNames.get(0));
-			 saleImg1.setSaleImgOriginName(saleImgOriginNames.get(0));
-			 saleImg1.setAptNum(aptNum);
-			 
-			 SaleImage saleImg2 = new SaleImage();
-			 saleImg2.setSaleImgSaveName(saleImgSaveNames.get(1));
-			 saleImg2.setSaleImgOriginName(saleImgOriginNames.get(1));
-			 saleImg2.setAptNum(aptNum);
-			 
-			 SaleImage saleImg3 = new SaleImage();
-			 saleImg3.setSaleImgSaveName(saleImgSaveNames.get(2));
-			 saleImg3.setSaleImgOriginName(saleImgOriginNames.get(2));
-			 saleImg3.setAptNum(aptNum);
+	         String aptNum =request.getParameter("aptNum");
+	         System.out.println("에이피티넘: " + aptNum);
+	         SaleImage saleImg = new SaleImage();
+	         saleImg.setSaleImgSaveName1(saleImgSaveNames.get(0));
+	         saleImg.setSaleImgSaveName2(saleImgSaveNames.get(1));
+	         saleImg.setSaleImgSaveName3(saleImgSaveNames.get(2));
+	         saleImg.setSaleImgOriginName1(saleImgOriginNames.get(0));
+	         saleImg.setSaleImgOriginName2(saleImgOriginNames.get(1));
+	         saleImg.setSaleImgOriginName3(saleImgOriginNames.get(2));
+			 saleImg.setAptNum(aptNum);
+			
 			 
 			
 			 
 			 
 	         SaleImageDao dao = new SaleImageDao();
 
-	         result = dao.updateSaleImg(saleImg1);
-	         result = dao.updateSaleImg(saleImg2);
-	         result = dao.updateSaleImg(saleImg3);
+	         result = dao.updateSaleImg(saleImg);
 	         
 	         	        
 	         forward.setPath("SaleImgUpdateFinish.jsp");

@@ -29,12 +29,16 @@ public class SaleImageDao {
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			String sql_insert_saleImg = "insert into saleimage(saleimgnum, saleImgOriginName, saleImgSaveName, aptnum)"
-			+ " values(seq_saleImg.nextval,?,?,(select aptnum from sale where aptnum=?))";
+			String sql_insert_saleImg = "insert into saleimage(saleImgOriginName1, saleImgSaveName1,saleImgOriginName2,saleImgSaveName2, saleImgOriginName3,saleImgSaveName3, aptnum)"
+				+"values(?,?,?,?,?,?,(select aptnum from sale where aptnum=?))";
 			pstmt = conn.prepareStatement(sql_insert_saleImg);
-			pstmt.setString(1, saleImg.getSaleImgOriginName());
-			pstmt.setString(2, saleImg.getSaleImgSaveName());
-			pstmt.setString(3, saleImg.getAptNum());
+			pstmt.setString(1, saleImg.getSaleImgOriginName1());
+			pstmt.setString(2, saleImg.getSaleImgSaveName1());
+			pstmt.setString(3, saleImg.getSaleImgOriginName2());
+			pstmt.setString(4, saleImg.getSaleImgSaveName2());
+			pstmt.setString(5, saleImg.getSaleImgOriginName3());
+			pstmt.setString(6, saleImg.getSaleImgSaveName3());
+			pstmt.setString(7, saleImg.getAptNum());
 			
 			resultRow = pstmt.executeUpdate();
 			
@@ -65,14 +69,16 @@ public class SaleImageDao {
 		List<SaleImage> saleImgList = null;
 		try {
 			conn = ds.getConnection();
-			String sql_select_img = "select saleimgsavename from saleImage where aptnum=?";
+			String sql_select_img = "select saleimgsavename1,saleimgsavename2,saleimgsavename3 from saleImage where aptnum=?";
 			pstmt = conn.prepareStatement(sql_select_img);
 			pstmt.setString(1, aptNum);
 			rs = pstmt.executeQuery();
 			saleImgList = new ArrayList<SaleImage>();
 			while(rs.next()) {
 				saleImg = new SaleImage();
-				saleImg.setSaleImgSaveName(rs.getString("saleimgsavename"));
+				saleImg.setSaleImgSaveName1(rs.getString("saleimgsavename1"));
+				saleImg.setSaleImgSaveName2(rs.getString("saleimgsavename2"));
+				saleImg.setSaleImgSaveName3(rs.getString("saleimgsavename3"));
 				saleImgList.add(saleImg);
 			}
 		}catch(Exception e) {
@@ -100,11 +106,15 @@ public class SaleImageDao {
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			String sql_update_saleImg = "update saleImage set saleImgoriginName=?, saleImgsaveName=? where aptNum=?";
+			String sql_update_saleImg = "update saleImage set saleImgoriginName1=?, saleImgsaveName1=?, saleImgoriginName2=?, saleImgsaveName2=?, saleImgoriginName3=?, saleImgsaveName3=? where aptNum=?";
 			pstmt = conn.prepareStatement(sql_update_saleImg);
-			pstmt.setString(1, saleImg.getSaleImgOriginName());
-			pstmt.setString(2, saleImg.getSaleImgSaveName());
-			pstmt.setString(3, saleImg.getAptNum());
+			pstmt.setString(1, saleImg.getSaleImgOriginName1());
+			pstmt.setString(2, saleImg.getSaleImgSaveName1());
+			pstmt.setString(3, saleImg.getSaleImgOriginName2());
+			pstmt.setString(4, saleImg.getSaleImgSaveName2());
+			pstmt.setString(5, saleImg.getSaleImgOriginName3());
+			pstmt.setString(6, saleImg.getSaleImgSaveName3());
+			pstmt.setString(7, saleImg.getAptNum());
 			resultRow = pstmt.executeUpdate();
 			if(resultRow > 0) {
 				System.out.println("매물 사진"+resultRow);
@@ -137,13 +147,11 @@ public class SaleImageDao {
 			conn = ds.getConnection();
 			conn.setAutoCommit(false); //트랜잭션 처리
 			
-			
 			//1. 매물 사진 테이블에 객체 저장(aptNum 제외)
-			String sql_insert_sale =
-			"insert into saleImage(saleImgNum, saleImgSaveName, saleImgOriginName) values(seq_saleImg.nextval, ?, ?)";
+			String sql_insert_sale ="insert into saleImage(saleImgSaveName1, saleImgOriginName1, saleImgSaveName2, saleImgOriginName2, saleImgSaveName3, saleImgOriginName3)"
+					+"values(?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql_insert_sale);
-			pstmt.setString(1, saleImg.getSaleImgSaveName());
-			pstmt.setString(2, saleImg.getSaleImgOriginName());
+			
 			resultRow = pstmt.executeUpdate();
 			
 			//2. sale 테이블에서 아파트 이름, 동, 호수 가져오기

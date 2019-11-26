@@ -57,6 +57,7 @@ import kr.or.bit.service.LoginService;
 import kr.or.bit.service.LogoutService;
 import kr.or.bit.service.SelectAllContractsService;
 import kr.or.bit.service.SelectAtpListService;
+import kr.or.bit.service.SelectAtpListService2;
 import kr.or.bit.service.SelectGenericUserService;
 import kr.or.bit.service.SelectREAUserService;
 import kr.or.bit.service.UpdateBlackService;
@@ -442,7 +443,7 @@ public class FrontController extends HttpServlet {
 			}
 		} else if (url_Command.equals("/SelectAptListService.d4b")) { // 아파트 목록보기
 			try {
-				action = new SelectAtpListService();
+				action = new SelectAtpListService2();
 				forward = action.execute(request, response);
 				System.out.println("SelectAptListService 끝난부분");
 			} catch (Exception e) {

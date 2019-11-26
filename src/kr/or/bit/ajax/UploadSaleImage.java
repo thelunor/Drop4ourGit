@@ -56,27 +56,20 @@ public class UploadSaleImage extends HttpServlet {
            }
 
            String aptNum =request.getParameter("aptNum");
-
-           SaleImage saleImg1 = new SaleImage();
-  		 saleImg1.setSaleImgSaveName(saleImgSaveNames.get(0));
-  		 saleImg1.setSaleImgOriginName(saleImgOriginNames.get(0));
-  		 saleImg1.setAptNum(aptNum);
+           System.out.println("에이피티넘: " + aptNum);
+           SaleImage saleImg = new SaleImage();
+           saleImg.setSaleImgSaveName1(saleImgSaveNames.get(0));
+           saleImg.setSaleImgSaveName2(saleImgSaveNames.get(1));
+           saleImg.setSaleImgSaveName3(saleImgSaveNames.get(2));
+           saleImg.setSaleImgOriginName1(saleImgOriginNames.get(0));
+           saleImg.setSaleImgOriginName2(saleImgOriginNames.get(1));
+           saleImg.setSaleImgOriginName3(saleImgOriginNames.get(2));
+  		 saleImg.setAptNum(aptNum);
   		 
-  		 SaleImage saleImg2 = new SaleImage();
-  		 saleImg2.setSaleImgSaveName(saleImgSaveNames.get(1));
-  		 saleImg2.setSaleImgOriginName(saleImgOriginNames.get(1));
-  		 saleImg2.setAptNum(aptNum);
-  		 
-  		 SaleImage saleImg3 = new SaleImage();
-  		 saleImg3.setSaleImgSaveName(saleImgSaveNames.get(2));
-  		 saleImg3.setSaleImgOriginName(saleImgOriginNames.get(2));
-  		 saleImg3.setAptNum(aptNum);
-  		 
+  		
            SaleImageDao dao = new SaleImageDao();
 
-           result = dao.insertSaleImg(saleImg1);
-           result = dao.insertSaleImg(saleImg2);
-           result = dao.insertSaleImg(saleImg3);
+           result = dao.insertSaleImg(saleImg);
            
            System.out.println("제발"+result);
            

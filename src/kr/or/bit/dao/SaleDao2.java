@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 
 import kr.or.bit.dto.Sale;
 import kr.or.bit.dto.SaleImage;
+import kr.or.bit.dto.SaleList;
 import kr.or.bit.utils.DB_Close;
 
 public class SaleDao2 {
@@ -107,7 +108,7 @@ public class SaleDao2 {
 		//2. List에 sale 넣기
 		return null;
 	}
-	*/
+
 	
 	public Map<List<String>, List<SaleImage>> selectAptImgList(String addr, String aptNum){ //주소로 map 객체 만들기
 		Connection conn = null;
@@ -143,6 +144,7 @@ public class SaleDao2 {
 		//2. List에 sale 넣기
 		return null;
 	}
+		*/
 	
 	public List<String> getAptNumByAddr(String addr) {
 		Connection conn = null;
@@ -160,8 +162,6 @@ public class SaleDao2 {
 				aptNum = rs.getString("aptNum");
 				aptNumList.add(aptNum);
 			}
-			System.out.println("매물 번호1"+aptNumList.get(0));
-			System.out.println("매물 번호2"+aptNumList.get(1));
 
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -415,4 +415,52 @@ public class SaleDao2 {
 
 	}
 
+	
+	
+	
+	public List<SaleList> getSaleListList(String addr){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		SaleList saleList = null;
+		List<SaleList> saleListList = new ArrayList<SaleList>();
+		try {
+			conn = ds.getConnection();
+			String sql = "select s.aptnum, s.aptsize, s.price, i.saleimgnum, i.saleimgsavename from sale s join saleimage i on (s.aptNum=i.aptNum) where addr like ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+addr+"%");
+			System.out.println("rs입성전");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				System.out.println("여기?");
+				saleList = new SaleList();
+				saleList.setAptNum(rs.getString(1));
+				saleList.setSize(rs.getString(2));
+				saleList.setPrice(rs.getString(3));
+				saleList.setSaleimgnum(rs.getString(4));
+				saleList.setSaleimgsavename(rs.getString(5));
+				saleListList.add(saleList);
+			}
+			System.out.println("리스트1"+saleListList.get(0));
+			System.out.println("리스트2"+saleListList.get(1));
+			System.out.println("리스트3"+saleListList.get(2));
+			System.out.println("리스트4"+saleListList.get(3));
+			System.out.println("리스트5"+saleListList.get(4));
+			System.out.println("리스트6"+saleListList.get(5));
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return saleListList;
+
+	}
+	
+	
 }
