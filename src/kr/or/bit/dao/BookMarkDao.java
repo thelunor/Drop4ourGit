@@ -35,26 +35,23 @@ public class BookMarkDao {
 		List<BookMark> bmList = null;
 		try {
 			conn = ds.getConnection();
-			String sql_get_bookmark = "select b.aptNum, s.aptSize, s.type, s.aptName, s.price from bookmark b join sale s" 
-										+ "on b.aptNum = s.aptNum where userId=?";
+			String sql_get_bookmark = "select b.aptNum, s.aptSize, s.type, s.aptName, s.price from bookmark b join sale s on (b.aptNum = s.aptNum) where userId=?";
 			pstmt = conn.prepareStatement(sql_get_bookmark);
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
 			bmList = new ArrayList<BookMark>();
-			System.out.println("북마크 읽는 중");
 			while(rs.next()) {
-				BookMark bookmark = new BookMark();				
+				BookMark bookmark = new BookMark();		
 				bookmark.setAptNum(rs.getString(1)); //아파트 번호
-				bookmark.setAptSize(rs.getString(2)); //아파트 면적
+				bookmark.setAptSize(rs.getString(2)); //아파트 면적			
 				bookmark.setType(rs.getString(3)); //아파트 유형
-				bookmark.setAptName(rs.getString(4)); //아파트 이름
+				bookmark.setAptName(rs.getString(4)); //아파트 이름			
 				bookmark.setPrice(rs.getString(5)); //아파트 가격
 				
 				bmList.add(bookmark);
-				System.out.println("난 북마크 " + bmList);
 			}
 		}catch(Exception e) {
-			
+			System.out.println(e.getMessage());
 		}finally {
 			DB_Close.close(pstmt);
 			DB_Close.close(rs);

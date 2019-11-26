@@ -1,9 +1,16 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.or.bit.dto.BookMark"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.or.bit.dao.BookMarkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
 	String genericUserId = (String) session.getAttribute("genericUserId");
-
+	BookMarkDao dao = new BookMarkDao();
+	List<BookMark> bmList = new ArrayList<BookMark>();
+	bmList = dao.getBookMark(genericUserId); //reaId로 리스트 불러오기
+	System.out.println("saleList.toString(): " + bmList.toString());	
 %>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
