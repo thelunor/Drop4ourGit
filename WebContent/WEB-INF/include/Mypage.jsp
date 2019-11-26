@@ -82,15 +82,22 @@ font-family: 'Jua', sans-serif;
 </style>
 <script>
 $(function() {
-	
+	getBookMark('24');			
+});
+
+function getBookMark(aptSize){
 	$.ajax({
         url : 'BookMarkList',
         type : 'post',
         data : {"userId" : $("#myId").val()},
         dataType : 'json',
         success : function(data) {	
-        	console.log(data);
-            $.each(data, function(index, element) {            	
+        	$("#bmContent").empty();
+            $.each(data, function(index, element) {   
+
+            	
+            	if(element.aptSize==aptSize){
+            		
             		var content = "";
 					content += "<div class='col-lg-4' onclick='deleteBookmark()' id='bookmark'>";
 					content += "<div class='card_top_border'></div>";
@@ -111,12 +118,12 @@ $(function() {
 					content += "</div>";  
 					
 					$('#bmContent').append(content);
-            	
+            	}
             });
         }
     });	
 		
-});
+}
 
 var close = document.getElementsByClassName("close");
 function deleteBookmark(){
@@ -148,8 +155,8 @@ function deleteBookmark(){
 				<div class="col-sm-12">
 				<input type="hidden" id="myId" value="<%=genericUserId%>">
  
-				<a href="#" id="twenty">24평</a> &nbsp; | &nbsp; <a href="#" id="thirty">32평</a>&nbsp; |
-				&nbsp; <a >42평</a> &nbsp;
+				<a href="#" onclick="getBookMark('24')">24평</a> &nbsp; | &nbsp; <a href="#" onclick="getBookMark('32')">32평</a>&nbsp; |
+				&nbsp; <a onclick="getBookMark('42')">42평</a> &nbsp;
 
 				<h6 style="float: right;"><img src="images/love.gif" style="width: 40px; height: 30px;"><%=genericUserId%> 님의 페이지입니다</h6>
 				</div>
