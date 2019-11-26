@@ -30,6 +30,7 @@ import kr.or.bit.service.GetGenericUserMypageMainService;
 import kr.or.bit.service.GetGenericUserEditService;
 import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroDataService;
+import kr.or.bit.service.GetREAIntroPageService;
 import kr.or.bit.service.GetREAMypageService;
 import kr.or.bit.service.GetREAScheduleListByDateService;
 import kr.or.bit.service.GetREAScheduleListByIdService;
@@ -221,6 +222,13 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/GetREAIntroDataService.d4b")) {
 			try {
 				action = new GetREAIntroDataService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/GetREAIntroPageService.d4b")) { //일반 사용자가 소개 페이지로
+			try {
+				action = new GetREAIntroPageService();
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

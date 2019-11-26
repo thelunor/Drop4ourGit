@@ -126,7 +126,7 @@
 						<div class="col-md-3" style="border: 1px solid rgb(211, 211, 211); padding-top: 15px; padding-bottom: 15px; height: 500px; width: 200px; position: fixed;">
 							<div class="signup-form">
 								<div class="form-group" style="text-align : center">
-									<img id="preview" src="./reaimg/${reaImgData.reaImgSaveName}" style="width:200px" alt="Profile">
+									<img id="preview" src="reaimg/${reaImgData.reaImgSaveName}" style="width:200px" alt="Profile">
 								</div>
 							</div>
 							<div style="margin-top: 10px; margin-bottom: 10px;">

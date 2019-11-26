@@ -95,11 +95,11 @@ h2, h4, h6, h3 {
 
 <body data-spy="scroll" data-target=".navbar-collapse">
 
-	<div class="houseDetail">
+	<!-- <div class="houseDetail">
 		<div class="page-wrapper">
 			<a class="btn trigger" href="#">Real Estate Agent</a>
 		</div>
-	</div>
+	</div> -->
 	<!-- End off featured slider -->
 
 	<!-- Modal -->
@@ -157,7 +157,7 @@ h2, h4, h6, h3 {
 	<script>
 
 $( document ).ready(function() {
-     $('.trigger').on('click', function() {
+     $('#detailBtn').on('click', function() {
         $('.modal-wrapper').toggleClass('open');
        $('.page-wrapper').toggleClass('blur-it');
         return false;

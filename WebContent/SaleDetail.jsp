@@ -331,7 +331,7 @@ a.btn  {
 				</div>
 				<br>			
 				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-block btn-lg">Click</button>
+					<button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='GetREAIntroPageService.d4b?reaId=${reaData.reaId}'">Click</button>
 				</div>					
 				</div>
     </div>

@@ -192,7 +192,7 @@ public class REAUserDao {
 		ResultSet rs = null;
 		REAUser reaUser = null;
 
-		String sql_get_REAInfo = "select officeName, officeDetailAddr, officeHp from reauser where reaId=?";
+		String sql_get_REAInfo = "select officeName, officeDetailAddr, officeHp, reaId from reauser where reaId=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_get_REAInfo);
@@ -204,6 +204,7 @@ public class REAUserDao {
 				reaUser.setOfficeName(rs.getString("officeName"));
 				reaUser.setOfficeDetailAddr(rs.getString("officeDetailAddr"));
 				reaUser.setOfficeHp(rs.getString("officeHP"));
+				reaUser.setReaId(rs.getString("reaId"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
