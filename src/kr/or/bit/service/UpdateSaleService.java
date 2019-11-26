@@ -32,6 +32,7 @@ public class UpdateSaleService implements Action {
 			type = value;
 		}
 		String addr = request.getParameter("addr");
+		String roadAddr = request.getParameter("roadAddr");
 		String aptName = request.getParameter("aptName");
 		String aptDong = request.getParameter("aptDong");
 		String aptHo = request.getParameter("aptHo");
@@ -62,6 +63,7 @@ public class UpdateSaleService implements Action {
 		sale.setDirection(direction);
 		sale.setEtc(etc);
 		sale.setIsContract(isContract);
+		sale.setRoadAddr(roadAddr);
 		sale.setAptNum(aptNum);
 		
 		try {

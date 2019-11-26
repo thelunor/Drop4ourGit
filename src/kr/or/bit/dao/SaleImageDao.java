@@ -61,25 +61,22 @@ public class SaleImageDao {
 	}
 	
 
-	public List<SaleImage> getSaleImgList(String aptNum) { // 매물 이미지 불러오기 (매물 번호로)
+	public SaleImage getSaleImgList(String aptNum) { // 매물 이미지 불러오기 (매물 번호로)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		SaleImage saleImg = null;
-		List<SaleImage> saleImgList = null;
 		try {
 			conn = ds.getConnection();
 			String sql_select_img = "select saleimgsavename1,saleimgsavename2,saleimgsavename3 from saleImage where aptnum=?";
 			pstmt = conn.prepareStatement(sql_select_img);
 			pstmt.setString(1, aptNum);
 			rs = pstmt.executeQuery();
-			saleImgList = new ArrayList<SaleImage>();
 			while(rs.next()) {
 				saleImg = new SaleImage();
 				saleImg.setSaleImgSaveName1(rs.getString("saleimgsavename1"));
 				saleImg.setSaleImgSaveName2(rs.getString("saleimgsavename2"));
 				saleImg.setSaleImgSaveName3(rs.getString("saleimgsavename3"));
-				saleImgList.add(saleImg);
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -94,7 +91,7 @@ public class SaleImageDao {
 			}
 		}
 		
-		return saleImgList;
+		return saleImg;
 	}
 	
 	

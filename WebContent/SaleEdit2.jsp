@@ -8,8 +8,8 @@
 
 <!doctype html>
 <%
-	List<SaleImage> saleImgList = new ArrayList<SaleImage>();
-	saleImgList = (List)request.getAttribute("saleImgList"); 
+	SaleImage saleImg = new SaleImage();
+	saleImg = (SaleImage)request.getAttribute("saleImg"); 
 	String aptNum = request.getParameter("aptNum");
 	
 %>
@@ -79,7 +79,7 @@ text-align: center;
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<img id="preview1" src="reaimg/<%=saleImgList.get(0).getSaleImgSaveName()%>" alt="Profile">
+										<img id="preview1" src="reaimg/<%=saleImg.getSaleImgSaveName3()%>" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="file" name="filename1" id="getfile1"
@@ -88,7 +88,7 @@ text-align: center;
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<img id="preview2" src="reaimg/<%=saleImgList.get(1).getSaleImgSaveName()%>" alt="Profile">
+										<img id="preview2" src="reaimg/<%=saleImg.getSaleImgSaveName2()%>" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="file" name="filename2" id="getfile2"
@@ -97,7 +97,7 @@ text-align: center;
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<img id="preview3" src="reaimg/<%=saleImgList.get(2).getSaleImgSaveName()%>" alt="Profile">
+										<img id="preview3" src="reaimg/<%=saleImg.getSaleImgSaveName1()%>" alt="Profile">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="file" name="filename3" id="getfile3"
@@ -168,26 +168,33 @@ text-align: center;
 	}; 
 	
 	 $(function(){
-		$("#submitBtn").click(function(){
-			var aptNum = <%=aptNum%>;
-			//console.log(aptNum);
-			var form = $("#myForm")[0];
-		 	var formData = new FormData(form);
-		 	
-		 	 $.ajax({
-		 		url : 'UpdateSaleImgService.d4b?aptNum='+aptNum,
-		 		enctype : "multipart/form-data",
-		 		type : 'post',
-		 		data : formData,
-		 		dataType:'html',
-		 		contentType : false,
-		 		processData : false,
-		 		success:function(data){
-		 			console.log(data);
-		 			$("#imgUpload").empty();
-		 			$("#imgUpload").append(data);
-		 		}
-		 	});
+		$("#submitBtn").click(function(event){
+			
+			if( $("#getfile1").val()=="" || $("#getfile2").val()=="" || $("#getfile3").val()==""){
+				alert("매물 사진을 등록해주세요");
+				e.preventdefault();
+			}else{
+				var aptNum = <%=aptNum%>;
+				//console.log(aptNum);
+				var form = $("#myForm")[0];
+			 	var formData = new FormData(form);
+			 	
+			 	 $.ajax({
+			 		url : 'UpdateSaleImgService.d4b?aptNum='+aptNum,
+			 		enctype : "multipart/form-data",
+			 		type : 'post',
+			 		data : formData,
+			 		dataType:'html',
+			 		contentType : false,
+			 		processData : false,
+			 		success:function(data){
+			 			console.log(data);
+			 			$("#imgUpload").empty();
+			 			$("#imgUpload").append(data);
+			 		}
+			 	});		
+			}
+		
 		});
 			
 		

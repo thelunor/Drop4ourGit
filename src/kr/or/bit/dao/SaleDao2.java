@@ -185,7 +185,7 @@ public class SaleDao2 {
 		Sale sale = null;
 		try {
 			conn = ds.getConnection();
-			String sql_select_aptInfo = "select aptnum, aptsize, type, addr, aptname, aptdong, aptho, price, direction, etc, iscontract, reaid from sale"
+			String sql_select_aptInfo = "select aptnum, aptsize, type, addr, aptname, aptdong, aptho, price, direction, etc, iscontract, reaid, roadaddr from sale"
 					+" where aptnum=?";
 			pstmt = conn.prepareStatement(sql_select_aptInfo);
 			pstmt.setString(1, aptNum);
@@ -204,6 +204,7 @@ public class SaleDao2 {
 				sale.setEtc(rs.getString("etc"));
 				sale.setIsContract(rs.getString("isContract"));
 				sale.setId(rs.getString("reaId"));
+				sale.setRoadAddr(rs.getString("roadAddr"));
 
 			}
 			System.out.println("DB에서 온 아파트 정보" + sale.toString());
@@ -303,7 +304,7 @@ public class SaleDao2 {
 			conn = ds.getConnection();
 			
 			//매물 테이블에 객체 넣기
-			String sql_update_sale = "update sale set aptsize=?,type=(select type from type where type=?),addr=?,aptname=?,aptdong=?,aptho=?,price=?,direction=?,etc=?,iscontract=?"
+			String sql_update_sale = "update sale set aptsize=?,type=(select type from type where type=?),addr=?,aptname=?,aptdong=?,aptho=?,price=?,direction=?,etc=?,iscontract=?,roadAddr=?"
 					+" where aptnum=?";
 			pstmt = conn.prepareStatement(sql_update_sale);
 			pstmt.setString(1, sale.getAptSize());
@@ -316,7 +317,8 @@ public class SaleDao2 {
 			pstmt.setString(8, sale.getDirection());
 			pstmt.setString(9, sale.getEtc());
 			pstmt.setString(10, sale.getIsContract());
-			pstmt.setString(11, sale.getAptNum());
+			pstmt.setString(11, sale.getRoadAddr());
+			pstmt.setString(12, sale.getAptNum());
 			resultRow = pstmt.executeUpdate();
 			
 			if(resultRow>0) {
