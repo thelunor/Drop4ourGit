@@ -4,16 +4,14 @@
 <%@page import="kr.or.bit.dao.BookMarkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%
 	String genericUserId = (String) session.getAttribute("genericUserId");
 	BookMarkDao dao = new BookMarkDao();
 	List<BookMark> bmList = new ArrayList<BookMark>();
-	bmList = dao.getBookMark(genericUserId); //reaId로 리스트 불러오기
-	System.out.println("saleList.toString(): " + bmList.toString());	
-%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	bmList = dao.getBookMark(genericUserId); //reaId로 리스트 불러오기	
+%>	
+
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 a {
 	color: gray;
@@ -63,6 +61,7 @@ a:hover, a:focus, a:active, a.active {
 
 .card-body {
 	overflow: hidden;
+	width : 100%;
 }
 
 .card-body ul {
@@ -77,8 +76,48 @@ a:hover, a:focus, a:active, a.active {
 .card-body ul li i {
 	margin-right: 10px;
 }
+h6{
+font-family: 'Jua', sans-serif;
+}
 </style>
 <script>
+$(function() {
+	
+	$.ajax({
+        url : 'BookMarkList',
+        type : 'post',
+        data : {"userId" : $("#myId").val()},
+        dataType : 'json',
+        success : function(data) {	
+        	console.log(data);
+            $.each(data, function(index, element) {            	
+            		var content = "";
+					content += "<div class='col-lg-4' onclick='deleteBookmark()' id='bookmark'>";
+					content += "<div class='card_top_border'></div>";
+					content += "<div class='card'>";
+					content += "<div class='contain'>";
+					content += "<img class='card-img-top img-fluid' src='./images/admin.jpg' width='100%' height='220'>";			
+					content += "<span id='text' class='close'><i class='fas fa-star'></i></span>"; 		
+					content += "</div>";
+					content += "<div class='card-body'>";
+					content += "<ul>";
+					content += "<h6 style='text-align:center;'><b>"+element.aptName+"</b></h6>";
+					content += "<li><i class='fa fa-check-circle text-primary'></i>"+element.type+"</li>";	
+					content += "<li><i class='fa fa-check-circle text-primary'></i>"+element.price+"만 원</li>";
+					content += "</ul>";
+					content += "</div>";
+					content += "</div>";
+					content += "<br>";
+					content += "</div>";  
+					
+					$('#bmContent').append(content);
+            	
+            });
+        }
+    });	
+		
+});
+
 var close = document.getElementsByClassName("close");
 function deleteBookmark(){
    for (var i = 0; i < close.length; i++) {
@@ -95,6 +134,7 @@ function deleteBookmark(){
 		<div class="row">
 			<div class="col-lg-2">
 				<div class="list-group">
+					<a class="list-group-item"></a>
 					<a href="#" class="list-group-item">북마크</a> <a href="#"
 						class="list-group-item">계약관리</a> <a
 						href="GetGenericUserEditService.d4b?genericUserId=<%=genericUserId%>"
@@ -104,120 +144,23 @@ function deleteBookmark(){
 			<div class="col-lg-1"></div>
 			<div class="col-lg-9">
 				<h3 style="font-family: 'Jua', sans-serif;">북마크</h3>
-				<a href="#">24평</a> &nbsp; | &nbsp; <a href="#">32평</a> &nbsp; |
-				&nbsp; <a href="#">42평</a> &nbsp;
-				<hr>
 				<div class="row">
-					<div class="col-lg-4" onclick="deleteBookmark()" id="bookmark">
-						<div class="card_top_border"></div>
-						<div class="card">
-						<div class="contain">
-							<img class="card-img-top img-fluid" src="./images/admin.jpg" width="220" height="220">			
-							<span id="text" class="close"><i class="fas fa-star"></i></span> 		
-							</div>
-							<div class="card-body">
-								<ul>
-								<li style="font-size: 30px; text-align: center; color:black;"><b>반포자이</b></li>
-									<li><i class="fa fa-check-circle text-primary"></i> 4억</li>
-									<li><i class="fa fa-check-circle text-primary"></i> 올수리 남향</li>
-								</ul>
-							</div>
-						 </div>
-					<br>
-					</div>
+				<div class="col-sm-12">
+				<input type="hidden" id="myId" value="<%=genericUserId%>">
+ 
+				<a href="#" id="twenty">24평</a> &nbsp; | &nbsp; <a href="#" id="thirty">32평</a>&nbsp; |
+				&nbsp; <a >42평</a> &nbsp;
 
-					<div class="col-lg-4" onclick="deleteBookmark()" id="bookmark">
-						<div class="card_top_border"></div>
-						<div class="card">
-						<div class="contain">
-							<img class="card-img-top img-fluid" src="./images/admin.jpg" width="220" height="220">			
-							<span id="text" class="close"><i class="fas fa-star"></i></span> 		
-							</div>
-							<div class="card-body">
-								<ul>
-								<li style="font-size: 30px; text-align: center; color:black;"><b>반포자이1</b></li>
-									<li><i class="fa fa-check-circle text-primary"></i> 4억</li>
-									<li><i class="fa fa-check-circle text-primary"></i> 올수리 남향</li>
-								</ul>
-							</div>
-						 </div>
-					<br>	 
-					</div>
-					<div class="col-lg-4" onclick="deleteBookmark()" id="bookmark">
-						<div class="card_top_border"></div>
-						<div class="card">
-						<div class="contain">
-							<img class="card-img-top img-fluid" src="./images/admin.jpg" width="220" height="220">			
-							<span id="text" class="close"><i class="fas fa-star"></i></span> 		
-							</div>
-							<div class="card-body">
-								<ul>
-								<li style="font-size: 30px; text-align: center; color:black;"><b>반포자이2</b></li>
-									<li><i class="fa fa-check-circle text-primary"></i> 4억</li>
-									<li><i class="fa fa-check-circle text-primary"></i> 올수리 남향</li>
-								</ul>
-							</div>
-						 </div>
-					<br>	 
-					</div>
-					<br>
-					<br>
-					<br>
-					<div class="col-lg-4" onclick="deleteBookmark()" id="bookmark">
-						<div class="card_top_border"></div>
-						<div class="card">
-						<div class="contain">
-							<img class="card-img-top img-fluid" src="./images/admin.jpg" width="220" height="220">			
-							<span id="text" class="close"><i class="fas fa-star"></i></span> 		
-							</div>
-							<div class="card-body">
-								<ul>
-								<li style="font-size: 30px; text-align: center; color:black;"><b>반포자이3</b></li>
-									<li><i class="fa fa-check-circle text-primary"></i> 4억</li>
-									<li><i class="fa fa-check-circle text-primary"></i> 올수리 남향</li>
-								</ul>
-							</div>
-						 </div>
-					<br>						 
-					</div>
-					<div class="col-lg-4" onclick="deleteBookmark()" id="bookmark">
-						<div class="card_top_border"></div>
-						<div class="card">
-						<div class="contain">
-							<img class="card-img-top img-fluid" src="./images/admin.jpg" width="220" height="220">			
-							<span id="text" class="close"><i class="fas fa-star"></i></span> 		
-							</div>
-							<div class="card-body">
-								<ul>
-								<li style="font-size: 30px; text-align: center; color:black;"><b>반포자이4</b></li>
-									<li><i class="fa fa-check-circle text-primary"></i> 4억</li>
-									<li><i class="fa fa-check-circle text-primary"></i> 올수리 남향</li>
-								</ul>
-							</div>
-						 </div>
-					<br>						 
-					</div>
-					<div class="col-lg-4" onclick="deleteBookmark()" id="bookmark">
-						<div class="card_top_border"></div>
-						<div class="card">
-						<div class="contain">
-							<img class="card-img-top img-fluid" src="./images/admin.jpg" width="220" height="220">			
-							<span id="text" class="close"><i class="fas fa-star"></i></span> 		
-							</div>
-							<div class="card-body">
-								<ul>
-								<li style="font-size: 30px; text-align: center; color:black;"><b>반포자이5</b></li>
-									<li><i class="fa fa-check-circle text-primary"></i> 4억</li>
-									<li><i class="fa fa-check-circle text-primary"></i> 올수리 남향</li>
-								</ul>
-							</div>
-						 </div>
-					</div>	
-					<br>									
+				<h6 style="float: right;"><img src="images/love.gif" style="width: 40px; height: 30px;"><%=genericUserId%> 님의 페이지입니다</h6>
 				</div>
+				</div>
+				<hr>
+				<div class="row" id="bmContent">
+				<br>									
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <!-- /.container -->
 
