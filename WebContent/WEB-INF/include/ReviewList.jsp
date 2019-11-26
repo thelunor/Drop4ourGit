@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.sql.Date"%>
 <%@page import="kr.or.bit.dto.GenericUser"%>
 <%@page import="sun.reflect.generics.visitor.Reifier"%>
 <%@page import="kr.or.bit.dao.ReviewDao"%>
@@ -33,11 +35,11 @@
 	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
 	
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
-	GenericUser genericUser = (GenericUser) request.getAttribute("genericUser");
 	String reaId = reaUser.getReaId();
-	String userId = (String) request.getAttribute("userId");
-	System.out.println("ReviewList userId: " + userId);
+	String genericUserId = (String) session.getAttribute("genericUserId");
+	System.out.println("ReviewList userId: " + genericUserId);
 	System.out.println("ReviewList reaId: " + reaId);
+	
 	// Review review = new Review();
 	// System.out.println("ReviewList review.toString: " + review.toString());
 	// java.sql.Date reviewDate = (java.sql.Date) request.getAttribute("reviewDate");
@@ -45,8 +47,9 @@
 	// int reviewNum = (Integer) request.getAttribute("reviewNum"); 
 %>
 	
-<c:set var="reviewList" value="<%=reviewList%>"></c:set>
-
+<c:set var="reviewList" value="<%=reviewList%>" />
+<input type="hidden" id="getREAId" value="<%=reaId%>">
+<input type="hidden" id="getUserId" value="<%=genericUserId%>">
 <section id="id" class="about">
 	<div class="container">
 		<div class="about_content">
@@ -143,17 +146,23 @@
 				url: 'InsertReview', // kr.or.bit.ajax
 				dataType: 'json',
 				type: 'post',
-				success: function(insertReview) {
+				data: {
+					reaId: $('#getREAId').val(),
+					userId: $('#getUserId').val(),
+					reviewDate: $('#reviewDate').val(),
+					reviewContent: $('#reviewContent').val(),
+				},
+				success: function(data) {
 					var review = "";
 						review += "<tr>";
 						review += "<td align='left' width='70%'>";
-						review += "<span>" + $('#reviewDate').val() + "</span></td>";
+						review += "<span>" + data.reviewDate + "</span></td>";
 						review += "<td align='right'>";
-						review += "작성자: <span>" + $('#userId').val() + "</span></td>";
+						review += "작성자: <span>" + data.userId + "</span></td>";
 						review += "</tr>";
 						review += "<tr>";
 						review += "<td colspan='2' style='border: 1px solid #d2d0d0; height: 120px;'>";
-						review += $('#reviewContent').val() + "</td>";
+						review += data.reviewContent + "</td>";
 						review += "</tr>";
 						review += "<tr>";
 						review += "<td colspan='2'>";
