@@ -152,7 +152,7 @@ text-align: center;
 						</div>
 						<!-- End Skill Bar -->
 					</div>						
-				 <a class="btn trigger" href="#">See the Details</a>		
+				 <a class="btn trigger" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>		
 				 </div>
 			</div>
 		</div>
@@ -191,10 +191,7 @@ text-align: center;
 	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 	// marker.setMap(null);
 $(function(){
-	var genericUserId = <%=genericUserId%>
-	var reaId = <%=reaId%>
-	console.log(genericUserId);
-	console.log(reaId);
+	
 	$('.slick-items').slick({
 		autoplay : true,
 		dots : true,
@@ -205,16 +202,7 @@ $(function(){
 		slidesToShow : 1,
 		slidesToScroll : 1,
 		fade : false
-	});
-	$('.trigger').on('click', function() {
-		alert("로그인해주세요")
-        $('.modal-wrapper').toggleClass('open');
-       $('.page-wrapper').toggleClass('blur-it');
-        return false;
-     });
-     $('[data-toggle="tooltip"]').tooltip(); 
-/*GetSaleDataService.d4b?aptNum=${sale.key.aptNum}*/
-		
+	});		
 });
 	
 </script>
