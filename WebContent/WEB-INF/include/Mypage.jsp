@@ -156,7 +156,7 @@ function deleteBookmark(){
 				<input type="hidden" id="myId" value="<%=genericUserId%>">
  
 				<a href="#" onclick="getBookMark('24')">24평</a> &nbsp; | &nbsp; <a href="#" onclick="getBookMark('32')">32평</a>&nbsp; |
-				&nbsp; <a onclick="getBookMark('42')">42평</a> &nbsp;
+				&nbsp; <a href="#" onclick="getBookMark('42')">42평</a> &nbsp;
 
 				<h6 style="float: right;"><img src="images/love.gif" style="width: 40px; height: 30px;"><%=genericUserId%> 님의 페이지입니다</h6>
 				</div>
