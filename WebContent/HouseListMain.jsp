@@ -32,7 +32,7 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 
      	});
 
-     	$("#searchInput").autocomplete({ //오토 컴플릿트 시작
+     	$("#houseSearch").autocomplete({ //오토 컴플릿트 시작
 			source : addrList, // source 는 자동 완성 대상
 			select : function(event, ui) { //아이템 선택시
 
@@ -58,13 +58,13 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
         }
 	});
 	
+	/*
 	$("#submitbtn").click(function() {
 		var address= $("#houseSearch").val().trim();
 		//console.log(address[0]+address[1]+address[2]);	
 // 		location.href="'SelectaptListService.d4b?address="+address[0]+address[1]+address[2];
 		location.href='SelectAptListService.d4b?search=' + address
-	});
-	
+	});*/
 	});
 </script>
 <style type="text/css">

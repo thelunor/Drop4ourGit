@@ -201,10 +201,6 @@ $(function(){
 		slidesToScroll : 1,
 		fade : false
 	});
-	$('#detailBtn').click(function(e){
-		alert("로그인 해주세요");
-		e.preventdefault();
-	})
 
 });
 	
