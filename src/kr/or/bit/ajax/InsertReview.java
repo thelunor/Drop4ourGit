@@ -36,10 +36,18 @@ public class InsertReview extends HttpServlet {
     	try {
     		review = new Review();
     		rvdao = new ReviewDao();
+    		reaId = review.getReaId();
+    		userId = review.getUserId();
     		result = rvdao.insertReview(review);
+    		System.out.println("InsertReview ajax reaId: " + reaId);
+    		System.out.println("InsertReview ajax userId: " + userId);
+    		System.out.println("InsertReview ajax result : " + result);
     		
-    		out.print(result);
-    		System.out.println("InsertReview ajax 성공");
+    		if (result > 0) {
+    			out.print(result);
+    			System.out.println("InsertReview ajax 성공");
+    		}
+    		System.out.println("InsertReview ajax 실패");
     	} catch (Exception e) {
     		System.out.println("InsertReview ajax 예외발생");
 			System.out.println(e.getMessage());

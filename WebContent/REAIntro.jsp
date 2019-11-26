@@ -1,3 +1,5 @@
+<%@page import="kr.or.bit.dto.GenericUser"%>
+<%@page import="kr.or.bit.dto.UserCode"%>
 <%@page import="kr.or.bit.dto.REAIntroBoard"%>
 <%@page import="kr.or.bit.dto.REAImage"%>
 <%@page import="kr.or.bit.dto.REAUser"%>
@@ -11,7 +13,11 @@
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
 	REAIntroBoard reaIntro = (REAIntroBoard) request.getAttribute("reaIntro");
-	// System.out.println("REAIntro.jsp");
+	String genericUserId = (String) session.getAttribute("genericUserId");
+	String reaId = (String) request.getAttribute("reaId");
+	System.out.println("REAIntro genericUserId: " + genericUserId);
+	System.out.println("REAIntro reaId: " + reaId);
+
 	// System.out.println("reaUser: " + reaUser);
 	// System.out.println("reaIntro: " + reaIntro);
 %>
@@ -106,7 +112,6 @@
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
 	
-	
 	<div class="culmn">
 		<!--Home page style-->
 
@@ -133,13 +138,19 @@
 								<hr>
 							</div>
 							<div>
-								두번째 소개
+								<b>${reaUserData.officeName}</b><br>
+								대표 공인중개사: <br>
+								<b>${reaUserData.reaName}</b><br>
+								${reaUserData.officeHp}
 							</div>
 							<div style="margin-top: 10px; margin-bottom: 10px;">
 								<hr>
 							</div>
 							<div>
-								세번째 소개
+								사업장 주소: <br>
+								${reaUserData.officeAddr} ${reaUserData.officeDetailAddr}<br><br>
+								사업자 등록번호: <br>
+								${reaUserData.regNum}
 							</div>
 						</div>
 						<!-- Left End -->

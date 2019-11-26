@@ -52,11 +52,11 @@ public class Review {				//후기 DTO
 		this.reviewDate = reviewDate;
 	}
 
-	public String getReaid() {
+	public String getReaId() {
 		return reaId;
 	}
 
-	public void setReaid(String reaId) {
+	public void setReaId(String reaId) {
 		this.reaId = reaId;
 	}
 

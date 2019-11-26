@@ -30,6 +30,8 @@ public class InsertReviewService implements Action {
 			System.out.println(e1.getMessage());
 		}
 		String reaId = request.getParameter("reaId");
+		System.out.println("InsertReviewService userId : " + userId);
+		System.out.println("InsertReviewService reaId : " + reaId);
 		
 		// 객체에 데이터 저장
 		Review review = new Review();
@@ -37,7 +39,7 @@ public class InsertReviewService implements Action {
 		review.setUserId(userId);
 		review.setReviewContent(reviewContent);
 		review.setReviewDate(reviewDate);
-		review.setReaid(reaId);
+		review.setReaId(reaId);
 		
 		// 데이터 저장 확인
 		System.out.println("Review 객체 데이터 저장 확인: " + review.toString());

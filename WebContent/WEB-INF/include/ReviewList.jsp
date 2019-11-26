@@ -31,8 +31,12 @@
 <%	
 	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
 	
-	String reaId = (String) request.getAttribute("reaId");
-	// String userId = (String) request.getAttribute("userId");
+	String reaId = (String) session.getAttribute("reaId");
+	String userId = (String) session.getAttribute("userId");
+	System.out.println("ReviewList userId: " + userId);
+	System.out.println("ReviewList reaId: " + reaId);
+	Review review = new Review();
+	System.out.println("ReviewList review.toString: " + review.toString());
 	// java.sql.Date reviewDate = (java.sql.Date) request.getAttribute("reviewDate");
 	// String reviewContent = (String) request.getAttribute("reviewContent");
 	// int reviewNum = (Integer) request.getAttribute("reviewNum"); 
@@ -136,6 +140,13 @@
 				url: 'InsertReview', // kr.or.bit.ajax
 				dataType: 'json',
 				type: 'post',
+				data: {
+					reaId: "",
+					userId: "",
+					reviewContent: "",
+					reviewDate: "",
+					reviewNum: ""
+				},
 				success: function(insertReview) {
 					var review = "";
 						review += "<tr>";

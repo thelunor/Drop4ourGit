@@ -11,6 +11,7 @@
 	SaleImage saleImg = (SaleImage) request.getAttribute("saleImg");
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
+	String genericUserId = (String) session.getAttribute("genericUserId");
 %>
 
 <!doctype html>
@@ -336,7 +337,8 @@ a.btn  {
 				</div>
 				<br>			
 				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-block btn-lg">Click</button>
+					<button type="submit" class="btn btn-primary btn-block btn-lg" 
+						onclick="location.href='GetREAIntroPageService.d4b?reaId=${reaData.reaId}&genericUserId=${genericUserId}'">Click</button>
 				</div>					
 				</div>
     </div>
