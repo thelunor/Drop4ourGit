@@ -11,9 +11,9 @@
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
 	REAIntroBoard reaIntro = (REAIntroBoard) request.getAttribute("reaIntro");
-	System.out.println("REAIntro.jsp");
-	System.out.println("reaUser: " + reaUser);
-	System.out.println("reaIntro: " + reaIntro);
+	// System.out.println("REAIntro.jsp");
+	// System.out.println("reaUser: " + reaUser);
+	// System.out.println("reaIntro: " + reaIntro);
 %>
 <c:set var="reaUserData" value="<%=reaUser %>"/>
 <c:set var="reaImgData" value="<%=reaImg %>"/>

@@ -26,8 +26,8 @@ public class InsertReviewService implements Action {
 		try {
 			reviewDate = (Date) new SimpleDateFormat().parse(request.getParameter("reviewDate"));
 		} catch (ParseException e1) {
-			System.out.println("reviewDate 예외발생");
-			e1.printStackTrace();
+			System.out.println("InsertReviewService reviewDate 예외발생");
+			System.out.println(e1.getMessage());
 		}
 		String reaId = request.getParameter("reaId");
 		
@@ -40,14 +40,15 @@ public class InsertReviewService implements Action {
 		review.setReaid(reaId);
 		
 		// 데이터 저장 확인
-		System.out.println("데이터 저장 확인: " + review.toString());
+		System.out.println("Review 객체 데이터 저장 확인: " + review.toString());
 		
 		try {
 			// DB 저장
 			ReviewDao rvdao = new ReviewDao();
 			int result = rvdao.insertReview(review);
+			System.out.println("result: " + result);
 			if (result > 0) {
-				forward.setPath("REAIntro.jsp");
+				forward.setPath("InsertReview");
 			} else {
 				forward.setPath("Main.jsp");
 			}
@@ -55,7 +56,7 @@ public class InsertReviewService implements Action {
 			System.out.println("InsertReviewService 예외발생");
 			System.out.println(e.getMessage());
 		}
-		
+		System.out.println(forward);
 		return forward;
 	}
 

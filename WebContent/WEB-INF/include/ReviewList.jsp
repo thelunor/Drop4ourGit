@@ -32,17 +32,14 @@
 	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
 	
 	String reaId = (String) request.getAttribute("reaId");
-	String userId = (String) request.getAttribute("userId");
-	java.sql.Date reviewDate = (java.sql.Date) request.getAttribute("reviewDate");
-	String reviewContent = (String) request.getAttribute("reviewContent");
-	int reviewNum = (Integer) request.getAttribute("reviewNum"); 
+	// String userId = (String) request.getAttribute("userId");
+	// java.sql.Date reviewDate = (java.sql.Date) request.getAttribute("reviewDate");
+	// String reviewContent = (String) request.getAttribute("reviewContent");
+	// int reviewNum = (Integer) request.getAttribute("reviewNum"); 
 %>
 	
 <c:set var="reviewList" value="<%=reviewList%>"></c:set>
 
-<script type="text/javascript">
-</script>
-	
 <section id="id" class="about">
 	<div class="container">
 		<div class="about_content">
@@ -81,23 +78,28 @@
 						<div style="margin-top: 20px; margin-bottom: 20px;">
 							<hr>
 						</div>
-						<c:forEach var="reviewTable" items="<%=reviewList%>" varStatus="status">
-							<table style="width: 100%;">
-								<tr>
-									<td align="left" width="70%">
-										<span>${reviewTable.reviewDate}</span></td>
-									<td align="right">
-										작성자: <span>${reviewTable.userId}</span></td>
-								</tr>
-								<tr>
-									<td colspan="2" style="border: 1px solid #d2d0d0; height: 120px;">
-										${reviewTable.reviewContent}</td>
-								</tr>
-							</table>
-							<div style="margin-top: 20px; margin-bottom: 20px;">
-								<hr>
-							</div>
-						</c:forEach>
+						
+						<table style="width: 100%;" id="reviewbody">
+							<c:forEach var="reviewTable" items="<%=reviewList%>" varStatus="status">
+									<tr>
+										<td align="left" width="70%">
+											<span id="reviewDate">${reviewTable.reviewDate}</span></td>
+										<td align="right">
+											작성자: <span id="userId">${reviewTable.userId}</span></td>
+									</tr>
+									<tr>
+										<td colspan="2" style="border: 1px solid #d2d0d0; height: 120px;" id="reviewContent">
+											${reviewTable.reviewContent}</td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											<div style="margin-top: 20px; margin-bottom: 20px;">
+												<hr>
+											</div>
+										</td>
+									</tr>
+							</c:forEach>
+						</table>
 						
 <%-- 						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
 						<c:if test="${cpage>1}">
@@ -129,9 +131,32 @@
 
 <script type="text/javascript">
 	$(function() {
-		function insert_review() {
-			
-		}
+		$('#insert_review').click(function() {
+			$.ajax({
+				url: 'InsertReview', // kr.or.bit.ajax
+				dataType: 'json',
+				type: 'post',
+				success: function(insertReview) {
+					var review = "";
+						review += "<tr>";
+						review += "<td align='left' width='70%'>";
+						review += "<span>" + $('#reviewDate').val() + "</span></td>";
+						review += "<td align='right'>";
+						review += "작성자: <span>" + $('#userId').val() + "</span></td>";
+						review += "</tr>";
+						review += "<tr>";
+						review += "<td colspan='2' style='border: 1px solid #d2d0d0; height: 120px;'>";
+						review += $('#reviewContent').val() + "</td>";
+						review += "</tr>";
+						review += "<tr>";
+						review += "<td colspan='2'>";
+						review += "<div style='margin-top: 20px; margin-bottom: 20px;'>";
+						review += "<hr></div></td></tr>";
+						
+						$('#reviewbody').append(review);
+				}
+			})
+		})
 	})
 </script>
 

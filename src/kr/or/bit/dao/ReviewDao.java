@@ -34,16 +34,18 @@ public class ReviewDao {
 		
 		try {
 			conn = ds.getConnection();
-			String sql = "INSERT INTO REVIEW (REVIEWNUM, USERID, REVIEWCONTENT, REVIEWDATE, REAID)" 
-						+ " VALUES (SEQ_REVIEW.NEXTVAL, (SELECT USERID FROM GENERICUSER WHERE USERID=?), ?, ?, "
-						+ " SELECT REAID FROM REAUSER WHERE REAID=?)";
+			String sql = "INSERT INTO REVIEW (REVIEWNUM, USERID, REVIEWCONTENT, REVIEWDATE, REAID) " 
+						+ " VALUES (SEQ_REVIEW.NEXTVAL, (SELECT USERID FROM GENERICUSER WHERE USERID=?), "
+						+ " ?, SYSDATE, (SELECT REAID FROM REAUSER WHERE REAID=?))";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, review.getUserId());
 			pstmt.setString(2, review.getReviewContent());
-			pstmt.setDate(3, (Date) review.getReviewDate());
-			pstmt.setString(4, review.getReaid());
+			// pstmt.setDate(3, (Date) review.getReviewDate());
+			// 후기글 입력 시 오늘 날짜로 DB 저장(SYSDATE)
+			pstmt.setString(3, review.getReaid());
 			
 			row = pstmt.executeUpdate();
+			System.out.println("리뷰등록 dao row: " + row);
 		} catch (Exception e) {
 			System.out.println("리뷰등록 dao 예외발생");
 			System.out.println(e.getMessage());
