@@ -233,6 +233,13 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if (url_Command.equals("/GetREAIntroBoardService.d4b")) { //공인중개사가 후기 작성 페이지로
+			try {
+				forward = new ActionForward();
+				forward.setPath("/REAIntroBoard.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (url_Command.equals("/GetREAScheduleListByDateService.d4b")) {
 			try {
 				action = new GetREAScheduleListByDateService(); //

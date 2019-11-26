@@ -146,6 +146,8 @@ text-align: center;
 	Map<Sale, SaleImage> saleMap = (Map<Sale, SaleImage>)request.getAttribute("saleMap");
 	ArrayList<String> priceList=new ArrayList<String>();
 	String stringPrice=null;
+	
+	
 	for ( Map.Entry<Sale, SaleImage> entry : saleMap.entrySet() ) {
 	    System.out.println("key : " + entry.getKey() +" / value : " + entry.getKey());
 	}

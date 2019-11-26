@@ -73,6 +73,7 @@ public class UpdateSaleService implements Action {
 						
 			if (result > 0) {
 				forward.setPath("GetSaleImgService.d4b?aptNum="+aptNum);
+				System.out.println(forward.getPath());
 			} else {
 				forward.setPath("Main.jsp");
 			}
