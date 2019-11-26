@@ -1,5 +1,7 @@
 package kr.or.bit.service;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,13 +16,18 @@ public class LoginService implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
+		PrintWriter out=null;
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
 
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 
 		try {
+			out=response.getWriter();
 			AdminDao aDao = new AdminDao();
 			GenericUserDao gDao = new GenericUserDao();
 			REAUserDao rDao = new REAUserDao();
@@ -59,6 +66,7 @@ public class LoginService implements Action {
 				return forward;
 			} else {
 				forward.setPath("Login.jsp"); // 아이디 또는 비밀번호가 일치하지 않을 때
+				request.setAttribute("type", "000");
 				System.out.println("로그인 실패");
 				return forward;
 			}

@@ -21,6 +21,13 @@
 
         }
     </style>
+    <%
+	String type=(String) request.getAttribute("type");
+	if(type=="000"){
+		System.out.println(type);
+		out.print("<script>alert('아이디 또는 비밀번호를 확인해주세요.')</script>");
+	}
+%>
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
