@@ -22,7 +22,35 @@ public class REAIntroBoardDao {
 	/* 소개 페이지 넣기, 읽기, 수정, 삭제 */
 
 	public int insertREAIntro(REAIntroBoard reaintro) { // 소개 페이지 넣기
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			String sql_insert_reaIntro = "insert into reaintroboard(reaid, subject, content)"
+					+"values((select reaid from reauser where reaid=?), ?, ?)";
+			pstmt = conn.prepareStatement(sql_insert_reaIntro);
+			pstmt.setString(1, reaintro.getId());
+			pstmt.setString(2, reaintro.getSubject());
+			pstmt.setString(3, reaintro.getContent());
+			resultRow = pstmt.executeUpdate();
+			if(resultRow > 0) {
+				System.out.println("소개 페이지 db 등록 완료");
+			}
+						
+		} catch (Exception e) {
+			System.out.println("insertREAIntro 예외발생");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				conn.close(); // 반환하기
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return resultRow;
 	}
 
 	public REAIntroBoard getREAIntroData(String id) { // 소개 읽기

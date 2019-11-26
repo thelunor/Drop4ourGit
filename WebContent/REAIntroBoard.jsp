@@ -78,7 +78,7 @@ h1, h3 {
 		<!-- Container -->
 		<section id="join" class="about roomy-100">
 			<div class="container">
-				<form id="introForm" role="form" action="InsertREAIntroService.d4b?reaId=<%=reaId %>" method="post">
+				<form id="introForm" role="form" action="InsertREAIntroService.d4b?reaUserId=<%=reaId %>" method="post">
 					<br style="clear: both">
 					<h3 style="margin-bottom: 25px;">공인중개사 소개글</h3>
 					<div class="form-group">
