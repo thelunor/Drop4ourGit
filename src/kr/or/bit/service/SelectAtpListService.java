@@ -18,13 +18,14 @@ public class SelectAtpListService implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
+		System.out.println("SelectAtpListService");
 		// HttpSession session = request.getSession();
 		String search = request.getParameter("search");
 		System.out.println(search);
 		Map<Sale, SaleImage> saleMap = new HashMap<Sale, SaleImage>();
 		
 		// String address = request.getParameter("address");
-
+		//80215
 		try {
 			SaleDao dao = new SaleDao();
 			saleMap = dao.selectAtpList(search);
