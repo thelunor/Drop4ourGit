@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import kr.or.bit.dto.REAIntroBoard;
+import kr.or.bit.utils.DB_Close;
 
 public class REAIntroBoardDao {
 
@@ -42,8 +43,8 @@ public class REAIntroBoardDao {
 			System.out.println("insertREAIntro 예외발생");
 			System.out.println(e.getMessage());
 		} finally {
+			DB_Close.close(pstmt);
 			try {
-				pstmt.close();
 				conn.close(); // 반환하기
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -61,6 +62,7 @@ public class REAIntroBoardDao {
 		
 		try {
 			conn = ds.getConnection();
+			System.out.println("디비디비비디비");
 			String select_sql = "SELECT REAID, SUBJECT, CONTENT "
 								+ "FROM REAINTROBOARD WHERE REAID=?";
 			pstmt = conn.prepareStatement(select_sql);
@@ -75,7 +77,6 @@ public class REAIntroBoardDao {
 				String content = rs.getString("content");
 				reaIntro = new REAIntroBoard(reaId, subject, content);
 
-				System.out.println("여기까지 성공중");
 			}
 		} catch (Exception e) {
 			System.out.println("getREAIntroDao 예외발생");
@@ -98,7 +99,36 @@ public class REAIntroBoardDao {
 		return 0;
 	}
 
-	public int deleteREAIntro(String id) { // 소개 삭제(공인중개사 id로)
+	public int deleteREAIntro(String reaid) { // 소개 삭제(공인중개사 id로)
 		return 0;
+	}
+	
+	public boolean checkREAIntro(String reaId) {
+		boolean check = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = ds.getConnection();
+			String sql_check = "select subject, content from reaintroboard where reaid=?";
+			pstmt = conn.prepareStatement(sql_check);
+			pstmt.setString(1, reaId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { 
+				check=true; //이미 등록된 소개글이 있다면
+			}else {
+				check=false;
+			}
+		}catch(Exception e) {
+			
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close(); // 반환하기
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return check;
 	}
 }

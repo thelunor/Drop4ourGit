@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
+import kr.or.bit.service.CheckIntroBoardService;
 import kr.or.bit.service.DeleteBookMarkService;
 import kr.or.bit.service.DeleteContractService;
 import kr.or.bit.service.DeleteGenericUserService;
@@ -29,6 +30,7 @@ import kr.or.bit.service.GetGenericUserByResService;
 import kr.or.bit.service.GetGenericUserMypageMainService;
 import kr.or.bit.service.GetGenericUserEditService;
 import kr.or.bit.service.GetREAImgService;
+import kr.or.bit.service.GetREAIntroBoardContentService;
 import kr.or.bit.service.GetREAIntroDataService;
 import kr.or.bit.service.GetREAIntroPageService;
 import kr.or.bit.service.GetREAMypageService;
@@ -90,11 +92,17 @@ public class FrontController extends HttpServlet {
 
 		Action action = null;
 		ActionForward forward = null;
-
 		// 삭제=========================================
-		if (url_Command.equals("/DeleteBookMarkService.d4b")) {
+		if(url_Command.equals("/CheckIntroBoardService.d4b")) {
+			action = new CheckIntroBoardService();
+			forward = action.execute(request, response);
+
+		} else if(url_Command.equals("/DeleteBookMarkService.d4b")) {
 			action = new DeleteBookMarkService();
 			forward = action.execute(request, response);
+		
+		// 삭제=========================================
+		
 		} else if (url_Command.equals("/DeleteContractService.d4b")) {
 			try {
 				action = new DeleteContractService(); //
@@ -237,6 +245,13 @@ public class FrontController extends HttpServlet {
 			try {
 				forward = new ActionForward();
 				forward.setPath("/REAIntroBoard.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/GetREAIntroBoardContentService.d4b")) {
+			try {
+				action = new GetREAIntroBoardContentService(); //
+				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
