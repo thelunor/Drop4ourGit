@@ -105,7 +105,6 @@ text-align: center;
 <br>
 <div class="row">
 	<div class="col-lg-7" id="items">
- <form action="SelectaptListService.d4b" method="post">
  <c:set var="priceList" value="priceList"></c:set>
  <c:set var="stringPrice" value="stringPrice"></c:set>
  <c:set var="listLength" value="listLength"></c:set>
@@ -155,7 +154,6 @@ text-align: center;
 		</div>
 		<hr>
 	</c:forEach>	
-	</form>
 	</div>
 
 	<!-- map -->

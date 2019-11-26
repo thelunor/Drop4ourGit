@@ -58,13 +58,12 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
         }
 	});
 	
-	/*
 	$("#submitbtn").click(function() {
 		var address= $("#houseSearch").val().trim();
 		//console.log(address[0]+address[1]+address[2]);	
 // 		location.href="'SelectaptListService.d4b?address="+address[0]+address[1]+address[2];
 		location.href='SelectAptListService.d4b?search=' + address
-	});*/
+	});
 	});
 </script>
 <style type="text/css">
