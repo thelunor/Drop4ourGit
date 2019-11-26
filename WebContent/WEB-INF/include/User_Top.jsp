@@ -32,9 +32,7 @@
 			</li>
 			<li class='mypage'>
 				<%
-					System.out.println("여기까지 1 ");
 					if (type.equals("U01")) {
-						System.out.println("여기까지 2 ");
 						out.print("<a href='GetGenericUserMypageMainService.d4b?genericUserId="+genericUserId+"'>마이페이지</a>");
 					} else if (type.equals("U02")) {
 						out.print("<a href='GetREAMypageService.d4b?reaId="+reaId+"'>마이페이지</a>");

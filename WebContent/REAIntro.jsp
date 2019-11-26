@@ -168,10 +168,10 @@
 													</h4>
 												</div>
 												<div style="margin-top: 8px;">
-													부동산 소개 제목: ${reaIntroData.subject }
+													${reaIntroData.subject }
 												</div>
 												<div style="margin-top: 8px;">
-													부동산 소개 내용: ${reaIntroData.content }
+													${reaIntroData.content }
 												</div>
 											</div>
 										</div>

@@ -22,18 +22,20 @@ public class GetREAIntroDataService implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		ActionForward forward = null;
+		ActionForward forward = new ActionForward();
+		HttpSession session = request.getSession();
+		String reaId = (String) session.getAttribute("reaUserId");			
+		
 		REAUser reaUser = null;
 		REAImage reaImg = null;
+		List<Review> rvList = null;
+		REAIntroBoard reaIntro = null;
+		
 		REAUserDao readao = null;
 		REAImageDao imgdao = null;
-		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("reaUserId");											
-		List<Review> rvList = null;
+		REAIntroBoardDao reaIntrodao = null;		
 		ReviewDao rvdao = null;
-		REAIntroBoard reaIntro = null;
-		REAIntroBoardDao reaIntrodao = null;
-		
+										
 		try {
 			forward = new ActionForward();
 			readao = new REAUserDao();
@@ -46,15 +48,14 @@ public class GetREAIntroDataService implements Action {
 			reaImg = imgdao.getREAImg(reaId);
 			rvList = rvdao.getReviewList(reaId);
 			reaIntro = reaIntrodao.getREAIntroData(reaId);
-			System.out.println("reaUser: " + reaUser);
-			System.out.println("rvList: " + rvList);
-			System.out.println("reaIntro: " + reaIntro);
-			if(reaUser != null && reaImg != null && rvList != null) {
+			
+			System.out.println("유저"+reaUser.toString());
+			if(reaUser != null && reaImg != null && reaIntro != null && rvList != null) {
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("rvList", rvList);
 				request.setAttribute("reaIntro", reaIntro);
-				forward.setPath("REAIntro.jsp");
+				forward.setPath("REAIntro.jsp?reaUserId="+reaId);
 			}
 		} catch (Exception e) {
 			System.out.println("getREAIntroService 예외발생");
