@@ -165,7 +165,7 @@ table {
 							<br>
 						</div>
 					</div>
-					<jsp:include page="Topic2.jsp"></jsp:include>
+					<jsp:include page="Topic.jsp"></jsp:include>
 					<br>
 					<div class="row">
 						<div class="col-md-12">

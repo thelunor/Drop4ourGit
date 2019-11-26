@@ -410,49 +410,17 @@ $(function() {
   }); 
 </script>
 <%
-	Map<Sale, List<SaleImage>> saleMap = (HashMap<Sale, List<SaleImage>>) request.getAttribute("saleMap");
-	//System.out.println("saleMap.toString(): 하우스리스트 입성: " + saleMap.toString());
-	ArrayList<String> priceList=new ArrayList<String>();
-	String stringPrice=null;
-	 double num = 79830;
-	 int price = 0;
-	 double price2=0;
-	Map<Map<Sale, List<SaleImage>>, String> map= new HashMap<Map<Sale, List<SaleImage>>,String>();
-	 for(Map<Sale, List<SaleImage>> sale : map.keySet()){
-		 for(Sale sale2 : sale.keySet()){
-			 price = Integer.parseInt(sale2.getPrice());
-			 price2= num / price * 100; 
-			 stringPrice = Double.toString(price2)+ "%";
-		 }
-		 map.put(saleMap, stringPrice);
-		}
-	 System.out.println(saleMap.toString());
-	 System.out.println("===============");
-	 System.out.println("맵 ㅡㅡ" + map.toString());
-	 System.out.println("===============");
-	 
-// 	String search=(String)request.getAttribute("search");
-// 	System.out.println(search);
-	
-	
-	
-	//System.out.println("search: " + search);
-	
-	//System.out.println(searchSplit[0]);
+String search=(String)request.getAttribute("search");
+System.out.println(search);
+String name[] = search.split(" ");
+System.out.println(name[0]);
 %>
-<% 
-//    if(!saleList.isEmpty()){
-//       String[] searchSplit = search.split(" ");
-   %>
-   <p style="font-size: 18px; font-family: 'Jua', sans-serif;">"<%=search %>" 검색 결과 &nbsp;&nbsp; <span id="topic"><%=searchSplit[1] %></span>
-   <i class="fas fa-angle-right"></i> <%=searchSplit[2] %></p>   
-   <%}else{
-      %>
-      <p style="font-size: 18px; font-family: 'Jua', sans-serif;"> "<%=search %>" 검색 결과가 없습니다.
-   <%} %>   
-   <br>
-   <div class="notice">
-      <ul class="rolling" id="roll">
-      
-      </ul>
+<p style="font-size: 18px; font-family: 'Jua', sans-serif;"> 검색 결과 &nbsp;&nbsp; <span id="topic"><%= name[0]%></span>
+	<i class="fas fa-angle-right"></i>역삼동</p>		
+
+	<br>
+	<div class="notice">
+		<ul class="rolling" id="roll">
+		
+		</ul>
    </div>
