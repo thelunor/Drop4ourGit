@@ -1,3 +1,4 @@
+<%@page import="kr.or.bit.dto.REAIntroBoard"%>
 <%@page import="kr.or.bit.dto.REAImage"%>
 <%@page import="kr.or.bit.dto.REAUser"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,10 +10,15 @@
 <%
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
-	
+	REAIntroBoard reaIntro = (REAIntroBoard) request.getAttribute("reaIntro");
+	System.out.println("REAIntro.jsp");
+	System.out.println("reaUser: " + reaUser);
+	System.out.println("reaIntro: " + reaIntro);
 %>
-<<c:set var="reaUserData" value="<%=reaUser %>"/>
-<<c:set var="reaImgData" value="<%=reaImg %>"/>
+<c:set var="reaUserData" value="<%=reaUser %>"/>
+<c:set var="reaImgData" value="<%=reaImg %>"/>
+<c:set var="reaIntroData" value="<%=reaIntro %>" />
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
@@ -151,7 +157,10 @@
 													</h4>
 												</div>
 												<div style="margin-top: 8px;">
-													회원가입: 2018.
+													부동산 소개 제목: ${reaIntroData.subject }
+												</div>
+												<div style="margin-top: 8px;">
+													부동산 소개 내용: ${reaIntroData.content }
 												</div>
 											</div>
 										</div>

@@ -1,5 +1,9 @@
 package kr.or.bit.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -21,8 +25,45 @@ public class REAIntroBoardDao {
 		return 0;
 	}
 
-	public REAIntroBoard getREAIntroData() { // 소개 읽기
-		return null;
+	public REAIntroBoard getREAIntroData(String id) { // 소개 읽기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		REAIntroBoard reaIntro = null;
+		
+		try {
+			conn = ds.getConnection();
+			String select_sql = "SELECT REAID, SUBJECT, CONTENT "
+								+ "FROM REAINTROBOARD WHERE REAID=?";
+			pstmt = conn.prepareStatement(select_sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				System.out.println("getREAIntro rs 성공");
+				
+				String reaId = rs.getString("reaId");
+				String subject = rs.getString("subject");
+				String content = rs.getString("content");
+				reaIntro = new REAIntroBoard(reaId, subject, content);
+
+				System.out.println("여기까지 성공중");
+			}
+		} catch (Exception e) {
+			System.out.println("getREAIntroDao 예외발생");
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				pstmt.close();
+				rs.close();
+				conn.close(); // 반환하기
+			} catch (Exception e) {
+				System.out.println("getREAIntroDao finally 예외발생");
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return reaIntro;
 	}
 
 	public int updateREAIntro(REAIntroBoard reaintro) { // 소개 수정
