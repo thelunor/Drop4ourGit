@@ -37,7 +37,7 @@ public class LoginService implements Action {
 			if (aDao.adminLogin(id, pwd)) { // 관리자 로그인 성공 시
 				System.out.println(aDao.adminLogin(id, pwd));
 				forward.setPath("UserMain.jsp");
-				session.setAttribute("adminId", id);
+				session.setAttribute("userId", id);
 				request.setAttribute("type", "A00");
 				return forward;
 			}
@@ -48,14 +48,14 @@ public class LoginService implements Action {
 
 			if (gResult.equals("U01") || rResult.equals("U02")) { // 블랙아닌 회원이 로그인했을 때
 				if (gResult.equals("U01")) {
-					session.setAttribute("genericUserId", id);
-					request.setAttribute("type", "U01"); // 일반 회원
+					session.setAttribute("userId", id);
+					session.setAttribute("type", "U01"); // 일반 회원
 					forward.setPath("UserMain.jsp");
 					System.out.println("일반회원 로그인");
 					return forward;
 				} else {
-					session.setAttribute("reaUserId", id);
-					request.setAttribute("type", "U02"); // 공인중개사 회원
+					session.setAttribute("userId", id);
+					session.setAttribute("type", "U02"); // 공인중개사 회원
 					forward.setPath("UserMain.jsp");
 					System.out.println("공인중개사 회원 로그인");
 					return forward;
@@ -66,7 +66,7 @@ public class LoginService implements Action {
 				return forward;
 			} else {
 				forward.setPath("Login.jsp"); // 아이디 또는 비밀번호가 일치하지 않을 때
-				request.setAttribute("type", "000");
+				session.setAttribute("type", "000");
 				System.out.println("로그인 실패");
 				return forward;
 			}
