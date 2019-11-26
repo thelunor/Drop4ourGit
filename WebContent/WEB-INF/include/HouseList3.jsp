@@ -11,20 +11,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% 
+	String genericUserId = (String) session.getAttribute("genericUserId");
+	String reaId = (String) session.getAttribute("reaUserId");
+%>
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <style type="text/css">
 h5{
 font-family: 'Jua', sans-serif;
 }
-button.btn :hover {
+a.btn :hover {
    color: #fff;
    background-color: #ff6863;
    border-color: #ff6863;
    border: 0.5px solid #eee;
 }
 
-button.btn  {
+a.btn  {
    color: #ff6863;
    background-color: #eee;
    border-color: #eee;
@@ -148,7 +152,7 @@ text-align: center;
 						</div>
 						<!-- End Skill Bar -->
 					</div>						
-				 <button class="btn" id="detailBtn" onclick="location.href='GetSaleDataService.d4b?aptNum=${sale.key.aptNum}'">See the Details</button>		
+				 <a class="btn trigger" href="#">See the Details</a>		
 				 </div>
 			</div>
 		</div>
@@ -187,7 +191,10 @@ text-align: center;
 	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 	// marker.setMap(null);
 $(function(){
-
+	var genericUserId = <%=genericUserId%>
+	var reaId = <%=reaId%>
+	console.log(genericUserId);
+	console.log(reaId);
 	$('.slick-items').slick({
 		autoplay : true,
 		dots : true,
@@ -199,7 +206,15 @@ $(function(){
 		slidesToScroll : 1,
 		fade : false
 	});
-
+	$('.trigger').on('click', function() {
+		alert("로그인해주세요")
+        $('.modal-wrapper').toggleClass('open');
+       $('.page-wrapper').toggleClass('blur-it');
+        return false;
+     });
+     $('[data-toggle="tooltip"]').tooltip(); 
+/*GetSaleDataService.d4b?aptNum=${sale.key.aptNum}*/
+		
 });
 	
 </script>
