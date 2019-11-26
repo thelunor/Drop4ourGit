@@ -144,7 +144,7 @@ text-align: center;
 						<!-- End Skill Bar -->
 
 						<div class="teamskillbar clearfix m-top-50" data-percent="30%">
-							<h6>교통 편리함</h6>
+							<h6>${sale.key.etc}</h6>
 							<div class="teamskillbar-bar"></div>
 						</div>
 						<!-- End Skill Bar -->

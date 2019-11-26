@@ -1,3 +1,4 @@
+<%@page import="kr.or.bit.dto.SaleImage"%>
 <%@page import="kr.or.bit.dto.Sale"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.bit.dto.REAImage"%>
@@ -7,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% 
 	Sale sale = (Sale) request.getAttribute("saleData");
+	SaleImage saleImg = (SaleImage) request.getAttribute("saleImg");
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
 %>
@@ -204,20 +206,20 @@ a.btn  {
 			<div class="featured_slider">
 				<div>
 					<div class="featured_img">
-						<img src="./images/house.jpg" alt="" /> <a
-							href="./images/house.jpg" class="popup-img"></a>
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName1() %>" alt="매물사진1" /> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName1() %>" class="popup-img" style="width:300px;height:300px;"></a>
 					</div>
 				</div>
 				<div>
 					<div class="featured_img">
-						<img src="./images/house1.jpg" alt="" /> <a
-							href="./images/house1.jpg" class="popup-img"></a>
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName2() %>" alt="매물사진2" /> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName2() %>" class="popup-img" style="width:300px;height:300px;"></a>
 					</div>
 				</div>
 				<div>
 					<div class="featured_img">
-						<img src="./images/house2.jpg" alt="" /> <a
-							href="./images/house2.jpg" class="popup-img"></a>
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName3() %>" alt="매물사진3" /> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName3() %>" class="popup-img" style="width:300px;height:300px;"></a>
 					</div>
 				</div>
 				<div>
