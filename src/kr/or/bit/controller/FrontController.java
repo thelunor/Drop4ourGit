@@ -58,6 +58,7 @@ import kr.or.bit.service.InsertSaleImgService;
 import kr.or.bit.service.InsertSaleService;
 import kr.or.bit.service.LoginService;
 import kr.or.bit.service.LogoutService;
+import kr.or.bit.service.SaleDeleteService;
 import kr.or.bit.service.SelectAllContractsService;
 import kr.or.bit.service.SelectAtpListService;
 import kr.or.bit.service.SelectAtpListService2;
@@ -486,7 +487,14 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
+		} else if (url_Command.equals("/SaleDeleteService.d4b")) { // 공인중개사회원 목록보기
+			try {
+				action = new SaleDeleteService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		// update========================================
 		else if (url_Command.equals("/UpdateBlackService.d4b")) {
 			try {

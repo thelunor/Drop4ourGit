@@ -189,18 +189,16 @@ input {
 																	id='edit_btn'
 																	onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
 															<td><button type='button' class='btn-group-sm'
-																	id='delete_btn' value="${saleData.aptNum}">삭제</button></td>
+																	id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
 														</tr>
 													</c:forEach>
 												</tbody>
 											</table>
-
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</form>
@@ -226,7 +224,7 @@ input {
 								console.log(aptNum);
 								$
 										.ajax({
-											url : 'SaleDelete?aptNum=' + aptNum,
+											url : $(),
 											type : 'post',
 											dataType : 'json',
 											success : function(data) { //data는 object!
