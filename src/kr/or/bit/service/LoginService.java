@@ -18,7 +18,7 @@ public class LoginService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		PrintWriter out=null;
 		ActionForward forward = new ActionForward();
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 

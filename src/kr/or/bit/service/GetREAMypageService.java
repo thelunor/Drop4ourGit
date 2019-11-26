@@ -29,6 +29,7 @@ public class GetREAMypageService implements Action {
 		SaleDao2 saleDao = null;
 		HttpSession session = request.getSession();
 		String reaId = (String)session.getAttribute("reaUserId");
+		System.out.println("reaId 임돠"+reaId);
 		try {
 
 			forward = new ActionForward();

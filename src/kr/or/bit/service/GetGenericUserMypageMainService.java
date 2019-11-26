@@ -18,6 +18,7 @@ public class GetGenericUserMypageMainService implements Action {
 		GenericUser user = new GenericUser();
 		GenericUserDao dao = null;
 		String genericUserId = (String)session.getAttribute("genericUserId");
+		System.out.println("genericUserId는 : " + genericUserId);
 		try {
 
 			forward = new ActionForward();
