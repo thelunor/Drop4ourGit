@@ -18,14 +18,12 @@ public class GetREAIntroBoardContentService implements Action {
 		String reaId = (String) session.getAttribute("reaUserId");
 		REAIntroBoard introBoard = null;
 		REAIntroBoardDao dao = null;
-		System.out.println("여기는?");
 		try {
 			dao = new REAIntroBoardDao();
 			introBoard = dao.getREAIntroData(reaId);
 			if(introBoard != null) {
 				forward.setPath("REAIntroBoard_content.jsp?reaUserId="+reaId);
 				request.setAttribute("introBoard", introBoard);
-				System.out.println("여기 갈까?");
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

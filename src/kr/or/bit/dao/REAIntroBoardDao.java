@@ -3,6 +3,7 @@ package kr.or.bit.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -62,7 +63,6 @@ public class REAIntroBoardDao {
 		
 		try {
 			conn = ds.getConnection();
-			System.out.println("디비디비비디비");
 			String select_sql = "SELECT REAID, SUBJECT, CONTENT "
 								+ "FROM REAINTROBOARD WHERE REAID=?";
 			pstmt = conn.prepareStatement(select_sql);
@@ -70,8 +70,6 @@ public class REAIntroBoardDao {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				System.out.println("getREAIntro rs 성공");
-				
 				String reaId = rs.getString("reaId");
 				String subject = rs.getString("subject");
 				String content = rs.getString("content");
@@ -95,15 +93,37 @@ public class REAIntroBoardDao {
 		return reaIntro;
 	}
 
-	public int updateREAIntro(REAIntroBoard reaintro) { // 소개 수정
-		return 0;
+	public int updateREAIntro(REAIntroBoard introBoard) { // 소개 수정(공인중개사 아이디로)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			String sql_update_intro = "update reaintroboard set subject=?, content=? where reaId=?";
+			pstmt = conn.prepareStatement(sql_update_intro);
+			pstmt.setString(1, introBoard.getSubject());
+			pstmt.setString(2, introBoard.getContent());
+			pstmt.setString(3, introBoard.getId());
+			resultRow = pstmt.executeUpdate();
+			if(resultRow > 0) {
+				System.out.println("업데이트 성공");
+			}
+		}catch(Exception e) {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return resultRow;
 	}
 
 	public int deleteREAIntro(String reaid) { // 소개 삭제(공인중개사 id로)
 		return 0;
 	}
 	
-	public boolean checkREAIntro(String reaId) {
+	public boolean checkREAIntro(String reaId) { //소개글 유무 체크하는 함수
 		boolean check = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;

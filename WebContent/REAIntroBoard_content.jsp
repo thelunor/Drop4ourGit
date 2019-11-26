@@ -84,7 +84,7 @@ h1, h3 {
 		<section id="join" class="about roomy-100">
 			<div class="container">
 				<form id="introForm" role="form"
-					action="InsertREAIntroService.d4b?reaUserId=<%=reaId%>"
+					action="UpdateREAIntroService.d4b?reaUserId=<%=reaId%>"
 					method="post">
 					<br style="clear: both">
 					<h3 style="margin-bottom: 25px;">공인중개사 소개글 수정</h3>
@@ -100,17 +100,18 @@ h1, h3 {
 					<div>
 						<div class="row">
 							<div class="col-sm-5">
-								<button type="button" id="edit_btn" name="edit_btn"
+								<button type="submit" id="edit_btn" name="edit_btn"
 									class="btn btn-primary pull-right">수정 완료</button>
 							</div>
-							<div class="col-sm-5">
-								<button type="button" id="delete_btn" name="delete_btn"
-									class="btn btn-primary pull-right">삭제</button>
-							</div>
-
+							
 						</div>
 					</div>
 				</form>
+				<div class="col-sm-5">
+								<button type="button" id="delete_btn" name="delete_btn"
+									class="btn btn-primary pull-right">삭제</button>
+							</div>
+				
 			</div>
 		</section>
 		<!-- scroll up-->

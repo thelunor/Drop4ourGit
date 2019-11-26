@@ -22,7 +22,6 @@ public class CheckIntroBoardService implements Action {
 		try {
 			dao = new REAIntroBoardDao();
 			check = dao.checkREAIntro(reaId);
-			System.out.println("쳌쳌쳌"+check);
 			if(check) { //이미 등록된 소개글이 있다면
 				forward.setPath("GetREAIntroBoardContentService.d4b?reaUserId="+reaId);
 
