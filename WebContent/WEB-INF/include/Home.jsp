@@ -3,7 +3,7 @@
 <script>
 $.noConflict();
 
-jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
+jQuery(document).ready(function( $ ) {//화면 다 뜨면 시작
 	var addrList = []; //주소 저장 리스트
 	
 	$.ajax({

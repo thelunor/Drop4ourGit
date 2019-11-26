@@ -80,8 +80,8 @@ Featured section style
 }
 
 .featured_img img {
-	width: 100%;
-	height: 100%;
+	width : 100%;
+	height : 250px;
 }
 
 .featured_slider div {
@@ -136,7 +136,11 @@ a.btn  {
   Z-index: 1;
 
 }
+.popup-img{ 
+ width:400px; !important;
+ height:300px; !important;
 
+}
 .modal-wrapper.open {
   opacity: 1;
   visibility: visible;
@@ -206,26 +210,26 @@ a.btn  {
 			<div class="featured_slider">
 				<div>
 					<div class="featured_img">
-						<img src="reaimg/<%=saleImg.getSaleImgSaveName1() %>" alt="매물사진1" /> <a
-							href="reaimg/<%=saleImg.getSaleImgSaveName1() %>" class="popup-img" style="width:300px;height:300px;"></a>
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName1() %>" alt="매물사진1"/> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName1() %>" class="popup-img"></a>
 					</div>
 				</div>
 				<div>
 					<div class="featured_img">
-						<img src="reaimg/<%=saleImg.getSaleImgSaveName2() %>" alt="매물사진2" /> <a
-							href="reaimg/<%=saleImg.getSaleImgSaveName2() %>" class="popup-img" style="width:300px;height:300px;"></a>
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName2() %>" alt="매물사진2"/> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName2() %>" class="popup-img"></a>
 					</div>
 				</div>
 				<div>
 					<div class="featured_img">
-						<img src="reaimg/<%=saleImg.getSaleImgSaveName3() %>" alt="매물사진3" /> <a
-							href="reaimg/<%=saleImg.getSaleImgSaveName3() %>" class="popup-img" style="width:300px;height:300px;"></a>
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName3() %>" alt="매물사진3"/> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName3() %>" class="popup-img"></a>
 					</div>
 				</div>
 				<div>
 					<div class="featured_img">
-						<img src="reaimg/<%=saleImg.getSaleImgSaveName3() %>" alt="" /> <a
-							href="reaimg/<%=saleImg.getSaleImgSaveName3() %>" class="popup-img" style="width:300px;height:300px;"></a>
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName3() %>" alt=""/> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName3() %>" class="popup-img"></a>
 					</div>
 				</div>
 			</div>
@@ -244,7 +248,8 @@ a.btn  {
 						<br>
 					<!-- Button -->
 					<%
-                      if(sale.getType()=="24") {
+                      if(saleData.type}.equals("32")) {
+                    		System.out.println("유형" + sale.getType());
                      %>
 					<p style="font-size: 20px; font-family: 'Jua', sans-serif;">
 					방 2개 &nbsp;|&nbsp; 욕실 1개 </p>
@@ -271,7 +276,8 @@ a.btn  {
 										required="required" value="${saleData.aptDong}">
 								</div>
 								<div class="form-group">
-									<label>유형 </label> <input type="text" class="form-control" value="${saleData.type}">
+									<label>유형 </label> 
+									<input type="text" class="form-control" value="${saleData.type}">
 								</div>
 								<div class="form-group">
 									<label>방향 </label> <input type="text" class="form-control"
@@ -331,7 +337,7 @@ a.btn  {
 				</div>
 				<br>			
 				<div class="form-group">
-					<button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='GetREAIntroPageService.d4b?reaId=${reaData.reaId}'">Click</button>
+					<button type="submit" class="btn btn-primary btn-block btn-lg">Click</button>
 				</div>					
 				</div>
     </div>

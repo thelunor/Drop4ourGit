@@ -78,7 +78,7 @@ text-align: center;
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<img id="preview1" src="images/picture.png" alt="Profile">
+										<img id="preview1" src="images/picture.png" alt="Profile" style="width: 400px; height: 250px;">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="file" name="filename1" id="getfile1"
@@ -87,7 +87,7 @@ text-align: center;
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<img id="preview2" src="images/picture.png" alt="Profile">
+										<img id="preview2" src="images/picture.png" alt="Profile" style="width: 400px; height: 250px;">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="file" name="filename2" id="getfile2"
@@ -96,7 +96,7 @@ text-align: center;
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<img id="preview3" src="images/picture.png" alt="Profile">
+										<img id="preview3" src="images/picture.png" alt="Profile" style="width: 400px; height: 250px;">
 										<br> <br>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
 											type="file" name="filename3" id="getfile3"
