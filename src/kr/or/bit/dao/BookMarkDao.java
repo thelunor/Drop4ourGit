@@ -65,7 +65,32 @@ public class BookMarkDao {
 	}
 
 	public int insertBookMark(BookMark bookMark) { //북마크 생성
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			String sql_insertBk = "insert into bookmark(userid, aptnum, bookdate)"
+					+"values((select userid from genericuser where userid=?), (select aptnum from sale where aptnum=?),sysdate)";
+			pstmt = conn.prepareStatement(sql_insertBk);
+			pstmt.setString(1, bookMark.getUserId());
+			pstmt.setString(2, bookMark.getAptNum());
+			resultRow = pstmt.executeUpdate();
+			if(resultRow > 0) {
+				System.out.println("북마크 db 생성 완료");
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultRow;		
 	}
 
 	public int deleteBookMark(String id) { // 북마크 삭제하기

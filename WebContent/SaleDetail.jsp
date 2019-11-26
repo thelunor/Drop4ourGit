@@ -12,6 +12,7 @@
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
 	String genericUserId = (String) session.getAttribute("genericUserId");
+	String aptNum = (String) request.getParameter("aptNum");
 %>
 
 <!doctype html>
@@ -241,8 +242,12 @@ a.btn  {
 				<div class="col-md-12">
 				<div class="houseDetail">
 					<div class="page-wrapper">
+					<div class="row">
 					  <a class="btn trigger" href="#">담당 부동산</a>
+					  <a class="btn" href="InsertBookMarkService.d4b?userId=<%=genericUserId %>&aptNum=<%=aptNum %>">북마크</a>
 					</div>
+					</div>
+				
 					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${saleData.aptName}</span>&nbsp;${saleData.type}</h4> 										
 					<input type="text" class="form-control" name="address"
 						id="address" required="required" placeholder="도로명 주소"  value="${saleData.roadAddr}">
