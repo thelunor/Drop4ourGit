@@ -14,8 +14,11 @@
 <% 
 	String genericUserId = (String) session.getAttribute("genericUserId");
 	String reaId = (String) session.getAttribute("reaUserId");
+	String search=(String)request.getAttribute("search");
+	System.out.println(search);
+	String name[] = search.split(" ");
+	System.out.println(name[0]);
 %>
-<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <style type="text/css">
 h5{
@@ -66,9 +69,79 @@ a.btn  {
 .slick-items, .detail{
 text-align: center;
 }
+.main_featured .head_title {
+	width: 70%;
+	margin: 0 auto;
+}
+
+.btnJoin {
+	color: #fff;
+	background-color: #ff6863;
+	border: 2px solid;
+	border-color: #ff6863;
+	padding: 1rem 3rem;
+}
+
+.btnJoin:hover {
+	background-color: #eee;
+	border-color: #eee;
+	border: 2px solid #eee;
+	color: #ff6863;
+}
+
+.modal-wrapper {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: rgb(242, 242, 242, 0.5);
+	top: 0;
+	left: 0;
+	visibility: hidden;
+	Z-index: 1;
+}
+
+.modal-wrapper.open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal {
+	width: 400px;
+	height: 600px;
+	display: block;
+	position: relative;
+	top: 40%;
+	left: 38%;
+	background: #fff;
+	opacity: 0;
+	transition: all 0.5s ease-in-out;
+}
+
+.modal-wrapper.open .modal {
+	margin-top: -200px;
+	opacity: 1;
+}
+
+.btn-close {
+	font-size: 28px;
+	display: block;
+	float: right;
+	color: #fff;
+}
+
+.content {
+	padding: 10%;
+}
+
+.head {
+	width: 100%;
+	height: 50px;
+	padding: 10px;
+	overflow: hidden;
+	background: #ff6863;
+}
 </style>
 <%
-
 	
 	Map<Sale, SaleImage> saleMap = (Map<Sale, SaleImage>)request.getAttribute("saleMap");
 	ArrayList<String> priceList=new ArrayList<String>();
@@ -102,7 +175,8 @@ text-align: center;
 //  System.out.println(saleMap.toString());
 //  System.out.println(saleMap.values());
 %>
-<h6>300개 이상의 매물</h6>
+<h6> 300개 이상의 매물</h6>
+<input type="hidden" id="dongName" value="<%=name[0]%>">
 <p style="font-size: 13px">거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</p>
 <br>
 <div class="row">
@@ -149,15 +223,16 @@ text-align: center;
 							<div class="teamskillbar-bar"></div>
 						</div>
 						<!-- End Skill Bar -->
-					</div>						
+					</div>		
+				<div class="page-wrapper">					
 				 <a class="btn trigger" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>		
+				 </div>
 				 </div>
 			</div>
 		</div>
 		<hr>
 	</c:forEach>	
 	</div>
-
 	<!-- map -->
 	<div class="col-lg-5">
 		<div id="map" style="width: 100%; height: 100%;"></div>
@@ -165,10 +240,60 @@ text-align: center;
 
 </div>
 
-<script>
+	<div class="modal-wrapper">
+		<div class="modal">
+			<div class="head">
+				<a class="btn-close trigger" href="#"> <i class="fa fa-times"
+					aria-hidden="true"></i>
+				</a>
+			</div>
+			<div class="content">
+			  <form action="LoginService.d4b" method="post" name="loginForm">
+				<div class="information">
+					<h3 style="text-align: center;">로그인</h3>
+					<br>
+					<div class="form-group">
+						<label>아이디 </label> 
+						<input class="form-control" type="text" name="id" id="id" placeholder="ID" style="width: 320px" required="required">
+						<label>비밀번호 </label> 
+						<input class="form-control" type="password" name="pwd" id="pwd" required="required" placeholder="PASSWORD" style="width: 320px">
+					</div>
+					<br>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-block btn-lg">Click</button>
+						<br>
+						<hr>
+					</div>
+					<br> <span>계정이 없으신가요?</span> <br>
+					<br>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+
+								<button type="submit" class="btnJoin" onclick="location.href='JoinCheckGeneric.jsp'">
+									<i class="fas fa-user"></i> 일반
+								</button>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<button type="submit" class="btnJoin"
+									style="padding-left: 20px; padding-right: 20px;" onclick="location.href='JoinCheckREA.jsp'">
+									<i class="fas fa-home"></i> 공인중개인
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+<script>	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
-		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		center : new kakao.maps.LatLng(37.5173552, 127.0452494), // 지도의 중심좌표
 		level : 3
 	// 지도의 확대 레벨
 	};
@@ -176,7 +301,7 @@ text-align: center;
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 	// 마커가 표시될 위치입니다 
-	var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+	var markerPosition = new kakao.maps.LatLng(37.5173552, 127.0452494);
 
 	// 마커를 생성합니다
 	var marker = new kakao.maps.Marker({
@@ -186,8 +311,6 @@ text-align: center;
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
 
-	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	// marker.setMap(null);
 $(function(){
 	
 	$('.slick-items').slick({
@@ -201,6 +324,14 @@ $(function(){
 		slidesToScroll : 1,
 		fade : false
 	});		
+	
+	$('.trigger').click(function(){
+   	 $('.modal-wrapper').toggleClass('open');
+        $('.page-wrapper').toggleClass('blur-it');
+         return false;
+    });
+    $('[data-toggle="tooltip"]').tooltip(); 	
+	
 });
 	
 </script>

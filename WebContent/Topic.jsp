@@ -416,7 +416,7 @@ String name[] = search.split(" ");
 System.out.println(name[0]);
 %>
 <p style="font-size: 18px; font-family: 'Jua', sans-serif;"> 검색 결과 &nbsp;&nbsp; <span id="topic"><%= name[0]%></span>
-	<i class="fas fa-angle-right"></i>역삼동</p>		
+	<i class="fas fa-angle-right"></i><%= name[1]%></p>		
 
 	<br>
 	<div class="notice">
