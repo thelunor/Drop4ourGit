@@ -10,7 +10,8 @@ public class InsertREAIntroService implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+		ActionForward forward = null;
+		
 		return null;
 	}
 

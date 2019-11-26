@@ -100,8 +100,6 @@ input {
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
 			<jsp:include page="WEB-INF/include/REAUser_Top.jsp"></jsp:include>
-
-
 			<!-- Side jsp -->
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
@@ -148,6 +146,8 @@ input {
 								<button type="submit" class="btn-group">계약서 작성</button>
 								&nbsp;
 								<button type="submit" class="btn-group">계약 관리</button>
+								&nbsp;
+								<button type="button" class="btn-group" onclick="location.href='GetREAIntroDataService.d4b?reaUserId=${reaUserData.reaId}'">소개글 관리</button>
 								<br> <br>
 								<div id="saleList">
 									<div class="card-header py-3">
