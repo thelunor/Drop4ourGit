@@ -36,7 +36,7 @@ public class InsertREAIntroService implements Action {
 			System.out.println(e.getMessage());
 		}
 		
-		return null;
+		return forward;
 	}
 
 }
