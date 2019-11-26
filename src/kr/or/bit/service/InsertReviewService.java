@@ -22,7 +22,7 @@ public class InsertReviewService implements Action {
 		int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 		String userId = request.getParameter("userId");
 		String reviewContent = request.getParameter("reviewContent");
-		Date reviewDate = null;
+		java.util.Date reviewDate = null;
 		try {
 			reviewDate = (Date) new SimpleDateFormat().parse(request.getParameter("reviewDate"));
 		} catch (ParseException e1) {

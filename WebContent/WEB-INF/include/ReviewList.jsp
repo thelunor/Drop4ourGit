@@ -1,7 +1,6 @@
+<%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.sql.Date"%>
 <%@page import="kr.or.bit.dto.GenericUser"%>
-<%@page import="sun.reflect.generics.visitor.Reifier"%>
 <%@page import="kr.or.bit.dao.ReviewDao"%>
 <%@page import="kr.or.bit.dto.REAImage"%>
 <%@page import="kr.or.bit.dto.REAUser"%>
@@ -44,7 +43,9 @@
 	// System.out.println("ReviewList review.toString: " + review.toString());
 	// java.sql.Date reviewDate = (java.sql.Date) request.getAttribute("reviewDate");
 	// String reviewContent = (String) request.getAttribute("reviewContent");
-	// int reviewNum = (Integer) request.getAttribute("reviewNum"); 
+	// int reviewNum = (Integer) request.getAttribute("reviewNum");
+	Date today = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy. MM. dd");
 %>
 	
 <c:set var="reviewList" value="<%=reviewList%>" />
@@ -64,13 +65,13 @@
 							<table class="table table-bordered" id="reviewTable"
 								style="text-align: center; margin: auto; width: 100%; border: none;">
 			                    <tr>
-			                        <td style="padding: 0;"><div align="left" style="padding-left: 10px;">날짜:&nbsp;
-			                        	<input type="text" id="reviewDate" name="reviewDate" placeholder="날짜입력" 
-			                        		style="border: 1px solid #d2d0d0; display: inline; width: 50%; padding: 0;">
+			                        <td style="padding: 0;"><div align="left" style="padding-left: 10px;">
+		                        		날짜:&nbsp;<input type="text" id="reviewDate" name="reviewDate" value="<%=sdf.format(today) %>" 
+			                        					readonly="readonly" style="display: inline; width: 50%; padding: 0;">
 										<input type="hidden" id="reviewNum" name="reviewNum" value=""></div></td>
-			                       	<td style="padding: 0;"><div align="right" style="padding-right: 10px;">작성자:&nbsp;
-			                       		<input type="text" id="userId" name="userId" placeholder="작성자아이디" 
-			                       			style="border: 1px solid #d2d0d0; display: inline; width: 50%; padding: 0;">
+			                       	<td style="padding: 0;"><div align="right" style="padding-right: 10px;">
+			                       		작성자:&nbsp;<input type="text" id="userId" name="userId" value="<%=genericUserId %>" 
+			                       						readonly="readonly" style="; display: inline; width: 30%; padding: 0;">
 			                       		<input type="hidden" id="reaId" name="reaId" value=""></div></td>
 			                    </tr>
 			                    <tr>
@@ -156,13 +157,13 @@
 					var review = "";
 						review += "<tr>";
 						review += "<td align='left' width='70%'>";
-						review += "<span>" + data.reviewDate + "</span></td>";
+						review += "<span>" + $('#reviewDate').val() + "</span></td>";
 						review += "<td align='right'>";
-						review += "작성자: <span>" + data.userId + "</span></td>";
+						review += "작성자: <span>" + $('#getUserId').val() + "</span></td>";
 						review += "</tr>";
 						review += "<tr>";
 						review += "<td colspan='2' style='border: 1px solid #d2d0d0; height: 120px;'>";
-						review += data.reviewContent + "</td>";
+						review += $('#reviewContent').val() + "</td>";
 						review += "</tr>";
 						review += "<tr>";
 						review += "<td colspan='2'>";

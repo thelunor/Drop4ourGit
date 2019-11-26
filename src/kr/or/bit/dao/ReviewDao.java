@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,11 +40,11 @@ public class ReviewDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, review.getUserId());
 			pstmt.setString(2, review.getReviewContent());
-			pstmt.setDate(3, (Date) review.getReviewDate());
+			pstmt.setString(3, review.getReviewDate());
 			// 후기글 입력 시 오늘 날짜로 DB 저장(SYSDATE)
 			pstmt.setString(4, review.getReaId());
-			
 			row = pstmt.executeUpdate();
+			
 			if (row > 0) {
 				System.out.println("후기등록 성공");
 			}
@@ -84,8 +84,10 @@ public class ReviewDao {
 			
 			while (rs.next()) {
 				System.out.println("ReviewDao rs 성공");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy. MM. dd");
+				
 				Review review = new Review();
-				java.sql.Date reviewDate = rs.getDate("reviewDate");
+				java.util.Date reviewDate = sdf.parse(rs.getString("reviewDate"));
 				review.setReviewNum(rs.getInt("reviewNum"));
 				review.setUserId(rs.getString("userId"));
 				review.setReviewContent(rs.getString("reviewContent"));
