@@ -103,14 +103,13 @@ h1, h3 {
 								<button type="submit" id="edit_btn" name="edit_btn"
 									class="btn btn-primary pull-right">수정 완료</button>
 							</div>
-							
+							<div class="col-sm-5">
+								<button type="button" id="delete_btn" name="delete_btn"
+									class="btn btn-primary pull-right" onclick="location.href='DeleteREAIntroService.d4b?reaId=<%=reaId%>'">삭제</button>
+							</div>
 						</div>
 					</div>
 				</form>
-				<div class="col-sm-5">
-								<button type="button" id="delete_btn" name="delete_btn"
-									class="btn btn-primary pull-right">삭제</button>
-							</div>
 				
 			</div>
 		</section>

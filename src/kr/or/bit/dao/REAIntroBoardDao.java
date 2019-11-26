@@ -119,8 +119,30 @@ public class REAIntroBoardDao {
 		return resultRow;
 	}
 
-	public int deleteREAIntro(String reaid) { // 소개 삭제(공인중개사 id로)
-		return 0;
+	public int deleteREAIntro(String reaId) { // 소개 삭제(공인중개사 id로)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			String delete_intro = "delete from reaintroboard where reaid=?";
+			pstmt = conn.prepareStatement(delete_intro);
+			pstmt.setString(1, reaId);
+			resultRow = pstmt.executeUpdate();
+			if(resultRow > 0) {
+				System.out.println("삭제 완료");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultRow;
 	}
 	
 	public boolean checkREAIntro(String reaId) { //소개글 유무 체크하는 함수
