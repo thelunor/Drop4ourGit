@@ -1,18 +1,15 @@
 package kr.or.bit.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.SaleDao;
-import kr.or.bit.dao.SaleImageDao;
 import kr.or.bit.dto.Sale;
 import kr.or.bit.dto.SaleImage;
 
@@ -24,7 +21,7 @@ public class SelectAtpListService implements Action {
 		// HttpSession session = request.getSession();
 		String search = request.getParameter("search");
 		System.out.println(search);
-		Map<Sale, List<SaleImage>> saleMap = new HashMap<Sale, List<SaleImage>>();
+		Map<Sale, SaleImage> saleMap = new HashMap<Sale, SaleImage>();
 		
 		// String address = request.getParameter("address");
 
@@ -45,7 +42,6 @@ public class SelectAtpListService implements Action {
 		forward = new ActionForward();
 		// session.setAttribute("address", address);
 		forward.setPath("SelectAptListServiceOk.d4b");
-		System.out.println("여기?1");
 		return forward;
 	}
 

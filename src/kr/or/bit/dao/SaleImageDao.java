@@ -61,7 +61,7 @@ public class SaleImageDao {
 	}
 	
 
-	public SaleImage getSaleImgList(String aptNum) { // 매물 이미지 불러오기 (매물 번호로)
+	public SaleImage getSaleImg(String aptNum) { // 매물 이미지 불러오기 (매물 번호로)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

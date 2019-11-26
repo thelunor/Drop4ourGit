@@ -30,43 +30,41 @@ public class SaleDao {
 	public int insertSale(Sale sale) { // 매물 넣기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs=null;
+		ResultSet rs = null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			
-			//매물 테이블에 객체 넣기
+
+			// 매물 테이블에 객체 넣기
 //			String sql = "SELECT aptnum INTO salecopy FROM sale";
 //			pstmt=conn.prepareStatement(sql);
 //			rs=pstmt.executeQuery();
 //			String maxNum=rs.getString("maxNum");
 //			System.out.println("maxNum: 맥스넘~ " + maxNum);
-			
-					
-            String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, roadAddr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)" +  
-                    " values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
+
+			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, roadAddr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)"
+					+ " values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
 			pstmt = conn.prepareStatement(sql_insert_sale);
 			pstmt.setString(1, sale.getAptSize());
 			pstmt.setString(2, sale.getType());
 			pstmt.setString(3, sale.getAddr());
-            pstmt.setString(4, sale.getRoadAddr());
-            pstmt.setString(5, sale.getAptName());
-            pstmt.setString(6, sale.getAptDong());
-            pstmt.setString(7, sale.getAptHo());
-            pstmt.setString(8, sale.getPrice());
-            pstmt.setString(9, sale.getDirection());
-            pstmt.setString(10, sale.getEtc());
-            pstmt.setString(11, sale.getIsContract());
-            pstmt.setString(12, sale.getId());
+			pstmt.setString(4, sale.getRoadAddr());
+			pstmt.setString(5, sale.getAptName());
+			pstmt.setString(6, sale.getAptDong());
+			pstmt.setString(7, sale.getAptHo());
+			pstmt.setString(8, sale.getPrice());
+			pstmt.setString(9, sale.getDirection());
+			pstmt.setString(10, sale.getEtc());
+			pstmt.setString(11, sale.getIsContract());
+			pstmt.setString(12, sale.getId());
 			resultRow = pstmt.executeUpdate();
-			
-			
-			if(resultRow>0) {
+
+			if (resultRow > 0) {
 				System.out.println("매물 정보 DB 등록 성공");
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("e.getMessage(): " + e.getMessage());
-		}finally {
+		} finally {
 			DB_Close.close(pstmt);
 			try {
 				conn.close();
@@ -77,7 +75,6 @@ public class SaleDao {
 		}
 		return resultRow;
 	}
-	
 
 	public Sale getSaleDataByAptNum(String aptNum) { // 매물 한개 읽기 (매물 번호로)
 		Connection conn = null;
@@ -87,11 +84,11 @@ public class SaleDao {
 		try {
 			conn = ds.getConnection();
 			String sql_select_aptInfo = "select aptnum, aptsize, type, addr, aptname, aptdong, aptho, price, direction, etc, iscontract, reaid from sale"
-					+" where aptnum=?";
+					+ " where aptnum=?";
 			pstmt = conn.prepareStatement(sql_select_aptInfo);
 			pstmt.setString(1, aptNum);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				sale = new Sale();
 				sale.setAptNum(rs.getString("aptNum"));
 				sale.setAptSize(rs.getString("aptSize"));
@@ -108,9 +105,9 @@ public class SaleDao {
 			}
 			System.out.println("DB에서 온 아파트 정보" + sale.toString());
 
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}finally {
+		} finally {
 			DB_Close.close(rs);
 			DB_Close.close(pstmt);
 			try {
@@ -120,10 +117,10 @@ public class SaleDao {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return sale;
 	}
-	
+
 	public String getAptNumByAptInfo(String aptName, String aptDong, String aptHo) { // 매물 번호 읽기 (아파트 이름, 동, 호수로)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -137,15 +134,15 @@ public class SaleDao {
 			pstmt.setString(2, aptDong);
 			pstmt.setString(3, aptHo);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				aptNum = rs.getString("aptNum");
 			}
 			System.out.println(aptNum);
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		return aptNum;
 	}
 
@@ -154,7 +151,7 @@ public class SaleDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Sale> saleList = null;
-		
+
 		try {
 			conn = ds.getConnection();
 			String sql_select_sale = "select aptnum,aptsize,type,addr,aptname,aptdong,aptho,price,iscontract from sale where reaid=?";
@@ -162,22 +159,22 @@ public class SaleDao {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			saleList = new ArrayList<Sale>();
-			while(rs.next()) {
+			while (rs.next()) {
 				Sale sale = new Sale();
-				sale.setAptNum(rs.getString("aptNum")); //매물번호				
-				sale.setAptSize(rs.getString("aptSize")); //면적
-				sale.setType(rs.getString("type")); //유형
-				sale.setAddr(rs.getString("addr")); //주소
-				sale.setAptName(rs.getString("aptName")); //아파트이름
-				sale.setAptDong(rs.getString("aptDong")); //동
-				sale.setAptHo(rs.getString("aptHo")); //호수
-				sale.setPrice(rs.getString("price")); //매매가
+				sale.setAptNum(rs.getString("aptNum")); // 매물번호
+				sale.setAptSize(rs.getString("aptSize")); // 면적
+				sale.setType(rs.getString("type")); // 유형
+				sale.setAddr(rs.getString("addr")); // 주소
+				sale.setAptName(rs.getString("aptName")); // 아파트이름
+				sale.setAptDong(rs.getString("aptDong")); // 동
+				sale.setAptHo(rs.getString("aptHo")); // 호수
+				sale.setPrice(rs.getString("price")); // 매매가
 				sale.setIsContract(rs.getString("isContract"));
 				saleList.add(sale);
 			}
-		}catch(Exception e) {
-			
-		}finally {
+		} catch (Exception e) {
+
+		} finally {
 			DB_Close.close(pstmt);
 			DB_Close.close(rs);
 			try {
@@ -189,17 +186,16 @@ public class SaleDao {
 		return saleList;
 	}
 
-
 	public int updateSale(Sale sale) { // 매물 수정 (2019/11/24/알파카)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			
-			//매물 테이블에 객체 넣기
+
+			// 매물 테이블에 객체 넣기
 			String sql_update_sale = "update sale set aptsize=?,type=(select type from type where type=?),addr=?,aptname=?,aptdong=?,aptho=?,price=?,direction=?,etc=?,iscontract=?"
-					+" where aptnum=?";
+					+ " where aptnum=?";
 			pstmt = conn.prepareStatement(sql_update_sale);
 			pstmt.setString(1, sale.getAptSize());
 			pstmt.setString(2, sale.getType());
@@ -213,13 +209,13 @@ public class SaleDao {
 			pstmt.setString(10, sale.getIsContract());
 			pstmt.setString(11, sale.getAptNum());
 			resultRow = pstmt.executeUpdate();
-			
-			if(resultRow>0) {
+
+			if (resultRow > 0) {
 				System.out.println("매물 정보 DB 수정 성공");
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}finally {
+		} finally {
 			DB_Close.close(pstmt);
 			try {
 				conn.close();
@@ -237,76 +233,71 @@ public class SaleDao {
 		try {
 			conn = ds.getConnection();
 			conn.setAutoCommit(false);
-			
+
 			String sql_delete_saleImg = "delete from saleImage where aptnum=?";
 			String sql_delete_sale = "delete from sale where aptnum=?";
-			
+
 			pstmt = conn.prepareStatement(sql_delete_saleImg);
 			pstmt.setString(1, aptNum);
 			resultRow = pstmt.executeUpdate();
-			System.out.println("resultRow 1 "+resultRow);
-						
+			System.out.println("resultRow 1 " + resultRow);
+
 			pstmt = conn.prepareStatement(sql_delete_sale);
 			pstmt.setString(1, aptNum);
 			resultRow = pstmt.executeUpdate();
-			System.out.println("resultRow 2 "+resultRow);
+			System.out.println("resultRow 2 " + resultRow);
 
-
-			
-			if(resultRow>0) {
+			if (resultRow > 0) {
 				conn.commit();
 				System.out.println("매물 삭제 완료");
 
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("delete sale dao 오류");
-		}finally {
-			 DB_Close.close(pstmt);
-	         try {
-	            conn.close();
-	         } catch (SQLException e) {
-	            e.printStackTrace();
-	         }
+		} finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return resultRow;
 	}
-	
-	public Map<Sale, List<SaleImage>> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
+
+	public Map<Sale, SaleImage> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		Map<Sale, List<SaleImage>> mapList = null;
-		SaleImageDao imgDao=null;
-		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize from sale where addr=?";
+
+		Map<Sale, SaleImage> mapList = null;
+		Sale sale = null;
+		SaleImage saleImg = null;
+		SaleImageDao imgDao = null;
+		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize from sale where addr like ?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_select_aptList);
-			pstmt.setString(1, addr);
+			pstmt.setString(1, "%" + addr + "%");
 			rs = pstmt.executeQuery();
-			
+
 			imgDao = new SaleImageDao();
-			mapList= new HashMap<Sale, List<SaleImage>>();
-				while (rs.next()) {
-					Sale sale = new Sale();
-					sale.setAptName(rs.getString("aptName")); // 아파트 이름
-					sale.setAptDong(rs.getString("aptDong")); // 아파트 동
-					sale.setPrice(rs.getString("price")); 			//가격
-					sale.setAptNum(rs.getString("aptNum")); //매물번호
-					sale.setAptSize(rs.getString("aptSize")); //아파트 사이즈
-					String aptNum = rs.getString("aptNum");
-					System.out.println("aptNum 띠요오오옹: " + aptNum);
-					List<SaleImage> imgList = new ArrayList<SaleImage>();
-					imgList = imgDao.getSaleImgList(aptNum);
-					System.out.println(imgList.toString());
-					
-					mapList.put(sale,imgList);
-					
-					System.out.println(mapList.values());
-				}
-				System.out.println("다오 끝");
-		
+			mapList = new HashMap<Sale, SaleImage>();
+
+			while (rs.next()) {
+				sale = new Sale();
+				sale.setAptName(rs.getString("aptName")); // 아파트 이름
+				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
+				sale.setPrice(rs.getString("price")); // 가격
+				sale.setAptNum(rs.getString("aptNum")); // 매물번호
+				sale.setAptSize(rs.getString("aptSize")); // 아파트 사이즈
+				String aptNum = sale.getAptNum();
+				saleImg = new SaleImage();
+				saleImg = imgDao.getSaleImg(aptNum);
+				mapList.put(sale, saleImg);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -321,15 +312,14 @@ public class SaleDao {
 		return mapList;
 
 	}
-	
-	
+
 	public Sale getSaleDetail(String aptNum) { // 아파트 매물 번호로 매물 정보 가져오기 (SaleDetail 페이지)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Sale sale = null;
 		String sql_get_saleDetail = "select roadAddr, aptName,aptSize,Type,aptDong,price,Direction,etc, reaId from sale where aptNum=?";
-		
+
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_get_saleDetail);
@@ -337,17 +327,17 @@ public class SaleDao {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				sale = new Sale();
-				sale.setRoadAddr(rs.getString("roadAddr")); //아파트 지번 주소
-				sale.setAptName(rs.getString("aptName")); //아파트 이름
-				sale.setAptSize(rs.getString("aptSize")); //아파트 면적
-				sale.setType(rs.getString("type")); //매물 유형
+				sale.setRoadAddr(rs.getString("roadAddr")); // 아파트 지번 주소
+				sale.setAptName(rs.getString("aptName")); // 아파트 이름
+				sale.setAptSize(rs.getString("aptSize")); // 아파트 면적
+				sale.setType(rs.getString("type")); // 매물 유형
 				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
-				sale.setPrice(rs.getString("price")); //매매가격
-				sale.setDirection(rs.getString("direction")); //아파트 향
-				sale.setEtc(rs.getString("etc")); //특징
-				sale.setId(rs.getString("reaId")); //공인중개사 아이디
+				sale.setPrice(rs.getString("price")); // 매매가격
+				sale.setDirection(rs.getString("direction")); // 아파트 향
+				sale.setEtc(rs.getString("etc")); // 특징
+				sale.setId(rs.getString("reaId")); // 공인중개사 아이디
 			}
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -361,24 +351,23 @@ public class SaleDao {
 		}
 		return sale;
 	}
-	
-	
+
 	public ArrayList<Sale> getAddr() { // 주소가져오기
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Sale> saleList = null;
-		String sql_get_addr = "select addr from sale";		
+		String sql_get_addr = "select addr from sale";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_get_addr);
 			rs = pstmt.executeQuery();
 			saleList = new ArrayList<Sale>();
-				while (rs.next()) {
-					Sale sale = new Sale();
-					sale.setAddr(rs.getString("addr"));				
-					saleList.add(sale);
-			}		
+			while (rs.next()) {
+				Sale sale = new Sale();
+				sale.setAddr(rs.getString("addr"));
+				saleList.add(sale);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -392,8 +381,5 @@ public class SaleDao {
 		}
 		return saleList;
 	}
-	
-
-	
 
 }

@@ -116,13 +116,13 @@ text-align: center;
 			<div class="col-lg-7">
 				<div class="slick-items">
 					<div>
-						<img src="./images/xi1.jpg" alt="New York" width="500" height="220">
+						<img src="reaimg/${sale.key.saleImgSaveName1 }" alt="New York" width="500" height="220">
 					</div>
 					<div>
-						<img src="./images/xi2.jpg" alt="New York" width="500" height="220">
+						<img src="reaimg/${sale.key.saleImgSaveName2 }" alt="New York" width="500" height="220">
 					</div>
 					<div>
-						<img src="./images/xi3.jpg" alt="New York" width="500" height="220">
+						<img src="reaimg/${sale.key.saleImgSaveName3 }" alt="New York" width="500" height="220">
 					</div>
 				</div>
 			</div>
@@ -133,7 +133,7 @@ text-align: center;
 				<input type="text" class="form-control"	value="전용면적   ${sale.key.aptSize}㎡">			
 					<br>
 					<div class="skill_bar sm-m-top-50">
-						<div class="teamskillbar clearfix m-top-20" data-percent="${sale.value}">>
+						<div class="teamskillbar clearfix m-top-20" data-percent="">>
 							<h6>거래 가격 : ${sale.key.price}</h6>
 							<div class="teamskillbar-bar"></div>
 						</div>

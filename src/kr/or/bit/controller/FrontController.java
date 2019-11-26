@@ -443,15 +443,13 @@ public class FrontController extends HttpServlet {
 			}
 		} else if (url_Command.equals("/SelectAptListService.d4b")) { // 아파트 목록보기
 			try {
-				action = new SelectAtpListService2();
+				action = new SelectAtpListService();
 				forward = action.execute(request, response);
-				System.out.println("SelectAptListService 끝난부분");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		} else if (url_Command.equals("/SelectAptListServiceOk.d4b")) { // 아파트 목록보기
 			try {
-				System.out.println("SelectAptListServiceOk컨트롤러: ");
 				forward = new ActionForward();
 				forward.setPath("/HouseListMain.jsp");
 				System.out.println("SelectAptListServiceOk컨트롤러끝난부분입니당: ");

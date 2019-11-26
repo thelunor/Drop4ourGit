@@ -20,7 +20,7 @@ public class GetSaleImgService implements Action {
 		SaleImage saleImg = new SaleImage();
 		try {
 			SaleImageDao dao = new SaleImageDao();
-			saleImg = dao.getSaleImgList(aptNum);
+			saleImg = dao.getSaleImg(aptNum);
 
 			if(saleImg!=null) {
 				System.out.println("매물 사진 가져오기 성공");
