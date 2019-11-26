@@ -17,14 +17,14 @@
 h5{
 font-family: 'Jua', sans-serif;
 }
-a.btn :hover {
+button.btn :hover {
    color: #fff;
    background-color: #ff6863;
    border-color: #ff6863;
    border: 0.5px solid #eee;
 }
 
-a.btn  {
+button.btn  {
    color: #ff6863;
    background-color: #eee;
    border-color: #eee;
@@ -120,13 +120,13 @@ text-align: center;
 			<div class="col-lg-7">
 				<div class="slick-items">
 					<div>
-						<img src="reaimg/${sale.value.saleImgSaveName1}" alt="New York" width="500" height="220">
+						<img src="reaimg/${sale.value.saleImgSaveName1}" alt="매물사진1" width="500" height="220">
 					</div>
 					<div>
-						<img src="reaimg/${sale.value.saleImgSaveName2}" alt="New York" width="500" height="220">
+						<img src="reaimg/${sale.value.saleImgSaveName2}" alt="매물사진2" width="500" height="220">
 					</div>
 					<div>
-						<img src="reaimg/${sale.value.saleImgSaveName3}" alt="New York" width="500" height="220">
+						<img src="reaimg/${sale.value.saleImgSaveName3}" alt="매물사진3" width="500" height="220">
 					</div>
 				</div>
 			</div>
@@ -149,7 +149,7 @@ text-align: center;
 						</div>
 						<!-- End Skill Bar -->
 					</div>						
-				 <a class="btn" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>		
+				 <button class="btn" id="detailBtn" onclick="location.href='GetSaleDataService.d4b?aptNum=${sale.key.aptNum}'">See the Details</button>		
 				 </div>
 			</div>
 		</div>
@@ -190,7 +190,6 @@ text-align: center;
 	// marker.setMap(null);
 $(function(){
 
-    
 	$('.slick-items').slick({
 		autoplay : true,
 		dots : true,
@@ -202,6 +201,10 @@ $(function(){
 		slidesToScroll : 1,
 		fade : false
 	});
+	$('#detailBtn').click(function(e){
+		alert("로그인 해주세요");
+		e.preventdefault();
+	})
 
 });
 	

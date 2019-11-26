@@ -409,7 +409,7 @@ $(function() {
        
   }); 
 </script>
-<%
+<%-- <%
 	System.out.println("하우스하우스");
 	Map<Sale, SaleImage> saleMap = (Map<Sale, SaleImage>) request.getAttribute("saleMap");
 	System.out.println("saleMap.toString(): 하우스리스트 입성: " + saleMap.toString());
@@ -456,4 +456,4 @@ $(function() {
       <ul class="rolling" id="roll">
       
       </ul>
-   </div>
+   </div> --%>

@@ -224,8 +224,8 @@ a.btn  {
 				</div>
 				<div>
 					<div class="featured_img">
-						<img src="./images/house1.jpg" alt="" /> <a
-							href="./images/house1.jpg" class="popup-img"></a>
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName3() %>" alt="" /> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName3() %>" class="popup-img" style="width:300px;height:300px;"></a>
 					</div>
 				</div>
 			</div>
