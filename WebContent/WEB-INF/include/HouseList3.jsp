@@ -87,7 +87,7 @@ text-align: center;
 	    
 // 	                                var dNametable = "";
 // 	                                dNametable += "<tr>";
-// 	                                dNametable += "<td>" + element.eName + "</td>";
+// 	                                dNvcxametable += "<td>" + element.eName + "</td>";
 // 	                                dNametable += "<td>" + element.empNo + "</td>";
 // 	                                dNametable += "<td>" + element.job + "</td>";
 // 	                                dNametable += "<td>" + element.sal + "</td>";

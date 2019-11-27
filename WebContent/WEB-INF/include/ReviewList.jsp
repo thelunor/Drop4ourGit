@@ -39,6 +39,7 @@
 	System.out.println("ReviewList userId: " + genericUserId);
 	System.out.println("ReviewList reaId: " + reaId);
 	
+	
 	// Review review = new Review();
 	// System.out.println("ReviewList review.toString: " + review.toString());
 	// java.sql.Date reviewDate = (java.sql.Date) request.getAttribute("reviewDate");
@@ -91,6 +92,7 @@
 						
 						<table style="width: 100%;" id="reviewbody">
 							<c:forEach var="reviewTable" items="<%=reviewList%>" varStatus="status">
+									<input type="hidden" id="reviewNum" value="${ reviewTable.reviewNum}">
 									<tr>
 										<td align="left" width="70%">
 											<span>${reviewTable.reviewDate}</span></td>
@@ -140,6 +142,11 @@
 
 <script type="text/javascript">
 	$(function() {
+		
+		var reviewNum = $("#reviewNum").val();
+		console.log(reviewNum);
+		
+		
 		$('#insert_review').click(function() {
 			$.ajax({
 				url: 'InsertReview', // kr.or.bit.ajax
@@ -175,8 +182,14 @@
 		})
 		
 		$('#delete_review').click(function() {
+			
 			$.ajax({
-				
+				url:'DeleteReview?reviewNum='+reviewNum,
+				dataType: 'html',
+				type: 'post',
+				success:function(data){
+					console.log(data);
+				}
 			})
 		})
 	})

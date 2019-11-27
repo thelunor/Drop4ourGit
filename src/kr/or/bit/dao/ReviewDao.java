@@ -122,41 +122,34 @@ public class ReviewDao {
 		return 0;
 	}
 
-	public int deleteReview(String userId, int reviewNum) { // 리뷰 삭제(글번호로)
+	public int deleteReview(int reviewNum) { // 리뷰 삭제(글번호로)
 		/* 리뷰 삭제시 리뷰에 댓글이 있는 경우 댓글부터 삭제해야 함! */
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int row = 0;
+		int resultRow = 0;
 		
 		try {
 			conn = ds.getConnection();
-			String select_sql = "SELECT REVIEWNUM FROM REVIEW WHERE USERID=?";
-			String del_sql = "DELETE FROM REVIEW WHERE REVIEWNUM=?";
-			// 회원 아이디 검증
-			pstmt = conn.prepareStatement(select_sql);
-			pstmt.setString(1, userId);
+			conn.setAutoCommit(false); //트랜잭션
+			//댓글 삭제
+			String sql_del_comment = "delete from reviewComment where reviewNum=?";
+			//글 삭제
+			String sql_del_review = "delete from review where reviewNum=?";
 			
-			rs = pstmt.executeQuery();
+			pstmt = conn.prepareStatement(sql_del_comment);
+			pstmt.setInt(1, reviewNum);
+			pstmt.executeQuery(); //댓글 삭제
 			
-			if (rs.next()) {
-				if (userId.equals(userId)) { // 실제 삭제처리
-					conn.setAutoCommit(false);
-					pstmt = conn.prepareStatement(del_sql);
-					pstmt.setInt(1, reviewNum);
-					row = pstmt.executeUpdate();
-					
-					if (row > 0) {
-						conn.commit();
-					} else {
-						conn.rollback();
-					}
-					return row;
-				} else {
-					return 0;
-				}
-			} else {
-				return -1;
+			pstmt = conn.prepareStatement(sql_del_review);
+			pstmt.setInt(1, reviewNum);
+			resultRow = pstmt.executeUpdate();
+			
+			if(resultRow>0) {
+				conn.commit();
+				System.out.println("커밋 완료");
+			}else {
+				conn.rollback();
 			}
 			
 		} catch (Exception e) {
@@ -169,11 +162,10 @@ public class ReviewDao {
 			try {
 				conn.close();
 			} catch (Exception e) {
-				System.out.println("ReviewDao delete close 예외발생");
 				System.out.println(e.getMessage());
 			}
 		}
 		
-		return 0;
+		return resultRow;
 	}
 }
