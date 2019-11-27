@@ -67,10 +67,50 @@ a.btn  {
 text-align: center;
 }
 </style>
+<script type="text/javascript">
+	        $(function () {
+	            $(window).scroll(function () {
+	                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	                    $.ajax({
+	                        url: 'InfiniteScroll',
+	                        type: 'post',
+	                        data: {
+	                            "search": $("#search").val()
+	                        },
+	                        dataType: 'json',
+	                        success: function (data) {
+	                            $("#tbody").empty();
+	    
+	                            $.each(data, function (index, element) {
+	    
+ 	                                console.log(element);
+	    
+// 	                                var dNametable = "";
+// 	                                dNametable += "<tr>";
+// 	                                dNametable += "<td>" + element.eName + "</td>";
+// 	                                dNametable += "<td>" + element.empNo + "</td>";
+// 	                                dNametable += "<td>" + element.job + "</td>";
+// 	                                dNametable += "<td>" + element.sal + "</td>";
+// 	                                dNametable += "<td>" + element.dName + "</td>";
+// 	                                dNametable += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href = 'editForm.d4b?empNo="+element.empNo+"' > 수정</button > " + "</td > ";
+// 	                                dNametable += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "
+// 	                                location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
+// 	                                dNametable += "</tr>";
+	    
+// 	                                $('#tbody').append(dNametable);
+	                            })
+	                        }
+	                    })
+	                }
+	            })
+	        });
+</script>
 <%
    Map<Sale, SaleImage> saleMap = (Map<Sale, SaleImage>)request.getAttribute("saleMap");
+	String search =(String) request.getAttribute("search");
 %>
 <h6>300개 이상의 매물</h6>
+<input type="hidden" value="<%=search%>" id="search">
 <p style="font-size: 13px">거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</p>
 <br>
 <div class="row">
@@ -80,59 +120,53 @@ text-align: center;
  <c:set var="listLength" value="listLength"></c:set>
   <c:set var="listLength" value="listLength"></c:set>
  <c:set var="saleData" value=""></c:set>
-<%-- <c:forEach var="sale" items="<%=list%>" varStatus="status"> --%>
-<%--  <c:forEach var="i" begin="0" end="<%=listLength %>" step="1"> --%>
 <c:forEach var="sale" items="<%=saleMap%>" varStatus="status">
-
-      <!-- items inner -->
-      <div class="row">
-         <div class="col-lg-1"></div>
-         <div class="col-lg-7">
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-7">
             <div class="slick-items">
-               <div>
-                  <img src="reaimg/${sale.value.saleImgSaveName1}" alt="매물사진1" width="500" height="220">
-               </div>
-               <div>
-                  <img src="reaimg/${sale.value.saleImgSaveName2}" alt="매물사진2" width="500" height="220">
-               </div>
-               <div>
-                  <img src="reaimg/${sale.value.saleImgSaveName3}" alt="매물사진3" width="500" height="220">
-               </div>
+                <div>
+                    <img src="reaimg/${sale.value.saleImgSaveName1}" alt="매물사진1" width="500" height="220">
+                </div>
+                <div>
+                    <img src="reaimg/${sale.value.saleImgSaveName2}" alt="매물사진2" width="500" height="220">
+                </div>
+                <div>
+                    <img src="reaimg/${sale.value.saleImgSaveName3}" alt="매물사진3" width="500" height="220">
+                </div>
             </div>
-         </div>
-         <!-- 내용 -->
-         <div class="col-lg-4">
-         <div class="detail" style="text-align: center;">
-            <h5>${sale.key.aptName}</h5>
-            <input type="text" class="form-control"   value="전용면적   ${sale.key.aptSize}㎡">         
-               <br>
-               <div class="skill_bar sm-m-top-50">
-                  <div class="teamskillbar clearfix m-top-20" data-percent="${79830 / sale.key.price * 100}%">
-                     <h6>거래 가격 : ${sale.key.price}</h6>
-                     <div class="teamskillbar-bar"></div>
-                  </div>
-                  <!-- End Skill Bar -->
+        </div>
+        <!-- 내용 -->
+        <div class="col-lg-4">
+            <div class="detail" style="text-align: center;">
+                <h5>${sale.key.aptName}</h5>
+                <input type="text" class="form-control" value="전용면적   ${sale.key.aptSize}㎡">
+                <br>
+                <div class="skill_bar sm-m-top-50">
+                    <div class="teamskillbar clearfix m-top-20" data-percent="${79830 / sale.key.price * 100}%">
+                        <h6>거래 가격 : ${sale.key.price}</h6>
+                        <div class="teamskillbar-bar"></div>
+                    </div>
+                    <!-- End Skill Bar -->
+                    <div class="teamskillbar clearfix m-top-50" data-percent="">
+                        <h6>${sale.key.etc}</h6>
+                        <div class="teamskillbar-bar"></div>
+                    </div>
+                    <!-- End Skill Bar -->
+                </div>
+                <a class="btn trigger" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    </c:forEach>
+    </div>
 
-                  <div class="teamskillbar clearfix m-top-50" data-percent="">
-                     <h6>${sale.key.etc}</h6>
-                     <div class="teamskillbar-bar"></div>
-                  </div>
-                  <!-- End Skill Bar -->
-               </div>                  
-             <a class="btn trigger" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>      
-             </div>
-         </div>
-      </div>
-      <hr>
-   </c:forEach>   
-   </div>
-
-   <!-- map -->
-   <div class="col-lg-5">
-      <div id="map" style="width: 100%; height: 100%;"></div>
-   </div>
-
-</div>
+    <!-- map -->
+    <div class="col-lg-5">
+        <div id="map" style="width: 100%; height: 100%;"></div>
+    </div>
+	</div>
 
 <script>
    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

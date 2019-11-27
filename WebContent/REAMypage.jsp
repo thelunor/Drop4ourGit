@@ -139,15 +139,13 @@ input {
 							<div class="col-md-12">
 								<input type="submit" class="btn-group" value="매물 등록">
 								&nbsp;
-								<button type="submit" class="btn-group">지난 매물 보기</button>
-								&nbsp;
 								<button type="submit" class="btn-group">계약서 작성</button>
 								&nbsp;
 								<button type="submit" class="btn-group">계약 관리</button>
 								&nbsp;
 								<button type="button" class="btn-group" onclick="location.href='CheckIntroBoardService.d4b?reaUserId=${reaUserData.reaId}'">소개글 관리</button>
 								&nbsp;
-								<button type="button" class="btn-group" onclick="location.href='REASchedule.jsp'">일정 관리</button>
+								<button type="button" class="btn-group" onclick="location.href='REASchedule.jsp?userId=${reaUserData.reaId}'">일정 관리</button>
 								<br> <br>
 								<div id="saleList">
 									<div class="card-header py-3">
