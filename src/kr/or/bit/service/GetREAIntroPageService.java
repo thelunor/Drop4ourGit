@@ -45,6 +45,7 @@ public class GetREAIntroPageService implements Action {
 			reaImg = imgdao.getREAImg(reaId);
 			rvList = rvdao.getReviewList(reaId);
 			reaIntro = reaIntrodao.getREAIntroData(reaId);
+			System.out.println(reaIntro.toString());
 			System.out.println("reaUser: " + reaUser);
 			System.out.println("rvList: " + rvList);
 			System.out.println("reaIntro: " + reaIntro);

@@ -28,8 +28,6 @@
 	SaleDao2 dao = new SaleDao2();
 	List<Sale> saleList = new ArrayList<Sale>();
 	saleList = dao.getSaleList(id); //reaId로 리스트 불러오기
-	System.out.println("saleList.toString(): " + saleList.toString());
-	//System.out.println(reaImg.getReaImgSaveName());
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
 <c:set var="reaImgData" value="<%=reaImg%>"></c:set>

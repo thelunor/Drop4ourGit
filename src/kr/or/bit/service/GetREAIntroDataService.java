@@ -49,10 +49,11 @@ public class GetREAIntroDataService implements Action {
 			rvList = rvdao.getReviewList(reaId);
 			reaIntro = reaIntrodao.getREAIntroData(reaId);
 			
-			System.out.println("유저: "+reaUser.toString());
-			System.out.println("띠요오옹1");
+			System.out.println("유저1: "+reaUser.toString());
+			System.out.println("유저2: "+reaImg.toString());
+			System.out.println("유저3: "+rvList.toString());
+			System.out.println("유저4: "+reaIntro.toString());
 			if(reaUser != null && reaImg != null && reaIntro != null && rvList != null) {
-				System.out.println("띠요오옹2");
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("rvList", rvList);

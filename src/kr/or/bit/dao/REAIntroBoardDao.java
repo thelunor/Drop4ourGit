@@ -60,7 +60,6 @@ public class REAIntroBoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		REAIntroBoard reaIntro = null;
-		
 		try {
 			conn = ds.getConnection();
 			String select_sql = "SELECT REAID, SUBJECT, CONTENT "
@@ -74,7 +73,6 @@ public class REAIntroBoardDao {
 				String subject = rs.getString("subject");
 				String content = rs.getString("content");
 				reaIntro = new REAIntroBoard(reaId, subject, content);
-
 			}
 		} catch (Exception e) {
 			System.out.println("getREAIntroDao 예외발생");
