@@ -25,6 +25,8 @@
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1381779640e5bfb90acf9a443e18cee4&libraries=services"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <jsp:include page="./css/css.jsp"></jsp:include>
 <style type="text/css">
 h2, h4, h6, h3{
@@ -654,10 +656,8 @@ $( document ).ready(function() {
 			success : function(data){
 				$("#bookMarkBtn").empty();
 				$("#bookMarkBtn").append(data);
-				
 				//console.log(data);
 			}
-		
 		 });
 	  });
 	});

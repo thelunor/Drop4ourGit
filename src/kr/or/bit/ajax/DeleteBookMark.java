@@ -15,7 +15,7 @@ import kr.or.bit.dto.BookMark;
 /**
  * Servlet implementation class InsertBookMark
  */
-@WebServlet("/InsertBookMark")
+@WebServlet("/DeleteBookMark")
 public class DeleteBookMark extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,11 +34,13 @@ public class DeleteBookMark extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String aptNum = request.getParameter("aptNum");
+		System.out.println("서블렛"+userId+"/"+aptNum);
 		try {
 			dao = new BookMarkDao();
 			result = dao.deleteBookMark(userId, aptNum);
 			if(result > 0) {
-				out.print("<script>북마크가 삭제 되었습니다.</script>");
+				System.out.println("result"+result);
+				out.print("<script>alert('북마크가 삭제 되었습니다.')</script>");
 			}
     
 		}catch(Exception e) {
