@@ -6,27 +6,34 @@ import javax.servlet.http.HttpSession;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
+import kr.or.bit.dao.BookMarkDao;
 import kr.or.bit.dao.REAIntroBoardDao;
-import kr.or.bit.dto.REAIntroBoard;
 
-public class DeleteREAIntroService implements Action {
+public class CheckBookMarkService implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
+		//db에 북마크가 있는지 없는지 확인
 		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("userId");
-		REAIntroBoardDao dao = null;
-		int result = 0;
+		String userId = (String) session.getAttribute("userId");
+		String aptNum = request.getParameter("aptNum");
+		BookMarkDao dao = null;
+		boolean check = false;
 		try {
-			dao = new REAIntroBoardDao();
-			result = dao.deleteREAIntro(reaId);
-			if(result>0) {
-				forward.setPath("GetREAUserByIdService.d4b?reaUserId"+reaId);
+			dao = new BookMarkDao();
+			check = dao.checkBookMark(userId, aptNum);
+			
+			if(check) { //이미 등록된 북마크가 있다면
+
+			}else { //아직 북마크가 없다면 
 			}
+			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
+
+		
 		return forward;
 	}
 

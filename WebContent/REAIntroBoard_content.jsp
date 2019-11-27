@@ -8,7 +8,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String reaId = (String) session.getAttribute("reaUserId");
+	String reaId = (String) session.getAttribute("userId");
 	REAIntroBoard introBoard = (REAIntroBoard) request.getAttribute("introBoard");
 %>
 <c:set var="boardData" value="<%=introBoard%>" />
@@ -21,21 +21,12 @@
 <title>공인중개사 소개 페이지</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- include libraries(jQuery, bootstrap) -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-
-<!-- include summernote css/js -->
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 
 <jsp:include page="css/css.jsp" />
 
@@ -64,6 +55,13 @@ h1, h3 {
 	clear: both;
 	float: none;
 }
+ @import url(http://fonts.googleapis.com/css?family=Roboto:400italic,400);
+   * {
+    font-family: "Roboto", Helvetica, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+   }
+
 </style>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
@@ -84,7 +82,7 @@ h1, h3 {
 		<section id="join" class="about roomy-100">
 			<div class="container">
 				<form id="introForm" role="form"
-					action="UpdateREAIntroService.d4b?reaUserId=<%=reaId%>"
+					action="UpdateREAIntroService.d4b"
 					method="post">
 					<br style="clear: both">
 					<h3 style="margin-bottom: 25px;">공인중개사 소개글 수정</h3>
@@ -99,14 +97,16 @@ h1, h3 {
 					</div>
 					<div>
 						<div class="row">
-							<div class="col-sm-5">
+							<div class="col-sm-3"></div>
+							<div class="col-sm-3">
 								<button type="submit" id="edit_btn" name="edit_btn"
-									class="btn btn-primary pull-right">수정 완료</button>
+									class="btn btn-primary btn-block btn-lg">수정 완료</button>
 							</div>
-							<div class="col-sm-5">
+							<div class="col-sm-3">
 								<button type="button" id="delete_btn" name="delete_btn"
-									class="btn btn-primary pull-right" onclick="location.href='DeleteREAIntroService.d4b?reaId=<%=reaId%>'">삭제</button>
+									class="btn btn-primary btn-block btn-lg" onclick="location.href='DeleteREAIntroService.d4b'">삭제</button>
 							</div>
+							<div class="col-sm-3"></div>
 						</div>
 					</div>
 				</form>
@@ -123,14 +123,16 @@ h1, h3 {
 
 	<!-- JS includes -->
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#summernote').summernote({
-				height : 300,
-				minHeight : null,
-				maxHeight : null,
-				lang : 'ko-KR'
-			});
-		});
+	$(document).ready(function() {
+		$('#summernote').summernote({
+			lang : 'ko-KR',
+			placeholder: '소개글을 작성해주세요.',
+	        tabsize: 2,
+	        height: 400,
+	        defaultFontName: 'Comic Sans MS'
+
+	      });
+	});
 	</script>
 
 </body>

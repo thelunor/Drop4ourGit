@@ -12,6 +12,7 @@
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
 	String userId = (String) session.getAttribute("userId");
+	boolean bkCheck = (boolean) request.getAttribute("bkCheck");
 	String aptNum = (String) request.getParameter("aptNum");
 %>
 
@@ -25,6 +26,8 @@
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1381779640e5bfb90acf9a443e18cee4&libraries=services"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <jsp:include page="./css/css.jsp"></jsp:include>
 <style type="text/css">
 h2, h4, h6, h3{
@@ -247,7 +250,19 @@ a.btn  {
 					<div class=row>
 					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${saleData.aptName}</span>&nbsp;${saleData.type}</h4> 										
 					&nbsp;&nbsp;&nbsp;
-					<button type="submit" class="btn" id="bookMarkBtn" style="padding: 0;border: none;background: none;color:#ff6863;"><i class="far fa-bookmark fa-2x"></i></button>
+					
+					<%
+					if(bkCheck){ //이미 북마크가 있다면
+						out.print("<button type='submit' class='btn' style='padding: 0;border: none;background: none;color:#ff6863;'>");
+						out.print("<i class='fas fa-bookmark fa-2x'></i>");
+						out.print("</button>");
+					}else{ //북마크가 없다면
+						out.print("<button type='submit' class='btn' id='bookMarkBtn' style='padding: 0;border: none;background: none;color:#ff6863;'>");
+						out.print("<i class='far fa-bookmark fa-2x'></i>");
+						out.print("</button>");
+					}
+					%>
+					
 					<input type="hidden" id="userId" value="<%=userId %>">
 					</div>
 					<input type="text" class="form-control" name="address"
@@ -654,10 +669,8 @@ $( document ).ready(function() {
 			success : function(data){
 				$("#bookMarkBtn").empty();
 				$("#bookMarkBtn").append(data);
-				
 				//console.log(data);
 			}
-		
 		 });
 	  });
 	});

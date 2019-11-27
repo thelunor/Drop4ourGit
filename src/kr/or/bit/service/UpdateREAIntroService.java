@@ -16,7 +16,7 @@ public class UpdateREAIntroService implements Action {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
 		int result = 0;
-		String reaId = (String) session.getAttribute("reaUserId");
+		String reaId = (String) session.getAttribute("userId");
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
 		REAIntroBoard introBoard = new REAIntroBoard();
@@ -28,7 +28,7 @@ public class UpdateREAIntroService implements Action {
 			dao = new REAIntroBoardDao();
 			result = dao.updateREAIntro(introBoard);
 			if(result > 0) {
-				forward.setPath("GetREAUserByIdService.d4b?reaUserId="+reaId);
+				forward.setPath("GetREAUserByIdService.d4b");
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

@@ -160,7 +160,7 @@ public class REAIntroBoardDao {
 				check=false;
 			}
 		}catch(Exception e) {
-			
+			System.out.println(e.getMessage());
 		}finally {
 			DB_Close.close(pstmt);
 			try {

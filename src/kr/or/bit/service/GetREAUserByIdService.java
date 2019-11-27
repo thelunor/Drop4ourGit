@@ -25,7 +25,7 @@ public class GetREAUserByIdService implements Action {
 		REAIntroBoardDao introDao = null;
 		
 		HttpSession session = request.getSession();
-		String reaId = (String)session.getAttribute("reaUserId");
+		String reaId = (String)session.getAttribute("userId");
 		try {
 
 			forward = new ActionForward();
@@ -39,10 +39,6 @@ public class GetREAUserByIdService implements Action {
 			if (reaUser != null && reaImg != null) {
 				System.out.println("조회 성공");
 				request.setAttribute("reaUser", reaUser);
-				
-				
-				
-			 	
 				request.setAttribute("reaImg", reaImg);
 				forward.setPath("REAMypage.jsp");
 			} else {
