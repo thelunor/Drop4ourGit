@@ -2,8 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String userId = (String) session.getAttribute("userId");
-	String type= (String) request.getAttribute("type");
-	System.out.println("타입아~!~!" + type);
+	String type= "U02";
 	
 	//System.out.println("reaIdㅡㅡㅡ"+ reaId);
 %>
@@ -13,7 +12,7 @@
 		<ul>
 			<li class="login"><a href ='LogoutService.d4b'>로그아웃</a></li>
 			<li class="main"><a href="UserMain.jsp?type=<%=type%>">메인</a></li>
-			<li class="main"><a href="GetREAUserByIdService.d4b?type=<%=type%>">마이페이지</a></li>
+			<li class="main"><a href="GetREAMypageService.d4b?type=<%=type%>">마이페이지</a></li>
 			<li class="main"><a href="GetREAIntroDataService.d4b?type=<%=type%>">소개페이지</a></li>
 		</ul>
 	</div>

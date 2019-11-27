@@ -24,7 +24,7 @@
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
 	System.out.println(reaUser);
-	String id = (String) session.getAttribute("reaUserId");
+	String id = (String) session.getAttribute("userId");
 	SaleDao2 dao = new SaleDao2();
 	List<Sale> saleList = new ArrayList<Sale>();
 	saleList = dao.getSaleList(id); //reaId로 리스트 불러오기

@@ -29,6 +29,7 @@ public class GetREAMypageService implements Action {
 		SaleDao2 saleDao = null;
 		HttpSession session = request.getSession();
 		String reaId = (String)session.getAttribute("userId");
+		String type=(String)request.getAttribute("type");
 		System.out.println("reaId 임돠"+reaId);
 		try {
 
@@ -47,6 +48,7 @@ public class GetREAMypageService implements Action {
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("saleList", saleList);
+				request.setAttribute("type", type);
 				forward.setPath("REAMypage.jsp");
 			} else {
 				System.out.println("조회 실패");

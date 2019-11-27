@@ -3,7 +3,9 @@
 <%
 	String userId=(String) session.getAttribute("userId");
 	String type=(String) request.getAttribute("type");
-	
+	if(type == null){
+		type=(String) request.getParameter("type");
+	}
  %>
 <!-- Start Atribute Navigation -->
 <div class="container">

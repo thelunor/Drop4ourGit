@@ -24,8 +24,8 @@ public class GetREAIntroDataService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("reaUserId");			
-		
+		String reaId = (String) session.getAttribute("userId");			
+		System.out.println("아리에이아이디: " + reaId);
 		REAUser reaUser = null;
 		REAImage reaImg = null;
 		List<Review> rvList = null;
@@ -49,13 +49,15 @@ public class GetREAIntroDataService implements Action {
 			rvList = rvdao.getReviewList(reaId);
 			reaIntro = reaIntrodao.getREAIntroData(reaId);
 			
-			System.out.println("유저"+reaUser.toString());
+			System.out.println("유저: "+reaUser.toString());
+			System.out.println("띠요오옹1");
 			if(reaUser != null && reaImg != null && reaIntro != null && rvList != null) {
+				System.out.println("띠요오옹2");
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("rvList", rvList);
 				request.setAttribute("reaIntro", reaIntro);
-				forward.setPath("REAIntro.jsp?reaUserId="+reaId);
+				forward.setPath("REAIntro.jsp?userId="+reaId);
 			}
 		} catch (Exception e) {
 			System.out.println("getREAIntroService 예외발생");
