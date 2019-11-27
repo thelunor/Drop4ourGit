@@ -95,7 +95,7 @@ public class BookMarkDao {
 		return resultRow;		
 	}
 
-	public int deleteBookMark(String id) { // 북마크 삭제하기
+	public int deleteBookMark(String aptNum) { // 북마크 삭제하기
 		return 0;
 	}
 }

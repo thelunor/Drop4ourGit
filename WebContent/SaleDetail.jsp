@@ -242,13 +242,15 @@ a.btn  {
 				<div class="col-md-12">
 				<div class="houseDetail">
 					<div class="page-wrapper">
-					<div class="row">
 					  <a class="btn trigger" href="#">담당 부동산</a>
-					  <a class="btn" href="InsertBookMarkService.d4b?userId=<%=userId %>&aptNum=<%=aptNum %>">북마크</a>
 					</div>
-					</div>
-				
+					<div class=row>
 					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${saleData.aptName}</span>&nbsp;${saleData.type}</h4> 										
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="InsertBookMarkService.d4b?userId=<%=userId %>&aptNum=<%=aptNum %>" style=""><i class="far fa-bookmark fa-2x"></i></a>
+
+					
+					</div>
 					<input type="text" class="form-control" name="address"
 						id="address" required="required" placeholder="도로명 주소"  value="${saleData.roadAddr}">
 						<br>
