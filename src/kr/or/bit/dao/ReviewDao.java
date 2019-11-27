@@ -86,9 +86,9 @@ public class ReviewDao {
 				System.out.println("ReviewDao rs 성공");
 				Review review = new Review();
 				
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy. MM. dd");
-				Date date = (Date) sdf.parse(rs.getString("reviewDate"));
-				Date reviewDate = new Date(date.getDate());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	            java.util.Date date = sdf.parse(rs.getString("reviewDate"));
+	            Date reviewDate = new Date(date.getTime());
 				
 				review.setReviewNum(rs.getInt("reviewNum"));
 				review.setUserId(rs.getString("userId"));
@@ -97,7 +97,7 @@ public class ReviewDao {
 				review.setReaId(rs.getString("reaId"));
 				
 				rvList.add(review);
-				System.out.println("ReviewDao getList rvList: " + rvList);
+//				System.out.println("ReviewDao getList rvList: " + rvList);
 			}
 		} catch (Exception e) {
 			System.out.println("ReviewDao 예외발생");
