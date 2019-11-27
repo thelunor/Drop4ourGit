@@ -27,6 +27,7 @@ public class InsertBookMarkService implements Action {
 			bookMark = new BookMark();
 			bookMark.setUserId(userId);
 			bookMark.setAptNum(aptNum);
+			
 			result = dao.insertBookMark(bookMark);
 			if(result > 0) {
 				forward = new ActionForward();

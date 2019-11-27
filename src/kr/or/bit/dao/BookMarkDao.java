@@ -75,6 +75,8 @@ public class BookMarkDao {
 			pstmt = conn.prepareStatement(sql_insertBk);
 			pstmt.setString(1, bookMark.getUserId());
 			pstmt.setString(2, bookMark.getAptNum());
+			System.out.println("북마크"+bookMark.toString());
+			
 			resultRow = pstmt.executeUpdate();
 			if(resultRow > 0) {
 				System.out.println("북마크 db 생성 완료");

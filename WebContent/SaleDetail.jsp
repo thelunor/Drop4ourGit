@@ -11,7 +11,7 @@
 	SaleImage saleImg = (SaleImage) request.getAttribute("saleImg");
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
-	String genericUserId = (String) session.getAttribute("genericUserId");
+	String userId = (String) session.getAttribute("userId");
 	String aptNum = (String) request.getParameter("aptNum");
 %>
 
@@ -244,7 +244,7 @@ a.btn  {
 					<div class="page-wrapper">
 					<div class="row">
 					  <a class="btn trigger" href="#">담당 부동산</a>
-					  <a class="btn" href="InsertBookMarkService.d4b?userId=<%=genericUserId %>&aptNum=<%=aptNum %>">북마크</a>
+					  <a class="btn" href="InsertBookMarkService.d4b?userId=<%=userId %>&aptNum=<%=aptNum %>">북마크</a>
 					</div>
 					</div>
 				
