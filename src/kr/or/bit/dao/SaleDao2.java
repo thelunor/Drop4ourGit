@@ -162,7 +162,6 @@ public class SaleDao2 {
 				aptNum = rs.getString("aptNum");
 				aptNumList.add(aptNum);
 			}
-
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}finally {
