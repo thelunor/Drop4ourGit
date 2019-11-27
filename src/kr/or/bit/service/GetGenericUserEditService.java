@@ -19,7 +19,7 @@ public class GetGenericUserEditService implements Action {
 		HttpSession session = request.getSession();
 		GenericUser user = new GenericUser();
 		GenericUserDao dao = null;
-		String genericUserId = (String)session.getAttribute("genericUserId");
+		String genericUserId = (String)session.getAttribute("userId");
 		try {
 
 			forward = new ActionForward();

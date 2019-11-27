@@ -55,11 +55,18 @@ text-align: center;
 									<br>
 									<h2 style="font-size: 18px;">마이페이지에서<br> 수정된 내용을 확인할 수 있습니다.</h2>
 									<hr>
-									<br>
-								
-									<br>
-									<br>
-									<br> <br> 
+									<br> 
+									<br> 
+									<div class="form-group">
+								<div class="row">
+								<div class="col-sm-6">
+						            <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='UserMain.jsp?type=U01'">메인페이지로 이동</button>
+						        </div>
+						        <div class="col-sm-6">
+						        	 <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='GetGenericUserMypageMainService.d4b?type=U01'">마이페이지로 이동</button>
+						        </div>	
+						        </div> 
+						        </div>
 							</div>
 						</div>
 					</div>

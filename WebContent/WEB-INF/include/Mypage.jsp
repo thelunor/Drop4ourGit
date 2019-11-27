@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String genericUserId = (String) session.getAttribute("genericUserId");
+	String genericUserId = (String) session.getAttribute("userId");
 	BookMarkDao dao = new BookMarkDao();
 	List<BookMark> bmList = new ArrayList<BookMark>();
 	bmList = dao.getBookMark(genericUserId); //reaId로 리스트 불러오기	
