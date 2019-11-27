@@ -32,10 +32,10 @@
 	
 <%	
 	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
-	
+	System.out.println("reviewList: " + reviewList);
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	String reaId = reaUser.getReaId();
-	String genericUserId = (String) session.getAttribute("genericUserId");
+	String genericUserId = (String) session.getAttribute("userId");
 	System.out.println("ReviewList userId: " + genericUserId);
 	System.out.println("ReviewList reaId: " + reaId);
 	
@@ -70,7 +70,7 @@
 			                        					readonly="readonly" style="display: inline; width: 50%; padding: 0;">
 										<input type="hidden" id="reviewNum" name="reviewNum" value=""></div></td>
 			                       	<td style="padding: 0;"><div align="right" style="padding-right: 10px;">
-			                       		작성자:&nbsp;<input type="text" id="userId" name="userId" value="<%=genericUserId %>" 
+			                       		작성자:&nbsp;<input type="text" id="userId" name="userId" value="<%=genericUserId%>" 
 			                       						readonly="readonly" style="; display: inline; width: 30%; padding: 0;">
 			                       		<input type="hidden" id="reaId" name="reaId" value=""></div></td>
 			                    </tr>

@@ -19,26 +19,26 @@ public class InsertReviewService implements Action {
 		ActionForward forward = new ActionForward();
 		
 		// 데이터 받기: reviewNum, userId, reviewContent, reviewDate, reaId
-		int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
+//		int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
 		String userId = request.getParameter("userId");
 		String reviewContent = request.getParameter("reviewContent");
-		java.util.Date reviewDate = null;
-		try {
-			reviewDate = (Date) new SimpleDateFormat().parse(request.getParameter("reviewDate"));
-		} catch (ParseException e1) {
-			System.out.println("InsertReviewService reviewDate 예외발생");
-			System.out.println(e1.getMessage());
-		}
+//		java.util.Date reviewDate = null;
+//		try {
+//			reviewDate = (Date) new SimpleDateFormat().parse(request.getParameter("reviewDate"));
+//		} catch (ParseException e1) {
+//			System.out.println("InsertReviewService reviewDate 예외발생");
+//			System.out.println(e1.getMessage());
+//		}
 		String reaId = request.getParameter("reaId");
 		System.out.println("InsertReviewService userId : " + userId);
 		System.out.println("InsertReviewService reaId : " + reaId);
 		
 		// 객체에 데이터 저장
 		Review review = new Review();
-		review.setReviewNum(reviewNum);
+//		review.setReviewNum(reviewNum);
 		review.setUserId(userId);
 		review.setReviewContent(reviewContent);
-		review.setReviewDate(reviewDate);
+//		review.setReviewDate(reviewDate);
 		review.setReaId(reaId);
 		
 		// 데이터 저장 확인

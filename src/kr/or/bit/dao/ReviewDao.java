@@ -36,13 +36,13 @@ public class ReviewDao {
 			conn = ds.getConnection();
 			String sql = "INSERT INTO REVIEW (REVIEWNUM, USERID, REVIEWCONTENT, REVIEWDATE, REAID) " 
 						+ " VALUES (SEQ_REVIEW.NEXTVAL, (SELECT USERID FROM GENERICUSER WHERE USERID=?), "
-						+ " ?, ?, (SELECT REAID FROM REAUSER WHERE REAID=?))";
+						+ " ?, SYSDATE, (SELECT REAID FROM REAUSER WHERE REAID=?))";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, review.getUserId());
 			pstmt.setString(2, review.getReviewContent());
-			pstmt.setString(3, review.getReviewDate());
-			// 후기글 입력 시 오늘 날짜로 DB 저장(SYSDATE)
-			pstmt.setString(4, review.getReaId());
+//			pstmt.setString(3, review.getReviewDate());
+//			후기글 입력 시 오늘 날짜로 DB 저장(SYSDATE)
+			pstmt.setString(3, review.getReaId());
 			row = pstmt.executeUpdate();
 			
 			if (row > 0) {
@@ -84,16 +84,20 @@ public class ReviewDao {
 			
 			while (rs.next()) {
 				System.out.println("ReviewDao rs 성공");
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy. MM. dd");
-				
 				Review review = new Review();
-				java.util.Date reviewDate = sdf.parse(rs.getString("reviewDate"));
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy. MM. dd");
+				Date date = (Date) sdf.parse(rs.getString("reviewDate"));
+				Date reviewDate = new Date(date.getDate());
+				
 				review.setReviewNum(rs.getInt("reviewNum"));
 				review.setUserId(rs.getString("userId"));
 				review.setReviewContent(rs.getString("reviewContent"));
 				review.setReviewDate(reviewDate);
 				review.setReaId(rs.getString("reaId"));
+				
 				rvList.add(review);
+				System.out.println("ReviewDao getList rvList: " + rvList);
 			}
 		} catch (Exception e) {
 			System.out.println("ReviewDao 예외발생");

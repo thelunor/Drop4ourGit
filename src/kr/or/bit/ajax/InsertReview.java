@@ -32,13 +32,13 @@ public class InsertReview extends HttpServlet {
     	String reaId = request.getParameter("reaId");
     	String userId = request.getParameter("userId");
 		
-		java.util.Date reviewDate = null;
-		try {
-			reviewDate = (Date) new SimpleDateFormat().parse(request.getParameter("reviewDate"));
-		} catch (ParseException e1) {
-			System.out.println("InsertReviewDate ajax 예외발생");
-			System.out.println(e1.getMessage());
-		}
+//		java.util.Date reviewDate = null;
+//		try {
+//			reviewDate = (Date) new SimpleDateFormat().parse(request.getParameter("reviewDate"));
+//		} catch (ParseException e1) {
+//			System.out.println("InsertReviewDate ajax 예외발생");
+//			System.out.println(e1.getMessage());
+//		}
 		
 		String reviewContent = request.getParameter("reviewContent");
     			
@@ -53,7 +53,7 @@ public class InsertReview extends HttpServlet {
     		review.setReaId(reaId);
     		review.setUserId(userId);
     		review.setReviewContent(reviewContent);
-    		review.setReviewDate(reviewDate);
+//    		review.setReviewDate(reviewDate);
     		
     		result = rvdao.insertReview(review);
     		// System.out.println("InsertReview ajax reaId: " + reaId);
