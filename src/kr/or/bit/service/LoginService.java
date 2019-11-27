@@ -49,13 +49,13 @@ public class LoginService implements Action {
 			if (gResult.equals("U01") || rResult.equals("U02")) { // 블랙아닌 회원이 로그인했을 때
 				if (gResult.equals("U01")) {
 					session.setAttribute("userId", id);
-					session.setAttribute("type", "U01"); // 일반 회원
+					request.setAttribute("type", "U01"); // 일반 회원
 					forward.setPath("UserMain.jsp");
 					System.out.println("일반회원 로그인");
 					return forward;
 				} else {
 					session.setAttribute("userId", id);
-					session.setAttribute("type", "U02"); // 공인중개사 회원
+					request.setAttribute("type", "U02"); // 공인중개사 회원
 					forward.setPath("UserMain.jsp");
 					System.out.println("공인중개사 회원 로그인");
 					return forward;

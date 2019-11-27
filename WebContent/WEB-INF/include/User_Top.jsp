@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String userId = (String) session.getAttribute("userId");
-	String type = (String) session.getAttribute("type");
-	System.out.println(userId);
-	System.out.println(type);
+	String userId=(String) session.getAttribute("userId");
+	String type=(String) request.getAttribute("type");
 	
  %>
 <!-- Start Atribute Navigation -->
@@ -13,7 +11,7 @@
 		<ul>
 			<li class="login">
 				<%
-					if (type != null) {
+					if (type != null && type.trim() != "") {
 						out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 					} else {
 						out.print("<a href ='Login.jsp'>로그인</a>");
@@ -22,7 +20,7 @@
 			</li>
 			<li class="join">
 				<%
-					if (type == null) {
+					if (type == null || type.trim() == "") {
 						out.print("<a href='JoinPage.jsp'>회원가입</a>");
 					} 
 				%>							
@@ -30,23 +28,18 @@
 			<li class='mypage'>
 				<%
 					if (type.equals("U01")) {
-						out.print("<a href='GetGenericUserMypageMainService.d4b?genericUserId="+userId+ "&type=" + type + "'>마이페이지</a>");
+						out.print("<a href='GetGenericUserMypageMainService.d4b?type=" + type + "'>마이페이지</a>");
 					} else if (type.equals("U02")) {
-						out.print("<a href='GetREAMypageService.d4b?reaId="+userId+"&type=" + type + "'>마이페이지</a>");
+						out.print("<a href='GetREAMypageService.d4b?type=" + type + "'>마이페이지</a>");
 					}
 				%>
 			</li>
-
 			<li class="side-menu">
 				<%
-
-					if (userId != null) {
-						if (userId.equals("admin")) {
-							out.print("<a href='#'><i class='fa fa-bars'></i></a>");
-						}
+					if (type.equals("A00")) {
+						out.print("<a href='#'><i class='fa fa-bars'></i></a>");
 					}
 				%>
-			
 		</ul>
 	</div>
 	<!-- End Atribute Navigation -->

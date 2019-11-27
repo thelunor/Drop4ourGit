@@ -28,7 +28,7 @@ public class GetREAMypageService implements Action {
 		REAImageDao imgDao=null;
 		SaleDao2 saleDao = null;
 		HttpSession session = request.getSession();
-		String reaId = (String)session.getAttribute("reaUserId");
+		String reaId = (String)session.getAttribute("userId");
 		System.out.println("reaId 임돠"+reaId);
 		try {
 
