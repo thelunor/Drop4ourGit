@@ -17,14 +17,14 @@ public class GetGenericUserMypageMainService implements Action {
 		HttpSession session = request.getSession();
 		GenericUser user = new GenericUser();
 		GenericUserDao dao = null;
-		String genericUserId = (String)session.getAttribute("genericUserId");
+		String genericUserId = (String)session.getAttribute("userId");
+		String type=(String)request.getAttribute("type");
 		System.out.println("genericUserId는 : " + genericUserId);
 		try {
 
 			forward = new ActionForward();
 			dao = new GenericUserDao();
 			user = dao.getGenericMypage(genericUserId);
-			String type=user.getUserCode();
 			
 			if (user != null) {
 				System.out.println("일반 회원 마이페이지 페이지!!!!");
