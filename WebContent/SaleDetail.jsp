@@ -195,7 +195,7 @@ a.btn  {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="./WEB-INF/include/Top.jsp"></jsp:include>
+			<jsp:include page="./WEB-INF/include/GenericUser_Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
 			<jsp:include page="./WEB-INF/include/Side.jsp"></jsp:include>
@@ -246,10 +246,9 @@ a.btn  {
 					</div>
 					<div class=row>
 					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${saleData.aptName}</span>&nbsp;${saleData.type}</h4> 										
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="InsertBookMarkService.d4b?userId=<%=userId %>&aptNum=<%=aptNum %>" style=""><i class="far fa-bookmark fa-2x"></i></a>
-
-					
+					&nbsp;&nbsp;&nbsp;
+					<button type="submit" class="btn" id="bookMarkBtn" style="padding: 0;border: none;background: none;color:#ff6863;"><i class="far fa-bookmark fa-2x"></i></button>
+					<input type="hidden" id="userId" value="<%=userId %>">
 					</div>
 					<input type="text" class="form-control" name="address"
 						id="address" required="required" placeholder="도로명 주소"  value="${saleData.roadAddr}">
@@ -641,7 +640,26 @@ $( document ).ready(function() {
 	    $('.page-wrapper').toggleClass('blur-it');
 	     return false;
 	  });
-	  $('[data-toggle="tooltip"]').tooltip(); 
+	  $('[data-toggle="tooltip"]').tooltip();
+	  var id = $("#userId").val();
+	  var aptNum = <%=aptNum%>
+	  console.log(id);
+	  console.log(aptNum);
+	  
+	  $("#bookMarkBtn").click(function(){		  
+		 $.ajax({
+			url : 'InsertBookMark?userId='+id+'&aptNum='+aptNum,
+			type: 'post',
+			dataType : 'html',
+			success : function(data){
+				$("#bookMarkBtn").empty();
+				$("#bookMarkBtn").append(data);
+				
+				//console.log(data);
+			}
+		
+		 });
+	  });
 	});
 </script>	
 </body>
