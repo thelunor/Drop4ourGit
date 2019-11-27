@@ -276,6 +276,7 @@ public class SaleDao {
 		SaleImage saleImg = null;
 		SaleImageDao imgDao = null;
 		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize, etc from sale where addr like ?";
+		int count=0;
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_select_aptList);
@@ -297,8 +298,9 @@ public class SaleDao {
 				saleImg = new SaleImage();
 				saleImg = imgDao.getSaleImg(aptNum);
 				mapList.put(sale, saleImg);
+				count++;
 			}
-
+			System.out.println(count);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -312,6 +314,55 @@ public class SaleDao {
 		}
 		return mapList;
 
+	}
+	public int selectAtpListCount(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		Map<Sale, SaleImage> mapList = null;
+		Sale sale = null;
+		SaleImage saleImg = null;
+		SaleImageDao imgDao = null;
+		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize, etc from sale where addr like ?";
+		int count=0;
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql_select_aptList);
+			pstmt.setString(1, "%" + addr + "%");
+			rs = pstmt.executeQuery();
+			
+			imgDao = new SaleImageDao();
+			mapList = new HashMap<Sale, SaleImage>();
+			
+			while (rs.next()) {
+				sale = new Sale();
+				sale.setAptName(rs.getString("aptName")); // 아파트 이름
+				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
+				sale.setPrice(rs.getString("price")); // 가격
+				sale.setAptNum(rs.getString("aptNum")); // 매물번호
+				sale.setAptSize(rs.getString("aptSize")); // 아파트 사이즈
+				sale.setEtc(rs.getString("etc"));
+				String aptNum = sale.getAptNum();
+				saleImg = new SaleImage();
+				saleImg = imgDao.getSaleImg(aptNum);
+				mapList.put(sale, saleImg);
+				count++;
+			}
+			System.out.println(count);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+		
 	}
 
 	public Sale getSaleDetail(String aptNum) { // 아파트 매물 번호로 매물 정보 가져오기 (SaleDetail 페이지)
@@ -383,4 +434,34 @@ public class SaleDao {
 		return saleList;
 	}
 
+	public int getTotalSaleCount() {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) cnt from sale";
+		int totalcount = 0;
+
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				System.out.println("Next 들어옴");
+				totalcount = rs.getInt("cnt");
+				System.out.println(totalcount);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return totalcount;
+	}
 }

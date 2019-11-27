@@ -29,10 +29,14 @@ public class SelectAtpListService implements Action {
 		try {
 			SaleDao dao = new SaleDao();
 			saleMap = dao.selectAtpList(search);
+			int count = dao.selectAtpListCount(search);
+			System.out.println("Count: " + count);
+			
 			//System.out.println(saleMap.toString());
 			if (saleMap != null) {
 				request.setAttribute("saleMap", saleMap);
 				request.setAttribute("search", search);
+				request.setAttribute("count", count);
 			} else {
 				request.setAttribute("saleMap", saleMap);
 				request.setAttribute("search", "법정구 법정동");

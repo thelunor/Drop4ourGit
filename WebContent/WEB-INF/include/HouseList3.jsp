@@ -15,11 +15,6 @@
 	//String genericUserId = (String) session.getAttribute("userId");
 	//String reaId = (String) session.getAttribute("reaId");
 	String userId = (String) session.getAttribute("userId");
-	System.out.println(userId);
-	String roadAddr = (String) request.getAttribute("roadAddr");
-	System.out.println(roadAddr);
-	String addr = (String) session.getAttribute("roadAddr");
-	System.out.println(addr);
 	int count = (int)request.getAttribute("count");
 	System.out.println(count);
 %>
