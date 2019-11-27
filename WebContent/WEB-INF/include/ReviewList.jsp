@@ -75,12 +75,11 @@
 			                       		<input type="hidden" id="reaId" name="reaId" value=""></div></td>
 			                    </tr>
 			                    <tr>
-			                    	<td colspan="4" align="left">
+			                    	<td colspan="4" align="left" id="contentTd">
 			                    		<textarea id="reviewContent" name="reviewContent" class="ckeditor"
 											rows="5" style="resize: none; width: 100%; border: 1px solid #d2d0d0;"></textarea>
 									<div align="right">
-			                    		<input type="button" id="insert_review" name="insert_review"  
-			                    			value="확인">
+			                    		<input type="button" id="insert_review" name="insert_review" value="확인">
 									</div></td>
 			                    </tr>
 		                   </table>
@@ -94,20 +93,19 @@
 							<c:forEach var="reviewTable" items="<%=reviewList%>" varStatus="status">
 									<tr>
 										<td align="left" width="70%">
-											<span id="reviewDate">${reviewTable.reviewDate}</span></td>
+											<span>${reviewTable.reviewDate}</span></td>
 										<td align="right">
-											작성자: <span id="userId">${reviewTable.userId}</span></td>
+											작성자: <span id="reviewId">${reviewTable.userId}</span></td>
 									</tr>
 									<tr>
-										<td colspan="2" style="border: 1px solid #d2d0d0; height: 120px;" id="reviewContent">
-											${reviewTable.reviewContent}</td>
-									</tr>
-									<tr>
-										<td colspan="2">
-											<div style="margin-top: 20px; margin-bottom: 20px;">
-												<hr>
-											</div>
-										</td>
+										<td colspan="2" style="height: 100px;">
+											<textarea rows="3" style="resize: none; width: 100%; border: 1px solid #d2d0d0;" 
+												readonly="readonly">${reviewTable.reviewContent}</textarea>
+											<div align="right" id="delete_div">
+			                    				<c:if test="${reviewTable.userId == sessionScope.userId}">
+			                    					<input type="button" id="delete_review" name="delete_review" value="삭제">
+			                    				</c:if>
+											</div><hr></td>
 									</tr>
 							</c:forEach>
 						</table>
@@ -171,7 +169,14 @@
 						review += "<hr></div></td></tr>";
 						
 						$('#reviewbody').append(review);
+						location.reload(); // 비동기 입력 후 textarea 입력값이 남아있어 초기화를 위해 페이지 새로고침
 				}
+			})
+		})
+		
+		$('#delete_review').click(function() {
+			$.ajax({
+				
 			})
 		})
 	})
