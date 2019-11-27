@@ -8,7 +8,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-	String reaId = (String) session.getAttribute("reaUserId");
+	String reaId = (String) session.getAttribute("userId");
 	// System.out.println("REAIntro.jsp");
 	// System.out.println("reaUser: " + reaUser);
 	// System.out.println("reaIntro: " + reaIntro);
@@ -23,13 +23,22 @@
 <title>공인중개사 소개 페이지</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+
+
+
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
 <jsp:include page="css/css.jsp" />
+
+
 
 <style type="text/css">
 a {
@@ -100,14 +109,16 @@ h1, h3 {
 
 	<!-- JS includes -->
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#summernote').summernote({
-		        placeholder: '소개글을 작성해주세요.',
-		        tabsize: 2,
-		        height: 400
-		      });
+	$(function(){
+		$('#summernote').summernote({
+			placeholder: '소개글을 작성해주세요.',
+	        tabsize: 2,
+	        height: 400,
+			fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
+			fontNamesIgnoreCheck : [ '맑은고딕' ],
+			focus: true
 		});
-
+	})
 	</script>
 
 </body>
