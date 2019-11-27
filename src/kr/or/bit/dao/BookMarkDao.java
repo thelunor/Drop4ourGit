@@ -121,4 +121,35 @@ public class BookMarkDao {
 		}
 		return resultRow;		
 	}
+	
+	
+	public boolean checkBookMark(String userId, String aptNum) { //이미 북마크 되어 있는지 아닌지 체크하는 함수
+		boolean check = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = ds.getConnection();
+			String sql_check = "select bookdate from bookmark where userid=? and aptnum=?";
+			pstmt = conn.prepareStatement(sql_check);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, aptNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) { 
+				check=true; //이미 저장된 북마크가 있다면
+			}else {
+				check=false;
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close(); // 반환하기
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return check;
+	}
 }
