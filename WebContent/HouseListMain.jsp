@@ -16,12 +16,12 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=668464eb0d779bb6eecda046a974a34b"></script>
 <jsp:include page="./css/css.jsp"></jsp:include>
+<%String type =(String) request.getAttribute("type"); %>
 <script>
 $.noConflict();
 
 jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 	var addrList = []; //주소 저장 리스트
-	
 	$.ajax({
         url : 'AddrList',
         type : 'post',
@@ -62,7 +62,7 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 		var address= $("#houseSearch").val().trim();
 		//console.log(address[0]+address[1]+address[2]);	
 // 		location.href="'SelectaptListService.d4b?address="+address[0]+address[1]+address[2];
-		location.href='SelectAptListService.d4b?search=' + address
+		location.href='SelectAptListService.d4b?search=' + addrSplit[0] + " " + addrSplit[1] +'&type='+<%=type%>;
 	});
 	});
 </script>
@@ -132,7 +132,15 @@ table {
 </style>
 </head>
 <jsp:include page="./css/css.jsp"></jsp:include>
-
+<%
+	String type=(String)request.getAttribute("type");
+	String top=null;
+	if(type=="U01"){
+		top="User_Top";
+	}else{
+		top="REAUser_Top";
+	}
+%>
 <body data-spy="scroll" data-target=".navbar-collapse">
 
 	<div class="culmn">
@@ -141,7 +149,7 @@ table {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/<%=top%>.jsp"></jsp:include>
 			<!-- Side jsp -->
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>

@@ -17,6 +17,29 @@
 	String userId = (String) session.getAttribute("userId");
 	int count = (int)request.getAttribute("count");
 	System.out.println(count);
+	
+	String ps = request.getParameter("ps"); //pagesize
+	String cp = request.getParameter("cp");    //current page
+	
+	if(ps == null || ps.trim().equals("")){
+		//default 값 설정
+		ps = "5";
+	}
+	if(cp == null || cp.trim().equals("")){
+		//default 값 설정
+		cp = "1";
+	}
+	int pagesize = Integer.parseInt(ps);
+	int cpage = Integer.parseInt(cp);
+	int pagecount =0;
+	
+	if(count % pagesize == 0){
+		pagecount = count / pagesize;
+	}else{
+		pagecount = (count / pagesize) +1;
+	}
+	
+	List<Board> list = service.list(cpage,pagesize);
 %>
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
