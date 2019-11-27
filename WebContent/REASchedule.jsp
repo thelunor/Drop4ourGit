@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%
+String reaId = (String) session.getAttribute("userId");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +12,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <jsp:include page="./css/css.jsp"></jsp:include>
@@ -370,7 +375,18 @@ h1, h3, #myUL {
   background-color: #f44336;
   color: white;
 }
-
+#myInput2{
+text-align: center;
+width: 100%;
+}
+#myInput1{
+text-align: center;
+margin-left: 15px;
+width: 28%;
+font-family: 'Sunflower', sans-serif;
+border:none;
+font-size: 15px;
+}
 </style>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
@@ -430,15 +446,17 @@ h1, h3, #myUL {
 
 <br>
 <br>
+<input type="hidden" id="reaId" value="<%=reaId%>">
 <!-- to do list -->
 <div class= "container-fluid">
 <div id="myDIV" class="header">
 <div class="page-header">
 	<h3 id="timeline">To Do List</h3>
 </div>
-<div class="row" style="text-align: center">
+<div class="row">
+<input type="datetime-local" name="myInput1" id="myInput1" placeholder="시간 추가">
 <div class="col-md-9">
-<input type="text" id="myInput" placeholder="일정 추가" style="color : black;">
+<input type="text" name="myInput2" id="myInput2" placeholder="일정 추가" style="border: 1px solid black;">
 </div>
 <div class="col-md-3">
 <button type="button" class="btn btn-primary" onclick="newElement()" id="toDoBtn" >Add</button>
@@ -559,10 +577,11 @@ h1, h3, #myUL {
 	// Create a new list item when clicking on the "Add" button
 	function newElement() {
 	  var li = document.createElement("li");
-	  var inputValue = document.getElementById("myInput").value;
-	  
+	  var inputValue = document.getElementById("myInput2").value;
+
 	  var count = $('#timetable').children().size();
-	  
+	  var time = document.getElementById("myInput1").value;
+	 console.log(time);
 	  if(count%2==0){
 	      var schedule = "";
 	      schedule += "<li>";
@@ -571,8 +590,8 @@ h1, h3, #myUL {
 	      schedule += "</div>";
 	      schedule += "<div class='timeline-panel'>";
 	      schedule += "	<div class='timeline-heading'>";
-	      schedule += "<h4 class='timeline-title'>2019."+inputValue.substr(0,2)+"."+inputValue.substr(3,3)
-	      												+" "+inputValue.substr(5,7)+"</h4>";
+	      schedule += "<h4 class='timeline-title'>"+time.substr(0,4)+"."+time.substr(5,2)+"."+time.substr(8,2)
+	      												+" "+time.substr(11,6)+"</h4>";
 	      schedule += "</div>";
 	      schedule += "<div class='timeline-body'>";
 	      schedule += "<p>"+inputValue+"</p>";
@@ -590,8 +609,8 @@ h1, h3, #myUL {
 	      schedule += "</div>";
 	      schedule += "<div class='timeline-panel'>";
 	      schedule += "	<div class='timeline-heading'>";
-	      schedule += "<h4 class='timeline-title'>2019."+inputValue.substr(0,2)+"."+inputValue.substr(3,3)
-														+" "+inputValue.substr(5,7)+"</h4>";
+	      schedule += "<h4 class='timeline-title'>"+time.substr(0,4)+"."+time.substr(5,2)+"."+time.substr(8,2)
+												   +" "+time.substr(11,6)+"</h4>";
 	      schedule += "</div>";
 	      schedule += "<div class='timeline-body'>";
 	      schedule += "<p>"+inputValue+"</p>";
@@ -611,7 +630,6 @@ h1, h3, #myUL {
 	  } else {
 	    document.getElementById("myUL").appendChild(li);
 	  }
-	  document.getElementById("myInput").value = "";
 
 	  var span = document.createElement("SPAN");
 	  var txt = document.createTextNode("\u00D7");
@@ -625,6 +643,11 @@ h1, h3, #myUL {
 	      div.style.display = "none";
 	    }
 	  }
+
+	  insertSchedule();
+
+	  document.getElementById("myInput1").value = "";
+	  document.getElementById("myInput2").value = "";
 	}
 	
 //================================
@@ -675,10 +698,7 @@ function loadDate (date, dayIn) {
 document.querySelector('.cal-date').textContent = date;
 document.querySelector('.cal-day').textContent = init.dayList[dayIn];
 console.log(init.dayList[dayIn]);
-if(init.dayList[dayIn]=='Sunday'){ 
-	 $('#timetable').empty();  
-	 $('#myUL').empty(); 
-}
+
 }
 
 /**
@@ -766,6 +786,15 @@ if (e.target.classList.contains('day')) {
  reloadTodo();
 }
 });
+
+function insertSchedule(){
+	console.log("in");
+	$.ajax({
+		url:"InsertSchedule",
+		data : {myInput1 : $("#myInput1").val(), myInput2: $("#myInput2").val(), reaId: $("#reaId").val()},
+		success:function(){}
+	})
+}
 </script>
 </body>
 </html>

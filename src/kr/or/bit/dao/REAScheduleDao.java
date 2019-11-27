@@ -1,16 +1,16 @@
 package kr.or.bit.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import kr.or.bit.dto.REASchedule;
 import kr.or.bit.utils.DB_Close;
 
 public class REAScheduleDao {
@@ -20,29 +20,31 @@ public class REAScheduleDao {
 		Context context = new InitialContext();
 		ds = (DataSource) context.lookup("java:comp/env/jdbc/oracle");
 	}
-	
-	public int insertSchedule(REASchedule reaSchedule) {
+
+	public int insertSchedule(String reaId, String content, String scheDate) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		System.out.println("scheDate" + scheDate);
+		System.out.println("content" + content);
+		System.out.println("reaId" + reaId);
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
 			String sql_insertSchedule = "insert into REASchedule(scheNum, scheDate, content, reaId)"
-					+"values(?, ?, ?, (select reaid from reauser where reaid=?))";
+					+ "values(SEQ_SCHEDULE.nextval, ?, ?, (select reaid from reauser where reaid=?))";
 			pstmt = conn.prepareStatement(sql_insertSchedule);
-			pstmt.setInt(1, reaSchedule.getScheNum());
-			pstmt.setDate(2, new Date(reaSchedule.getScheDate().getTime())); 
-			pstmt.setString(3, reaSchedule.getContent());
-			pstmt.setString(4, reaSchedule.getReaId());			
-			resultRow = pstmt.executeUpdate();
+			pstmt.setTimestamp(1, new Timestamp(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(scheDate.replace('T', ' ')).getTime()));
+			pstmt.setString(2, content);
+			pstmt.setString(3, reaId);
 			
-			if(resultRow > 0) {
+			resultRow = pstmt.executeUpdate();
+			if (resultRow > 0) {
 				System.out.println("reaSchedule db 생성 완료");
 			}
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}finally {
+		} finally {
 			DB_Close.close(pstmt);
 			try {
 				conn.close();
@@ -50,6 +52,6 @@ public class REAScheduleDao {
 				e.printStackTrace();
 			}
 		}
-		return resultRow;		
+		return resultRow;
 	}
 }
