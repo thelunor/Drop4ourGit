@@ -1,8 +1,15 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="kr.or.bit.dao.REAScheduleDao"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="kr.or.bit.dto.REASchedule"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-String reaId = (String) session.getAttribute("userId");
+	String reaId = (String) session.getAttribute("userId");
+	ArrayList<REASchedule> sList = (ArrayList<REASchedule>) request.getAttribute("sList");
 %>
 <!DOCTYPE html>
 <html>
@@ -11,9 +18,13 @@ String reaId = (String) session.getAttribute("userId");
 <title>일정관리</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Jua&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <jsp:include page="./css/css.jsp"></jsp:include>
 <style type="text/css">
@@ -273,7 +284,6 @@ h1, h3, #myUL {
 	margin-top: 5px;
 }
 
-
 @media ( max-width : 767px) {
 	ul.timeline:before {
 		left: 40px;
@@ -306,94 +316,157 @@ h1, h3, #myUL {
 }
 /* Include the padding and border in an element's total width and height */
 #myUL {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* Remove margins and padding from the list */
 #myUL ul {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 /* Style the list items */
 #myUL ul, #myUL li {
-  cursor: pointer;
-  position: relative;
-  padding: 12px 8px 12px 40px;
-  list-style-type: none;
-  background: #eee;
-  font-size: 18px;
-  transition: 0.2s;
-  
-  /* make the list items unselectable */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+	cursor: pointer;
+	position: relative;
+	padding: 12px 8px 12px 40px;
+	list-style-type: none;
+	background: #eee;
+	font-size: 18px;
+	transition: 0.2s;
+	/* make the list items unselectable */
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 /* Set all odd list items to a different color (zebra-stripes) */
 #myUL ul, #myUL li:nth-child(odd) {
-  background: #f9f9f9;
+	background: #f9f9f9;
 }
 
 /* Darker background-color on hover */
 #myUL ul, #myUL li:hover {
-  background: #ddd;
+	background: #ddd;
 }
 
 /* When clicked on, add a background color and strike out text */
 #myUL li .checked {
-  background: #888;
-  color: #fff;
-  text-decoration: line-through;
+	background: #888;
+	color: #fff;
+	text-decoration: line-through;
 }
 
 /* Add a "checked" mark when clicked on */
 #myUL li.checked::before {
-  content: '';
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
+	content: '';
+	position: absolute;
+	border-color: #fff;
+	border-style: solid;
+	border-width: 0 2px 2px 0;
+	top: 10px;
+	left: 16px;
+	transform: rotate(45deg);
+	height: 15px;
+	width: 7px;
 }
 
 /* Style the close button */
 #myUL .close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 12px 16px 12px 16px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 12px 16px 12px 16px;
 }
 
 #myUL .close:hover {
-  background-color: #f44336;
-  color: white;
+	background-color: #f44336;
+	color: white;
 }
-#myInput2{
-text-align: center;
-width: 100%;
+
+#myInput2 {
+	text-align: center;
+	width: 100%;
 }
-#myInput1{
-text-align: center;
-margin-left: 15px;
-width: 28%;
-font-family: 'Sunflower', sans-serif;
-border:none;
-font-size: 15px;
+
+#myInput1 {
+	text-align: center;
+	margin-left: 15px;
+	width: 28%;
+	font-family: 'Sunflower', sans-serif;
+	border: none;
+	font-size: 15px;
 }
 </style>
+<script>
+$(function() {
+	$.ajax({
+        url : 'ScheduleList',
+        type : 'post',
+        data : {"reaId" : $("#reaId").val()},
+        dataType : 'json',
+        success : function(data) {	
+            $.each(data, function(index, element) {
+            	var allData = "";
+            	allData += "<li>"+element.content+"<span class='close'>\u00D7</span></li>";            	
+            	$('#myUL').append(allData);
+            });
+        }
+	});	
+	
+	ScrollSchedule();
+});
+
+function ScrollSchedule(){	
+	console.log("나 탄다");
+	var even = "";	
+	$.ajax({
+        url : 'ScheduleList',
+        type : 'post',
+        data : {"reaId" : $("#reaId").val()},
+        dataType : 'json',
+        success : function(data) {	
+        	var count = 0;
+            $.each(data, function(index, element) {
+            	count ++;
+            	if(count >7){
+            	if(count %2 ==0){           	
+            	 even += "<li>";
+            	 even += "<div class='timeline-badge' id='badge'><i class='fas fa-check'></i></div>";
+            	 even += "<div class='timeline-panel'><div class='timeline-heading'>";
+            	 even += "<h4 class='timeline-title'><li><div class='timeline-badge'>";
+            	 even += "<i class='fas fa-check'></i></div><div class='timeline-panel'>";
+            	 even += "<div class='timeline-heading'>";
+            	 even += "<h4 class='timeline-title'>" + document.getElementById('hiddentime').value +"</h4></div>";
+				 even += "<div class='timeline-body'><p>" +element.content+ "</p></div></div></li>"			
+
+            		}
+            	}
+			});
+            console.log(count);
+            console.log(even);
+        }
+	});
+		
+	$('#timeContent').scroll(function(){
+        var scrollT = $(this).scrollTop(); //스크롤바의 상단위치
+        var scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
+        var contentH = $('#timetable').height(); //문서 전체 내용을 갖는 div의 높이
+        if(scrollT + scrollH +1 >= contentH) { // 스크롤바가 아래 쪽에 위치할 때
+            $('#timetable').append(even);
+        }
+    });
+	
+}
+</script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
 	<div class="culmn">
 
 		<!-- Top jsp -->
-		<nav class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
+		<nav
+			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
 			<jsp:include page="WEB-INF/include/REAUser_Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
@@ -444,91 +517,89 @@ font-size: 15px;
 								</div>
 							</div>
 
-<br>
-<br>
-<input type="hidden" id="reaId" value="<%=reaId%>">
-<!-- to do list -->
-<div class= "container-fluid">
-<div id="myDIV" class="header">
-<div class="page-header">
-	<h3 id="timeline">To Do List</h3>
-</div>
-<div class="row">
-<input type="datetime-local" name="myInput1" id="myInput1" placeholder="시간 추가">
-<div class="col-md-9">
-<input type="text" name="myInput2" id="myInput2" placeholder="일정 추가" style="border: 1px solid black;">
-</div>
-<div class="col-md-3">
-<button type="button" class="btn btn-primary" onclick="newElement()" id="toDoBtn" >Add</button>
-</div>
-</div>
-</div>
+							<br> <br>
+							<c:set var="list" value="<%=sList%>"></c:set>
+							<input type="hidden" id="reaId" value="<%=reaId%>">
 
-<ul id="myUL" style="font-size: 12px;">
-  <li>12/02 17:00 이혜리 - 삼성아파트 매매 계약 (양타)</li>
-  <li>12/08 13:00 김진호 - 상담 예약</li>
-</ul>
-</div>
+
+							<!-- to do list -->
+							<div class="container-fluid">
+								<div id="myDIV" class="header">
+									<div class="page-header">
+										<h3 id="timeline">오늘의 To Do List</h3>
+									</div>
+									<div class="row">
+										<input type="datetime-local" name="myInput1" id="myInput1"
+											placeholder="시간 추가">
+										<div class="col-md-9">
+											<input type="text" name="myInput2" id="myInput2"
+												placeholder="일정 추가">
+										</div>
+										<div class="col-md-3">
+											<button type="button" class="btn btn-primary"
+												onclick="newElement()" id="toDoBtn">Add</button>
+										</div>
+									</div>
+								</div>
+								<ul id="myUL" style="font-size: 12px;">
+
+								</ul>
+							</div>
 						</div>
 						<!-- // .my-calendar -->
 						<div class="col-md-6">
 							<div class="page-header">
-								<h3 id="timeline">이번 주 스케줄</h3>
+								<h3 id="timeline">My Schedule</h3>
 							</div>
+							<div id="timeContent" style="overflow-y: scroll;">
 							<ul class="timeline" id="timetable">
-								<li>
-									<div class="timeline-badge">
-										<i class="fas fa-check"></i>
-									</div>								
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4 class="timeline-title">2019.11.19 14:00</h4>
-										</div>
-										<div class="timeline-body">
-											<p>이정은 - 비트아파트 매물 보기 예약</p>
-										</div>
-									</div>
-								</li>
-								<li class="timeline-inverted">
-									<div class="timeline-badge success">
-										<i class="fas fa-check"></i>
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4 class="timeline-title">2019.11.21 18:30</h4>
-										</div>
-										<div class="timeline-body">
-											<p>이혜리 - 삼성아파트 매매 계약 (양타)</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="timeline-badge">
-										<i class="fas fa-check"></i>
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4 class="timeline-title">2019.11.22 10:00</h4>
-										</div>
-										<div class="timeline-body">
-											<p>김진호 - 상담 예약</p>
-										</div>
-									</div>
-								</li>
-								<li class="timeline-inverted">
-									<div class="timeline-badge success">
-										<i class="fas fa-check"></i>
-									</div>
-									<div class="timeline-panel">
-										<div class="timeline-heading">
-											<h4 class="timeline-title">2019.11.21 18:30</h4>
-										</div>
-										<div class="timeline-body">
-											<p>오형남 - 현대아파트 매매 계약 (양타)</p>
-										</div>
-									</div>
-								</li>								
-							</ul>
+								<c:forEach var="schedule" items="<%=sList%>" varStatus="status">
+									<c:choose>
+										<c:when test="${status.count %2 == 1}">
+											<li>
+												<div class="timeline-badge">
+													<i class="fas fa-check"></i>
+												</div>
+												<div class="timeline-panel">
+													<div class="timeline-heading">
+														<h4 class="timeline-title">
+															<fmt:formatDate value="${schedule.scheDate}"
+																pattern="yyyy.MM.dd HH:mm" />
+														</h4>
+													</div>
+													<div class="timeline-body">
+														<p>${schedule.content}</p>
+													</div>
+												</div>
+											</li>
+										</c:when>
+										<c:when test="${status.count %2 == 0}">
+											<li class="timeline-inverted">
+												<div class="timeline-badge success">
+													<i class="fas fa-check"></i>
+												</div>
+												<div class="timeline-panel">
+													<div class="timeline-heading">
+														<h4 class="timeline-title">
+															<fmt:formatDate value="${schedule.scheDate}"
+																pattern="yyyy.MM.dd HH:mm" />
+														</h4>
+													</div>
+													<div class="timeline-body">
+														<p>${schedule.content}</p>
+													</div>
+												</div>
+											</li>
+										</c:when>
+									</c:choose>
+									<c:if test="${status.count > 6}">
+										<script> ScrollSchedule() </script>
+										<input type="hidden" id="hiddentime" value="<fmt:formatDate value='${schedule.scheDate}'
+																pattern='yyyy.MM.dd HH:mm' />">
+									</c:if>
+								</c:forEach>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -547,7 +618,8 @@ font-size: 15px;
 	<script>
 	// Create a "close" button and append it to each list item
 	var myNodelist = document.getElementById("myUL").getElementsByTagName("LI");
-	var i;
+	console.log(myNodelist);
+	var i; 
 	for (i = 0; i < myNodelist.length; i++) {
 	  var span = document.createElement("SPAN");
 	  var txt = document.createTextNode("\u00D7");
@@ -788,7 +860,6 @@ if (e.target.classList.contains('day')) {
 });
 
 function insertSchedule(){
-	console.log("in");
 	$.ajax({
 		url:"InsertSchedule",
 		data : {myInput1 : $("#myInput1").val(), myInput2: $("#myInput2").val(), reaId: $("#reaId").val()},

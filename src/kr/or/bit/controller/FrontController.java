@@ -270,10 +270,10 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/GetREAScheduleListByScheNumService.d4b")) {
+		} else if (url_Command.equals("/GetREAScheduleListByIdServiceOk.d4b")) {
 			try {
-				action = new GetREAScheduleListByScheNumService(); //
-				forward = action.execute(request, response);
+				forward = new ActionForward();
+				forward.setPath("/REASchedule.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

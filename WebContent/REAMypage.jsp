@@ -145,7 +145,7 @@ input {
 								&nbsp;
 								<button type="button" class="btn-group" onclick="location.href='CheckIntroBoardService.d4b'">소개글 관리</button>
 								&nbsp;
-								<button type="button" class="btn-group" onclick="location.href='REASchedule.jsp?userId=${reaUserData.reaId}'">일정 관리</button>
+								<button type="button" class="btn-group" onclick="location.href='GetREAScheduleListByIdService.d4b?userId=${reaUserData.reaId}'">일정 관리</button>
 								<br> <br>
 								<div id="saleList">
 									<div class="card-header py-3">
