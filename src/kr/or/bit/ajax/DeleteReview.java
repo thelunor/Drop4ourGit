@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.or.bit.dao.BookMarkDao;
 import kr.or.bit.dao.ReviewDao;
 
 /**
@@ -28,13 +27,15 @@ public class DeleteReview extends HttpServlet {
     	request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
-    	int reviewNum = Integer.parseInt(request.getParameter("reaviewNum"));
+    	String reviewNum = request.getParameter("reviewNum");
     	ReviewDao dao = null;
     	int result = 0;
     	try {
 			dao = new ReviewDao();
-			result = dao.deleteReview(reviewNum);
-			
+			System.out.println("reviewNum"+reviewNum);
+			result = dao.deleteReview(Integer.parseInt(reviewNum));
+
+			System.out.println("result"+result);
 			if(result > 0) {
 				out.print("<script>alert('댓글이 삭제 되었습니다.')</script>");
 			}

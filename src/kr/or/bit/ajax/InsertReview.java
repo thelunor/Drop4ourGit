@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.bit.dao.ReviewDao;
 import kr.or.bit.dto.Review;
+import net.sf.json.JSONArray;
 
 @WebServlet("/InsertReview")
 public class InsertReview extends HttpServlet {
@@ -53,16 +54,13 @@ public class InsertReview extends HttpServlet {
     		review.setReaId(reaId);
     		review.setUserId(userId);
     		review.setReviewContent(reviewContent);
-//    		review.setReviewDate(reviewDate);
     		
     		result = rvdao.insertReview(review);
-    		// System.out.println("InsertReview ajax reaId: " + reaId);
-    		// System.out.println("InsertReview ajax userId: " + userId);
-    		// System.out.println("InsertReview ajax result : " + result);
-    		
+    	
     		if (result > 0) {
-    			out.print(result);
-    			System.out.println("InsertReview ajax 성공");
+    		  	JSONArray jsonlist = JSONArray.fromObject(review);
+    		  	out.print(jsonlist);
+
     		}
     	} catch (Exception e) {
     		System.out.println("InsertReview ajax 예외발생");

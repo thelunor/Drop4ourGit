@@ -69,7 +69,6 @@
 			                        <td style="padding: 0;"><div align="left" style="padding-left: 10px;">
 		                        		날짜:&nbsp;<input type="text" id="reviewDate" name="reviewDate" value="<%=sdf.format(today) %>" 
 			                        					readonly="readonly" style="display: inline; width: 50%; padding: 0;">
-										<input type="hidden" id="reviewNum" name="reviewNum" value=""></div></td>
 			                       	<td style="padding: 0;"><div align="right" style="padding-right: 10px;">
 			                       		작성자:&nbsp;<input type="text" id="userId" name="userId" value="<%=genericUserId%>" 
 			                       						readonly="readonly" style="; display: inline; width: 30%; padding: 0;">
@@ -91,6 +90,7 @@
 						</div>
 						
 						<table style="width: 100%;" id="reviewbody">
+						<tbody id="tbody"> 
 							<c:forEach var="reviewTable" items="<%=reviewList%>" varStatus="status">
 									<input type="hidden" id="reviewNum" value="${ reviewTable.reviewNum}">
 									<tr>
@@ -110,6 +110,8 @@
 											</div><hr></td>
 									</tr>
 							</c:forEach>
+							</tbody>
+							</div>
 						</table>
 						
 <%-- 						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
@@ -142,53 +144,52 @@
 
 <script type="text/javascript">
 	$(function() {
-		
 		var reviewNum = $("#reviewNum").val();
-		console.log(reviewNum);
-		
-		
+
 		$('#insert_review').click(function() {
 			$.ajax({
 				url: 'InsertReview', // kr.or.bit.ajax
 				dataType: 'json',
 				type: 'post',
 				data: {
-					reaId: $('#getREAId').val(),
 					userId: $('#getUserId').val(),
-					reviewDate: $('#reviewDate').val(),
 					reviewContent: $('#reviewContent').val(),
+					reviewDate: $('#reviewDate').val(),
+					reaId: $('#getREAId').val()
 				},
 				success: function(data) {
-					var review = "";
+					console.log(data);
+					$.each(data, function(index, value){
+						var review = "";
 						review += "<tr>";
 						review += "<td align='left' width='70%'>";
-						review += "<span>" + $('#reviewDate').val() + "</span></td>";
+						review += "<span>" + value.reviewDate+ "</span></td>";
 						review += "<td align='right'>";
-						review += "작성자: <span>" + $('#getUserId').val() + "</span></td>";
+						review += "작성자: <span>" + value.userId + "</span></td>";
 						review += "</tr>";
 						review += "<tr>";
 						review += "<td colspan='2' style='border: 1px solid #d2d0d0; height: 120px;'>";
-						review += $('#reviewContent').val() + "</td>";
+						review += value.reviewContent + "</td>";
 						review += "</tr>";
 						review += "<tr>";
 						review += "<td colspan='2'>";
 						review += "<div style='margin-top: 20px; margin-bottom: 20px;'>";
 						review += "<hr></div></td></tr>";
-						
 						$('#reviewbody').append(review);
-						location.reload(); // 비동기 입력 후 textarea 입력값이 남아있어 초기화를 위해 페이지 새로고침
+					});
 				}
 			})
 		})
 		
 		$('#delete_review').click(function() {
-			
+			console.log(reviewNum);
 			$.ajax({
 				url:'DeleteReview?reviewNum='+reviewNum,
 				dataType: 'html',
 				type: 'post',
 				success:function(data){
-					console.log(data);
+					$("#tbody").empty();
+					$("#tbody").append(data);
 				}
 			})
 		})
