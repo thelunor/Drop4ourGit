@@ -5,19 +5,17 @@ import java.util.Date;
 public class REASchedule { //공인중개사 매물 일정 관리
 	private int scheNum; //일정번호
 	private Date scheDate; //일정 날짜
-	private String aptNum; //매물 번호
-	private String subject; //제목
 	private String content; //내용
+	private String reaId; //공인중개사 아이디
 	
 	public REASchedule() {}
 
-	public REASchedule(int scheNum, Date scheDate, String aptNum, String subject, String content) {
+	public REASchedule(int scheNum, Date scheDate, String content, String reaId) {
 		super();
 		this.scheNum = scheNum;
 		this.scheDate = scheDate;
-		this.aptNum = aptNum;
-		this.subject = subject;
 		this.content = content;
+		this.reaId = reaId;
 	}
 
 	public int getScheNum() {
@@ -36,22 +34,6 @@ public class REASchedule { //공인중개사 매물 일정 관리
 		this.scheDate = scheDate;
 	}
 
-	public String getAptNum() {
-		return aptNum;
-	}
-
-	public void setAptNum(String aptNum) {
-		this.aptNum = aptNum;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -60,11 +42,20 @@ public class REASchedule { //공인중개사 매물 일정 관리
 		this.content = content;
 	}
 
+	public String getReaId() {
+		return reaId;
+	}
+
+	public void setReaId(String reaId) {
+		this.reaId = reaId;
+	}
+
 	@Override
 	public String toString() {
-		return "REASchedule [scheNum=" + scheNum + ", scheDate=" + scheDate + ", aptNum=" + aptNum + ", subject="
-				+ subject + ", content=" + content + ", toString()=" + super.toString() + "]";
+		return "REASchedule [scheNum=" + scheNum + ", scheDate=" + scheDate + ", content=" + content + ", reaId="
+				+ reaId + "]";
 	}
+	
 	
 	
 }
