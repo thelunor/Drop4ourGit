@@ -94,7 +94,31 @@ public class BookMarkDao {
 		return resultRow;		
 	}
 
-	public int deleteBookMark(String aptNum) { // 북마크 삭제하기
-		return 0;
+	public int deleteBookMark(String userId, String aptNum) { // 북마크 삭제하기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			String sql_deleteBk = "delete from bookmark where userid=? and aptnum=?";
+			pstmt = conn.prepareStatement(sql_deleteBk);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, aptNum);
+			
+			resultRow = pstmt.executeUpdate();
+			if(resultRow > 0) {
+				System.out.println("북마크 삭제 완료");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultRow;		
 	}
 }
