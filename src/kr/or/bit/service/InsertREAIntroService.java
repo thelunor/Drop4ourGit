@@ -15,7 +15,7 @@ public class InsertREAIntroService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("reaUserId");
+		String reaId = (String) session.getAttribute("userId");
 		System.out.println("아이디아이디"+reaId);
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
@@ -30,7 +30,7 @@ public class InsertREAIntroService implements Action {
 			result = dao.insertREAIntro(reaintro);
 			if(result > 0) {
 				forward = new ActionForward();
-				forward.setPath("GetREAUserByIdService.d4b?reaUserId="+reaId);
+				forward.setPath("GetREAUserByIdService.d4b");
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

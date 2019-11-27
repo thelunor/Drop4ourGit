@@ -15,14 +15,14 @@ public class GetREAIntroBoardContentService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("reaUserId");
+		String reaId = (String) session.getAttribute("userId");
 		REAIntroBoard introBoard = null;
 		REAIntroBoardDao dao = null;
 		try {
 			dao = new REAIntroBoardDao();
 			introBoard = dao.getREAIntroData(reaId);
 			if(introBoard != null) {
-				forward.setPath("REAIntroBoard_content.jsp?reaUserId="+reaId);
+				forward.setPath("REAIntroBoard_content.jsp");
 				request.setAttribute("introBoard", introBoard);
 			}
 		}catch(Exception e) {

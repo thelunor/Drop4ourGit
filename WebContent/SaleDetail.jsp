@@ -262,12 +262,7 @@ a.btn  {
 						out.print("</button>");
 					}
 					%>
-					<!--  
-					<button type="submit" class="btn" id="bookMarkBtn" style="padding: 0;border: none;background: none;color:#ff6863;">
-					<i class="far fa-bookmark fa-2x"></i>
 					
-					</button>
-					-->
 					<input type="hidden" id="userId" value="<%=userId %>">
 					</div>
 					<input type="text" class="form-control" name="address"

@@ -15,7 +15,7 @@ public class DeleteREAIntroService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("reaUserId");
+		String reaId = (String) session.getAttribute("userId");
 		REAIntroBoardDao dao = null;
 		int result = 0;
 		try {

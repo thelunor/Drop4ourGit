@@ -23,15 +23,12 @@
 <title>공인중개사 소개 페이지</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- include libraries(jQuery, bootstrap) -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-    
-    <!-- include summernote css/js -->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <jsp:include page="css/css.jsp" />
 
 <style type="text/css">
@@ -86,8 +83,7 @@ h1, h3 {
 						style="width:100%;">
 					</div>
 					<div class="form-group">
-						<textarea class="form-control" id="summernote" name="content"
-							placeholder="내용을 입력해주세요" maxlength="140" rows="7"></textarea>
+						<textarea class="form-control" id="summernote" name="content" maxlength="140" rows="7"></textarea>
 					</div>
 					<button type="submit" id="submit" name="submit"
 						class="btn btn-primary pull-right">작성 완료</button>
@@ -106,11 +102,10 @@ h1, h3 {
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#summernote').summernote({
-				height : 300,
-				minHeight : null,
-				maxHeight : null,
-				lang : 'ko-KR'
-			});
+		        placeholder: '소개글을 작성해주세요.',
+		        tabsize: 2,
+		        height: 400
+		      });
 		});
 
 	</script>
