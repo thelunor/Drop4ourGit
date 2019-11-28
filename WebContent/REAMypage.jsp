@@ -24,10 +24,10 @@
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
 	System.out.println(reaUser);
-	String id = (String) session.getAttribute("userId");
+	String userId = (String) session.getAttribute("userId");
 	SaleDao2 dao = new SaleDao2();
 	List<Sale> saleList = new ArrayList<Sale>();
-	saleList = dao.getSaleList(id); //reaId로 리스트 불러오기
+	saleList = dao.getSaleList(userId); //reaId로 리스트 불러오기
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
 <c:set var="reaImgData" value="<%=reaImg%>"></c:set>
@@ -147,7 +147,7 @@ input {
 								&nbsp;
 								<button type="button" class="btn-group" onclick="location.href='GetREAScheduleListByIdService.d4b?userId=${reaUserData.reaId}'">일정 관리</button>
 								&nbsp;
-								<button type="button" class="btn-group" onclick="location.href='GetREAMypageEditService.d4b?reaId=${reaUserData.reaId}'">정보 수정</button>
+								<button type="button" class="btn-group" onclick="location.href='GetREAMypageEditService.d4b'">정보 수정</button>
 								<br> <br>
 								<div id="saleList">
 									<div class="card-header py-3">

@@ -74,6 +74,7 @@ public class REAUserDao {
 					+ "officeDetailAddr=?, officeHp=?, regNum=?, userCode=?, where reaId=?";
 
 			pstmt = conn.prepareStatement(sql);
+			System.out.println("쿼리문 실행");
 
 			pstmt.setString(1, reaUser.getReaPwd());
 			pstmt.setString(2, reaUser.getReaName());
