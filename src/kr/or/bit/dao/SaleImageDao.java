@@ -160,6 +160,14 @@ public class SaleImageDao {
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("GenericUserLogin 예외");
+			}
 		}
 		return resultRow;
 	}

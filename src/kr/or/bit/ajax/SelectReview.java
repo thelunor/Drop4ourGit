@@ -30,13 +30,39 @@ public class SelectReview extends HttpServlet {
     	
     	PrintWriter out = response.getWriter();
     	String reaId = request.getParameter("reaId");
-    	ReviewDao rvdao = null;
+		String ps = request.getParameter("pageSize"); // pagesize
+		String cp = request.getParameter("cp"); // current page
+		String type = request.getParameter("type");
+    	ReviewDao rvDao = null;
     	List<Review> rvlist = null;
     	
     	try {
-    		rvdao = new ReviewDao();
+    		
+    		rvDao = new ReviewDao();
     		rvlist = new ArrayList<Review>();
+    		
+    		int count = rvDao.
+			if (ps == null || ps.trim().equals("")) {
+				// default 값 설정
+				ps = "5";
+			}
+			if (cp == null || cp.trim().equals("")) {
+				// default 값 설정
+				cp = "1";
+			}
+			int pageSize = Integer.parseInt(ps);
+			int cPage = Integer.parseInt(cp);
+			int pageCount = 0;
 
+			if (count % pageSize == 0) {
+				pageCount = count / pageSize;
+			} else {
+				pageCount = (count / pageSize) + 1;
+			}
+			saleMap = dao.selectAtpList(search, cPage, pageSize);
+    		
+    		
+    		
     		rvlist = rvdao.getReviewList(reaId);
     		JSONArray jsonlist = JSONArray.fromObject(rvlist);
     		out.print(jsonlist);
