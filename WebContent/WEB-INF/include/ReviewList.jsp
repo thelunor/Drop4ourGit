@@ -101,11 +101,12 @@
 									</tr>
 									<tr>
 										<td colspan="2" style="height: 100px;">
-											<textarea rows="3" style="resize: none; width: 100%; border: 1px solid #d2d0d0;" 
+											<textarea id="textarea" rows="3" style="resize: none; width: 100%; border: 1px solid #d2d0d0;" 
 												readonly="readonly">${reviewTable.reviewContent}</textarea>
 											<div align="right" id="delete_div">
 			                    				<c:if test="${reviewTable.userId == sessionScope.userId}">
 			                    					<input type="button" id="delete_review" name="delete_review" value="삭제">
+			                    					<input type="button" id="edit_review" name="edit_review" value="수정">
 			                    				</c:if>
 											</div><hr></td>
 									</tr>
@@ -154,12 +155,10 @@
 				data: {
 					userId: $('#getUserId').val(),
 					reviewContent: $('#reviewContent').val(),
-					reviewDate: $('#reviewDate').val(),
 					reaId: $('#getREAId').val()
 				},
 				success: function(data) {
-					console.log(data);
-					$.each(data, function(index, value){
+					 $.each(data, function(index, value){
 						var review = "";
 						review += "<tr>";
 						review += "<td align='left' width='70%'>";
@@ -168,21 +167,20 @@
 						review += "작성자: <span>" + value.userId + "</span></td>";
 						review += "</tr>";
 						review += "<tr>";
-						review += "<td colspan='2' style='border: 1px solid #d2d0d0; height: 120px;'>";
-						review += value.reviewContent + "</td>";
-						review += "</tr>";
-						review += "<tr>";
-						review += "<td colspan='2'>";
-						review += "<div style='margin-top: 20px; margin-bottom: 20px;'>";
-						review += "<hr></div></td></tr>";
-						$('#reviewbody').append(review);
+						review += "<td colspan='2' style='height: 100px;'>";
+						review += "<textarea rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
+						review += value.reviewContent+"</textarea>";
+						review += "<div align='right' id='delete_div'>";
+						review += "<input type='button' id='delete_review' value='삭제'>";
+						review += "<input type='button' id='edit_review' value='수정'>";
+						review += "</div><hr></td>";						
+						$('#tbody').append(review);
 					});
 				}
-			})
-		})
+			});
+		});
 		
 		$('#delete_review').click(function() {
-			console.log(reviewNum);
 			$.ajax({
 				url:'DeleteReview?reviewNum='+reviewNum,
 				dataType: 'html',
@@ -193,7 +191,23 @@
 				}
 			})
 		})
-	})
+		/*
+		$("#edit_review").click(function(){
+			$.ajax({
+				url: 'EditReview', // kr.or.bit.ajax
+				dataType: 'json',
+				type: 'post',
+				data: {
+					userId: $('#getUserId').val(),
+					reviewContent: $('#reviewContent').val(),
+					reaId: $('#getREAId').val()
+				},
+				success: function(data) {
+					console.log(data);
+				}
+		});
+			*/
+	});
 </script>
 
 

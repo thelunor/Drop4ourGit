@@ -57,7 +57,7 @@ public class GetREAIntroPageService implements Action {
 				forward.setPath("REAIntro.jsp");
 			}
 		} catch (Exception e) {
-			System.out.println("getREAIntroService 예외발생");
+			System.out.println("getREAIntroPageService 예외발생");
 			System.out.println(e.getMessage());
 		}
 		

@@ -89,7 +89,77 @@ public class ReviewDao {
 		}
 		return review;
 	}
+	
+	public Date getReviewDate(Review review) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Date reviewDate = null;
+		try {
+			conn = ds.getConnection();
+			String sql_select_reviewDate = "select reviewdate from review where userid=? and reaid=?";
+			pstmt = conn.prepareStatement(sql_select_reviewDate);
+			pstmt.setString(1, review.getUserId());
+			pstmt.setString(2, review.getReaId());
+			rs = pstmt.executeQuery();
+			System.out.println("rs입성전");
+			if(rs.next()) {
+				System.out.println("rs입성후");
 
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	            java.util.Date date = sdf.parse(rs.getString(1));
+	            reviewDate = new Date(date.getTime());
+			}
+		}catch (Exception e) {
+			System.out.println("리뷰 날짜 가져오기 예외발생");
+			System.out.println(e.getMessage());
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+
+			try {
+				conn.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return reviewDate;
+	}
+	
+	public String getReviewNum(Review review) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String reviewNum = "";
+		try {
+			conn = ds.getConnection();
+			String sql_select_reviewNum = "select reviewnum from review where userid=? and reaid=?";
+			pstmt = conn.prepareStatement(sql_select_reviewNum);
+			pstmt.setString(1, review.getUserId());
+			pstmt.setString(2, review.getReaId());
+			rs = pstmt.executeQuery();
+			System.out.println("rs입성전");
+			if(rs.next()) {
+				System.out.println("rs입성후");
+				reviewNum = rs.getString("reviewNum");
+			}
+		}catch (Exception e) {
+			System.out.println("글번호 가져오기 예외발생");
+			System.out.println(e.getMessage());
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+
+			try {
+				conn.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return reviewNum;
+	}
+	
+	
 	public List<Review> getReviewList(String id) { // 리뷰 리스트 가져오기(공인중개사 id로)
 		/* 리뷰 리스트 가져올 때 댓글도 가져오기! */
 		Connection conn = null;
@@ -110,9 +180,8 @@ public class ReviewDao {
 			rvList = new ArrayList<Review>();
 			
 			while (rs.next()) {
-				System.out.println("ReviewDao rs 성공");
 				Review review = new Review();
-				
+
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	            java.util.Date date = sdf.parse(rs.getString("reviewDate"));
 	            Date reviewDate = new Date(date.getTime());
@@ -145,7 +214,49 @@ public class ReviewDao {
 	}
 
 	public int updateReview(Review review) { // 리뷰 수정
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+			
+			
+			//1. 일단 reviewNum 찾아오기
+			String select_reviewNum = "select reviewNum from review where userid=? and reaid=?";
+			pstmt = conn.prepareStatement(select_reviewNum);
+			pstmt.setString(1, review.getUserId());
+			pstmt.setString(2, review.getReaId());
+    		rs = pstmt.executeQuery();
+    		
+    		if(rs.next()) {
+    			String reviewNum = rs.getString("reviewNum");
+        		//2. DB에서 수정하기
+    			String sql_update_review = "update review set reviewcontent=? where reviewnum=?";
+    			pstmt = conn.prepareStatement(sql_update_review);
+    			pstmt.setString(1, review.getReviewContent());
+    			pstmt.setInt(2, Integer.parseInt(reviewNum));
+    			resultRow = pstmt.executeUpdate();
+    			conn.commit();
+    			System.out.println("업데이트 완료?"+resultRow);
+    		}			
+			
+		} catch (Exception e) {
+			System.out.println("ReviewDao update 예외발생");
+			System.out.println(e.getMessage());
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			
+			try {
+				conn.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return resultRow;
 	}
 
 	public int deleteReview(int reviewNum) { // 리뷰 삭제(글번호로)

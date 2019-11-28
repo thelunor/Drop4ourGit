@@ -263,7 +263,6 @@ a.btn  {
 					}
 					%>
 					
-					<input type="hidden" id="userId" value="<%=userId %>">
 					</div>
 					<input type="text" class="form-control" name="address"
 						id="address" required="required" placeholder="도로명 주소"  value="${saleData.roadAddr}">
@@ -359,7 +358,7 @@ a.btn  {
 				<br>			
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary btn-block btn-lg" 
-						onclick="location.href='GetREAIntroPageService.d4b?reaId=${reaData.reaId}&genericUserId=${genericUserId}'">Click</button>
+						onclick="location.href='GetREAIntroPageService.d4b?reaId=${reaData.reaId}&userId=<%=userId%>'">Click</button>
 				</div>					
 				</div>
     </div>

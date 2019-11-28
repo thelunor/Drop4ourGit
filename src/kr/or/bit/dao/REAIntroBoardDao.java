@@ -73,6 +73,8 @@ public class REAIntroBoardDao {
 				String subject = rs.getString("subject");
 				String content = rs.getString("content");
 				reaIntro = new REAIntroBoard(reaId, subject, content);
+				System.out.println("여기 타니?");
+
 			}
 		} catch (Exception e) {
 			System.out.println("getREAIntroDao 예외발생");
@@ -83,7 +85,6 @@ public class REAIntroBoardDao {
 				rs.close();
 				conn.close(); // 반환하기
 			} catch (Exception e) {
-				System.out.println("getREAIntroDao finally 예외발생");
 				System.out.println(e.getMessage());
 			}
 		}

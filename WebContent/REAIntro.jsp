@@ -13,9 +13,9 @@
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
 	REAIntroBoard reaIntro = (REAIntroBoard) request.getAttribute("reaIntro");
-	String genericUserId = (String) session.getAttribute("userId");
+	String userId = (String) session.getAttribute("userId");
 	String reaId = reaUser.getReaId();
-	System.out.println("REAIntro genericUserId: " + genericUserId);
+	System.out.println("REAIntro genericUserId: " + userId);
 	System.out.println("REAIntro reaId: " + reaId);
 
 	// System.out.println("reaUser: " + reaUser);
