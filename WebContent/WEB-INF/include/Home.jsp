@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%String type =(String) request.getAttribute("type"); 
+<%
+	String type=(String) request.getAttribute("type");
+	if(type==null || type.trim()==""){
+	type= (String) request.getParameter("type");
+	}
 	System.out.println("타타타타입" + type);
 %>
 <script>

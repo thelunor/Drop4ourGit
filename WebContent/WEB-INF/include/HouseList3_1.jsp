@@ -143,6 +143,8 @@
 	System.out.println("cPage: " + cPage);
 
 %>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=LIBRARY"></script>
@@ -196,6 +198,72 @@ a.btn  {
 }
 .slick-items, .detail{
 text-align: center;
+}
+.btnJoin {
+	color: #fff;
+	background-color: #ff6863;
+	border: 2px solid;
+	border-color: #ff6863;
+	padding: 1rem 3rem;
+}
+
+.btnJoin:hover {
+	background-color: #eee;
+	border-color: #eee;
+	border: 2px solid #eee;
+	color: #ff6863;
+}
+
+.modal-wrapper {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: rgb(242, 242, 242, 0.5);
+	top: 0;
+	left: 0;
+	visibility: hidden;
+	Z-index: 1;
+}
+
+.modal-wrapper.open {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal {
+	width: 400px;
+	height: 600px;
+	display: block;
+	position: relative;
+	top: 40%;
+	left: 38%;
+	background: #fff;
+	opacity: 0;
+	transition: all 0.5s ease-in-out;
+}
+
+.modal-wrapper.open .modal {
+	margin-top: -200px;
+	opacity: 1;
+}
+
+.btn-close {
+	font-size: 28px;
+	display: block;
+	float: right;
+	color: #fff;
+}
+
+.content {
+	padding: 10%;
+}
+
+.head {
+	width: 100%;
+	height: 50px;
+	padding: 10px;
+	overflow: hidden;
+	background: #ff6863;
 }
 </style>
 
@@ -253,18 +321,15 @@ text-align: center;
 		                </div>
 		                <%
 		                System.out.println("타타타탙타타타입"+type);
-		                if(type.empty()){
-		                	System.out.println("요기탐1"+type);
-		                	out.print("<a class='btn trigger' href='#'>See the Details</a>");
-		                }else if(type.isEmpty()){
-		                	System.out.println("요기탐2"+type);
-		                	out.print("<a class='btn trigger' href='#'>See the Details</a>");
+		                if(type!=null && type.trim()=="" ){
+		                	System.out.println("요기탐3"+type);
+		                	out.print(" <a class='btn trigger' href='GetSaleDataService.d4b?aptNum=");
+		                	out.print("&type="+type+"'");
+		                	out.print("'>See the Details</a>");
 		                }
 		                else{
-		                	System.out.println("요기탐3"+type);
-		                	out.print(" <a class='btn trigger' href='GetSaleDataService.d4b?aptNum='");
-		                	out.print("&type="+type);
-		                	out.print("'>See the Details</a>");
+		                	System.out.println("요기탐2"+type);
+		                	out.print("<a class='btn trigger' href='#'>See the Details</a>");
 		                }
 		                %>
 <%-- 		                <a class="btn trigger" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}&type=<%=type%>">See the Details</a>
@@ -289,4 +354,64 @@ text-align: center;
         <div id="map" style="width: 100%; height: 100%;"></div>
     </div>
 	</div>
+		<!-- Modal -->
+	<div class="modal-wrapper">
+		<div class="modal">
+			<div class="head">
+				<a class="btn-close trigger" href="#"> <i class="fa fa-times"
+					aria-hidden="true"></i>
+				</a>
+			</div>
+			<div class="content">
+			  <form action="LoginService.d4b" method="post" name="loginForm">
+				<div class="information">
+					<h3 style="text-align: center;">로그인</h3>
+					<br>
+					<div class="form-group">
+						<label>아이디 </label> 
+						<input class="form-control" type="text" name="id" id="id" placeholder="ID" style="width: 320px" required="required">
+						<label>비밀번호 </label> 
+						<input class="form-control" type="password" name="pwd" id="pwd" required="required" placeholder="PASSWORD" style="width: 320px">
+					</div>
+					<br>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-block btn-lg">Click</button>
+						<br>
+						<hr>
+					</div>
+					<br> <span>계정이 없으신가요?</span> <br>
+					<br>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
 
+								<button type="submit" class="btnJoin" onclick="location.href='JoinCheckGeneric.jsp'">
+									<i class="fas fa-user"></i> 일반
+								</button>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<button type="submit" class="btnJoin"
+									style="padding-left: 20px; padding-right: 20px;" onclick="location.href='JoinCheckREA.jsp'">
+									<i class="fas fa-home"></i> 공인중개인
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+
+$( document ).ready(function() {
+     $('.trigger').click(function(){
+    	 $('.modal-wrapper').toggleClass('open');
+         $('.page-wrapper').toggleClass('blur-it');
+          return false;
+     });
+     $('[data-toggle="tooltip"]').tooltip(); 
+   });
+</script>

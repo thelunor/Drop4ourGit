@@ -22,7 +22,6 @@ public class SelectAtpListService implements Action {
 		String ps = request.getParameter("pageSize"); // pagesize
 		String cp = request.getParameter("cp"); // current page
 		String type = request.getParameter("type");
-		System.out.println("그댄 서치 내겐 서치이이이 그댄 서치.." + search);
 		Map<Sale, SaleImage> saleMap = new HashMap<Sale, SaleImage>();
 		try {
 			SaleDao dao = new SaleDao();

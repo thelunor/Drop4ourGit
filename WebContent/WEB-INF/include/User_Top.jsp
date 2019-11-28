@@ -3,10 +3,9 @@
 <%
 	String userId=(String) session.getAttribute("userId");
 	String type=(String) request.getAttribute("type");
-	if(type == null){
-		type=(String) request.getParameter("type");
+	if(type==null || type.trim()==""){
+		type= (String) request.getParameter("type");
 	}
-	System.out.println("타입쓰는 ? " + type);
  %>
 <!-- Start Atribute Navigation -->
 <div class="container">
@@ -14,10 +13,11 @@
 		<ul>
 			<li class="login">
 				<%
-					if (type != null && type.trim() != "") {
-						out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
-					} else {
+					System.out.println("타입쓰는 ? " + type);
+					if (type==null || type.trim().equals("")) {
 						out.print("<a href ='Login.jsp'>로그인</a>");
+					} else {
+						out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 					}
 				%>
 			</li>
