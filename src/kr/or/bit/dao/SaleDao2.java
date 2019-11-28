@@ -261,7 +261,7 @@ public class SaleDao2 {
 		
 		try {
 			conn = ds.getConnection();
-			String sql_select_sale = "select aptnum,aptsize,type,addr,aptname,aptdong,aptho,price,iscontract from sale where reaid=?";
+			String sql_select_sale = "select aptnum,aptsize,type,addr,aptname,aptdong,aptho,price,iscontract from sale where reaid=? ORDER BY aptnum desc";
 			pstmt = conn.prepareStatement(sql_select_sale);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
