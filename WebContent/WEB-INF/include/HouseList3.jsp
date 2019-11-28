@@ -17,6 +17,7 @@
 	//String reaId = (String) session.getAttribute("reaId");
 	String userId = (String) session.getAttribute("userId");
 	String search= (String) request.getAttribute("search");
+	String type= (String) request.getAttribute("type");
 	int pageCount = (int) request.getAttribute("pageCount");
 	int count = (int) request.getAttribute("count");
 	int pageSize = (int) request.getAttribute("pageSize");
@@ -83,44 +84,7 @@ a.btn  {
 text-align: center;
 }
 </style>
-<script type="text/javascript">
-	        $(function () {
-	            $(window).scroll(function () {
-	                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-	                    $.ajax({
-	                        url: 'InfiniteScroll',
-	                        type: 'post',
-	                        data: {
-	                            "search": $("#search").val()
-	                        },
-	                        dataType: 'json',
-	                        success: function (data) {
-	                            $("#tbody").empty();
-	    
-	                            $.each(data, function (index, element) {
-	    
- 	                                console.log(element);
-	    
-// 	                                var dNametable = "";
-// 	                                dNametable += "<tr>";
-// 	                                dNametable += "<td>" + element.eName + "</td>";
-// 	                                dNametable += "<td>" + element.empNo + "</td>";
-// 	                                dNametable += "<td>" + element.job + "</td>";
-// 	                                dNametable += "<td>" + element.sal + "</td>";
-// 	                                dNametable += "<td>" + element.dName + "</td>";
-// 	                                dNametable += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href = 'editForm.d4b?empNo="+element.empNo+"' > 수정</button > " + "</td > ";
-// 	                                dNametable += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "
-// 	                                location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
-// 	                                dNametable += "</tr>";
-	    
-// 	                                $('#tbody').append(dNametable);
-	                            })
-	                        }
-	                    })
-	                }
-	            })
-	        });
-</script>
+
 <%
 	Map<Sale, SaleImage> saleMap = (Map<Sale, SaleImage>)request.getAttribute("saleMap");
 	System.out.println(saleMap);
@@ -179,7 +143,7 @@ text-align: center;
 		    <div>
 		<%
 			int pagersize=5;
-			ThePager pager=new ThePager(count, cPage, pageSize, pagersize, "SelectAtpListService.d4b?pageSize="+ pageSize + "&cPage=" + cPage + "&search=" + search);
+			ThePager pager=new ThePager(count, cPage, pageSize, pagersize, "SelectAptListService.d4b?search="+search, type);
 		%>
 		<%=pager.toString() %>
 	</div>

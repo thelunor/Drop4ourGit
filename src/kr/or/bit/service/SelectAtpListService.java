@@ -22,7 +22,7 @@ public class SelectAtpListService implements Action {
 		// HttpSession session = request.getSession();
 		String search = request.getParameter("search");
 		String ps = request.getParameter("pageSize"); //pagesize
-		String cp = request.getParameter("cPage");    //current page
+		String cp = request.getParameter("cp");    //current page
 		System.out.println("그댄 서치 내겐 서치이이이 그댄 서치.." + search);
 		Map<Sale, SaleImage> saleMap = new HashMap<Sale, SaleImage>();
 		
