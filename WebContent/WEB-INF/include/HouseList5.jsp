@@ -21,8 +21,8 @@
 %>
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d0c0a21e3bf46994d7f7a41d9cc729f&libraries=services"></script>
+
 <style type="text/css">
 h5{
 font-family: 'Jua', sans-serif;
@@ -109,6 +109,20 @@ text-align: center;
 	                    })
 	                }
 	            });
+	            
+	            $('.slick-items').slick({
+	                autoplay : true,
+	                dots : true,
+	                speed : 300 /* 이미지가 슬라이딩시 걸리는 시간 */,
+	                infinite : true,
+	                autoplaySpeed : 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */,
+	                arrows : true,
+	                slidesToShow : 1,
+	                slidesToScroll : 1,
+	                fade : false
+	             });
+	            
+	            
 	            var arrValue = $("input[name='addr']").length;
 	            var array = new Array(arrValue);
 	            
@@ -153,32 +167,13 @@ text-align: center;
 	    	        			position : coords,
 	    	        			content : content
 	    	        		});
+	    	           customOverlay.setMap(map);
+	    	           map.setCenter(coords);
 	    	        } 
 	    	    }); 
-	    		)
+	    		
 	    	}
 
-	    	
-	    	
-	    	
-	
-	    	
-	       // 마커가 표시될 위치입니다 
-	       var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
-
-	       // 마커를 생성합니다
-	       var marker = new kakao.maps.Marker({
-	          position : markerPosition
-	       });
-
-	       // 마커가 지도 위에 표시되도록 설정합니다
-	       marker.setMap(map);
-
-	       // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	       // marker.setMap(null);
-	        	
-	        	
-		    	 */
 	        });
 </script>
 <%
@@ -247,25 +242,3 @@ text-align: center;
         <div id="map" style="width: 100%; height: 100%;"></div>
     </div>
 	</div>
-
-<script>
-
-	
-
-	
-$(function(){
-   
-   $('.slick-items').slick({
-      autoplay : true,
-      dots : true,
-      speed : 300 /* 이미지가 슬라이딩시 걸리는 시간 */,
-      infinite : true,
-      autoplaySpeed : 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */,
-      arrows : true,
-      slidesToShow : 1,
-      slidesToScroll : 1,
-      fade : false
-   });      
-});
-   
-</script>
