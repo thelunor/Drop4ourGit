@@ -41,7 +41,8 @@ public class SelectReview extends HttpServlet {
     		rvDao = new ReviewDao();
     		rvlist = new ArrayList<Review>();
     		
-    		int count = rvDao.
+    		int count = rvDao.getReviewListCount(reaId);
+    		
 			if (ps == null || ps.trim().equals("")) {
 				// default 값 설정
 				ps = "5";
