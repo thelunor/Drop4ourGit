@@ -29,7 +29,7 @@ text-align: center;
 
 		<!-- Top jsp -->
 		<nav class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/include/User_Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>

@@ -54,7 +54,7 @@
 		<button type="button" class="navbar-toggler" data-toggle="collapse"
 			data-target="#navbar-menu"></button>
 
-		<a class="navbar-brand" href="./UserMain.jsp?userId=<%=userId%>&type=<%=type%>" > <img
+		<a class="navbar-brand" href="./UserMain.jsp?type=<%=type%>" > <img
 			src="./images/logo2.png" class="logo logo-display m-top-10" alt="">
 			<img src="./images/logo.jpg" class="logo logo-scrolled" alt="">
 		</a>

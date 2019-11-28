@@ -21,8 +21,8 @@
 		<button type="button" class="navbar-toggler" data-toggle="collapse"
 			data-target="#navbar-menu"></button>
 
-		<a class="navbar-brand" href="./Main.jsp"> <img
-			src="./images/logo1.png" class="logo logo-display m-top-10" alt="">
+		<a class="navbar-brand" href="./UserMain.jsp?type=U02"> <img
+			src="./images/logo2.png" class="logo logo-display m-top-10" alt="">
 			<img src="./images/logo.jpg" class="logo logo-scrolled" alt="">
 		</a>
 	</div>

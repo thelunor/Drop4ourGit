@@ -6,6 +6,7 @@
 <% 
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
+	String type =(String) request.getAttribute("type");
 	//System.out.println(reaImg.getReaImgSaveName());
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
@@ -186,7 +187,11 @@ a.btn  {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="./WEB-INF/include/Top.jsp"></jsp:include>
+			<%if(type=="U01"){%>
+			<jsp:include page="WEB-INF/include/REAUser_Top.jsp"></jsp:include>
+			<%}else{ %>
+			<jsp:include page="WEB-INF/include/User_Top.jsp"></jsp:include>
+			<%} %>
 
 			<!-- Side jsp -->
 			<jsp:include page="./WEB-INF/include/Side.jsp"></jsp:include>

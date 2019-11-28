@@ -20,7 +20,6 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d0c0a21e3bf46994d7f7a41d9cc729f&libraries=services"></script>
 
 <jsp:include page="./css/css.jsp"></jsp:include>
-<jsp:include page="ValidationCheck.jsp"></jsp:include>
 
 <% 
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
