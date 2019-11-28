@@ -62,6 +62,7 @@ public class InsertREAUserService implements Action {
 			user.setOfficeDetailAddr(officeDetailAddr);
 			user.setOfficeHp(officeHp);
 			user.setRegNum(regNum);
+			user.setRegNum(userCode);
 
 			REAImage reaImg = new REAImage();
 			reaImg.setReaId(reaId);

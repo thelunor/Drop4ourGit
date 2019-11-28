@@ -129,6 +129,7 @@ public class AdminDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int resultRow = 0;
+		System.out.println("user.toString() "+user.toString());
 		try {
 			conn = ds.getConnection();
 			conn.setAutoCommit(false); // 트랜잭션
@@ -145,7 +146,7 @@ public class AdminDao {
 			pstmt.setString(7, user.getOfficeDetailAddr());
 			pstmt.setString(8, user.getOfficeHp());
 			pstmt.setString(9, user.getRegNum());
-			pstmt.setString(10, user.getUserCode());
+			pstmt.setString(10, "U02");
 
 			resultRow = pstmt.executeUpdate();
 
