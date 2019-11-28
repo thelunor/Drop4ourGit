@@ -21,7 +21,9 @@ public class SelectAtpListService implements Action {
 		System.out.println("SelectAtpListService");
 		// HttpSession session = request.getSession();
 		String search = request.getParameter("search");
-		System.out.println(search);
+		String ps = request.getParameter("pageSize"); //pagesize
+		String cp = request.getParameter("cPage");    //current page
+		System.out.println("그댄 서치 내겐 서치이이이 그댄 서치.." + search);
 		Map<Sale, SaleImage> saleMap = new HashMap<Sale, SaleImage>();
 		
 		// String address = request.getParameter("address");
@@ -30,11 +32,8 @@ public class SelectAtpListService implements Action {
 			SaleDao dao = new SaleDao();
 			
 			int count = dao.selectAtpListCount(search);
-			System.out.println("Count: " + count);
 			
 			
-			String ps = request.getParameter("ps"); //pagesize
-			String cp = request.getParameter("cp");    //current page
 			
 			if(ps == null || ps.trim().equals("")){
 				//default 값 설정
@@ -53,24 +52,16 @@ public class SelectAtpListService implements Action {
 			}else{
 				pageCount = (count / pageSize) +1;
 			}
-			
 			saleMap = dao.selectAtpList(search, cPage, pageSize);
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			//System.out.println(saleMap.toString());
 			if (saleMap != null) {
 				request.setAttribute("saleMap", saleMap);
 				request.setAttribute("search", search);
 				request.setAttribute("count", count);
+				request.setAttribute("pageSize", pageSize);
+				request.setAttribute("cPage", cPage);
+				request.setAttribute("pageCount", pageCount);
 			} else {
 				request.setAttribute("saleMap", saleMap);
 				request.setAttribute("search", "법정구 법정동");

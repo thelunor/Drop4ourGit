@@ -275,30 +275,22 @@ public class SaleDao {
 		Sale sale = null;
 		SaleImage saleImg = null;
 		SaleImageDao imgDao = null;
-		String sql_select_aptList = "select roadAddr, aptname, aptdong, price, aptNum, aptSize, etc from sale where addr like ?";
-		
-		
-		String sql = "select * from "
-				+ "(select rownum rn,idx,writer,email,homepage,pwd,subject , content, writedate, readnum "
-				+ ",filename,filesize,refer,depth,step "
-				+ " from ( SELECT * FROM jspboard ORDER BY refer DESC , step ASC ) " + " where rownum <= ?" + // endrow
-				") where rn >= ?";
-		
-		
-		
-		int count=0;
+		String sql_select_aptList = "select X.rnum, X.aptnum, X.aptsize, X.type, X.addr, X.roadaddr, X.aptname, X.aptdong, X.aptho, X.price, X.direction, X.etc, X.iscontract, X.reaid from (select rownum as rnum, A.aptnum, A.aptsize, A.type, A.addr, A.roadaddr, A.aptname, A.aptdong, A.aptho, A.price, A.direction, A.etc, A.iscontract, A.reaid from (select aptnum, aptsize, type, addr, roadaddr, aptname, aptdong, aptho, price, direction, etc, iscontract, reaid from sale order by aptnum) A where rownum <= ?) X where X.rnum >= ? and addr like ?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_select_aptList);
-			pstmt.setString(1, "%" + addr + "%");
+			int start = cPage * pageSize - (pageSize - 1);
+			int end = cPage * pageSize;
+			pstmt.setInt(1, end);
+			pstmt.setInt(2, start);
+			pstmt.setString(3, "%" + addr + "%");
 			rs = pstmt.executeQuery();
 
 			imgDao = new SaleImageDao();
 			mapList = new HashMap<Sale, SaleImage>();
-
 			while (rs.next()) {
 				sale = new Sale();
-				sale.setRoadAddr(rs.getString("roadAddr")); // 아파트 도로명 주소
+				sale.setRoadAddr(rs.getString("roadAddr"));
 				sale.setAptName(rs.getString("aptName")); // 아파트 이름
 				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
 				sale.setPrice(rs.getString("price")); // 가격
@@ -309,10 +301,7 @@ public class SaleDao {
 				saleImg = new SaleImage();
 				saleImg = imgDao.getSaleImg(aptNum);
 				mapList.put(sale, saleImg);
-				count++;
 			}
-			System.out.println(count);
-			System.out.println("SaleDao mapList: " + mapList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -325,7 +314,6 @@ public class SaleDao {
 			}
 		}
 		return mapList;
-
 	}
 	public int selectAtpListCount(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
 		Connection conn = null;
@@ -361,7 +349,6 @@ public class SaleDao {
 				mapList.put(sale, saleImg);
 				count++;
 			}
-			System.out.println(count);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -374,7 +361,6 @@ public class SaleDao {
 			}
 		}
 		return count;
-		
 	}
 
 	public Sale getSaleDetail(String aptNum) { // 아파트 매물 번호로 매물 정보 가져오기 (SaleDetail 페이지)
