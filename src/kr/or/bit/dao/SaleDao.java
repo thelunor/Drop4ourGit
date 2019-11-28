@@ -275,7 +275,7 @@ public class SaleDao {
 		Sale sale = null;
 		SaleImage saleImg = null;
 		SaleImageDao imgDao = null;
-		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize, etc from sale where addr like ?";
+		String sql_select_aptList = "select roadAddr, aptname, aptdong, price, aptNum, aptSize, etc from sale where addr like ?";
 		
 		
 		String sql = "select * from "
@@ -298,6 +298,7 @@ public class SaleDao {
 
 			while (rs.next()) {
 				sale = new Sale();
+				sale.setRoadAddr(rs.getString("roadAddr")); // 아파트 도로명 주소
 				sale.setAptName(rs.getString("aptName")); // 아파트 이름
 				sale.setAptDong(rs.getString("aptDong")); // 아파트 동
 				sale.setPrice(rs.getString("price")); // 가격
@@ -311,6 +312,7 @@ public class SaleDao {
 				count++;
 			}
 			System.out.println(count);
+			System.out.println("SaleDao mapList: " + mapList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

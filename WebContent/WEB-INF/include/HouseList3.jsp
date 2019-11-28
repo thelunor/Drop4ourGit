@@ -23,9 +23,10 @@
 %>
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=LIBRARY"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=LIBRARY"></script>
 <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=services,clusterer,drawing"></script>
+
 <style type="text/css">
 h5{
 font-family: 'Jua', sans-serif;
@@ -76,6 +77,7 @@ a.btn  {
 text-align: center;
 }
 </style>
+
 <script type="text/javascript">
 	        $(function () {
 	            $(window).scroll(function () {
@@ -150,6 +152,7 @@ text-align: center;
 		        <!-- 내용 -->
 		        <div class="col-lg-4">
 		            <div class="detail" style="text-align: center;">
+		            	<input type="hidden" value="${sale.key.roadAddr}" id="roadAddr"> <!-- 지도중심좌표 이동을 위한 도로명 주소값 -->
 		                <h5>${sale.key.aptName}</h5>
 		                <input type="text" class="form-control" value="전용면적   ${sale.key.aptSize}㎡">
 		                <br>
@@ -190,9 +193,10 @@ text-align: center;
    
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
-	
+	var addr = document.getElementById('roadAddr');
+	console.log(addr);
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('강남구 역삼동', function(result, status) {
+	geocoder.addressSearch(addr, function(result, status) {
 	    // 정상적으로 검색이 완료됐으면 
 		if (status === kakao.maps.services.Status.OK) {
 			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
