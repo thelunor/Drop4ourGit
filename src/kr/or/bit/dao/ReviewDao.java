@@ -315,15 +315,13 @@ public class ReviewDao {
 		try {
 			conn = ds.getConnection();
 			String sql_del_review = "delete from review where reviewnum=?";
-			System.out.println("여기여기여기");
+			System.out.println("reviewNum: " + reviewNum);
 			pstmt = conn.prepareStatement(sql_del_review); //리뷰에 댓글 있는지 확인
 			pstmt.setInt(1, reviewNum);
 			resultRow = pstmt.executeUpdate();
 			if(resultRow>0) {
 				System.out.println("삭제 완료");
 			}
-			
-			
 		} catch (Exception e) {
 			System.out.println("ReviewDao delete 예외발생");
 			System.out.println(e.getMessage());
@@ -336,7 +334,6 @@ public class ReviewDao {
 				System.out.println(e.getMessage());
 			}
 		}
-		
 		return resultRow;
 	}
 	

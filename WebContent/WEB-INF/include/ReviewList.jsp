@@ -91,33 +91,7 @@
 						<table style="width: 100%;" id="reviewbody">
 						
 						<tbody id="tbody">
-							<%-- 
-									 <tr>
-										<td align="left" width="70%">
-											<span>${reviewTable.reviewDate}</span></td>
-										<td align="right">
-											작성자: <span id="reviewId">${reviewTable.userId}</span></td>
-									</tr>
-									<tr>
-										<td colspan="2" style="height: 100px;">
-											<textarea rows="3" style="resize: none; width: 100%; border: 1px solid #d2d0d0;" 
-												readonly="readonly">${reviewTable.reviewContent}</textarea>
-	 											<input type="hidden" id="reviewNum" value="${ reviewTable.reviewNum}">
-												<div class="row">
-											<div class="col-sm-6">
-												<button type="submit"
-													class="btn btn-primary btn-block btn-lg" id="signUp">Sign Up</button> 
-											</div>
-											<div class="col-sm-6">
-												<button type="reset"
-													class="btn btn-primary btn-block btn-lg">Cancel</button>
-											</div>
-										</div>
-											<hr></td>
-											
-									</tr>   --%>
-									
-							</tbody>
+						</tbody>
 							
 						</table>
 						
@@ -157,6 +131,8 @@ var reviewNum = $("#reviewNum").val();
 
 	$(function() {
 		getReviewList();
+		
+	});
 		$('#insert_review').click(function() {
 			var param = {
 					userId : $('#getUserId').val(),
@@ -169,41 +145,13 @@ var reviewNum = $("#reviewNum").val();
 				type: 'post',
 				data: param,
 				success: function(data) {
-					console.log(data);
-					getReviewList();
 					$("#reviewContent").val("");
-					
-					 $.each(data, function(index, value){
-						console.log(value.reviewNum);
-						var review = "";
-						review += "<tr>";
-						review += "<td align='left' width='70%'>";
-						review += "<span>" + value.reviewDate+ "</span></td>";
-						review += "<td align='right'>";
-						review += "작성자: <span id='reviewId'>" + value.userId + "</span></td>";
-						review += "</tr><tr>";
-						review += "<td colspan='2' style='height: 100px;'>";
-						review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
-						review += value.reviewContent+"</textarea>";
-						review += "<input type='hidden' id='reviewNum value='"+value.reviewNum+"'>";
-						review += "<div class='row'>";
-						review += "<div class='col-sm-6'>";
-						review += "<button id='delete_review' class='btn btn-primary btn-block btn-sm' onclick='delete_review()'>삭제</button></div>";
-						review += "<div class='col-sm-6'>";
-						review += "<button id='edit_review' class='btn btn-primary btn-block btn-sm'>수정</button></div>";
-						review += "</div></div><hr></td></tr>";		
-						$('#tbody').append(review);
-						$("#reviewContent").val("");
-					});
-					 
-					 
-					 
+					getReviewList();
 				}
 			});
 		});
 		
 	
-		});
 
 	function getReviewList(){ //리뷰 리스트 가져오기
 		$.ajax({
@@ -211,8 +159,8 @@ var reviewNum = $("#reviewNum").val();
 			dataType:"JSON",
 			type:"POST",
 			success: function(data){
+				var review = "";
 				$.each(data,function(index, element){
-					var review = "";
 					review += "<tr>";
 					review += "<td align='left' width='70%'>";
 					review += "<span>" + element.reviewDate+ "</span></td>";
@@ -223,28 +171,33 @@ var reviewNum = $("#reviewNum").val();
 					review += "<td colspan='2' style='height: 100px;'>";
 					review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
 					review += element.reviewContent+"</textarea>";
-					review += "<input type='hidden' id='reviewNum value='"+element.reviewNum+"'>";
+					review += "<input type='hidden' id='reviewNum' value='"+element.reviewNum+"'>";
 					review += "<div class='row'>"
 					review += "<div class='col-sm-6'>"
 					review += "<button class='btn btn-primary btn-block btn-sm' onclick='delete_review()'>삭제</button></div>";
 					review += "<div class='col-sm-6'>"
 					review += "<button id='edit_review' class='btn btn-primary btn-block btn-sm'>수정</button></div>";
 					review += "</div></div><hr></td></tr>";					
-						$("#tbody").append(review);
 				});
+				$("#tbody").append(review);
+
 			}
 	});
 	}
 	function delete_review(){
+		//console.log(reaId);
+		//console.log(reviewNum);
 		$.ajax({
-			url:'DeleteReview?reviewNum='+reviewNum+"&reaId="+reaId,
+			url:'DeleteReview?reviewNum='+$("#reviewNum").val(),
 			dataType: 'text',
 			type: 'post',
 			success:function(data){
-				console.log(data);
-				//getReviewList();
+				if(data.trim() == "success"){
+					getReviewList()
+				}
 			}
 		});
+		
 	}
 
 	/*

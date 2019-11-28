@@ -31,7 +31,7 @@ public class DeleteReview extends HttpServlet {
     	request.setCharacterEncoding("utf-8");
         response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
-    	int reviewNum = Integer.parseInt(request.getParameter("reviewNum"));
+    	String reviewNum = request.getParameter("reviewNum");
     	System.out.println("그으으을번호"+reviewNum);
     	//String reaId = request.getParameter("reaId");
     	//List<Review> reviewList = null;
@@ -39,15 +39,12 @@ public class DeleteReview extends HttpServlet {
     	int result = 0;
     	try {
 			dao = new ReviewDao();
-			result = dao.deleteReview(reviewNum);
-			out.print("<script>하이</script>");
-			/*
+			result = dao.deleteReview(Integer.parseInt(reviewNum));
+			
 			if(result > 0) {
-				reviewList = dao.getReviewList(reaId);
-				JSONArray jsonlist = JSONArray.fromObject(reviewList);
-			  	out.print(jsonlist);
+				out.print("success");
 			}
-			*/
+			
     
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
