@@ -209,61 +209,7 @@ public class ReviewDao {
 		
 		return rvList;
 	}
-	
-	
-	public List<Review> getReviewListCount(String id) { // 리뷰 리스트 가져오기(공인중개사 id로)
-		/* 리뷰 리스트 가져올 때 댓글도 가져오기! */
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<Review> rvList = null;
-		
-		try {
-			conn = ds.getConnection();
-			String review_sql = "SELECT RV.REVIEWNUM, RV.USERID, RV.REVIEWCONTENT, RV.REVIEWDATE, RV.REAID " + 
-					"FROM REVIEW RV JOIN REAUSER RU " + 
-					"ON RV.REAID = RU.REAID " + 
-					"WHERE RV.REAID=? " +
-					"ORDER BY RV.REVIEWNUM";
-			pstmt = conn.prepareStatement(review_sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			rvList = new ArrayList<Review>();
-			
-			while (rs.next()) {
-				Review review = new Review();
-				
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				java.util.Date date = sdf.parse(rs.getString("reviewDate"));
-				Date reviewDate = new Date(date.getTime());
-				
-				review.setReviewNum(rs.getInt("reviewNum"));
-				review.setUserId(rs.getString("userId"));
-				review.setReviewContent(rs.getString("reviewContent"));
-				review.setReviewDate(reviewDate);
-				review.setReaId(rs.getString("reaId"));
-				
-				rvList.add(review);
-			}
-		} catch (Exception e) {
-			System.out.println("ReviewDao 예외발생");
-			System.out.println(e.getMessage());
-		} finally {
-			DB_Close.close(rs);
-			DB_Close.close(pstmt);
-			
-			try {
-				conn.close();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		
-		return rvList;
-	}
 
-	
-	
 	public int updateReview(Review review) { // 리뷰 수정
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -314,13 +260,11 @@ public class ReviewDao {
 		/* 리뷰 삭제시 리뷰에 댓글이 있는 경우 댓글부터 삭제해야 함! */
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int resultRow = 0;
-		
 		try {
 			conn = ds.getConnection();
-			String sql_del_review = "delete from review where reviewNum=?";
-			
+			String sql_del_review = "delete from review where reviewnum=?";
+			System.out.println("여기여기여기");
 			pstmt = conn.prepareStatement(sql_del_review); //리뷰에 댓글 있는지 확인
 			pstmt.setInt(1, reviewNum);
 			resultRow = pstmt.executeUpdate();
@@ -333,7 +277,6 @@ public class ReviewDao {
 			System.out.println("ReviewDao delete 예외발생");
 			System.out.println(e.getMessage());
 		} finally {
-			DB_Close.close(rs);
 			DB_Close.close(pstmt);
 			
 			try {
