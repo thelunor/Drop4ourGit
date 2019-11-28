@@ -15,7 +15,9 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <jsp:include page="./css/css.jsp"></jsp:include>
-<%String type =(String) request.getAttribute("type"); %>
+<%String type =(String) request.getAttribute("type");
+	System.out.println("타입이라고" + type);
+%>
 <script>
 $.noConflict();
 
@@ -140,8 +142,10 @@ table {
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
 			<%if(type=="U01"){%>
 			<jsp:include page="WEB-INF/include/REAUser_Top.jsp"></jsp:include>
-			<%}else{ %>
+			<%} else if (type == "U02") { %> 
 			<jsp:include page="WEB-INF/include/User_Top.jsp"></jsp:include>
+				<%}else { %> 
+			<jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
 			<%} %>
 			<!-- Side jsp -->
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
@@ -169,7 +173,7 @@ table {
 					<br>
 					<div class="row">
 						<div class="col-md-12">
-							<jsp:include page="WEB-INF/include/HouseList3.jsp"></jsp:include>
+							<jsp:include page="WEB-INF/include/HouseList3_1.jsp"></jsp:include>
 						</div>
 					</div>
 				</div>
