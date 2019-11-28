@@ -33,6 +33,7 @@ public class InsertReview extends HttpServlet {
     	String reaId = request.getParameter("reaId");
     	String userId = request.getParameter("userId");
 		String reviewContent = request.getParameter("reviewContent");
+		System.out.println("userId"+userId+"/"+"reaId"+reaId+"reviewContent"+reviewContent);
 		
     	Date reviewDate = null;
     	int reviewNum = 0;

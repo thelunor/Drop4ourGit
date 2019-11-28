@@ -76,7 +76,7 @@
 			                    		<textarea id="reviewContent" name="reviewContent" class="ckeditor"
 											rows="5" style="resize: none; width: 100%; border: 1px solid #d2d0d0;"></textarea>
 									<div align="right">
-			                    		<input type="button" id="insert_review" name="insert_review" value="확인">
+			                    		<button type="submit" id="insert_review" class="btn btn-primary btn-block btn-lg" name="insert_review">작성 완료</button>
 									</div></td>
 			                    </tr>
 		                   </table>
@@ -87,12 +87,12 @@
 						
 						
 						<form name="review" method="post">
-						
+						<!-- 후기글 뿌려지는 곳 -->
 						<table style="width: 100%;" id="reviewbody">
 						
 						<tbody id="tbody">
-						
-									<%-- <tr>
+							<%-- 
+									 <tr>
 										<td align="left" width="70%">
 											<span>${reviewTable.reviewDate}</span></td>
 										<td align="right">
@@ -103,22 +103,25 @@
 											<textarea rows="3" style="resize: none; width: 100%; border: 1px solid #d2d0d0;" 
 												readonly="readonly">${reviewTable.reviewContent}</textarea>
 	 											<input type="hidden" id="reviewNum" value="${ reviewTable.reviewNum}">
-												<div align="right" id="delete_div">
-			                    				<c:if test="${reviewTable.userId == sessionScope.userId}">
-			                    					<input type="button" id="delete_review" name="delete_review" value="삭제">
-			                    					<input type="button" id="edit_review" name="edit_review" value="수정">
-			                    				</c:if>
-											</div><hr></td>
+												<div class="row">
+											<div class="col-sm-6">
+												<button type="submit"
+													class="btn btn-primary btn-block btn-lg" id="signUp">Sign Up</button> 
+											</div>
+											<div class="col-sm-6">
+												<button type="reset"
+													class="btn btn-primary btn-block btn-lg">Cancel</button>
+											</div>
+										</div>
+											<hr></td>
 											
-									</tr> --%>
+									</tr>   --%>
 									
 							</tbody>
 							
 						</table>
 						
-						</form>
-						
-						
+						</form>						
 						
 <%-- 						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
 						<c:if test="${cpage>1}">
@@ -144,8 +147,7 @@
 		</div>
 	</div>
 </section>
-
-<!-- scroll up-->
+ 
 <jsp:include page="./ScrollUp.jsp"></jsp:include>
 
 <script type="text/javascript">
@@ -156,7 +158,7 @@
 	var reaId = $("#getREAId").val();
 	var reviewNum = $("#reviewNum").val();
 
-		function getReviewList(){
+		function getReviewList(){ //리뷰 리스트 가져오기
 			$.ajax({
 				url:"GetReviewList?reaId="+reaId,
 				dataType:"JSON",
@@ -176,33 +178,34 @@
 						review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
 						review += element.reviewContent+"</textarea>";
 						review += "<input type='hidden' id='reviewNum value='"+element.reviewNum+"'>";
-						review += "<div align='right' id='delete_div'>";
-						review += "<input type='button' id='delete_review' value='삭제'>";
-						review += "<input type='button' id='edit_review' value='수정'>";
-						review += "</div><hr></td></tr>";					
+						review += "<div class='row'>"
+						review += "<div class='col-sm-6'>"
+						review += "<button id='delete_review' class='btn btn-primary btn-block btn-sm'>삭제</button></div>";
+						review += "<div class='col-sm-6'>"
+						review += "<button id='edit_review' class='btn btn-primary btn-block btn-sm'>수정</button></div>";
+						review += "</div></div><hr></td></tr>";					
  						$("#tbody").append(review);
-						
-					})
-
-				
+					});
 				}
-		})
+		});
 		}
-		
-	
-		//var reviewNum = $("#reviewNum").val();
-		
 		$('#insert_review').click(function() {
+			
+			var param = {
+					userId : $('#getUserId').val(),
+					reviewContent : $('#reviewContent').val(),
+					reaId : $('#getREAId').val()
+					};
 			$.ajax({
 				url: 'InsertReview', // kr.or.bit.ajax
 				dataType: 'json',
 				type: 'post',
-				data: {
-					userId: $('#getUserId').val(),
-					reviewContent: $('#reviewContent').val(),
-					reaId: $('#getREAId').val()
-				},
+				data: param,
 				success: function(data) {
+					console.log(data);
+					getReviewList();
+					$("#reviewContent").val("");
+					/*
 					 $.each(data, function(index, value){
 						console.log(value.reviewNum);
 						var review = "";
@@ -218,44 +221,31 @@
 						review += "<div align='right' id='delete_div'>";
 						review += "<input type='button' id='delete_review' value='삭제'>";
 						review += "<input type='button' id='edit_review' value='수정'>";
-						review += "<input type='hidden' id='reviewNum1' value='+"+value.reviewNum+"'>";
+						review += "<input type='hidden' id='reviewNum' value='+"+value.reviewNum+"'>";
 						review += "</div><hr></td></tr>";						
 						$('#tbody').append(review);
 						$("#reviewContent").val("");
 					});
+					*/
 				}
 			});
 		});
 		
-		$('#delete_review').click(function() {			
+		$('#delete_review').click(function() {
+			var param = {
+					reviewNum : $("#reviewNum").val(),
+					reaId : $('#getREAId').val()
+					};
 			$.ajax({
-				url:'DeleteReview?reviewNum='+reviewNum+"&reaId="+reaId,
+				url:'DeleteReview',
 				dataType: 'json',
+				data : param,
 				type: 'post',
 				success:function(data){
-					$("#tbody").empty();
-					 $.each(data, function(index, value){
-							var review = "";
-							review += "<tr>";
-							review += "<td align='left' width='70%'>";
-							review += "<span>" + value.reviewDate+ "</span></td>";
-							review += "<td align='right'>";
-							review += "작성자: <span id='reviewId'>" + value.userId + "</span></td>";
-							review += "</tr><tr>";
-							review += "<td colspan='2' style='height: 100px;'>";
-							review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
-							review += value.reviewContent+"</textarea>";
-							review += "<div align='right' id='delete_div'>";
-							review += "<input type='button' id='delete_review' value='삭제'>";
-							review += "<input type='button' id='edit_review' value='수정'>";
-							review += "<input type='hidden' id='reviewNum1' value='+"+value.reviewNum+"'>";
-							review += "</div><hr></td></tr>";						
-							$('#tbody').append(review);
-						});
-				
+					getReviewList();
 				}
 			})
-		})
+		});
 		/*
 		$("#edit_review").click(function(){
 			$.ajax({
