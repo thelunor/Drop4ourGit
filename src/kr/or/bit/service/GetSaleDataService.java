@@ -26,7 +26,7 @@ public class GetSaleDataService implements Action {
 		String aptNum =request.getParameter("aptNum");
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
-		System.out.println("아파트 매물 번호"+aptNum);
+		String type=(String) request.getParameter("type");
 		Sale sale = null;	//매물
 		SaleImage saleImg = null; //매물 사진
 		REAUser reaUser = null; //공인중개사
@@ -59,6 +59,7 @@ public class GetSaleDataService implements Action {
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("bkCheck", bkCheck);
+				request.setAttribute("type", type);
 				
 				forward.setPath("GetSaleDataServiceOk.d4b");
 				

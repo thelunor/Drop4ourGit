@@ -202,6 +202,7 @@ text-align: center;
 <%
 	Map<Sale, SaleImage> saleMap = (Map<Sale, SaleImage>)request.getAttribute("saleMap");
 	System.out.println(saleMap);
+	
 %>
 <h6>300개 이상의 매물</h6>
 <input type="hidden" value="<%=search%>" id="search">
@@ -250,7 +251,7 @@ text-align: center;
 		                    
 		                    <!-- End Skill Bar -->
 		                </div>
-		                <a class="btn trigger" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>
+		                <a class="btn trigger" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}&type=<%=type%>">See the Details</a>
 		            </div>
 		        </div>
 		    </div>

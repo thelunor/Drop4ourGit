@@ -14,7 +14,11 @@
 	String userId = (String) session.getAttribute("userId");
 	boolean bkCheck = (boolean) request.getAttribute("bkCheck");
 	String aptNum = (String) request.getParameter("aptNum");
+
 	String type =(String) request.getAttribute("type");
+	if(type==null){
+		type=request.getParameter("type");
+	}
 %>
 
 <!doctype html>
