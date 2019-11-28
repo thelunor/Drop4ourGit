@@ -56,7 +56,18 @@
 		</nav>
 		<!--Home Sections-->
 	<jsp:include page="WEB-INF/include/Home.jsp"></jsp:include>	
-	
+	<br>
+	<br>
+	<div class="contain-fluid">
+	<div class="row">
+	<div class="col-md-6">
+		<jsp:include page="Chart_0.jsp"></jsp:include>		
+	</div>
+	<div class="col-md-6">
+		<jsp:include page="Chart_1.jsp"></jsp:include>		
+	</div>		
+	</div>
+	</div>
 		<!-- scroll up-->
 		<div class="scrollup">
 			<a href="#"><i class="fa fa-chevron-up"></i></a>
