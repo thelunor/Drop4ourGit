@@ -31,6 +31,8 @@
 	<jsp:include page="../../css/css.jsp" />
 	
 <%	
+	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
+	System.out.println("reviewList: " + reviewList);
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	String reaId = reaUser.getReaId();
 	String genericUserId = (String) session.getAttribute("userId");
@@ -47,8 +49,11 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy. MM. dd");
 %>
 	
+<c:set var="reviewList" value="<%=reviewList%>" />
 <input type="hidden" id="getREAId" value="<%=reaId%>">
 <input type="hidden" id="getUserId" value="<%=genericUserId%>">
+
+
 
 <section id="id" class="about">
 	<div class="container">
@@ -59,6 +64,7 @@
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
+						
 						<div>
 							<table class="table table-bordered" id="reviewTable"
 								style="text-align: center; margin: auto; width: 100%; border: none;">
@@ -81,18 +87,14 @@
 			                    </tr>
 		                   </table>
 						</div>
+						
 						<div style="margin-top: 20px; margin-bottom: 20px;">
 							<hr>
 						</div>
-						
-						
-						<form name="review" method="post">
-						
 						<table style="width: 100%;" id="reviewbody">
-						
 						<tbody id="tbody">
-						
-									<%-- <tr>
+							<c:forEach var="reviewTable" items="<%=reviewList%>" varStatus="status">
+									<tr>
 										<td align="left" width="70%">
 											<span>${reviewTable.reviewDate}</span></td>
 										<td align="right">
@@ -110,15 +112,10 @@
 			                    				</c:if>
 											</div><hr></td>
 											
-									</tr> --%>
-									
+									</tr>
+							</c:forEach>
 							</tbody>
-							
 						</table>
-						
-						</form>
-						
-						
 						
 <%-- 						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
 						<c:if test="${cpage>1}">
@@ -150,47 +147,10 @@
 
 <script type="text/javascript">
 	$(function() {
-		getReviewList();
-
-	});
-	var reaId = $("#getREAId").val();
-	var reviewNum = $("#reviewNum").val();
-
-		function getReviewList(){
-			$.ajax({
-				url:"GetReviewList?reaId="+reaId,
-				dataType:"JSON",
-				type:"POST",
-				success: function(data){
-					console.log(data);
-					$.each(data,function(index, element){
-						var review = "";
-						review += "<tr>";
-						review += "<td align='left' width='70%'>";
-						review += "<span>" + element.reviewDate+ "</span></td>";
-						review += "<td align='right'>";
-						review += "작성자: <span id='reviewId'>"+element.userId+"</span></td>";
-						review += "</tr>";
-						review += "<tr>";
-						review += "<td colspan='2' style='height: 100px;'>";
-						review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
-						review += element.reviewContent+"</textarea>";
-						review += "<input type='hidden' id='reviewNum value='"+element.reviewNum+"'>";
-						review += "<div align='right' id='delete_div'>";
-						review += "<input type='button' id='delete_review' value='삭제'>";
-						review += "<input type='button' id='edit_review' value='수정'>";
-						review += "</div><hr></td></tr>";					
- 						$("#tbody").append(review);
-						
-					})
-
-				
-				}
-		})
-		}
-		
-	
+		var reaId = $("#getREAId").val();
+		var reviewNum = $("#reviewNum").val();
 		//var reviewNum = $("#reviewNum").val();
+		console.log(reaId);
 		
 		$('#insert_review').click(function() {
 			$.ajax({
@@ -272,4 +232,11 @@
 				}
 		});
 			*/
+	});
 </script>
+
+
+
+
+	
+	
