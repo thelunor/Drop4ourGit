@@ -151,46 +151,13 @@
 <jsp:include page="./ScrollUp.jsp"></jsp:include>
 
 <script type="text/javascript">
+var reaId = $("#getREAId").val();
+var reviewNum = $("#reviewNum").val();
+
+
 	$(function() {
 		getReviewList();
-
-	});
-	var reaId = $("#getREAId").val();
-	var reviewNum = $("#reviewNum").val();
-
-		function getReviewList(){ //리뷰 리스트 가져오기
-			$.ajax({
-				url:"GetReviewList?reaId="+reaId,
-				dataType:"JSON",
-				type:"POST",
-				success: function(data){
-					console.log(data);
-					$.each(data,function(index, element){
-						var review = "";
-						review += "<tr>";
-						review += "<td align='left' width='70%'>";
-						review += "<span>" + element.reviewDate+ "</span></td>";
-						review += "<td align='right'>";
-						review += "작성자: <span id='reviewId'>"+element.userId+"</span></td>";
-						review += "</tr>";
-						review += "<tr>";
-						review += "<td colspan='2' style='height: 100px;'>";
-						review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
-						review += element.reviewContent+"</textarea>";
-						review += "<input type='hidden' id='reviewNum value='"+element.reviewNum+"'>";
-						review += "<div class='row'>"
-						review += "<div class='col-sm-6'>"
-						review += "<button id='delete_review' class='btn btn-primary btn-block btn-sm'>삭제</button></div>";
-						review += "<div class='col-sm-6'>"
-						review += "<button id='edit_review' class='btn btn-primary btn-block btn-sm'>수정</button></div>";
-						review += "</div></div><hr></td></tr>";					
- 						$("#tbody").append(review);
-					});
-				}
-		});
-		}
 		$('#insert_review').click(function() {
-			
 			var param = {
 					userId : $('#getUserId').val(),
 					reviewContent : $('#reviewContent').val(),
@@ -205,7 +172,7 @@
 					console.log(data);
 					getReviewList();
 					$("#reviewContent").val("");
-					/*
+					
 					 $.each(data, function(index, value){
 						console.log(value.reviewNum);
 						var review = "";
@@ -218,34 +185,88 @@
 						review += "<td colspan='2' style='height: 100px;'>";
 						review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
 						review += value.reviewContent+"</textarea>";
-						review += "<div align='right' id='delete_div'>";
-						review += "<input type='button' id='delete_review' value='삭제'>";
-						review += "<input type='button' id='edit_review' value='수정'>";
-						review += "<input type='hidden' id='reviewNum' value='+"+value.reviewNum+"'>";
-						review += "</div><hr></td></tr>";						
+						review += "<input type='hidden' id='reviewNum value='"+value.reviewNum+"'>";
+						review += "<div class='row'>";
+						review += "<div class='col-sm-6'>";
+						review += "<button id='delete_review' class='btn btn-primary btn-block btn-sm' onclick='delete_review()'>삭제</button></div>";
+						review += "<div class='col-sm-6'>";
+						review += "<button id='edit_review' class='btn btn-primary btn-block btn-sm'>수정</button></div>";
+						review += "</div></div><hr></td></tr>";		
 						$('#tbody').append(review);
 						$("#reviewContent").val("");
 					});
-					*/
+					 
+					 
+					 
 				}
 			});
 		});
 		
-		$('#delete_review').click(function() {
-			var param = {
-					reviewNum : $("#reviewNum").val(),
-					reaId : $('#getREAId').val()
-					};
-			$.ajax({
-				url:'DeleteReview',
-				dataType: 'json',
-				data : param,
-				type: 'post',
-				success:function(data){
-					getReviewList();
-				}
-			})
+	
 		});
+
+	function getReviewList(){ //리뷰 리스트 가져오기
+		$.ajax({
+			url:"GetReviewList?reaId="+reaId,
+			dataType:"JSON",
+			type:"POST",
+			success: function(data){
+				$.each(data,function(index, element){
+					var review = "";
+					review += "<tr>";
+					review += "<td align='left' width='70%'>";
+					review += "<span>" + element.reviewDate+ "</span></td>";
+					review += "<td align='right'>";
+					review += "작성자: <span id='reviewId'>"+element.userId+"</span></td>";
+					review += "</tr>";
+					review += "<tr>";
+					review += "<td colspan='2' style='height: 100px;'>";
+					review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
+					review += element.reviewContent+"</textarea>";
+					review += "<input type='hidden' id='reviewNum value='"+element.reviewNum+"'>";
+					review += "<div class='row'>"
+					review += "<div class='col-sm-6'>"
+					review += "<button class='btn btn-primary btn-block btn-sm' onclick='delete_review()'>삭제</button></div>";
+					review += "<div class='col-sm-6'>"
+					review += "<button id='edit_review' class='btn btn-primary btn-block btn-sm'>수정</button></div>";
+					review += "</div></div><hr></td></tr>";					
+						$("#tbody").append(review);
+				});
+			}
+	});
+	}
+	function delete_review(){
+		$.ajax({
+			url:'DeleteReview?reviewNum='+reviewNum+"&reaId="+reaId,
+			dataType: 'text',
+			type: 'post',
+			success:function(data){
+				console.log(data);
+				//getReviewList();
+			}
+		});
+	}
+
+	/*
+	$('#delete_review').click(function() {
+		alert("하이하이");
+		//console.log(reviewNum);
+		//console.log(reaId);
+
+			$.ajax({
+			url:'DeleteReview?reviewNum'+reviewNum+"&reaId="+reaId,
+			dataType: 'json',
+			type: 'post',
+			success:function(data){
+				console.log(data);
+				//getReviewList();
+			}
+		}) 
+		
+		
+		*/
+		
+		
 		/*
 		$("#edit_review").click(function(){
 			$.ajax({
@@ -262,4 +283,5 @@
 				}
 		});
 			*/
+
 </script>
