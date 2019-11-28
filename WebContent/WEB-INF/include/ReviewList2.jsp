@@ -52,6 +52,9 @@
 <c:set var="reviewList" value="<%=reviewList%>" />
 <input type="hidden" id="getREAId" value="<%=reaId%>">
 <input type="hidden" id="getUserId" value="<%=genericUserId%>">
+
+
+
 <section id="id" class="about">
 	<div class="container">
 		<div class="about_content">

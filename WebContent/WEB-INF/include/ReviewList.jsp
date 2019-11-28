@@ -31,8 +31,6 @@
 	<jsp:include page="../../css/css.jsp" />
 	
 <%	
-	List<Review> reviewList = (ArrayList<Review>) request.getAttribute("rvList");
-	System.out.println("reviewList: " + reviewList);
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	String reaId = reaUser.getReaId();
 	String genericUserId = (String) session.getAttribute("userId");
@@ -49,90 +47,150 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy. MM. dd");
 %>
 	
-<c:set var="reviewList" value="<%=reviewList%>" />
 <input type="hidden" id="getREAId" value="<%=reaId%>">
 <input type="hidden" id="getUserId" value="<%=genericUserId%>">
-    <section id="id" class="about">
-        <div class="container">
-            <div class="about_content">
-                <div class="container-fluid">
-                    <div class="card-header py-3">
-                        <h5 class="m-0 font-weight-bold text-primary">계약자 생생후기</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div>
-                                <table class="table table-bordered" id="reviewTable"
-                                    style="text-align: center; margin: auto; width: 100%; border: none;">
-                                    <tr>
-                                        <td style="padding: 0;">
-                                            <div align="left" style="padding-left: 10px;">
-                                              	  날짜:&nbsp;<input type="text" id="reviewDate" name="reviewDate"  value="<%=sdf.format(today) %>" readonly="readonly" style="display: inline; width: 50%; padding: 0;">
-                                             </div> 
-                                        <td style="padding: 0;">
-                                            <div align="right" style="padding-right: 10px;">
-                                              	  작성자:&nbsp;<input type="text" id="userId" name="userId" value="<%=genericUserId%>" readonly="readonly" style="; display: inline; width: 30%; padding: 0;">
-                                                <input type="hidden" id="reaId" name="reaId" value="">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4" align="left" id="contentTd">
-                                            <textarea id="reviewContent" name="reviewContent" class="ckeditor" rows="5"
-                                                style="resize: none; width: 100%; border: 1px solid #d2d0d0;"></textarea>
-                                            <div align="right">
-                                                <input type="button" id="insert_review" name="insert_review" value="확인">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div style="margin-top: 20px; margin-bottom: 20px;">
-                                <hr>
-                            </div>
-                            <table style="width: 100%;" id="reviewbody">
-                                <tbody id="tbody">
-                                    <c:forEach var="reviewTable" items="<%=reviewList%>" varStatus="status">
-                                        <tr>
-                                            <td align="left" width="70%">
-                                                <span>${reviewTable.reviewDate}</span></td>
-                                            <td align="right">
-                                                작성자: <span id="reviewId">${reviewTable.userId}</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="height: 100px;">
-                                                <textarea rows="3"
-                                                    style="resize: none; width: 100%; border: 1px solid #d2d0d0;"
-                                                    readonly="readonly">${reviewTable.reviewContent}</textarea>
-                                                <input type="hidden" id="reviewNum" value="${ reviewTable.reviewNum}">
-                                                <div align="right" id="delete_div">
-                                                    <c:if test="${reviewTable.userId == sessionScope.userId}">
-                                                        <input type="button" id="delete_review" name="delete_review"  value="삭제">
-                                                        <input type="button" id="edit_review" name="edit_review"value="수정">
-                                                    </c:if>
-                                                </div>
-                                                <hr>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
+<section id="id" class="about">
+	<div class="container">
+		<div class="about_content">
+			<div class="container-fluid">
+				<div class="card-header py-3">
+					<h5 class="m-0 font-weight-bold text-primary">계약자 생생후기</h5>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<div>
+							<table class="table table-bordered" id="reviewTable"
+								style="text-align: center; margin: auto; width: 100%; border: none;">
+			                    <tr>
+			                        <td style="padding: 0;"><div align="left" style="padding-left: 10px;">
+		                        		날짜:&nbsp;<input type="text" id="reviewDate" name="reviewDate" value="<%=sdf.format(today) %>" 
+			                        					readonly="readonly" style="display: inline; width: 50%; padding: 0;">
+			                       	<td style="padding: 0;"><div align="right" style="padding-right: 10px;">
+			                       		작성자:&nbsp;<input type="text" id="userId" name="userId" value="<%=genericUserId%>" 
+			                       						readonly="readonly" style="; display: inline; width: 30%; padding: 0;">
+			                       		<input type="hidden" id="reaId" name="reaId" value=""></div></td>
+			                    </tr>
+			                    <tr>
+			                    	<td colspan="4" align="left" id="contentTd">
+			                    		<textarea id="reviewContent" name="reviewContent" class="ckeditor"
+											rows="5" style="resize: none; width: 100%; border: 1px solid #d2d0d0;"></textarea>
+									<div align="right">
+			                    		<input type="button" id="insert_review" name="insert_review" value="확인">
+									</div></td>
+			                    </tr>
+		                   </table>
+						</div>
+						<div style="margin-top: 20px; margin-bottom: 20px;">
+							<hr>
+						</div>
+						
+						
+						<form name="review" method="post">
+						
+						<table style="width: 100%;" id="reviewbody">
+						
+						<tbody id="tbody">
+						
+									<%-- <tr>
+										<td align="left" width="70%">
+											<span>${reviewTable.reviewDate}</span></td>
+										<td align="right">
+											작성자: <span id="reviewId">${reviewTable.userId}</span></td>
+									</tr>
+									<tr>
+										<td colspan="2" style="height: 100px;">
+											<textarea rows="3" style="resize: none; width: 100%; border: 1px solid #d2d0d0;" 
+												readonly="readonly">${reviewTable.reviewContent}</textarea>
+	 											<input type="hidden" id="reviewNum" value="${ reviewTable.reviewNum}">
+												<div align="right" id="delete_div">
+			                    				<c:if test="${reviewTable.userId == sessionScope.userId}">
+			                    					<input type="button" id="delete_review" name="delete_review" value="삭제">
+			                    					<input type="button" id="edit_review" name="edit_review" value="수정">
+			                    				</c:if>
+											</div><hr></td>
+											
+									</tr> --%>
+									
+							</tbody>
+							
+						</table>
+						
+						</form>
+						
+						
+						
+<%-- 						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
+						<c:if test="${cpage>1}">
+							<a href="board_list.jsp?cp=${cpage-1}&ps=${pagesize}">이전</a>
+						</c:if> 
+						<!--페이지 리스트 구현  -->
+						<c:forEach var="i" begin="1" end="${pagecount}" step="1">
+							<c:choose>
+								<c:when test="${cpage==i}">
+									<font color='red'>[${i}]</font>
+								</c:when>
+								<c:otherwise>
+									<a href="board_list.jsp?cp=${i}&ps=${pagesize}">[${i}]</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach> <!--다음 링크 --> <c:if test="${cpage<pagecount}">
+							<a href="board_list.jsp?cp=${cpage+1}&ps=${pagesize}">다음</a>
+						</c:if> --%>
+			
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 <!-- scroll up-->
 <jsp:include page="./ScrollUp.jsp"></jsp:include>
 
 <script type="text/javascript">
 	$(function() {
-		var reaId = $("#getREAId").val();
-		var reviewNum = $("#reviewNum").val();
+		getReviewList();
+
+	});
+	var reaId = $("#getREAId").val();
+	var reviewNum = $("#reviewNum").val();
+
+		function getReviewList(){
+			$.ajax({
+				url:"GetReviewList?reaId="+reaId,
+				dataType:"JSON",
+				type:"POST",
+				success: function(data){
+					console.log(data);
+					$.each(data,function(index, element){
+						var review = "";
+						review += "<tr>";
+						review += "<td align='left' width='70%'>";
+						review += "<span>" + element.reviewDate+ "</span></td>";
+						review += "<td align='right'>";
+						review += "작성자: <span id='reviewId'>"+element.userId+"</span></td>";
+						review += "</tr>";
+						review += "<tr>";
+						review += "<td colspan='2' style='height: 100px;'>";
+						review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
+						review += element.reviewContent+"</textarea>";
+						review += "<input type='hidden' id='reviewNum value='"+element.reviewNum+"'>";
+						review += "<div align='right' id='delete_div'>";
+						review += "<input type='button' id='delete_review' value='삭제'>";
+						review += "<input type='button' id='edit_review' value='수정'>";
+						review += "</div><hr></td></tr>";					
+ 						$("#tbody").append(review);
+						
+					})
+
+				
+				}
+		})
+		}
+		
+	
 		//var reviewNum = $("#reviewNum").val();
-		console.log(reaId);
 		
 		$('#insert_review').click(function() {
 			$.ajax({
@@ -214,11 +272,4 @@
 				}
 		});
 			*/
-	});
 </script>
-
-
-
-
-	
-	

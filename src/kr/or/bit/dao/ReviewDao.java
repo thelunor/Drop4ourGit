@@ -192,7 +192,6 @@ public class ReviewDao {
 				review.setReaId(rs.getString("reaId"));
 				
 				rvList.add(review);
-//				System.out.println("ReviewDao getList rvList: " + rvList);
 			}
 		} catch (Exception e) {
 			System.out.println("ReviewDao 예외발생");
@@ -204,7 +203,6 @@ public class ReviewDao {
 			try {
 				conn.close();
 			} catch (Exception e) {
-				System.out.println("ReviewDao 예외발생2");
 				System.out.println(e.getMessage());
 			}
 		}
