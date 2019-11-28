@@ -246,6 +246,8 @@ text-align: center;
 		                        <h6>${sale.key.etc}</h6>
 		                        <div class="teamskillbar-bar"></div>
 		                    </div>
+		                    <input type="hidden" name="addr" value=" ${sale.key.addr}">
+		                    
 		                    <!-- End Skill Bar -->
 		                </div>
 		                <a class="btn trigger" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}">See the Details</a>
