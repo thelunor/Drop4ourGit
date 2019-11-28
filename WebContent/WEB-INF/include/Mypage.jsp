@@ -1,3 +1,4 @@
+<%@page import="kr.or.bit.dto.SaleImage"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.bit.dto.BookMark"%>
 <%@page import="java.util.List"%>
@@ -6,6 +7,7 @@
    pageEncoding="UTF-8"%>
 <%
    String genericUserId = (String) session.getAttribute("userId");
+   SaleImage saleImg = (SaleImage) request.getAttribute("saleImg");
    BookMarkDao dao = new BookMarkDao();
    List<BookMark> bmList = new ArrayList<BookMark>();
    bmList = dao.getBookMark(genericUserId); //reaId로 리스트 불러오기   
@@ -107,7 +109,7 @@ function getBookMark(aptSize){
                content += "<div class='card_top_border'></div>";
                content += "<div class='card'>";
                content += "<div class='contain'>";
-               content += "<img class='card-img-top img-fluid' src='./images/admin.jpg' width='100%' height='220'>";         
+               content += "<img class='card-img-top img-fluid' src='reaimg/"+element.saleImgSaveName1+"' width='100%' height='220'>";         
                content += "<div id='text' class='close' style='display:inline'><button type='button' class='btn btn-default' onclick='deleteBk()'><i class='fa fa-trash' aria-hidden='true'style='padding:0;border: none;background: none;'></i></button></div>";       
                content += "</div>";
                content += "<div class='card-body'>";

@@ -10,11 +10,12 @@ public class BookMark {
 	private String type; //거래유형
 	private String aptName; //아파트 이름
 	private String price; //거래금액
+	private String saleImgSaveName1; //아파트 사진
 	
 	public BookMark() {}
 	
-	public BookMark(String userId, String aptNum, Date bookDate, String aptSize, String type, String aptName,
-			String price) {
+	public BookMark(String userId, String aptNum, Date bookDate, String aptSize, String type, String aptName, 
+			String price, String saleImgSaveName1) {
 		super();
 		this.userId = userId;
 		this.aptNum = aptNum;
@@ -23,6 +24,7 @@ public class BookMark {
 		this.type = type;
 		this.aptName = aptName;
 		this.price = price;
+		this.saleImgSaveName1 = saleImgSaveName1;
 	}
 
 	public String getUserId() {
@@ -81,11 +83,22 @@ public class BookMark {
 		this.price = price;
 	}
 
+	public String getSaleImgSaveName1() {
+		return saleImgSaveName1;
+	}
+
+	public void setSaleImgSaveName1(String saleImgSaveName1) {
+		this.saleImgSaveName1 = saleImgSaveName1;
+	}
+
 	@Override
 	public String toString() {
 		return "BookMark [userId=" + userId + ", aptNum=" + aptNum + ", bookDate=" + bookDate + ", aptSize=" + aptSize
-				+ ", type=" + type + ", aptName=" + aptName + ", price=" + price + "]";
+				+ ", type=" + type + ", aptName=" + aptName + ", price=" + price + ", saleImgSaveName1="
+				+ saleImgSaveName1 + "]";
 	}
+
+	
 
 	
 }

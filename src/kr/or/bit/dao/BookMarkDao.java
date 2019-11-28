@@ -35,7 +35,7 @@ public class BookMarkDao {
 		List<BookMark> bmList = null;
 		try {
 			conn = ds.getConnection();
-			String sql_get_bookmark = "select b.aptNum, s.aptSize, s.type, s.aptName, s.price from bookmark b join sale s on (b.aptNum = s.aptNum) where userId=?";
+			String sql_get_bookmark = "select b.aptNum, s.aptSize, s.type, s.aptName, s.price, i.saleimgsavename1 from bookmark b join sale s on b.aptNum = s.aptNum join saleimage i on s.aptNum = i.aptNum where userId=?";
 			pstmt = conn.prepareStatement(sql_get_bookmark);
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
@@ -47,9 +47,10 @@ public class BookMarkDao {
 				bookmark.setType(rs.getString(3)); //아파트 유형
 				bookmark.setAptName(rs.getString(4)); //아파트 이름			
 				bookmark.setPrice(rs.getString(5)); //아파트 가격
-				
+				bookmark.setSaleImgSaveName1(rs.getString(6)); //아파트 사진				
 				bmList.add(bookmark);
 			}
+
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}finally {

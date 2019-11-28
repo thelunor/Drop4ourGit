@@ -32,6 +32,7 @@ public class BookMarkList extends HttpServlet {
 		try {
 			dao = new BookMarkDao();
 		  List<BookMark> bmList = dao.getBookMark(userId);
+		  System.out.println(bmList);
 	  	  JSONArray jsonlist = JSONArray.fromObject(bmList);
 	  	  out.print(jsonlist);
 		} catch (Exception e) {

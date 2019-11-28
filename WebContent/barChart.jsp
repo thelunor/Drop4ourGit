@@ -15,11 +15,14 @@ canvas {
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 $(function() { 
+	
+	console.log("난 탄다");
 	let allData9 = [
 		{code:11110, sum:0, count:0}, //종로구
-		{code:11350, sum:0, count:0}, //노원구
+		{code:11290, sum:0, count:0}, //성북구
 		{code:11620, sum:0, count:0}, //관악구
 		{code:11680, sum:0, count:0}, //강남구
 		{code:11740, sum:0, count:0}, //강동구
@@ -27,7 +30,7 @@ $(function() {
 	  ];
 	let allData10 = [
 		{code:11110, sum:0, count:0}, //종로구
-		{code:11350, sum:0, count:0}, //노원구
+		{code:11290, sum:0, count:0}, //성북구
 		{code:11620, sum:0, count:0}, //관악구
 		{code:11680, sum:0, count:0}, //강남구
 		{code:11740, sum:0, count:0}, //강동구
@@ -35,7 +38,7 @@ $(function() {
 	  ];
 	let allData11 = [
 		{code:11110, sum:0, count:0}, //종로구
-		{code:11350, sum:0, count:0}, //노원구
+		{code:11290, sum:0, count:0}, //성북구
 		{code:11620, sum:0, count:0}, //관악구
 		{code:11680, sum:0, count:0}, //강남구
 		{code:11740, sum:0, count:0}, //강동구
@@ -43,21 +46,21 @@ $(function() {
 	  ];	
 
 	var j9 = 0; //9월 종로구 평균 거래금액
-	var n9 = 0; //9월 노원구 평균 거래금액
+	var s9 = 0; //9월 성북구 평균 거래금액
 	var g9 = 0; //9월 관악구 평균 거래금액
 	var gn9 = 0; //9월 강남구 평균 거래금액
     var gd9 = 0; //9월 강동구 평균 거래금액      
     var gs9 = 0; //9월 강서구 평균 거래금액    
 
 	var j10 = 0; //10월 종로구 평균 거래금액
-	var n10 = 0; //10월 노원구 평균 거래금액
+	var s10 = 0; //10월 성북구 평균 거래금액
 	var g10 = 0; //10월 관악구 평균 거래금액
 	var gn10 = 0; //10월 강남구 평균 거래금액
     var gd10 = 0; //10월 강동구 평균 거래금액      
     var gs10 = 0; //10월 강서구 평균 거래금액        
 
 	var j11 = 0; //11월 종로구 평균 거래금액
-	var n11 = 0; //11월 노원구 평균 거래금액
+	var s11 = 0; //11월 성북구 평균 거래금액
 	var g11 = 0; //11월 관악구 평균 거래금액
 	var gn11 = 0; //11월 강남구 평균 거래금액
     var gd11 = 0; //11월 강동구 평균 거래금액      
@@ -70,8 +73,9 @@ $(function() {
                success : function(data) {        
             	
             	$.each(data, function(index, element) {
-                let amount = element.response.body.items.item;
-               
+
+               let amount = element.response.body.items.item;
+                console.log(element);
                 
 				$.each(amount, function(key, value){       
 			        //9월달 데이터       
@@ -79,7 +83,7 @@ $(function() {
 			               allData9[0].sum += parseInt(value.거래금액.trim());
 			               allData9[0].count ++;  
 			        
-			        }else if(value.월=='9'&&(value.지역코드=='11350')){		               
+			        }else if(value.월=='9'&&(value.지역코드=='11290')){		               
 			               allData9[1].sum += parseInt(value.거래금액.trim());
 			               allData9[1].count ++;  
 			        
@@ -104,7 +108,7 @@ $(function() {
 			               allData10[0].sum += parseInt(value.거래금액.trim());
 			               allData10[0].count ++;  
 			        
-			        }else if(value.월=='10'&&(value.지역코드=='11350')){		               
+			        }else if(value.월=='10'&&(value.지역코드=='11290')){		               
 			               allData10[1].sum += parseInt(value.거래금액.trim());
 			               allData10[1].count ++;  
 			        
@@ -129,7 +133,7 @@ $(function() {
 			               allData11[0].sum += parseInt(value.거래금액.trim());
 			               allData11[0].count ++;  
 			               
-			        }else if(value.월=='11'&&(value.지역코드=='11350')){		               
+			        }else if(value.월=='11'&&(value.지역코드=='11290')){		               
 			               allData11[1].sum += parseInt(value.거래금액.trim());
 			               allData11[1].count ++;  
 			               
@@ -148,16 +152,16 @@ $(function() {
 			        }else if(value.월=='11'&&(value.지역코드=='11500')){		               
 			               allData11[5].sum += parseInt(value.거래금액.trim());
 			               allData11[5].count ++;  
-			        }
+			        } 
 
 				});
-           		
+
             	});  
 
 				  //9월 평균
 				  j9 = (allData9[0].sum/allData9[0].count).toFixed(2); 
 
-				  n9 = (allData9[1].sum/allData9[1].count).toFixed(2); 
+				  s9 = (allData9[1].sum/allData9[1].count).toFixed(2); 
 
 				  g9 = (allData9[2].sum/allData9[2].count).toFixed(2); 
 
@@ -170,7 +174,7 @@ $(function() {
 				  //10월 평균
 				  j10 = (allData10[0].sum/allData10[0].count).toFixed(2); 
 
-				  n10 = (allData10[1].sum/allData10[1].count).toFixed(2); 
+				  s10 = (allData10[1].sum/allData10[1].count).toFixed(2); 
 
 				  g10 = (allData10[2].sum/allData10[2].count).toFixed(2); 
 
@@ -183,7 +187,7 @@ $(function() {
             	  //11월 평균
 				  j11 = (allData11[0].sum/allData11[0].count).toFixed(2);
 
-				  n11 = (allData11[1].sum/allData11[1].count).toFixed(2); 
+				  s11 = (allData11[1].sum/allData11[1].count).toFixed(2); 
 
 				  g11 = (allData11[2].sum/allData11[2].count).toFixed(2); 
 
@@ -203,29 +207,29 @@ $(function() {
        
           
         function barchart(){ 
-        var MONTHS = ['종로구', '노원구', '관악구', '강남구', '강동구', '강서구'];
+        var MONTHS = ['종로구', '성북구', '관악구', '강남구', '강동구', '강서구'];
  		var color = Chart.helpers.color;
  		var barChartData = {
- 			labels: ['종로구', '노원구', '관악구', '강남구', '강동구', '강서구'],
+ 			labels: ['종로구', '성북구', '관악구', '강남구', '강동구', '강서구'],
  			
  			datasets: [{
  				label: '9월 평균 거래금액',
  				backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
  				borderColor: window.chartColors.yellow,
  				borderWidth: 1,
- 				data: [j9, n9, g9, gn9, gd9, gs9]
+ 				data: [j9, s9, g9, gn9, gd9, gs9]
  			}, {
  				label: '10월 평균 거래금액',
  				backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
  				borderColor: window.chartColors.green,
  				borderWidth: 1,
- 				data: [j10, n10, g10, gn10, gd10, gs10]		
+ 				data: [j10, s10, g10, gn10, gd10, gs10]		
  			}, {
  				label: '11월 평균 거래금액',
  				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
  				borderColor: window.chartColors.red,
  				borderWidth: 1,
- 				data: [j11, n11, g11, gn11, gd11, gs11]
+ 				data: [j11, s11, g11, gn11, gd11, gs11]
  			}]
 
  		};

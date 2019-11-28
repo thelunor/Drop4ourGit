@@ -48,7 +48,7 @@ public class Data extends HttpServlet {
               
         ArrayList<Integer> lawd = new ArrayList<>();
         lawd.add(11110); //종로구
-        lawd.add(11350); //노원구
+        lawd.add(11290); //노원구
         lawd.add(11620); //관악구
         lawd.add(11680); //강남구
         lawd.add(11740); //강동구
