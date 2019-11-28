@@ -24,7 +24,6 @@ public class InsertSchedule extends HttpServlet {
         super();
     }
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.out.println("in InsertSchedule");
 		  request.setCharacterEncoding("UTF-8");
 		  response.setContentType("text/html;charset=UTF-8"); //클라언트에게 전달한 페이지의 정보 구성
 		  String reaId = request.getParameter("reaId");

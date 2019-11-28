@@ -10,6 +10,7 @@
 <%
 	String reaId = (String) session.getAttribute("userId");
 	ArrayList<REASchedule> sList = (ArrayList<REASchedule>) request.getAttribute("sList");
+	System.out.println(sList);
 %>
 <!DOCTYPE html>
 <html>
@@ -378,6 +379,7 @@ h1, h3, #myUL {
 	right: 0;
 	top: 0;
 	padding: 12px 16px 12px 16px;
+	border:none;
 }
 
 #myUL .close:hover {
@@ -408,56 +410,46 @@ $(function() {
         dataType : 'json',
         success : function(data) {	
             $.each(data, function(index, element) {
+            	console.log(element.scheNum);
             	var allData = "";
-            	allData += "<li>"+element.content+"<span class='close'>\u00D7</span></li>";            	
+            	var no = element.scheNum;
+            	console.log(no);
+            	allData += "<li id='sche'><input type='hidden' id='scheNum' value='"+element.scheNum+"'>"+element.content+"<button class='close' type='button' onclick='DeleteSchedule()'>\u00D7</button></li>";  
             	$('#myUL').append(allData);
             });
         }
 	});	
 	
-	ScrollSchedule();
+	// Click on a close button to hide the current list item
+	var close = document.getElementsByClassName("close");
+	var i;
+	for (i = 0; i < close.length; i++) {
+	  close[i].onclick = function() {
+	    var div = this.parentElement;
+	    console.log(div);
+	    div.style.display = "none";
+	  }
+	}
 });
 
-function ScrollSchedule(){	
-	console.log("나 탄다");
-	var even = "";	
-	$.ajax({
-        url : 'ScheduleList',
-        type : 'post',
-        data : {"reaId" : $("#reaId").val()},
-        dataType : 'json',
-        success : function(data) {	
-        	var count = 0;
-            $.each(data, function(index, element) {
-            	count ++;
-            	if(count >7){
-            	if(count %2 ==0){           	
-            	 even += "<li>";
-            	 even += "<div class='timeline-badge' id='badge'><i class='fas fa-check'></i></div>";
-            	 even += "<div class='timeline-panel'><div class='timeline-heading'>";
-            	 even += "<h4 class='timeline-title'><li><div class='timeline-badge'>";
-            	 even += "<i class='fas fa-check'></i></div><div class='timeline-panel'>";
-            	 even += "<div class='timeline-heading'>";
-            	 even += "<h4 class='timeline-title'>" + document.getElementById('hiddentime').value +"</h4></div>";
-				 even += "<div class='timeline-body'><p>" +element.content+ "</p></div></div></li>"			
 
-            		}
-            	}
-			});
-            console.log(count);
-            console.log(even);
-        }
-	});
-		
-	$('#timeContent').scroll(function(){
-        var scrollT = $(this).scrollTop(); //스크롤바의 상단위치
-        var scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
-        var contentH = $('#timetable').height(); //문서 전체 내용을 갖는 div의 높이
-        if(scrollT + scrollH +1 >= contentH) { // 스크롤바가 아래 쪽에 위치할 때
-            $('#timetable').append(even);
-        }
-    });
-	
+function DeleteSchedule(){
+
+	var reaId = $("#reaId").val();
+	var scheNum = $("#scheNum").val();
+
+	$.ajax({
+		url : 'DeleteSchedule?reaId='+reaId+'&scheNum='+scheNum,
+		type: 'post',
+		dataType : 'html',
+		success : function(data){
+				$("#sche").empty();
+				$("#sche").append(data);				
+			
+		}
+	 });
+   
+   
 }
 </script>
 </head>
@@ -542,7 +534,6 @@ function ScrollSchedule(){
 									</div>
 								</div>
 								<ul id="myUL" style="font-size: 12px;">
-
 								</ul>
 							</div>
 						</div>
@@ -551,7 +542,7 @@ function ScrollSchedule(){
 							<div class="page-header">
 								<h3 id="timeline">My Schedule</h3>
 							</div>
-							<div id="timeContent" style="overflow-y: scroll;">
+							<div id="timeContent">
 							<ul class="timeline" id="timetable">
 								<c:forEach var="schedule" items="<%=sList%>" varStatus="status">
 									<c:choose>
@@ -592,11 +583,6 @@ function ScrollSchedule(){
 											</li>
 										</c:when>
 									</c:choose>
-									<c:if test="${status.count > 6}">
-										<script> ScrollSchedule() </script>
-										<input type="hidden" id="hiddentime" value="<fmt:formatDate value='${schedule.scheDate}'
-																pattern='yyyy.MM.dd HH:mm' />">
-									</c:if>
 								</c:forEach>
 								</ul>
 							</div>
@@ -616,27 +602,6 @@ function ScrollSchedule(){
 	<jsp:include page="./js/js.jsp"></jsp:include>
 
 	<script>
-	// Create a "close" button and append it to each list item
-	var myNodelist = document.getElementById("myUL").getElementsByTagName("LI");
-	console.log(myNodelist);
-	var i; 
-	for (i = 0; i < myNodelist.length; i++) {
-	  var span = document.createElement("SPAN");
-	  var txt = document.createTextNode("\u00D7");
-	  span.className = "close";
-	  span.appendChild(txt);
-	  myNodelist[i].appendChild(span);
-	}
-
-	// Click on a close button to hide the current list item
-	var close = document.getElementsByClassName("close");
-	var i;
-	for (i = 0; i < close.length; i++) {
-	  close[i].onclick = function() {
-	    var div = this.parentElement;
-	    div.style.display = "none";
-	  }
-	}
 
 	// Add a "checked" symbol when clicking on a list item
 	var list = document.querySelector('ul');
@@ -703,7 +668,7 @@ function ScrollSchedule(){
 	    document.getElementById("myUL").appendChild(li);
 	  }
 
-	  var span = document.createElement("SPAN");
+	  var span = document.createElement("button");
 	  var txt = document.createTextNode("\u00D7");
 	  span.className = "close";
 	  span.appendChild(txt);
