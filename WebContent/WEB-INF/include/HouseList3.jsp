@@ -17,11 +17,19 @@
 	//String reaId = (String) session.getAttribute("reaId");
 	String userId = (String) session.getAttribute("userId");
 	String search= (String) request.getAttribute("search");
-	String type= (String) request.getAttribute("type");
+	
+	
+	String type= request.getParameter("type");
+	if(type==null){
+		type= (String) request.getAttribute("type");	
+	}
+	
 	int pageCount = (int) request.getAttribute("pageCount");
 	int count = (int) request.getAttribute("count");
 	int pageSize = (int) request.getAttribute("pageSize");
 	int cPage = (int) request.getAttribute("cPage");
+	
+	System.out.println("type: "+type);
 	System.out.println("userId: "+userId);
 	System.out.println("search: "+search);
 	System.out.println("pageCount: " + pageCount);

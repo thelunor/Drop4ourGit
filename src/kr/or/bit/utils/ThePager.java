@@ -53,11 +53,6 @@ public class ThePager {
 
 		// 3. 다음, 마지막 항목 만들기
 		if (currentPage < pageCount) {
-//			linkString.append("&nbsp;");
-//			linkString.append(String.format("[<a href='%s?cp=%d'>다음</a>]", linkUrl, currentPage + 1));
-//			linkString.append("&nbsp;");
-//			linkString.append("&nbsp;");
-//			linkString.append(String.format("[<a href='%s?cp=%d'>마지막</a>]", linkUrl, pageCount));
 			linkString.append(String.format("[<a href='%s&type=%s&cp=%d'>다음</a>]", linkUrl,type, currentPage + 1));
 			linkString.append("&nbsp;");
 			linkString.append("&nbsp;");

@@ -23,6 +23,7 @@ public class SelectAtpListService implements Action {
 		String search = request.getParameter("search");
 		String ps = request.getParameter("pageSize"); //pagesize
 		String cp = request.getParameter("cp");    //current page
+		String type= request.getParameter("type");
 		System.out.println("그댄 서치 내겐 서치이이이 그댄 서치.." + search);
 		Map<Sale, SaleImage> saleMap = new HashMap<Sale, SaleImage>();
 		
@@ -62,6 +63,7 @@ public class SelectAtpListService implements Action {
 				request.setAttribute("pageSize", pageSize);
 				request.setAttribute("cPage", cPage);
 				request.setAttribute("pageCount", pageCount);
+				request.setAttribute("type", type);
 			} else {
 				request.setAttribute("saleMap", saleMap);
 				request.setAttribute("search", "법정구 법정동");
