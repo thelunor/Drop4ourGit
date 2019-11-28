@@ -3,8 +3,6 @@
 <%
 	String userId = (String) session.getAttribute("userId");
 	String type= "U02";
-	
-	//System.out.println("reaIdㅡㅡㅡ"+ reaId);
 %>
 <!-- Start Atribute Navigation -->
 <div class="container">

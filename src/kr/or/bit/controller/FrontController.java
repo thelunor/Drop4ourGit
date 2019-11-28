@@ -39,6 +39,7 @@ import kr.or.bit.service.GetREAScheduleListByIdService;
 import kr.or.bit.service.GetREAScheduleListByScheNumService;
 import kr.or.bit.service.GetREAUserByIdService;
 import kr.or.bit.service.GetREAUserByRegService;
+import kr.or.bit.service.GetREAUserMypageService;
 import kr.or.bit.service.GetReviewComDataService;
 import kr.or.bit.service.GetReviewListService;
 import kr.or.bit.service.GetSaleDataService;
@@ -350,6 +351,13 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/GetREAMypageService.d4b")) {
 			try {
 				action = new GetREAMypageService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/GetREAMypageEditService.d4b")) {
+			try {
+				action = new GetREAUserMypageService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();

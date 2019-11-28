@@ -32,12 +32,10 @@ public class UpdateREAUserService implements Action {
 		System.out.println(reaId);
 		REAImage reaImg=null;
 		REAImageDao imageDao=null;
-		
+		String type = request.getParameter("type");
+		System.out.println("타입타입");
 		
 		try {
-			
-			
-
 			forward = new ActionForward();
 			reaUser=new REAUser();
 			reaUserDao=new REAUserDao();
@@ -54,7 +52,6 @@ public class UpdateREAUserService implements Action {
 			reaUser.setOfficeHp(officeHp);
 			reaUser.setRegNum(regNum);
 			reaUser.setUserCode(userCode);
-			System.out.println("넌 왜 널이니 ,,, : " + reaUser.toString());
 			int reaResult =reaUserDao.updateREAUser(reaUser);
 			System.out.println(reaResult);
 			reaImg.setReaImgSaveName(reaImgSaveName);
@@ -64,9 +61,9 @@ public class UpdateREAUserService implements Action {
 			
 			if (reaResult !=0 || imgResult !=0) {
 				System.out.println("업데이트 성공");
-//				request.setAttribute("reaUser", reaUser);
-//				request.setAttribute("reaImg", reaImg);
-				forward.setPath("REAMypage.jsp");
+				//request.setAttribute("reaUser", reaUser);
+				//request.setAttribute("reaImg", reaImg);
+				forward.setPath("GetREAMypageService.d4b?type="+type);
 			} else {
 				System.out.println("조회 실패");
 				forward.setPath("/AdminMain.jsp");

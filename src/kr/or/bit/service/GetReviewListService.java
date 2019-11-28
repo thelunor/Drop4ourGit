@@ -39,6 +39,7 @@ public class GetReviewListService implements Action {
 			request.setAttribute("reaId", reaId);
 			if (reaUser != null) {
 				forward.setPath("GetReviewListServiceOk.d4b");
+				
 			} else {
 				System.out.println("reviewList 실패");
 				forward.setPath("Main.jsp"); // 임시

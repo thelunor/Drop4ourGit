@@ -25,8 +25,8 @@
 <% 
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
-	System.out.println(reaUser.toString());
-	
+	String userId = (String) session.getAttribute("userId");
+	String type= "U02";
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
 <c:set var="reaImgData" value="<%=reaImg%>"></c:set>
@@ -87,7 +87,7 @@ img.avatar {
 		<!--Login Sections-->
 
 		<section id="join" class="about roomy-100">
-			<form action="UpdateREAUserService.d4b" method="post" name="loginForm" enctype="multipart/form-data">
+			<form action="UpdateREAUserService.d4b?type=<%=type %>" method="post" name="loginForm" enctype="multipart/form-data">
 				<div class="container">
 					<div class="about_content">
 						<div class="row">
