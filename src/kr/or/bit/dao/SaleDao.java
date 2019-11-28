@@ -297,6 +297,7 @@ public class SaleDao {
 				sale.setAptNum(rs.getString("aptNum")); // 매물번호
 				sale.setAptSize(rs.getString("aptSize")); // 아파트 사이즈
 				sale.setEtc(rs.getString("etc"));
+				sale.setAddr(rs.getString("addr"));
 				String aptNum = sale.getAptNum();
 				saleImg = new SaleImage();
 				saleImg = imgDao.getSaleImg(aptNum);
@@ -324,7 +325,7 @@ public class SaleDao {
 		Sale sale = null;
 		SaleImage saleImg = null;
 		SaleImageDao imgDao = null;
-		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize, etc from sale where addr like ?";
+		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize, etc, addr from sale where addr like ?";
 		int count=0;
 		try {
 			conn = ds.getConnection();
@@ -343,6 +344,7 @@ public class SaleDao {
 				sale.setAptNum(rs.getString("aptNum")); // 매물번호
 				sale.setAptSize(rs.getString("aptSize")); // 아파트 사이즈
 				sale.setEtc(rs.getString("etc"));
+				sale.setAddr(rs.getString("addr")); //지번주소
 				String aptNum = sale.getAptNum();
 				saleImg = new SaleImage();
 				saleImg = imgDao.getSaleImg(aptNum);
