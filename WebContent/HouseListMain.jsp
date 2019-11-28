@@ -62,7 +62,7 @@ jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
 		var address= $("#houseSearch").val().trim();
 		//console.log(address[0]+address[1]+address[2]);	
 // 		location.href="'SelectaptListService.d4b?address="+address[0]+address[1]+address[2];
-		location.href='SelectAptListService.d4b?search=' + addrSplit[0] + " " + addrSplit[1] +'&type='+<%=type%>;
+		location.href='SelectAptListService.d4b?search=' + addrSplit[0] + " " + addrSplit[1] +'&type=<%=type%>';
 	});
 	});
 </script>
@@ -132,16 +132,6 @@ table {
 </style>
 </head>
 <jsp:include page="./css/css.jsp"></jsp:include>
-<%
-	String type=(String)request.getAttribute("type");
-	String top=null;
-	if(type=="U01"){
-		top="User_Top";
-	}else{
-		top="REAUser_Top";
-	}
-%>
-<body data-spy="scroll" data-target=".navbar-collapse">
 
 	<div class="culmn">
 		<!--Home page style-->
@@ -149,7 +139,11 @@ table {
 		<!-- Top jsp -->
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
-			<jsp:include page="WEB-INF/include/<%=top%>.jsp"></jsp:include>
+			<%if(type=="U01"){%>
+			<jsp:include page="WEB-INF/include/REAUser_Top.jsp"></jsp:include>
+			<%}else{ %>
+			<jsp:include page="WEB-INF/include/User_Top.jsp"></jsp:include>
+			<%} %>
 			<!-- Side jsp -->
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>

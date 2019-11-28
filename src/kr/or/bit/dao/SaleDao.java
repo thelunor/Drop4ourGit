@@ -266,7 +266,7 @@ public class SaleDao {
 		return resultRow;
 	}
 
-	public Map<Sale, SaleImage> selectAtpList(String addr) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
+	public Map<Sale, SaleImage> selectAtpList(String addr, int cPage, int pageSize) { // 주소로 아파트 이름, 아파트 동, 아파트 가격 조회(매물 보는 첫 페이지)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -276,6 +276,16 @@ public class SaleDao {
 		SaleImage saleImg = null;
 		SaleImageDao imgDao = null;
 		String sql_select_aptList = "select aptname, aptdong, price, aptNum, aptSize, etc from sale where addr like ?";
+		
+		
+		String sql = "select * from "
+				+ "(select rownum rn,idx,writer,email,homepage,pwd,subject , content, writedate, readnum "
+				+ ",filename,filesize,refer,depth,step "
+				+ " from ( SELECT * FROM jspboard ORDER BY refer DESC , step ASC ) " + " where rownum <= ?" + // endrow
+				") where rn >= ?";
+		
+		
+		
 		int count=0;
 		try {
 			conn = ds.getConnection();

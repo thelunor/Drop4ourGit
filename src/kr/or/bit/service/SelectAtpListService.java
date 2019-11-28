@@ -28,9 +28,43 @@ public class SelectAtpListService implements Action {
 		//80215
 		try {
 			SaleDao dao = new SaleDao();
-			saleMap = dao.selectAtpList(search);
+			
 			int count = dao.selectAtpListCount(search);
 			System.out.println("Count: " + count);
+			
+			
+			String ps = request.getParameter("ps"); //pagesize
+			String cp = request.getParameter("cp");    //current page
+			
+			if(ps == null || ps.trim().equals("")){
+				//default 값 설정
+				ps = "5";
+			}
+			if(cp == null || cp.trim().equals("")){
+				//default 값 설정
+				cp = "1";
+			}
+			int pageSize = Integer.parseInt(ps);
+			int cPage = Integer.parseInt(cp);
+			int pageCount =0;
+			
+			if(count % pageSize == 0){
+				pageCount = count / pageSize;
+			}else{
+				pageCount = (count / pageSize) +1;
+			}
+			
+			saleMap = dao.selectAtpList(search, cPage, pageSize);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			//System.out.println(saleMap.toString());
 			if (saleMap != null) {

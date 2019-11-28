@@ -54,7 +54,7 @@ jQuery(document).ready(function( $ ) {//화면 다 뜨면 시작
 		console.log(addrSplit[0]);
 		//console.log(address[0]+address[1]+address[2]);	
 // 		location.href="'SelectaptListService.d4b?address="+address[0]+address[1]+address[2];
-		location.href='SelectAptListService.d4b?search=' + addrSplit[0] + " " + addrSplit[1] +'&type=' <%=type%>;
+		location.href='SelectAptListService.d4b?search=' + addrSplit[0] + " " + addrSplit[1] +'&type=<%=type%>';
 	});
 	
 	});
