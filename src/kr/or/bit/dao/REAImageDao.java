@@ -64,25 +64,21 @@ public class REAImageDao {
 	public int updateREAImg(REAImage reaImg) { // 공인중개사 이미지 수정
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			conn.setAutoCommit(false);
-			String sql = "update REAImage set reaImgSaveName=? where reaId=?";
-
+			String sql = "update REAImage set reaimgoriginname=?, reaImgSaveName=? where reaId=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, reaImg.getReaImgSaveName());
-			pstmt.setString(2, reaImg.getReaId());
+			pstmt.setString(1, reaImg.getReaImgOriginName());
+			pstmt.setString(2, reaImg.getReaImgSaveName());
+			pstmt.setString(3, reaImg.getReaId());
 			resultRow = pstmt.executeUpdate();
 			if (resultRow > 0) {
-				conn.commit();
+				System.out.println("사진 업데이트 완료");
 			}
 		} catch (Exception e) {
 		} finally {
-			DB_Close.close(rs);
 			DB_Close.close(pstmt);
-
 			try {
 				conn.close();
 			} catch (SQLException e) {

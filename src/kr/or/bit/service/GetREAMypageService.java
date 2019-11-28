@@ -24,6 +24,7 @@ public class GetREAMypageService implements Action {
 		REAUser reaUser = new REAUser();
 		REAImage reaImg=new REAImage();
 		List<Sale> saleList = new ArrayList<Sale>();
+		
 		REAUserDao reaDao = null;
 		REAImageDao imgDao=null;
 		SaleDao2 saleDao = null;
@@ -40,10 +41,7 @@ public class GetREAMypageService implements Action {
 			reaUser = reaDao.getREAMypage(reaId);
 			reaImg =imgDao.getREAImg(reaId);
 			saleList = saleDao.getSaleList(reaId);
-			System.out.println("사용자" + reaUser.toString());
-			System.out.println("사용자 이미지" + reaImg.toString());
-			System.out.println(saleList.toString());
-			//System.out.println("매물리스트"+saleList.get(0));
+
 			if (reaUser != null && reaImg != null && saleList != null ) {
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);

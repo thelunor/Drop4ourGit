@@ -64,14 +64,11 @@ public class REAUserDao {
 	public int updateREAUser(REAUser reaUser) { // 중개사회원 수정
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		System.out.println("reaUser.toString(): " + reaUser.toString());
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			conn.setAutoCommit(false);
 			String sql = "update reaUser set reaPwd=?, reaName=?, reaPhoneNum=?, officeName=?, officeAddr=?,"
-					+ "officeDetailAddr=?, officeHp=?, regNum=?, userCode=?, where reaId=?";
+					+ "officeDetailAddr=?, officeHp=?, regNum=? where reaId=?";
 
 			pstmt = conn.prepareStatement(sql);
 			System.out.println("쿼리문 실행");
@@ -84,26 +81,19 @@ public class REAUserDao {
 			pstmt.setString(6, reaUser.getOfficeDetailAddr());
 			pstmt.setString(7, reaUser.getOfficeHp());
 			pstmt.setString(8, reaUser.getRegNum());
-			pstmt.setString(9, reaUser.getUserCode());
-			pstmt.setString(10, reaUser.getReaId());
+			pstmt.setString(9, reaUser.getReaId());
 
 			resultRow = pstmt.executeUpdate();
-
-			if (resultRow > 0) {
-				conn.commit();
-			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DB_Close.close(rs);
 			DB_Close.close(pstmt);
-
 			try {
 				conn.close();
 			} catch (SQLException e) {
 				System.out.println("update 예외");
 			}
-
 		}
 		return resultRow;
 	}
@@ -137,7 +127,7 @@ public class REAUserDao {
 			}
 
 		} catch (Exception e) {
-			System.out.println("readEmp 오류");
+			System.out.println("select reauser 오류");
 		} finally {
 			DB_Close.close(rs);
 			DB_Close.close(pstmt);

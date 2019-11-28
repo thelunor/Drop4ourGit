@@ -110,7 +110,7 @@ input {
 						<br> <br>
 						<div class="row">
 							<div class="col-md-6" style="text-align: center">
-								<img id="preview" src="./reaimg/${reaImgData.reaImgSaveName}"
+								<img id="preview" src="reaimg/${reaImgData.reaImgSaveName}"
 									style="width: 200px" alt="Profile"> <br> <br> <input
 									type="text" class="form-control" name="User_Id" id="User_Id"
 									required="required" value="${reaUserData.reaName}" readonly>
