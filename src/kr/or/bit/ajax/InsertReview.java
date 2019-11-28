@@ -32,18 +32,11 @@ public class InsertReview extends HttpServlet {
     	PrintWriter out = response.getWriter();
     	String reaId = request.getParameter("reaId");
     	String userId = request.getParameter("userId");
-		
-//		java.util.Date reviewDate = null;
-//		try {
-//			reviewDate = (Date) new SimpleDateFormat().parse(request.getParameter("reviewDate"));
-//		} catch (ParseException e1) {
-//			System.out.println("InsertReviewDate ajax 예외발생");
-//			System.out.println(e1.getMessage());
-//		}
-		
 		String reviewContent = request.getParameter("reviewContent");
+		
     	Date reviewDate = null;
-    	String reviewNum = "";
+    	int reviewNum = 0;
+    	
     	Review review = null;
     	ReviewDao rvdao = null;
     	int result = 0;
@@ -57,11 +50,15 @@ public class InsertReview extends HttpServlet {
     		review.setReviewContent(reviewContent);
     		
     		result = rvdao.insertReview(review); //DB 저장!!
-    		reviewDate = rvdao.getReviewDate(review); //DB에서 리뷰 날짜 가져오기
-    		//reviewNum = rvdao.getReviewNum(review);
-    		review.setReviewDate(reviewDate); // 리뷰 날짜 넣기
     		
-    		//review.setReviewNum(Integer.parseInt(reviewNum)+1);
+    		reviewDate = rvdao.getReviewDate(review); //DB에서 리뷰 날짜 가져오기
+    		
+    		reviewNum = rvdao.getReviewNum(review); //지금 넣은 리뷰의 게시글 번호 가져오기
+    		
+    		review.setReviewDate(reviewDate); // 리뷰 날짜 넣기
+    		review.setReviewNum(reviewNum); 
+    		System.out.println("db에 저장된 리뷰"+review.toString());
+    		
     		
     		if (result > 0) {
     		  	JSONArray jsonlist = JSONArray.fromObject(review);

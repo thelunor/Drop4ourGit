@@ -126,22 +126,21 @@ public class ReviewDao {
 		return reviewDate;
 	}
 	
-	public String getReviewNum(Review review) {
+	public int getReviewNum(Review review) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String reviewNum = "";
+		int seq_nextval = 0;
+		int reviewNum = 0;
 		try {
 			conn = ds.getConnection();
-			String sql_select_reviewNum = "select reviewnum from review where userid=? and reaid=?";
-			pstmt = conn.prepareStatement(sql_select_reviewNum);
-			pstmt.setString(1, review.getUserId());
-			pstmt.setString(2, review.getReaId());
+			String sql_select_seq = "SELECT seq_review.CURRVAL FROM DUAL";
+			pstmt = conn.prepareStatement(sql_select_seq);
 			rs = pstmt.executeQuery();
-			System.out.println("rs입성전");
 			if(rs.next()) {
 				System.out.println("rs입성후");
-				reviewNum = rs.getString("reviewNum");
+				seq_nextval = rs.getInt(1);
+				reviewNum =seq_nextval+1;
 			}
 		}catch (Exception e) {
 			System.out.println("글번호 가져오기 예외발생");
