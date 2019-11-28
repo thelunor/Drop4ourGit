@@ -12,6 +12,112 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+<link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d0c0a21e3bf46994d7f7a41d9cc729f&libraries=services"></script>
+   <script type="text/javascript">
+	        $(function () {
+	            $(window).scroll(function () {
+	                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+	                    $.ajax({
+	                        url: 'InfiniteScroll',
+	                        type: 'post',
+	                        data: {
+	                            "search": $("#search").val()
+	                        },
+	                        dataType: 'json',
+	                        success: function (data) {
+	                            $("#tbody").empty();
+	    
+	                            $.each(data, function (index, element) {
+	    
+ 	                                console.log(element);
+	    
+// 	                                var dNametable = "";
+// 	                                dNametable += "<tr>";
+// 	                                dNametable += "<td>" + element.eName + "</td>";
+// 	                                dNametable += "<td>" + element.empNo + "</td>";
+// 	                                dNametable += "<td>" + element.job + "</td>";
+// 	                                dNametable += "<td>" + element.sal + "</td>";
+// 	                                dNametable += "<td>" + element.dName + "</td>";
+// 	                                dNametable += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href = 'editForm.d4b?empNo="+element.empNo+"' > 수정</button > " + "</td > ";
+// 	                                dNametable += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "
+// 	                                location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
+// 	                                dNametable += "</tr>";
+	    
+// 	                                $('#tbody').append(dNametable);
+	                            })
+	                        }
+	                    })
+	                }
+	            });
+	            
+	            $('.slick-items').slick({
+	                autoplay : true,
+	                dots : true,
+	                speed : 300 /* 이미지가 슬라이딩시 걸리는 시간 */,
+	                infinite : true,
+	                autoplaySpeed : 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */,
+	                arrows : true,
+	                slidesToShow : 1,
+	                slidesToScroll : 1,
+	                fade : false
+	             });
+	            
+	            
+	            var arrValue = $("input[name='addr']").length;
+	            var array = new Array(arrValue);
+	            
+	            for(var i=0; i< array.length; i++){                          
+	            	array[i] = $("input[name='addr']")[i].value;
+	            }
+	     
+	        	
+	        	
+	        	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+	    		mapOption = {
+	    	   	center: new kakao.maps.LatLng(37.497571, 127.049994), // 지도의 중심좌표
+	    	   	level: 2 // 지도의 확대 레벨  
+	    	};
+
+	    	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	    	//주소-좌표 변환 객체를 생성합니다
+	    	var geocoder = new kakao.maps.services.Geocoder();
+	    	
+	    	
+	    	
+	    	
+	    	for (var i = 0; i < array.length; i++){
+	    		geocoder.addressSearch(array[i], function(result, status) {
+
+	    	        // 정상적으로 검색이 완료됐으면 
+	    	         if (status === kakao.maps.services.Status.OK) {
+
+	    	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+	    	            // 결과값으로 받은 위치를 마커로 표시합니다
+	    	            var marker = new kakao.maps.Marker({
+	    	                map: map,
+	    	                position: coords,
+	    	            });
+
+	    	           marker.setMap(map);
+	    	           
+	    	           var content = "<div> hi </div>";
+	    	           var customOverlay = new daum.maps.CustomOverlay(
+	    	        		{
+	    	        			position : coords,
+	    	        			content : content
+	    	        		});
+	    	           customOverlay.setMap(map);
+	    	           map.setCenter(coords);
+	    	        } 
+	    	    }); 
+	    		
+	    	}
+
+	        });
+</script>
 <%
 	//String genericUserId = (String) session.getAttribute("userId");
 	//String reaId = (String) session.getAttribute("reaId");
@@ -160,71 +266,7 @@ text-align: center;
 
     <!-- map -->
     <div class="col-lg-5">
-        <div id="map" style="width: 100%; height: 100%;"></div>
+        <div id="map" style="width: 100%; height: 600px;"></div>
     </div>
 	</div>
 
-<script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		level : 3 // 지도의 확대 레벨
-	};
-
-	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-   
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('강남구 역삼동', function(result, status) {
-	    // 정상적으로 검색이 완료됐으면 
-		if (status === kakao.maps.services.Status.OK) {
-			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-			var marker = new kakao.maps.Marker({
-				map: map,
-	            position: coords
-	        });
-
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-	        });
-	        infowindow.open(map, marker);
-
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-		} 
-	});    
-
-   // 마커가 표시될 위치입니다 
-   var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
-
-   // 마커를 생성합니다
-   var marker = new kakao.maps.Marker({
-      position : markerPosition
-   });
-
-   // 마커가 지도 위에 표시되도록 설정합니다
-   marker.setMap(map);
-
-   // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-   // marker.setMap(null);
-$(function(){
-   
-   $('.slick-items').slick({
-      autoplay : true,
-      dots : true,
-      speed : 300 /* 이미지가 슬라이딩시 걸리는 시간 */,
-      infinite : true,
-      autoplaySpeed : 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */,
-      arrows : true,
-      slidesToShow : 1,
-      slidesToScroll : 1,
-      fade : false
-   });      
-});
-   
-</script>

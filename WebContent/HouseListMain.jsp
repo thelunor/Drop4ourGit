@@ -169,7 +169,7 @@ table {
 					<br>
 					<div class="row">
 						<div class="col-md-12">
-							<jsp:include page="WEB-INF/include/HouseList5.jsp"></jsp:include>
+							<jsp:include page="WEB-INF/include/HouseList3.jsp"></jsp:include>
 						</div>
 					</div>
 				</div>
