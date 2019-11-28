@@ -238,16 +238,7 @@
 								
 								<!-- 네 번째 후기 -->
 								<div>
-								
-								
 									<jsp:include page="./WEB-INF/include/ReviewList.jsp" />
-									
-									
-									
-									
-									
-									
-									
 								</div>
 								<!-- Right End -->
 							</div>	
