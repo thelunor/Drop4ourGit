@@ -56,9 +56,7 @@ public class InsertReview extends HttpServlet {
     		reviewNum = rvdao.getReviewNum(review); //지금 넣은 리뷰의 게시글 번호 가져오기
     		
     		review.setReviewDate(reviewDate); // 리뷰 날짜 넣기
-    		review.setReviewNum(reviewNum); 
-    		System.out.println("db에 저장된 리뷰"+review.toString());
-    		
+    		review.setReviewNum(reviewNum);     		
     		
     		if (result > 0) {
     		  	JSONArray jsonlist = JSONArray.fromObject(review);

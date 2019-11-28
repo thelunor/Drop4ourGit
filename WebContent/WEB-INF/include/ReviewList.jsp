@@ -62,7 +62,7 @@
 				<div class="card-body">
 					<div class="table-responsive">
 						
-						<form action="InsertReviewService.d4b" method="post">
+						<div>
 							<table class="table table-bordered" id="reviewTable"
 								style="text-align: center; margin: auto; width: 100%; border: none;">
 			                    <tr>
@@ -83,7 +83,7 @@
 									</div></td>
 			                    </tr>
 		                   </table>
-						</form>
+						</div>
 						
 						<div style="margin-top: 20px; margin-bottom: 20px;">
 							<hr>
@@ -101,8 +101,8 @@
 										<td colspan="2" style="height: 100px;">
 											<textarea rows="3" style="resize: none; width: 100%; border: 1px solid #d2d0d0;" 
 												readonly="readonly">${reviewTable.reviewContent}</textarea>
-											<input type="hidden" id="reviewNum" value="${ reviewTable.reviewNum}">
-											<div align="right" id="delete_div">
+	 											<input type="hidden" id="reviewNum" value="${ reviewTable.reviewNum}">
+												<div align="right" id="delete_div">
 			                    				<c:if test="${reviewTable.userId == sessionScope.userId}">
 			                    					<input type="button" id="delete_review" name="delete_review" value="삭제">
 			                    					<input type="button" id="edit_review" name="edit_review" value="수정">
@@ -146,6 +146,7 @@
 	$(function() {
 		var reaId = $("#getREAId").val();
 		var reviewNum = $("#reviewNum").val();
+		//var reviewNum = $("#reviewNum").val();
 		console.log(reaId);
 		
 		$('#insert_review').click(function() {
@@ -174,7 +175,7 @@
 						review += "<div align='right' id='delete_div'>";
 						review += "<input type='button' id='delete_review' value='삭제'>";
 						review += "<input type='button' id='edit_review' value='수정'>";
-						review += "<input type='hidden' id='reviewNum2' value='+"+value.reviewNum+"'>";
+						review += "<input type='hidden' id='reviewNum1' value='+"+value.reviewNum+"'>";
 						review += "</div><hr></td></tr>";						
 						$('#tbody').append(review);
 						$("#reviewContent").val("");
@@ -191,7 +192,6 @@
 				success:function(data){
 					$("#tbody").empty();
 					 $.each(data, function(index, value){
-							console.log(value.reviewNum);
 							var review = "";
 							review += "<tr>";
 							review += "<td align='left' width='70%'>";
@@ -205,7 +205,7 @@
 							review += "<div align='right' id='delete_div'>";
 							review += "<input type='button' id='delete_review' value='삭제'>";
 							review += "<input type='button' id='edit_review' value='수정'>";
-							review += "<input type='hidden' id='reviewNum2' value='+"+value.reviewNum+"'>";
+							review += "<input type='hidden' id='reviewNum1' value='+"+value.reviewNum+"'>";
 							review += "</div><hr></td></tr>";						
 							$('#tbody').append(review);
 						});

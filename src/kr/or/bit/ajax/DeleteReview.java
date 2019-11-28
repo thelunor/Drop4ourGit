@@ -38,10 +38,8 @@ public class DeleteReview extends HttpServlet {
     	int result = 0;
     	try {
 			dao = new ReviewDao();
-			System.out.println("reviewNum"+reviewNum);
 			result = dao.deleteReview(Integer.parseInt(reviewNum));
 
-			System.out.println("result"+result);
 			if(result > 0) {
 				reviewList = dao.getReviewList(id);
 				JSONArray jsonlist = JSONArray.fromObject(reviewList);
@@ -50,7 +48,7 @@ public class DeleteReview extends HttpServlet {
     
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println("댓글 delete ajax 오류");
+			System.out.println(" delete ajax 오류");
 		}
     }
     

@@ -37,11 +37,7 @@ public class GetReviewListService implements Action {
 			reviewList = new ArrayList<Review>();
 			reviewList = rvdao.getReviewList(reaId);
 			request.setAttribute("reaId", reaId);
-			System.out.println(reaId);
 			if (reaUser != null) {
-				System.out.println("reaUser 성공");
-				System.out.println(reaUser);
-				System.out.println(reviewList);
 				forward.setPath("GetReviewListServiceOk.d4b");
 			} else {
 				System.out.println("reviewList 실패");
