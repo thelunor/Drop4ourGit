@@ -16,11 +16,9 @@
                </div>
            </li>	
 			<li><div><hr></div></li>           	
-			<li><a href="SelectGenericUserService.d4b"><span>&nbsp;회원 관리</span></a></li>
+			<li><a href="SelectGenericUserService.d4b?type=A00"><span>&nbsp;회원 관리</span></a></li>
 			<li><div><hr></div></li>
-			<li><a href="Join_form.jsp"><span>&nbsp;회원 추가</span></a></li>
-			<li><div><hr></div></li>			
-			<li><a href="Main.jsp">메인 페이지</a></li>
+			<li><a href="UserMain.jsp?type=A00">메인 페이지</a></li>
 		</ul>
 	</div>
 </div>

@@ -29,13 +29,14 @@
 		}
 	</style>
 </head>
+
 <body data-spy="scroll" data-target=".navbar-collapse">
 	<div class="culmn">
 		<!--Home page style-->
 
 		<nav class="navbar navbar-light navbar-expand-lg navbar-fixed ivory no-background bootsnav">
 			<!-- Top jsp -->
-			<jsp:include page="./WEB-INF/include/Top.jsp" />
+			<jsp:include page="./WEB-INF/include/User_Top.jsp" />
 			<!-- Side jsp -->
 			<jsp:include page="./WEB-INF/include/Side.jsp" />
 		</nav>

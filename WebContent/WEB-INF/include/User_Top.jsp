@@ -6,6 +6,7 @@
 	if(type == null){
 		type=(String) request.getParameter("type");
 	}
+	System.out.println("타입쓰는 ? " + type);
  %>
 <!-- Start Atribute Navigation -->
 <div class="container">
@@ -33,6 +34,8 @@
 						out.print("<a href='GetGenericUserMypageMainService.d4b?type=" + type + "'>마이페이지</a>");
 					} else if (type.equals("U02")) {
 						out.print("<a href='GetREAMypageService.d4b?type=" + type + "'>마이페이지</a>");
+					}else if(type.equals("A00")){
+						out.print("");
 					}
 				%>
 			</li>

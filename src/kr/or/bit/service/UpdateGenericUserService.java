@@ -16,7 +16,7 @@ public class UpdateGenericUserService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
-		String genericUserId = (String)session.getAttribute("genericUserId");
+		String genericUserId = (String)session.getAttribute("userId");
 
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
