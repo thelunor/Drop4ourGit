@@ -67,7 +67,6 @@ import kr.or.bit.service.SelectAtpListService;
 import kr.or.bit.service.SelectAtpListService2;
 import kr.or.bit.service.SelectGenericUserService;
 import kr.or.bit.service.SelectREAUserService;
-import kr.or.bit.service.UpdateBlackService;
 import kr.or.bit.service.UpdateContractService;
 import kr.or.bit.service.UpdateGenericUserService;
 import kr.or.bit.service.UpdateREAImgService;
@@ -520,14 +519,7 @@ public class FrontController extends HttpServlet {
 			}
 		}
 		// update========================================
-		else if (url_Command.equals("/UpdateBlackService.d4b")) {
-			try {
-				action = new UpdateBlackService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/UpdateContractService.d4b")) {
+		else if (url_Command.equals("/UpdateContractService.d4b")) {
 			try {
 				action = new UpdateContractService(); //
 				forward = action.execute(request, response);
