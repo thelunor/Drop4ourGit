@@ -28,6 +28,7 @@ import kr.or.bit.service.GetContractService;
 import kr.or.bit.service.GetGenericUserByIdService;
 import kr.or.bit.service.GetGenericUserByResService;
 import kr.or.bit.service.GetGenericUserMypageMainService;
+import kr.or.bit.service.GetGenericUserService;
 import kr.or.bit.service.GetGenericUserEditService;
 import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroBoardContentService;
@@ -41,6 +42,7 @@ import kr.or.bit.service.GetREAScheduleListByScheNumService;
 import kr.or.bit.service.GetREAUserByIdService;
 import kr.or.bit.service.GetREAUserByRegService;
 import kr.or.bit.service.GetREAUserMypageService;
+import kr.or.bit.service.GetREAUserService;
 import kr.or.bit.service.GetReviewComDataService;
 import kr.or.bit.service.GetReviewListService;
 import kr.or.bit.service.GetSaleDataService;
@@ -282,6 +284,20 @@ public class FrontController extends HttpServlet {
 			try {
 				forward = new ActionForward();
 				forward.setPath("/REASchedule.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/GetGenericUserService.d4b")) {
+			try {
+				action = new GetGenericUserService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/GetREAUserService.d4b")) {
+			try {
+				action = new GetREAUserService();
+				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

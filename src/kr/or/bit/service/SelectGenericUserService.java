@@ -21,12 +21,13 @@ public class SelectGenericUserService implements Action {
 		List<GenericUser> glist = null;
 		HttpSession session = request.getSession();
 		String userId=(String)session.getAttribute("userId");
+// 		System.out.println("userId: " + userId); 관리자 아이디
 		try {
 			GenericUserDao gdao = new GenericUserDao();
 			
 			glist = gdao.getGenericUserList();
 			request.setAttribute("GenericUserList", glist);
-			
+			System.out.println("glist: " + glist);
 		} catch (Exception e) {
 			System.out.println("서비스 예외발생");
 			System.out.println(e.getMessage());

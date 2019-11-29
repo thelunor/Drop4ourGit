@@ -97,17 +97,20 @@
 <%
 	List<GenericUser> generic = (ArrayList<GenericUser>) request.getAttribute("GenericUserList");
 	// 회원관리 이동 시 초기 목록(개인회원)
+	
 %>
 
 	<script>
 		$(function() {
+			
 			$('#search').change(function() {
+				
 				if ($('#search option:selected').val() == "GenericUser") { // 개인회원 목록
 					$.ajax({
 							url : 'SelectGenericUser', // kr.or.bit.ajax
 							type : 'post',
 							data : {
-								"GenericUser" : $("#search option:selected").val()
+		                        "GenericUser" : $("#search option:selected").val()
 							},
 							dataType : 'json',
 							success : function(data) {
@@ -128,7 +131,7 @@
 								$.each(data, function(index, element) {
 									var gutbody = "";
 										gutbody += "<tr>";
-										gutbody += "<td>" + element.userId + "</td>";
+										gutbody += "<td><a href='GetGenericUserService.d4b?genericUserId=" + element.userId + "'>" + element.userId + "</a></td>";
 										gutbody += "<td>" + element.userName + "</td>";
 										gutbody += "<td>" + element.frontResNum + "</td>";
 										gutbody += "<td>" + element.userPhoneNum + "</td>";
@@ -140,6 +143,7 @@
 							}
 						});
 				} else if ($("#search option:selected").val() == "REAUser") { // 공인중개사회원 목록
+					
 					$.ajax({
 							url : 'SelectREAUser', // kr.or.bit.ajax
 							type : 'post',
@@ -154,12 +158,10 @@
 								var ruthead = "";
 									ruthead += "<tr>";
 									ruthead += "<th>아이디</th>";
-									ruthead += "<th>이름</th>";
-									ruthead += "<th>전화번호</th>";
 									ruthead += "<th>부동산이름</th>";
-									ruthead += "<th>부동산주소</th>";
-									ruthead += "<th>부동산전화번호</th>";
 									ruthead += "<th>사업자등록번호</th>";
+									ruthead += "<th>부동산전화번호</th>";
+									ruthead += "<th>부동산주소</th>";
 									ruthead += "</tr>";
 
 									$('#thead').append(ruthead);
@@ -167,13 +169,11 @@
 								$.each(data, function(index, element) {
 									var rutbody = "";
 									rutbody += "<tr>";
-									rutbody += "<td>" + element.reaId + "</td>";
-									rutbody += "<td>" + element.reaName + "</td>";
-									rutbody += "<td>" + element.reaPhoneNum + "</td>";
+									rutbody += "<td><a href='GetREAUserService.d4b?REAUserId=" + element.reaId + "'>" + element.reaId + "</a></td>";
 									rutbody += "<td>" + element.officeName + "</td>";
-									rutbody += "<td>" + element.officeAddr + "</td>";
-									rutbody += "<td>" + element.officeHp + "</td>";
 									rutbody += "<td>" + element.regNum + "</td>";
+									rutbody += "<td>" + element.officeHp + "</td>";
+									rutbody += "<td>" + element.officeAddr + "</td>";
 									rutbody += "</tr>";
 									
 									$('#tbody').append(rutbody);
@@ -223,9 +223,10 @@
 									</tr>
 								</thead>
 								<tbody id="tbody">
-									<c:forEach var="genericuser" items="<%=generic%>" varStatus="status">
-										<tr>
-											<td>${genericuser.userId}</td>
+									<c:set var="genericUser" value="${requestScope.GenericUserList}" />
+									<c:forEach var="genericuser" items="${genericUser}" varStatus="status">
+										<tr class="userInfo">
+											<td><a href="GetGenericUserService.d4b?genericUserId=${genericuser.userId}">${genericuser.userId}</a></td>
 											<td>${genericuser.userName}</td>
 											<td>${genericuser.frontResNum}</td>
 											<td>${genericuser.userPhoneNum}</td>

@@ -27,8 +27,8 @@
 	String userId = (String) session.getAttribute("userId");
 	String type= "U02";
 %>
-<c:set var="reaUserData" value="<%=reaUser%>"></c:set>
-<c:set var="reaImgData" value="<%=reaImg%>"></c:set>
+<c:set var="reaImgData" value="<%=reaImg%>" />
+<c:set var="reaUserData" value="${requestScope.reaUser}" />
 
 <style type="text/css">
 h2 {
@@ -76,8 +76,7 @@ img.avatar {
 		<!--Home page style-->
 
 		<!-- Top jsp -->
-		<nav
-			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
+		<nav class="navbar navbar-light navbar-expand-lg navbar-fixed ivory no-background bootsnav">
 			<jsp:include page="WEB-INF/include/REAUser_Top.jsp"></jsp:include>
 
 			<!-- Side jsp -->
@@ -86,7 +85,7 @@ img.avatar {
 		<!--Login Sections-->
 
 		<section id="join" class="about roomy-100">
-			<form action="UpdateREAUserService.d4b?type=<%=type %>" method="post" name="loginForm" enctype="multipart/form-data">
+			<form action="AdminMain.jsp" method="post" name="loginForm" enctype="multipart/form-data">
 				<div class="container">
 					<div class="about_content">
 						<div class="row">
@@ -95,7 +94,7 @@ img.avatar {
 								<div class="signup-form">
 
 									<br> <br> <br>
-									<h2 style="text-align: center">공인중개사회원 정보수정</h2>
+									<h2 style="text-align: center">공인중개사회원 상세정보</h2>
 									<br>
 									<hr>
 									<div class="form-group" style="text-align: center">
@@ -111,7 +110,7 @@ img.avatar {
 										<input type="text" class="form-control" name="reaId" id="reaId"
 											required="required" readonly value="${reaUserData.reaId}">
 									</div>
-									<div class="form-group">
+									<div class="form-group" style="display: none;">
 										<label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>
 										<input type="password" class="form-control" name="reaPwd"
 											id="reaPwd" required="required" placeholder="영문+숫자 7자 이상">
@@ -119,59 +118,51 @@ img.avatar {
 									<div class="form-group">
 										<label>이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
 										<input type="text" class="form-control" name="reaName" id="reaName"
-											required="required" value="${reaUserData.reaName}">
+											required="required" value="${reaUserData.reaName}" readonly="readonly">
 									</div>
 									<div class="form-group">
 										<label>휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
-										<input type="text" class="form-control" name="reaPhoneNum"
-											id="reaPhoneNum" required="required" placeholder="010-0000-0000" value="${reaUserData.reaPhoneNum}">
+										<input type="text" class="form-control" name="reaPhoneNum" id="reaPhoneNum" 
+											required="required" placeholder="010-0000-0000" value="${reaUserData.reaPhoneNum}" readonly="readonly">
 									</div>
 									<div class="form-group">
 										<label>사무소 이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-										<input type="text" class="form-control" name="officeName"
-											id="officeName" required="required" value="${reaUserData.officeName}">
+										<input type="text" class="form-control" name="officeName" id="officeName" 
+											required="required" value="${reaUserData.officeName}" readonly="readonly">
 									</div>
 									<div class="form-group">
 										<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
-										<div class="row">
-											&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"
-												class="form-control" name="officeAddr" id="officeAddr"
-												required="required" placeholder="주소" style="width: 72%;" value="${reaUserData.officeAddr}">
-											&nbsp;&nbsp; <input type="button" onclick="searchAddr()"
-												value="주소 검색"><br>
+										<div class="row">&nbsp;&nbsp;&nbsp;&nbsp; 
+											<input type="text" class="form-control" name="officeAddr" id="officeAddr"
+												required="required" placeholder="주소" style="width: 89%;" value="${reaUserData.officeAddr}" readonly="readonly">
+											&nbsp;&nbsp; <input type="hidden" onclick="searchAddr()" value="주소 검색"><br>
 											<br>
 										</div>
-										<input type="text" class="form-control"
-											name="officeDetailAddr" id="officeDetailAddr"
-											required="required" placeholder="상세주소" style="width: 77%;" value="${reaUserData.officeDetailAddr}"><br>
+										<input type="text" class="form-control" name="officeDetailAddr" id="officeDetailAddr"
+											required="required" placeholder="상세주소" value="${reaUserData.officeDetailAddr}" readonly="readonly"><br>
 										<div id="map" 
-											style="width: 300px; height: 300px; margin-top: 10px; margin-left: 17%; display: none"></div>
+											style="width: 300px; height: 300px; margin-top: 10px; margin-left: 17%; display: none">
+										</div>
 									</div>
 									<br>
 
 									<div class="form-group">
-										<label>사무소 전화번호 &nbsp;&nbsp;&nbsp;&nbsp;<span
-											id="tdId"></span></label> <input type="text" class="form-control"
-											name="officeHp" id="officeHp" required="required"
-											placeholder="02-0000-0000" value="${reaUserData.officeHp}">
+										<label>사무소 전화번호 &nbsp;&nbsp;&nbsp;&nbsp;
+										<span id="tdId"></span></label> 
+										<input type="text" class="form-control" name="officeHp" id="officeHp" required="required"
+											placeholder="02-0000-0000" value="${reaUserData.officeHp}" readonly="readonly">
 									</div>
 									<div class="form-group">
 										<label>사업자등록번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-										<input type="text" class="form-control" name="regNum"
-											id="regNum" required="required" placeholder="000-00-00000" value="${reaUserData.regNum}">
+										<input type="text" class="form-control" name="regNum" id="regNum" required="required" 
+											placeholder="000-00-00000" value="${reaUserData.regNum}" readonly="readonly"><br>
+										<input type="text" id="userCode" name="userCode" value="공인중개사회원: U02" readonly="readonly">
 									</div>
-									<input type="hidden" id="userCode" name="userCode" value="U02">
-
 									<div class="form-group">
 										<div class="row">
-											<div class="col-sm-6">
-												<input type="submit"
-													class="btn btn-primary btn-block btn-lg" value="수정 완료">
-											</div>
-											<div class="col-sm-6">
-												<button type="reset"
-													class="btn btn-primary btn-block btn-lg">취소</button>
-											</div>
+											<button type="reset" class="btn btn-primary btn-block btn-lg"
+												onclick="location.href='SelectGenericUserService.d4b?type=A00'">목록으로 돌아가기</button>
+												<%-- class="btn btn-primary btn-block btn-lg" onclick="location.href='GetGenericUserMypageMainService.d4b?genericUserId=${genericUserData.userId}'"> --%>
 										</div>
 									</div>
 									<br> <br>

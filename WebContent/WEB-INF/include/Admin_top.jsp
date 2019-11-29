@@ -13,7 +13,7 @@
 			<ul>
 				<li class="login">
 				<%
-				if(session.getAttribute("userid") != null){
+				if(session.getAttribute("userId") != null){
 					out.print("<a href ='Logout.jsp'>로그아웃</a>");
 				}else{
 					out.print("<a href ='Login_form.jsp'>로그인</a>");

@@ -214,7 +214,7 @@ public class AdminDao {
 		
 			try {
 				DB_Close.close(pstmt);
-				DB_Close.close(conn);
+				conn.close(); // 반환하기
 			} catch (SQLException e) {
 				System.out.println("black 예외");
 			}
@@ -222,4 +222,98 @@ public class AdminDao {
 		return resultRow;
 	}
 
+	public GenericUser getGenericUser(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		GenericUser genericuser = null;
+		
+		try {
+			conn = ds.getConnection();
+			String getGenericUser_sql = "SELECT USERID, USERNAME, FRONTRESNUM, USERPHONENUM, USERADDR, USERDETAILADDR, USERCODE"
+										+ " FROM GENERICUSER WHERE USERID=?";
+			
+			pstmt = conn.prepareStatement(getGenericUser_sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				System.out.println("AdminDao getGenericUser rs 성공");
+				
+				genericuser = new GenericUser();
+				
+				genericuser.setUserId(rs.getString("userId"));
+				genericuser.setUserName(rs.getString("userName"));
+				genericuser.setFrontResNum(rs.getString("frontResNum"));
+				genericuser.setUserPhoneNum(rs.getString("userPhoneNum"));
+				genericuser.setUserAddr(rs.getString("userAddr"));
+				genericuser.setUserDetailAddr(rs.getString("userDetailAddr"));
+				genericuser.setUserCode(rs.getString("userCode"));
+				System.out.println("DB 정보 받기 성공");
+			}
+		} catch (Exception e) {
+			System.out.println("AdminDao getGenericUser 예외발생");
+			System.out.println(e.getMessage());
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close(); // 반환하기
+			} catch (Exception e) {
+				System.out.println("getGenericUser close 예외발생");
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return genericuser;
+	}
+	
+	public REAUser getREAUser(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		REAUser reaUser = null;
+		
+		try {
+			conn = ds.getConnection();
+			String getREAUser_sql = "SELECT REAID, REANAME, REAPHONENUM, OFFICENAME, OFFICEADDR, OFFICEDETAILADDR, OFFICEHP, REGNUM, USERCODE"
+					+ " FROM REAUSER WHERE REAID=?";
+			
+			pstmt = conn.prepareStatement(getREAUser_sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				System.out.println("AdminDao getREAUser rs 성공");
+				
+				reaUser = new REAUser();
+				reaUser.setReaId(rs.getString("reaId"));
+				reaUser.setReaName(rs.getString("reaName"));
+				reaUser.setReaPhoneNum(rs.getString("reaPhoneNum"));
+				reaUser.setOfficeName(rs.getString("officeName"));
+				reaUser.setOfficeAddr(rs.getString("officeAddr"));
+				reaUser.setOfficeDetailAddr(rs.getString("officeDetailAddr"));
+				reaUser.setOfficeHp(rs.getString("officeHP"));
+				reaUser.setRegNum(rs.getString("regNum"));
+				reaUser.setUserCode(rs.getString("userCode"));
+				System.out.println("DB 정보 받기 성공");
+			}
+		} catch (Exception e) {
+			System.out.println("AdminDao getREAUser 예외발생");
+			System.out.println(e.getMessage());
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close(); // 반환하기
+			} catch (Exception e) {
+				System.out.println("getREAUser close 예외발생");
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return reaUser;
+	}
 }
