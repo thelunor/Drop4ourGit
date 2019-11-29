@@ -12,6 +12,7 @@
 	ArrayList<REASchedule> sList = (ArrayList<REASchedule>) request.getAttribute("sList");
 	System.out.println(sList);
 %>
+<c:set var="reaId" value="${sessionScope.userId}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -403,17 +404,20 @@ h1, h3, #myUL {
 </style>
 <script>
 $(function() {
+	
 	$.ajax({
         url : 'ScheduleList',
         type : 'post',
+        data : {"reaId" : $("#reaId").val()},
         dataType : 'json',
         success : function(data) {	
+        	console.log(data);
             $.each(data, function(index, element) {
             	console.log(element);
             	var allData = "";
             	var no = element.scheNum;
             	console.log(no);
-            	allData += "<li id='sche'><input type='hidden' id='scheNum' value='"+element.scheNum+"'>"+element.content+"<button class='close' type='button' onclick='DeleteSchedule()'>\u00D7</button></li>";  
+            	allData += "<li id='sche'>"+element.content+"<button class='close' type='button' onclick='DeleteSchedule()'>\u00D7</button></li>";  
             	$('#myUL').append(allData);
             });
         }
@@ -441,9 +445,7 @@ function DeleteSchedule(){
 		url : 'DeleteSchedule?reaId='+reaId+'&scheNum='+scheNum,
 		type: 'post',
 		dataType : 'html',
-		success : function(data){
-				$("#sche").empty();
-				$("#sche").append(data);				
+		success : function(data){		
 			
 		}
 	 });
@@ -464,7 +466,7 @@ function DeleteSchedule(){
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
 		</nav>
 
-
+		<input type="hidden" id="reaId" value="${reaId}">
 		<section id="id" class="about roomy-100">
 			<form action="Login_ok.jsp" method="post" name="loginForm">
 				<div class="container-fluid">

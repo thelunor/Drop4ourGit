@@ -277,7 +277,7 @@ text-align: center;
 		                        <div class="teamskillbar-bar"></div>
 		                    </div>
 		                    <!-- End Skill Bar -->
-		                    <div class="teamskillbar clearfix m-top-50" data-percent="">
+		                    <div class="teamskillbar clearfix m-top-50" data-percent="90%">
 		                        <h6>${sale.key.etc}</h6>
 		                        <div class="teamskillbar-bar"></div>
 		                    </div>

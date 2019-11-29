@@ -40,11 +40,12 @@ public class InsertBookMark extends HttpServlet {
 			bookMark.setUserId(userId);
 			bookMark.setAptNum(aptNum);
 			result = dao.insertBookMark(bookMark);
-			if(result > 0) {
-				System.out.println("result"+result);
-				out.print("<i class='fas fa-bookmark fa-2x'></i>");
-			}
-    
+
+			 if(result > 0) {
+		            System.out.println("result"+result);
+		            out.print("<i class='fas fa-bookmark fa-2x'></i>");
+		         }
+
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("북마크 insert ajax 오류");

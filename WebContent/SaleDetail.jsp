@@ -14,13 +14,13 @@
 	String userId = (String) session.getAttribute("userId");
 	boolean bkCheck = (boolean) request.getAttribute("bkCheck");
 	String aptNum = (String) request.getParameter("aptNum");
-
+	System.out.println(aptNum);
 	String type =(String) request.getAttribute("type");
 	if(type==null){
 		type=request.getParameter("type");
 	}
 %>
-
+<c:set var="userId" value="${sessionScope.userId}" />
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -297,6 +297,8 @@ a.btn  {
    					%>
 
 					<br>
+					<input type="hidden" id="id" value="${userId}">
+					<input type="hidden" value="${saleData.aptNum}" id="aptNo">
 					<div class="box">
 						<div class="row">
 							<div class="col-md-6">
@@ -367,7 +369,7 @@ a.btn  {
 				<br>			
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary btn-block btn-lg" 
-						onclick="location.href='GetREAIntroPageServiceForUser.d4b?reaId=${reaData.reaId}'">Click</button>
+						onclick="location.href='GetREAIntroPageService.d4b?reaId=${reaData.reaId}&userId=<%=userId%>'">Click</button>
 				</div>					
 				</div>
     </div>
@@ -658,29 +660,28 @@ return content;
 }
 
 $( document ).ready(function() {
-	  $('.trigger').on('click', function() {
-	     $('.modal-wrapper').toggleClass('open');
-	    $('.page-wrapper').toggleClass('blur-it');
-	     return false;
-	  });
-	  $('[data-toggle="tooltip"]').tooltip();
-	  var id = $("#userId").val();
-	  var aptNum = <%=aptNum%>
-	  console.log(id);
-	  console.log(aptNum);
+    $('.trigger').on('click', function() {
+        $('.modal-wrapper').toggleClass('open');
+       $('.page-wrapper').toggleClass('blur-it');
+        return false;
+     });
+     $('[data-toggle="tooltip"]').tooltip();
 	  
-	  $("#bookMarkBtn").click(function(){		  
-		 $.ajax({
-			url : 'InsertBookMark?userId='+id+'&aptNum='+aptNum,
-			type: 'post',
-			dataType : 'html',
-			success : function(data){
-				$("#bookMarkBtn").empty();
-				$("#bookMarkBtn").append(data);
-				//console.log(data);
-			}
-		 });
-	  });
+  $("#bookMarkBtn").click(function(){	
+	  
+	  var userId = $("#id").val();
+	  var aptNum = <%=aptNum%>;
+
+		$.ajax({
+				url : 'InsertBookMark?userId='+userId+'&aptNum='+aptNum,
+				type: 'post',
+				dataType : 'html',
+				success : function(data){
+					 $("#bookMarkBtn").empty();
+			         $("#bookMarkBtn").append(data);
+				}
+			 });
+		 });  
 	});
 </script>	
 </body>

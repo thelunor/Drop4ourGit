@@ -11,8 +11,8 @@
    BookMarkDao dao = new BookMarkDao();
    List<BookMark> bmList = new ArrayList<BookMark>();
    bmList = dao.getBookMark(genericUserId); //reaId로 리스트 불러오기   
+   System.out.println("나야 " + bmList);
 %>   
-
 <script   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
@@ -104,13 +104,13 @@ function getBookMark(aptSize){
                
                if(element.aptSize==aptSize){
                   
-                  var content = "";
+               var content = "";
                content += "<div class='col-lg-4' id='bookmark'>";
                content += "<div class='card_top_border'></div>";
                content += "<div class='card'>";
                content += "<div class='contain'>";
                content += "<img class='card-img-top img-fluid' src='reaimg/"+element.saleImgSaveName1+"' width='100%' height='220'>";         
-               content += "<div id='text' class='close' style='display:inline'><button type='button' class='btn btn-default' onclick='deleteBk()'><i class='fa fa-trash' aria-hidden='true'style='padding:0;border: none;background: none;'></i></button></div>";       
+               content += "<div id='text' style='display:inline'><button type='button' class='close' onclick='deleteBk()'><i class='fa fa-trash' aria-hidden='true'style='padding:0;border: none;background: none; color:white;'></i></button></div>";       
                content += "</div>";
                content += "<div class='card-body'>";
                content += "<ul>";
@@ -133,22 +133,18 @@ function getBookMark(aptSize){
 }
 
 var close = document.getElementsByClassName("close");
-function deleteBk(){
    for (var i = 0; i < close.length; i++) {
         close[i].onclick = function() {
           var div = this.parentElement.parentElement.parentElement;
           div.style.display = "none";
         }
       }
-   
-}
 
-function deleteBk(){
+function deleteBk(obj){
 
    var userId = $("#myId").val();
    var aptNum = $("#aptNum").val();
-   //console.log(userId);
-   //console.log(aptNum);
+
    $.ajax({
       url : 'DeleteBookMark?userId='+userId+'&aptNum='+aptNum,
       type: 'post',
