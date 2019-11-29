@@ -218,27 +218,23 @@ input[type="text"] {
 				<tr><td style="text-align: center; ">주민등록번호</td><td><input type="text" style="width: 80px;"> - <input type="text" style="width: 80px;">&nbsp;전화&nbsp;<input type="text" style="width: 160px"> &nbsp;성명&nbsp;<input type="text" style="width: 119px"></td></tr>
 			</table>
 			<br>
-						<script>
-			$(function(){
-				console.log("${reaU.key.officeDetailAddr}");
-			})
-			</script>
 			<c:forEach var="reaU" items="<%=conMap%>" varStatus="status">
 			<table border="1" style="width: 100%; text-align: left; font-size: 14px;" id="REAInfo">
 				<tr><td rowspan="3" style="text-align: center; width: 84px;">개&nbsp;&nbsp;업<br>공인중개사</td><td style="width: 84px; font-size: 13px;">사무소 소재지</td><td colspan="3"><input type="text" value="${reaU.key.officeAddr}"style="width: 100%"></td></tr>
 				<tr><td style="width: 84px; font-size: 13px">사무소 명칭</td><td colspan="1"><input type="text" value="${reaU.key.officeName}" style="width: 100%"></td><td style="width: 100px; text-align: center;">대표자 명</td><td  style="width: 100px; text-align: center;"><input type="text" value="${reaU.key.reaName}" style="width: 100%"></td></tr>
 				<tr><td style="width: 84px; font-size: 13px">전화번호</td><td><input type="text" value="${reaU.key.officeHp}" style="width: 135px">&nbsp;등록번호&nbsp;<input type="text" value="${reaU.key.regNum}" style="width: 137px"></td><td>소속공인중개사</td><td>(<input type="text" style="width: 90px; text-align: center;" placeholder="자필서명">)</td></tr>
 			</table>
-			</c:forEach>
+
 			<br>
 			<br>
 			<br>
 			<div style="text-align: center;">
-				<button class="btn btn-primary btn-lg" style="width: 180px; height: 50px; font-size: 15px;">계약 완료</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-primary btn-lg" style="width: 180px; height: 50px; font-size: 15px;" onclick="location.href='UpdateContractService.d4b?aptNum=${reaU.value.aptNum}'">계약 완료</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button class="btn btn-primary btn-lg" style="width: 180px; height: 50px; font-size: 15px;" id="print-button" onclick="location.href='javascript:window.print()'">인쇄</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button class="btn btn-primary btn-lg" style="width: 180px; height: 50px; font-size: 15px;">취소</button>
 
 			</div>
+			</c:forEach>
 		</div>
 	</div>
 </body>

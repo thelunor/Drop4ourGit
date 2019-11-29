@@ -53,7 +53,6 @@ public class ContractDao {
 			glist = new ArrayList<GenericUser>();
 
 			while (rs.next()) {
-				System.out.println("다오 가져오기 성공");
 				GenericUser genericuser = new GenericUser();
 				
 				genericuser.setUserName(rs.getString("userName"));
@@ -62,7 +61,6 @@ public class ContractDao {
 				genericuser.setFrontResNum(rs.getString("frontResNum"));
 				genericuser.setBackResNum(rs.getString("backResNum"));
 				genericuser.setUserPhoneNum(rs.getString("userPhoneNum"));
-				System.out.println("DB에서 온 정보");
 				
 				glist.add(genericuser);
 			}
@@ -90,37 +88,31 @@ public class ContractDao {
 		REAUser reaUser = null;
 		Sale sale = null;
 		SaleDao saleDao = null;
-		String sql = "select r.officeAddr, r.officeDetailAddr, r.officeName, r.reaName, r.officeHp, r.regNum, s.roadAddr, s.price from reauser r join sale s on r.reaId = s.reaId where r.reaId=? and s.aptNum=?";
+		String sql = "select r.officeAddr, r.officeDetailAddr, r.officeName, r.reaName, r.officeHp, r.regNum, s.roadAddr, s.price, s.aptNum from reauser r join sale s on r.reaId = s.reaId where r.reaId=? and s.aptNum=?";
 
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, reaId);
 			pstmt.setString(2, aptNum);
-			System.out.println(reaId);
-			System.out.println(aptNum);
 			
 			rs = pstmt.executeQuery();			
 
 			sale = new Sale();
 			saleDao = new SaleDao();
 			mapList = new HashMap<REAUser, Sale>();
-			System.out.println(mapList);
 			reaUser = new REAUser();
 			
 			if (rs.next()) {
-				System.out.println("여기 들어옴");
 				reaUser.setOfficeAddr(rs.getString("officeAddr"));
 				reaUser.setOfficeDetailAddr(rs.getString("officeDetailAddr"));
 				reaUser.setOfficeName(rs.getString("officeName"));
 				reaUser.setReaName(rs.getString("reaName"));
 				reaUser.setOfficeHp(rs.getString("officeHp"));
-				System.out.println(rs.getString("officeHp"));
 				reaUser.setRegNum(rs.getString("regNum")); //중개인 등록번호
 				sale.setRoadAddr(rs.getString("roadAddr")); //아파트 도로명주소
-				System.out.println(rs.getString("roadAddr"));
 				sale.setPrice(rs.getString("price"));
-				System.out.println(rs.getString("price"));
+				sale.setAptNum(rs.getString("aptNum"));
 				
 				mapList.put(reaUser, sale);
 				
@@ -141,11 +133,81 @@ public class ContractDao {
 		return mapList;
 	}
 	
-	
-	public int insertContract(Contract contract) { //계약서 추가
-		
-		return 0;
+	public int updateContractSale(Sale sale) { // 계약된 매물 수정
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			
+			//매물 테이블에 객체 넣기
+			String sql_update_contractSale = "update sale set iscontract=? where aptNum=?";
+			pstmt = conn.prepareStatement(sql_update_contractSale);
+			pstmt.setString(1, "유");
+			pstmt.setString(2, sale.getAptNum());
+			resultRow = pstmt.executeUpdate();
+			
+			if(resultRow>0) {
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultRow;
 	}
+	
+	
+	public List<Sale> getSaleContractList(String isContract) { // 매물 리스트 출력(계약 유무)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Sale> saleList = null;
+		Sale sale = null;
+		
+		try {
+			conn = ds.getConnection();
+			String sql_select_contractSale = "select aptnum,aptsize,type,addr,aptname,aptdong,aptho,price from sale where isContract=?";
+			pstmt = conn.prepareStatement(sql_select_contractSale);
+			pstmt.setString(1, isContract);
+			rs = pstmt.executeQuery();
+			saleList = new ArrayList<Sale>();
+			while(rs.next()) {
+				sale = new Sale();
+				sale.setAptNum(rs.getString("aptNum")); //매물번호				
+				sale.setAptSize(rs.getString("aptSize")); //면적
+				sale.setType(rs.getString("type")); //유형
+				sale.setAddr(rs.getString("addr")); //주소
+				sale.setAptName(rs.getString("aptName")); //아파트이름
+				sale.setAptDong(rs.getString("aptDong")); //동
+				sale.setAptHo(rs.getString("aptHo")); //호수
+				sale.setPrice(rs.getString("price")); //매매가
+				saleList.add(sale);
+			}
+			System.out.println("사이즈"+saleList.size());
 
+		}catch(Exception e) {
+			
+		}finally {
+			DB_Close.close(pstmt);
+			DB_Close.close(rs);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return saleList;
+	}
+	
+	
+	
+	
+	
 	
 }
