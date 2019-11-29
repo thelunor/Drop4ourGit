@@ -64,6 +64,7 @@ $(function () {
                     //<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
                     list += "<td><button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "location.href='SaleDeleteService.d4b?aptNum="+element.aptNum+"' > 삭제</button ></td > ";
                     //list += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
+                    list += "<td><button type='button' class='btn-group-sm' id='contract_btn' onclick=" + "location.href='GetContractService.d4b?userId=" + element.reaId + "&aptNum=" + element.aptNum +"'>계약</button></td>";
                     list += "</tr>";
 
                     $('#tbody').append(list);
@@ -195,66 +196,67 @@ input {
 							</div>
 						</div>
 						<hr>
-						<div class="row">
-							<div class="col-md-12">
-								<input type="submit" class="btn-group" value="매물 등록">
-								&nbsp;
-								<button type="submit" class="btn-group">계약서 작성</button>
-								&nbsp;
-								<button type="submit" class="btn-group">계약 관리</button>
-								&nbsp;
-								<button type="button" class="btn-group" onclick="location.href='CheckIntroBoardService.d4b'">소개글 관리</button>
-								&nbsp;
-								<button type="button" class="btn-group" onclick="location.href='GetREAScheduleListByIdService.d4b?userId=${reaUserData.reaId}'">일정 관리</button>
-								&nbsp;
-								<button type="button" class="btn-group" onclick="location.href='GetREAMypageEditService.d4b'">정보 수정</button>
-								<br> <br>
-								<div id="saleList">
-									<div class="card-header py-3">
-										<h6 class="m-0 font-weight-bold text-primary">매물 관리</h6>
-									</div>
-									<div class="card-body">
-										<div class="table-responsive">
-											<table class="table table-bordered" width="100%"
-												cellspacing="0">
-												<input type="hidden" id="type" value="<%=type%>">
-												<thead>
-													<tr>
-														<th>면적</th>
-														<th>유형</th>
-														<th>주소</th>
-														<th>아파트이름</th>
-														<th>동</th>
-														<th>호수</th>
-														<th>매매가</th>
-														<th>계약여부</th>
-														<th>수정</th>
-														<th>삭제</th>
-													</tr>
-												</thead>
-												<tbody id="tbody">
-													<c:forEach var="saleData" items="<%=saleList%>"
-														varStatus="status">
-														<input type="hidden" id="aptNum"
-															value="${saleData.aptNum}">
-														<tr>
-															<td>${saleData.aptSize}</td>
-															<td>${saleData.type}</td>
-															<td>${saleData.addr}</td>
-															<td>${saleData.aptName}</td>
-															<td>${saleData.aptDong}</td>
-															<td>${saleData.aptHo}</td>
-															<td>${saleData.price}</td>
-															<td>${saleData.isContract}</td>
-															<td><button type='button' class='btn-group-sm'
-																	id='edit_btn'
-																	onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
-															<td><button type='button' class='btn-group-sm'
-																	id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
+			                  <div class="row">
+			                     <div class="col-md-12">
+			                        <input type="submit" class="btn-group" value="매물 등록">
+			                        &nbsp;
+			                        <button type="submit" class="btn-group">계약 관리</button>
+			                        &nbsp;
+			                        <button type="button" class="btn-group" onclick="location.href='CheckIntroBoardService.d4b'">소개글 관리</button>
+			                        &nbsp;
+			                        <button type="button" class="btn-group" onclick="location.href='GetREAScheduleListByIdService.d4b?userId=${reaUserData.reaId}'">일정 관리</button>
+			                        &nbsp;
+			                        <button type="button" class="btn-group" onclick="location.href='GetREAMypageEditService.d4b'">정보 수정</button>
+			                        
+			                        <br> <br>
+			                        <div id="saleList">
+			                           <div class="card-header py-3">
+			                              <h6 class="m-0 font-weight-bold text-primary">매물 관리</h6>
+			                           </div>
+			                           <div class="card-body">
+			                              <div class="table-responsive">
+			                                 <table class="table table-bordered" width="100%"
+			                                    cellspacing="0">
+			                                    <thead>
+			                                       <tr>
+			                                          <th>면적</th>
+			                                          <th>유형</th>
+			                                          <th>주소</th>
+			                                          <th>아파트이름</th>
+			                                          <th>동</th>
+			                                          <th>호수</th>
+			                                          <th>매매가</th>
+			                                          <th>계약여부</th>
+			                                          <th>수정</th>
+			                                          <th>삭제</th>
+			                                          <th>계약</th>
+			                                       </tr>
+			                                    </thead>
+			                                    <tbody id="tbody">
+			                                       <c:forEach var="saleData" items="<%=saleList%>"
+			                                          varStatus="status">
+			                                          <input type="hidden" id="aptNum"
+			                                             value="${saleData.aptNum}">
+			                                          <tr>
+			                                             <td>${saleData.aptSize}</td>
+			                                             <td>${saleData.type}</td>
+			                                             <td>${saleData.addr}</td>
+			                                             <td>${saleData.aptName}</td>
+			                                             <td>${saleData.aptDong}</td>
+			                                             <td>${saleData.aptHo}</td>
+			                                             <td>${saleData.price}</td>
+			                                             <td>${saleData.isContract}</td>
+			                                             <td><button type='button' class='btn-group-sm'
+			                                                   id='edit_btn'
+			                                                   onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
+			                                             <td><button type='button' class='btn-group-sm'
+			                                                   id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
+			                                             <td><button type='button' class='btn-group-sm'
+			                                                   id='contract_btn' onclick="location.href='GetContractService.d4b?userId=${reaUserData.reaId}&aptNum=${saleData.aptNum}'">계약</button></td>
+			                                          </tr>
+			                                       </c:forEach>
+			                                    </tbody>
+			                                 </table>
 										</div>
 									</div>
 								</div>
