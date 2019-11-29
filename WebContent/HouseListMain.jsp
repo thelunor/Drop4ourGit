@@ -145,9 +145,9 @@ table {
 		<nav
 			class="navbar navbar-light navbar-expand-lg  navbar-fixed ivory no-background bootsnav">
 			<%if(type.equals("U01")){%>
-			<jsp:include page="WEB-INF/include/REAUser_Top.jsp"></jsp:include>
-			<%} else if (type.equals("U02")) {%> 
 			<jsp:include page="WEB-INF/include/User_Top.jsp"></jsp:include>
+			<%} else if (type.equals("U02")) {%> 
+			<jsp:include page="WEB-INF/include/REAUser_Top.jsp"></jsp:include>
 				<%}else {%> 
 			<jsp:include page="WEB-INF/include/Top.jsp"></jsp:include>
 			<%} %>
