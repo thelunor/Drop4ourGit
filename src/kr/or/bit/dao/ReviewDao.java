@@ -264,39 +264,18 @@ public class ReviewDao {
 	public int updateReview(Review review) { // 리뷰 수정
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			conn.setAutoCommit(false);
-			
-			
-			//1. 일단 reviewNum 찾아오기
-			String select_reviewNum = "select reviewNum from review where userid=? and reaid=?";
-			pstmt = conn.prepareStatement(select_reviewNum);
-			pstmt.setString(1, review.getUserId());
-			pstmt.setString(2, review.getReaId());
-    		rs = pstmt.executeQuery();
-    		
-    		if(rs.next()) {
-    			String reviewNum = rs.getString("reviewNum");
-        		//2. DB에서 수정하기
-    			String sql_update_review = "update review set reviewcontent=? where reviewnum=?";
-    			pstmt = conn.prepareStatement(sql_update_review);
-    			pstmt.setString(1, review.getReviewContent());
-    			pstmt.setInt(2, Integer.parseInt(reviewNum));
-    			resultRow = pstmt.executeUpdate();
-    			conn.commit();
-    			System.out.println("업데이트 완료?"+resultRow);
-    		}			
-			
-		} catch (Exception e) {
-			System.out.println("ReviewDao update 예외발생");
+			String sql_update_review = "update review set reviewcontent=? where reviewnum=?";
+    		pstmt = conn.prepareStatement(sql_update_review);
+    		pstmt.setString(1, review.getReviewContent());
+    		pstmt.setInt(2, review.getReviewNum());
+    		resultRow = pstmt.executeUpdate();
+    	} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			DB_Close.close(rs);
 			DB_Close.close(pstmt);
-			
 			try {
 				conn.close();
 			} catch (Exception e) {

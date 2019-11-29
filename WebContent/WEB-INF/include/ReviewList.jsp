@@ -46,9 +46,9 @@
 	Date today = new Date();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy. MM. dd");
 %>
-	
 <input type="hidden" id="getREAId" value="<%=reaId%>">
 <input type="hidden" id="getUserId" value="<%=genericUserId%>">
+<input type="hidden" id="getDate" value="<%=sdf.format(today) %>">
 
 <section id="id" class="about">
 	<div class="container">
@@ -59,43 +59,47 @@
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
-						<div>
+					
+					<div id="review_table">
+						<form id="review_form" name="review_form" method="post">
 							<table class="table table-bordered" id="reviewTable"
-								style="text-align: center; margin: auto; width: 100%; border: none;">
+								style="text-align: center; margin: auto; width: 100%; border: none;">								
 			                    <tr>
-			                        <td style="padding: 0;"><div align="left" style="padding-left: 10px;">
+			                        <td style="padding: 0;">
+			                        <div align="left" style="padding-left: 10px;">
 		                        		날짜:&nbsp;<input type="text" id="reviewDate" name="reviewDate" value="<%=sdf.format(today) %>" 
-			                        					readonly="readonly" style="display: inline; width: 50%; padding: 0;">
-			                       	<td style="padding: 0;"><div align="right" style="padding-right: 10px;">
+			                        					readonly="readonly" style="display: inline; width: 50%; padding: 0;"></div>
+			                       	<td style="padding: 0;">
+			                       	<div align="right" style="padding-right: 10px;">
 			                       		작성자:&nbsp;<input type="text" id="userId" name="userId" value="<%=genericUserId%>" 
 			                       						readonly="readonly" style="; display: inline; width: 30%; padding: 0;">
-			                       		<input type="hidden" id="reaId" name="reaId" value=""></div></td>
+			                       	</div></td>
 			                    </tr>
 			                    <tr>
 			                    	<td colspan="4" align="left" id="contentTd">
 			                    		<textarea id="reviewContent" name="reviewContent" class="ckeditor"
 											rows="5" style="resize: none; width: 100%; border: 1px solid #d2d0d0;"></textarea>
 									<div align="right">
-			                    		<button type="submit" id="insert_review" class="btn btn-primary btn-block btn-lg" name="insert_review">작성 완료</button>
+			                    		<button type="submit" id="send" class="btn btn-primary btn-block btn-lg">작성 완료</button>
 									</div></td>
 			                    </tr>
+			                    
 		                   </table>
+		                   </form>
 						</div>
+						</div>
+						
 						<div style="margin-top: 20px; margin-bottom: 20px;">
 							<hr>
 						</div>
-						
-						
-						<form name="review" method="post">
 						<!-- 후기글 뿌려지는 곳 -->
-						<table style="width: 100%;" id="reviewbody">
+						<table style="width: 100%;" id="reviewList">
+						<tbody id="reviewListTbody">
 						
-						<tbody id="tbody">
 						</tbody>
 							
 						</table>
 						
-						</form>						
 						
 <%-- 						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
 						<c:if test="${cpage>1}">
@@ -127,13 +131,18 @@
 <script type="text/javascript">
 var reaId = $("#getREAId").val();
 var reviewNum = $("#reviewNum").val();
-
+var reviewId = $("#reviewId").val();
+var reviewId2 = $("#reviewId").html();
 
 	$(function() {
 		getReviewList();
-		
+		insert_review();
 	});
-		$('#insert_review').click(function() {
+	 
+	
+	
+	function insert_review(){
+		$("#send").on("click", function(){
 			var param = {
 					userId : $('#getUserId').val(),
 					reviewContent : $('#reviewContent').val(),
@@ -141,16 +150,21 @@ var reviewNum = $("#reviewNum").val();
 					};
 			$.ajax({
 				url: 'InsertReview', // kr.or.bit.ajax
-				dataType: 'json',
+				dataType: 'text',
 				type: 'post',
 				data: param,
 				success: function(data) {
-					$("#reviewContent").val("");
-					getReviewList();
+					if(data == "success"){
+						$("#reviewContent").val("");
+						$("#reviewListTbody").empty();
+						getReviewList();
+					}
 				}
-			});
-		});
-		
+			})
+			return false;
+		})
+	}
+	
 	
 
 	function getReviewList(){ //리뷰 리스트 가져오기
@@ -165,76 +179,135 @@ var reviewNum = $("#reviewNum").val();
 					review += "<td align='left' width='70%'>";
 					review += "<span>" + element.reviewDate+ "</span></td>";
 					review += "<td align='right'>";
-					review += "작성자: <span id='reviewId'>"+element.userId+"</span></td>";
+					review += "작성자: <div id='reviewId'><span>"+element.userId+"</span></div></td>";
 					review += "</tr>";
 					review += "<tr>";
 					review += "<td colspan='2' style='height: 100px;'>";
-					review += "<textarea id='textarea' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;'>";
+					review += "<textarea id='reveiwContent' name='reviewContent' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;' readonly>";
 					review += element.reviewContent+"</textarea>";
 					review += "<input type='hidden' id='reviewNum' value='"+element.reviewNum+"'>";
 					review += "<div class='row'>"
 					review += "<div class='col-sm-6'>"
 					review += "<button class='btn btn-primary btn-block btn-sm' onclick='delete_review()'>삭제</button></div>";
 					review += "<div class='col-sm-6'>"
-					review += "<button id='edit_review' class='btn btn-primary btn-block btn-sm'>수정</button></div>";
+					review += "<button class='btn btn-primary btn-block btn-sm' onclick='edit_reviewBtn()'>수정</button></div>";
 					review += "</div></div><hr></td></tr>";					
 				});
-				$("#tbody").append(review);
-
+				$("#reviewListTbody").append(review);
 			}
 	});
 	}
 	function delete_review(){
-		//console.log(reaId);
-		//console.log(reviewNum);
+		var reviewId = $("#reviewId").text();
+		if(reviewId == $("#getUserId").val()){
+			$.ajax({
+				url:'DeleteReview?reviewNum='+$("#reviewNum").val(),
+				dataType: 'text',
+				type: 'post',
+				success:function(data){
+					if(data.trim() == "success"){
+						alert("삭제되었습니다.");
+						getReviewList();
+					}
+				}
+			});
+			return;
+		}else {
+			alert("권한이 없습니다.");
+			return;
+		}
+	}
+	
+	function edit_reviewBtn(){
+		var reviewId = $("#reviewId").text().trim();
+		//console.log(reviewId);
+		var reviewNum =  $("#reviewNum").val().trim();
+		console.log(reviewNum);
+		if(reviewId == $("#getUserId").val().trim()){
+			$("#reviewListTbody").hide();
+			$("#review_table").empty();
+			var table = "";
+			table += "<form action='UpdateReviewService.d4b' method='post'>";
+			table += "<table class=table table-bordered' id='reviewTable'";
+			table += " style='text-align: center; margin: auto; width: 100%; border: none;'>";
+			table += "<tr>";
+			table += "<td style='padding: 0;'>";
+			table += "<div align='left' style='padding-left: 10px;'>날짜:&nbsp;";
+			table += "<input type='text' id='editDate' name='editDate' value='"+$("#getDate").val()+"'";
+			table += " readonly='readonly' style='display: inline; width: 50%; padding: 0;'></div>";
+			table += "<td style='padding: 0;'>";
+			table += "<div align='right' style='padding-right: 10px;'>작성자:&nbsp;";
+			table += "<input type='text' id='editId' name='editId' value='"+reviewId+"'";
+			table += " readonly='readonly' style='display: inline; width: 30%; padding: 0;'>";
+			table += "<input type='hidden' id='editNum' name='editNum' value='"+$("#reviewNum").val().trim()+"'>";
+			table += "<input type='hidden' id='editREAId' name='editREAId' value='"+$("#getREAId").val()+"'>";
+			table += "</div></td></tr>";
+			table += "<tr>";
+			table += "<td colspan='4' align='left' id='contentTd'>";
+			table += "<textarea id='editContent' name='editContent' class='ckeditor' rows='5'";
+			table += " style='resize: none; width: 100%; border: 1px solid #d2d0d0;'></textarea>";
+			table += "<div align='right'>";
+			table += "<input type='submit' id='edit_send' class='btn btn-primary btn-block btn-lg' value='수정 완료'>";
+			table += "</div></td></tr></table></form>";
+			$("#review_table").append(table);
+			
+		}else {
+			alert("권한이 없습니다.");
+			return;
+		}
+	}
+	$("#edit_send").click(function(){
+		alert("수정 되었습니다.");
+	});
+	
+	/*
+	
+	function edit_review(){
+		var param = {
+				editNum : $('#editNum').val(),
+				editContent : $('#editContent').val(),
+				editId : $('#editId').val()
+			};
 		$.ajax({
-			url:'DeleteReview?reviewNum='+$("#reviewNum").val(),
+			url: 'EditReview', // kr.or.bit.ajax
 			dataType: 'text',
 			type: 'post',
+			data: param,
 			success:function(data){
 				if(data.trim() == "success"){
-					getReviewList()
+					alert("수정 되었습니다.");
+					/*
+					$("#editContent").val(""); //여기까지 됨
+					var table = "";
+					table += "<tr>";
+					table += "<td style='padding: 0;'>";
+					table += "<div align='left' style='padding-left: 10px;'>날짜:&nbsp;";
+					table += "<input type='text' id='reviewDate' name='reviewDate' value='"+$("#getDate").val()+"'";
+					table += " readonly='readonly' style='display: inline; width: 50%; padding: 0;'></div>";
+					table += "<td style='padding: 0;'>";
+					table += "<div align='right' style='padding-right: 10px;'>작성자:&nbsp;";
+					table += "<input type='text' id='userId' name='userId' value='"+$("#getUserId").val()+"'";
+					table += " readonly='readonly' style='display: inline; width: 30%; padding: 0;'>";
+					table += "</div></td></tr>";
+					table += "<tr>";
+					table += "<td colspan='4' align='left' id='contentTd'>";
+					table += "<textarea id='reviewContent' name='reviewContent' class='ckeditor' rows='5'";
+					table += " style='resize: none; width: 100%; border: 1px solid #d2d0d0;'></textarea>";
+					table += "<div align='right'>";
+					table += "<button type='submit' id='send' class='btn btn-primary btn-block btn-lg'>작성 완료</button>";
+					table += "</div></td></tr>";
+					$("#reviewTbody").empty();
+					$("#reviewTbody").append(table);
+					getReviewList();
+					
 				}
+				return;
 			}
-		});
-		
+		})
+		return;	
 	}
-
-	/*
-	$('#delete_review').click(function() {
-		alert("하이하이");
-		//console.log(reviewNum);
-		//console.log(reaId);
-
-			$.ajax({
-			url:'DeleteReview?reviewNum'+reviewNum+"&reaId="+reaId,
-			dataType: 'json',
-			type: 'post',
-			success:function(data){
-				console.log(data);
-				//getReviewList();
-			}
-		}) 
-		
-		
+			
 		*/
 		
-		
-		/*
-		$("#edit_review").click(function(){
-			$.ajax({
-				url: 'EditReview', // kr.or.bit.ajax
-				dataType: 'json',
-				type: 'post',
-				data: {
-					userId: $('#getUserId').val(),
-					reviewContent: $('#reviewContent').val(),
-					reaId: $('#getREAId').val()
-				},
-				success: function(data) {
-					console.log(data);
-				}
-		});
-			*/
 
 </script>

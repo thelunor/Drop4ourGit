@@ -27,15 +27,17 @@ import kr.or.bit.service.GetBookMarkService;
 import kr.or.bit.service.GetContractService;
 import kr.or.bit.service.GetGenericUserByIdService;
 import kr.or.bit.service.GetGenericUserByResService;
-import kr.or.bit.service.GetGenericUserEditService;
 import kr.or.bit.service.GetGenericUserMypageMainService;
+import kr.or.bit.service.GetGenericUserEditService;
 import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroBoardContentService;
 import kr.or.bit.service.GetREAIntroDataService;
 import kr.or.bit.service.GetREAIntroPageService;
+import kr.or.bit.service.GetREAIntroPageServiceForUser;
 import kr.or.bit.service.GetREAMypageService;
 import kr.or.bit.service.GetREAScheduleListByDateService;
 import kr.or.bit.service.GetREAScheduleListByIdService;
+import kr.or.bit.service.GetREAScheduleListByScheNumService;
 import kr.or.bit.service.GetREAUserByIdService;
 import kr.or.bit.service.GetREAUserByRegService;
 import kr.or.bit.service.GetREAUserMypageService;
@@ -60,6 +62,7 @@ import kr.or.bit.service.LoginService;
 import kr.or.bit.service.LogoutService;
 import kr.or.bit.service.SaleDeleteService;
 import kr.or.bit.service.SelectAtpListService;
+import kr.or.bit.service.SelectAtpListService2;
 import kr.or.bit.service.SelectGenericUserService;
 import kr.or.bit.service.SelectREAUserService;
 import kr.or.bit.service.UpdateBlackService;
@@ -188,15 +191,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-		}else if (url_Command.equals("/GetContractServiceOk.d4b")) {
-				try {
-					forward = new ActionForward();
-					forward.setPath("/Contract.jsp");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}else if (url_Command.equals("/GetGenericUserEditService.d4b")) {
+		} else if (url_Command.equals("/GetGenericUserEditService.d4b")) {
 			try {
 				action = new GetGenericUserEditService(); //
 				forward = action.execute(request, response);
@@ -248,7 +243,14 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (url_Command.equals("/GetREAIntroBoardService.d4b")) { //공인중개사가 후기 작성 페이지로
+		}else if (url_Command.equals("/GetREAIntroPageServiceForUser.d4b")) { //일반 사용자가 소개 페이지로
+			try {
+				action = new GetREAIntroPageServiceForUser();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/GetREAIntroBoardService.d4b")) { //공인중개사가 후기 작성 페이지로
 			try {
 				forward = new ActionForward();
 				forward.setPath("/REAIntroBoard.jsp");

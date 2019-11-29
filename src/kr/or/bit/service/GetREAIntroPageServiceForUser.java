@@ -18,7 +18,7 @@ import kr.or.bit.dto.REAIntroBoard;
 import kr.or.bit.dto.REAUser;
 import kr.or.bit.dto.Review;
 
-public class GetREAIntroPageService implements Action {
+public class GetREAIntroPageServiceForUser implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
@@ -27,8 +27,7 @@ public class GetREAIntroPageService implements Action {
 		REAImage reaImg = null;
 		REAUserDao readao = null;
 		REAImageDao imgdao = null;
-		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("reaId");
+		String reaId = (String) request.getParameter("reaId");
 		List<Review> rvList = null;
 		ReviewDao rvdao = null;
 		REAIntroBoard reaIntro = null;
