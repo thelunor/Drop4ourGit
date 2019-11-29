@@ -61,10 +61,17 @@
 	<div class="contain-fluid">
 	<div class="row">
 	<div class="col-md-6">
-		<jsp:include page="Chart_0.jsp"></jsp:include>		
+		<jsp:include page="Chart_0.jsp"></jsp:include>	
+		
+		<br>
+		<br>
+		<jsp:include page="barChart.jsp"></jsp:include>				
 	</div>
 	<div class="col-md-6">
-		<jsp:include page="Chart_1.jsp"></jsp:include>		
+		<jsp:include page="Chart_1.jsp"></jsp:include>	
+		<br>
+		<br>
+		혜리파트	
 	</div>		
 	</div>
 	</div>

@@ -10,7 +10,7 @@
 					<h2 style="font-size: 150px;">✔</h2>
 					<br> <br>
 					<h2>
-						매물등록이 <span style="color: #ff3300;">완료</span> 되었습니다.
+						계약이 <span style="color: #ff3300;">완료</span> 되었습니다.
 					</h2>
 					<br> <br>
 					<h2 style="font-size: 18px;">

@@ -27,8 +27,8 @@ import kr.or.bit.service.GetBookMarkService;
 import kr.or.bit.service.GetContractService;
 import kr.or.bit.service.GetGenericUserByIdService;
 import kr.or.bit.service.GetGenericUserByResService;
-import kr.or.bit.service.GetGenericUserMypageMainService;
 import kr.or.bit.service.GetGenericUserEditService;
+import kr.or.bit.service.GetGenericUserMypageMainService;
 import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroBoardContentService;
 import kr.or.bit.service.GetREAIntroDataService;
@@ -36,7 +36,6 @@ import kr.or.bit.service.GetREAIntroPageService;
 import kr.or.bit.service.GetREAMypageService;
 import kr.or.bit.service.GetREAScheduleListByDateService;
 import kr.or.bit.service.GetREAScheduleListByIdService;
-import kr.or.bit.service.GetREAScheduleListByScheNumService;
 import kr.or.bit.service.GetREAUserByIdService;
 import kr.or.bit.service.GetREAUserByRegService;
 import kr.or.bit.service.GetREAUserMypageService;
@@ -60,9 +59,7 @@ import kr.or.bit.service.InsertSaleService;
 import kr.or.bit.service.LoginService;
 import kr.or.bit.service.LogoutService;
 import kr.or.bit.service.SaleDeleteService;
-import kr.or.bit.service.SelectAllContractsService;
 import kr.or.bit.service.SelectAtpListService;
-import kr.or.bit.service.SelectAtpListService2;
 import kr.or.bit.service.SelectGenericUserService;
 import kr.or.bit.service.SelectREAUserService;
 import kr.or.bit.service.UpdateBlackService;
@@ -191,7 +188,15 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/GetGenericUserEditService.d4b")) {
+			
+		}else if (url_Command.equals("/GetContractServiceOk.d4b")) {
+				try {
+					forward = new ActionForward();
+					forward.setPath("/Contract.jsp");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}else if (url_Command.equals("/GetGenericUserEditService.d4b")) {
 			try {
 				action = new GetGenericUserEditService(); //
 				forward = action.execute(request, response);
@@ -443,14 +448,7 @@ public class FrontController extends HttpServlet {
 			}
 		}
 		// select ================================================
-		else if (url_Command.equals("/SelectAllContractsService.d4b")) {
-			try {
-				action = new SelectAllContractsService();
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/SelectREAUserService.d4b")) { // 공인중개사회원 목록보기
+		 else if (url_Command.equals("/SelectREAUserService.d4b")) { // 공인중개사회원 목록보기
 			try {
 				action = new SelectREAUserService(); //
 				forward = action.execute(request, response);

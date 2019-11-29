@@ -406,11 +406,10 @@ $(function() {
 	$.ajax({
         url : 'ScheduleList',
         type : 'post',
-        data : {"reaId" : $("#reaId").val()},
         dataType : 'json',
         success : function(data) {	
             $.each(data, function(index, element) {
-            	console.log(element.scheNum);
+            	console.log(element);
             	var allData = "";
             	var no = element.scheNum;
             	console.log(no);
