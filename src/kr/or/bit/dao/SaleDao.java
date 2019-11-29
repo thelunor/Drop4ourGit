@@ -186,6 +186,57 @@ public class SaleDao {
 		return saleList;
 	}
 	
+	public List<Sale> getSaleList(String id, int cPage, int pageSize) { // 매물 리스트 출력(공인중개사 아이디로)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Sale> saleList = null;
+		
+		try {
+			conn = ds.getConnection();
+			String sql_select_sale = "select X.rnum, X.aptnum, X.aptsize, X.type, X.addr, X.roadaddr, X.aptname, X.aptdong, X.aptho, X.price, X.direction, X.etc, X.iscontract, X.reaid from (select rownum as rnum, A.aptnum, A.aptsize, A.type, A.addr, A.roadaddr, A.aptname, A.aptdong, A.aptho, A.price, A.direction, A.etc, A.iscontract, A.reaid from (select aptnum, aptsize, type, addr, roadaddr, aptname, aptdong, aptho, price, direction, etc, iscontract, reaid from sale order by aptnum) A where rownum <= ?) X where X.rnum >= ? and reaId =?";
+			
+			pstmt = conn.prepareStatement(sql_select_sale);
+			
+			int start = cPage * pageSize - (pageSize - 1);
+			int end = cPage * pageSize;
+			pstmt.setInt(1, end);
+			pstmt.setInt(2, start);
+			pstmt.setString(3, id);
+			
+			rs = pstmt.executeQuery();
+			
+			System.out.println("RSRSRSRS");
+			
+			saleList = new ArrayList<Sale>();
+			while (rs.next()) {
+				
+				Sale sale = new Sale();
+				sale.setAptNum(rs.getString("aptNum")); // 매물번호
+				sale.setAptSize(rs.getString("aptSize")); // 면적
+				sale.setType(rs.getString("type")); // 유형
+				sale.setAddr(rs.getString("addr")); // 주소
+				sale.setAptName(rs.getString("aptName")); // 아파트이름
+				sale.setAptDong(rs.getString("aptDong")); // 동
+				sale.setAptHo(rs.getString("aptHo")); // 호수
+				sale.setPrice(rs.getString("price")); // 매매가
+				sale.setIsContract(rs.getString("isContract"));
+				saleList.add(sale);
+			}
+		} catch (Exception e) {
+			
+		} finally {
+			DB_Close.close(pstmt);
+			DB_Close.close(rs);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return saleList;
+	}
+	
 	public int getSaleListCount(String id) { // 매물 리스트 출력(공인중개사 아이디로)
 		Connection conn = null;
 		PreparedStatement pstmt = null;

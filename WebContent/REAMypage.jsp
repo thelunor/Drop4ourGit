@@ -20,60 +20,70 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript">
-var count=10;
+var cPage=1;
 
 $(function () {
 	
+	let isEnd = false;
 	$(window).scroll(function () {
-	var type=$("#type").val();	
-   	 if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-   		 console.log('InfiniteScroll?type='+type);
-        $.ajax({
-            url: 'InfiniteScroll',
-            type: 'get',
-            dataType: 'json',
-            data: {
-                "type": $("#type").val(),
-                "count": 10
-            },
-            success: function (data) {
-//              	<td>${saleData.aptSize}</td>
-// 				<td>${saleData.type}</td>
-// 				<td>${saleData.addr}</td>
-// 				<td>${saleData.aptName}</td>
-// 				<td>${saleData.aptDong}</td>
-// 				<td>${saleData.aptHo}</td>
-// 				<td>${saleData.price}</td>
-// 				<td>${saleData.isContract}</td>
-// 				<td><button type='button' class='btn-group-sm' id='edit_btn' onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
-// 				<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
-             	 
-               	 $.each(data, function (index, element) {
-                    var list = "";
-                    list += "<tr>";
-                    list += "<td>" + element.aptSize + "</td>";
-                    list += "<td>" + element.type + "</td>";
-                    list += "<td>" + element.addr + "</td>";
-                    list += "<td>" + element.aptName + "</td>";
-                    list += "<td>" + element.aptDong + "</td>";
-                    list += "<td>" + element.aptHo + "</td>";
-                    list += "<td>" + element.price + "</td>";
-                    list += "<td>" + element.isContract + "</td>";
-                   // list += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href = 'editForm.d4b?empNo="+element.empNo+"' > 수정</button > " + "</td > ";
-                    list += "<td><button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href='GetSaleEditPageService.d4b?aptNum=" + element.aptNum + "'>수정</button></td>";
-                    //<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
-                    list += "<td><button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "location.href='SaleDeleteService.d4b?aptNum="+element.aptNum+"' > 삭제</button ></td > ";
-                    //list += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
-                    list += "<td><button type='button' class='btn-group-sm' id='contract_btn' onclick=" + "location.href='GetContractService.d4b?userId=" + element.reaId + "&aptNum=" + element.aptNum +"'>계약</button></td>";
-                    list += "</tr>";
-
-                    $('#tbody').append(list);
-                    
-	                })
-	            }
-	        })
-	    }
+		var type=$("#type").val();
+		
+	  	 if ($(document).height() <= $(window).scrollTop() + $(window).height() + 100) {
+	  		fetchList();
+	   	 }
 	});
+	
+	 var fetchList = function(){
+        if(isEnd == true){
+            return;
+        }
+        let startNo = $("#aptNum").last().val();
+        console.log(startNo);
+	        $.ajax({
+	            url: 'InfiniteScroll',
+	            type: 'get',
+	            dataType: 'json',
+	            data: {
+	                "type": $("#type").val(),
+	                "cPage": cPage
+	            },
+	            success: function (data) {
+	            	 let length = data.length;
+	            	 console.log(cPage);
+	                 if( length < 5 ){
+	                     isEnd = true;
+	                 } 
+	                
+	     
+	               	 $.each(data, function (index, element) {
+	                    var list = "";
+	                    list += "<tr>";
+	                    list += "<td>" + element.aptSize + "</td>";
+	                    list += "<td>" + element.type + "</td>";
+	                    list += "<td>" + element.addr + "</td>";
+	                    list += "<td>" + element.aptName + "</td>";
+	                    list += "<td>" + element.aptDong + "</td>";
+	                    list += "<td>" + element.aptHo + "</td>";
+	                    list += "<td>" + element.price + "</td>";
+	                    list += "<td>" + element.isContract + "</td>";
+	                   // list += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href = 'editForm.d4b?empNo="+element.empNo+"' > 수정</button > " + "</td > ";
+	                    list += "<td><button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href='GetSaleEditPageService.d4b?aptNum=" + element.aptNum + "'>수정</button></td>";
+	                    //<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
+	                    list += "<td><button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "location.href='SaleDeleteService.d4b?aptNum="+element.aptNum+"' > 삭제</button ></td > ";
+	                    //list += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
+	                    list += "<td><button type='button' class='btn-group-sm' id='contract_btn' onclick=" + "location.href='GetContractService.d4b?userId=" + element.reaId + "&aptNum=" + element.aptNum +"'>계약</button></td>";
+	                    list += "</tr>";
+	
+	                    $('#tbody').append(list);
+		                }) //each
+		                cPage++;
+		            },//success
+		            error: function () {
+						console.log("데이터 받아오기 실패");
+					}
+		        })//ajax
+		    } //fetchList
+	 fetchList();
 });
 </script>
 <jsp:include page="./css/css.jsp"></jsp:include>
@@ -233,28 +243,28 @@ input {
 			                                       </tr>
 			                                    </thead>
 			                                    <tbody id="tbody">
-			                                       <c:forEach var="saleData" items="<%=saleList%>"
-			                                          varStatus="status">
-			                                          <input type="hidden" id="aptNum"
-			                                             value="${saleData.aptNum}">
-			                                          <tr>
-			                                             <td>${saleData.aptSize}</td>
-			                                             <td>${saleData.type}</td>
-			                                             <td>${saleData.addr}</td>
-			                                             <td>${saleData.aptName}</td>
-			                                             <td>${saleData.aptDong}</td>
-			                                             <td>${saleData.aptHo}</td>
-			                                             <td>${saleData.price}</td>
-			                                             <td>${saleData.isContract}</td>
-			                                             <td><button type='button' class='btn-group-sm'
-			                                                   id='edit_btn'
-			                                                   onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
-			                                             <td><button type='button' class='btn-group-sm'
-			                                                   id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
-			                                             <td><button type='button' class='btn-group-sm'
-			                                                   id='contract_btn' onclick="location.href='GetContractService.d4b?userId=${reaUserData.reaId}&aptNum=${saleData.aptNum}'">계약</button></td>
-			                                          </tr>
-			                                       </c:forEach>
+<%-- 			                                       <c:forEach var="saleData" items="<%=saleList%>" --%>
+<%-- 			                                          varStatus="status"> --%>
+<!-- 			                                          <input type="hidden" id="aptNum" -->
+<%-- 			                                             value="${saleData.aptNum}"> --%>
+<!-- 			                                          <tr> -->
+<%-- 			                                             <td>${saleData.aptSize}</td> --%>
+<%-- 			                                             <td>${saleData.type}</td> --%>
+<%-- 			                                             <td>${saleData.addr}</td> --%>
+<%-- 			                                             <td>${saleData.aptName}</td> --%>
+<%-- 			                                             <td>${saleData.aptDong}</td> --%>
+<%-- 			                                             <td>${saleData.aptHo}</td> --%>
+<%-- 			                                             <td>${saleData.price}</td> --%>
+<%-- 			                                             <td>${saleData.isContract}</td> --%>
+<!-- 			                                             <td><button type='button' class='btn-group-sm' -->
+<!-- 			                                                   id='edit_btn' -->
+<%-- 			                                                   onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td> --%>
+<!-- 			                                             <td><button type='button' class='btn-group-sm' -->
+<%-- 			                                                   id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td> --%>
+<!-- 			                                             <td><button type='button' class='btn-group-sm' -->
+<%-- 			                                                   id='contract_btn' onclick="location.href='GetContractService.d4b?userId=${reaUserData.reaId}&aptNum=${saleData.aptNum}'">계약</button></td> --%>
+<!-- 			                                          </tr> -->
+<%-- 			                                       </c:forEach> --%>
 			                                    </tbody>
 			                                 </table>
 										</div>

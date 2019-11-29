@@ -33,7 +33,7 @@ public class GetREAMypageService implements Action {
 		String reaId = (String) session.getAttribute("userId");
 		String type = (String) request.getAttribute("type");
 		
-		int count=0;
+		
 		try {
 			forward = new ActionForward();
 			reaDao = new REAUserDao();
@@ -42,8 +42,7 @@ public class GetREAMypageService implements Action {
 			reaUser = reaDao.getREAMypage(reaId);
 			reaImg = imgDao.getREAImg(reaId);
 			saleList = saleDao.getSaleList(reaId);
-			count = saleDao.getSaleListCount(reaId);
-			System.out.println("카운트는 " + count);
+			
 
 			if (reaUser != null && reaImg != null && saleList != null) {
 				request.setAttribute("reaUser", reaUser);

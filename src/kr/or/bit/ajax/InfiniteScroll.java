@@ -39,13 +39,14 @@ public class InfiniteScroll extends HttpServlet {
 		REAUserDao reaDao = null;
 		REAUser reaUser = null;
 		SaleDao saleDao = null;
+		int count=0;
 		
 		
 		
 		
 		
 		String ps = request.getParameter("pageSize"); // pagesize
-		String cp = request.getParameter("cp"); 
+		String cp = request.getParameter("cPage"); 
 		
 		
 		
@@ -64,17 +65,42 @@ public class InfiniteScroll extends HttpServlet {
 			reaDao = new REAUserDao();
 			saleDao = new SaleDao();
 			reaUser = reaDao.getREAMypage(reaId);
-			saleList = saleDao.getSaleList(reaId);
+			
+			count = saleDao.getSaleListCount(reaId);
+			System.out.println("카운트는 " + count);
+			
+			if (ps == null || ps.trim().equals("")) {
+				// default 값 설정
+				ps = "10";
+			}
+			if (cp == null || cp.trim().equals("")) {
+				// default 값 설정
+				cp = "1";
+			}
+			int pageSize = Integer.parseInt(ps);
+			int cPage = Integer.parseInt(cp);
+			
+//			int pageCount = 0;
+//			if (count % pageSize == 0) {
+//				pageCount = count / pageSize;
+//			} else {
+//				pageCount = (count / pageSize) + 1;
+//			}
+			
+			saleList = saleDao.getSaleList(reaId, cPage, pageSize);
 			
 
 			if (saleList != null) {
 				JSONArray jsonlist = JSONArray.fromObject(saleList);
-				JSONObject jsonObject= new JSONObject();
-				jsonObject.accumulate("reaUser", reaUser);
-				jsonObject.accumulate("type", type);
+//				JSONObject jsonObject= new JSONObject();
+//				jsonObject.put("reaUser", reaUser);
+//				jsonObject.put("type", type);
+//				jsonObject.put("pageSize", pageSize);
+//				jsonObject.put("cPage", cPage);
 //				request.setAttribute("reaUser", reaUser);
 //				request.setAttribute("type", type);
 				out.print(jsonlist);
+				
 			} else {
 				System.out.println("InfiniteScroll Ajax 오류");
 			}
