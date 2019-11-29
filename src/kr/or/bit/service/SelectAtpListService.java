@@ -22,6 +22,7 @@ public class SelectAtpListService implements Action {
 		String ps = request.getParameter("pageSize"); // pagesize
 		String cp = request.getParameter("cp"); // current page
 		String type = request.getParameter("type");
+
 		Map<Sale, SaleImage> saleMap = new HashMap<Sale, SaleImage>();
 		try {
 			SaleDao dao = new SaleDao();
@@ -43,8 +44,11 @@ public class SelectAtpListService implements Action {
 			} else {
 				pageCount = (count / pageSize) + 1;
 			}
+			System.out.println("saleMap 입구");
 			saleMap = dao.selectAtpList(search, cPage, pageSize);
+			System.out.println("saleMap 출구");
 			if (saleMap != null) {
+				System.out.println("saleMap 널이 아님");
 				request.setAttribute("saleMap", saleMap);
 				request.setAttribute("search", search);
 				request.setAttribute("count", count);

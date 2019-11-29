@@ -363,20 +363,20 @@ public class SaleDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
 		Map<Sale, SaleImage> mapList = null;
 		Sale sale = null;
 		SaleImage saleImg = null;
 		SaleImageDao imgDao = null;
-		String sql_select_aptList = "select X.rnum, X.aptnum, X.aptsize, X.type, X.addr, X.roadaddr, X.aptname, X.aptdong, X.aptho, X.price, X.direction, X.etc, X.iscontract, X.reaid from (select rownum as rnum, A.aptnum, A.aptsize, A.type, A.addr, A.roadaddr, A.aptname, A.aptdong, A.aptho, A.price, A.direction, A.etc, A.iscontract, A.reaid from (select aptnum, aptsize, type, addr, roadaddr, aptname, aptdong, aptho, price, direction, etc, iscontract, reaid from sale order by aptnum) A where rownum <= ?) X where X.rnum >= ? and addr like ? and X.iscontract='무'";
+		String sql_select_aptList = "select X.rnum, X.aptnum, X.aptsize, X.type, X.addr, X.roadaddr, X.aptname, X.aptdong, X.aptho, X.price, X.direction, X.etc, X.iscontract, X.reaid from (select rownum as rnum, A.aptnum, A.aptsize, A.type, A.addr, A.roadaddr, A.aptname, A.aptdong, A.aptho, A.price, A.direction, A.etc, A.iscontract, A.reaid from (select aptnum, aptsize, type, addr, roadaddr, aptname, aptdong, aptho, price, direction, etc, iscontract, reaid from sale where addr like ? order by aptnum) A where rownum <= ?) X where X.rnum >=? and  X.iscontract='무'";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql_select_aptList);
 			int start = cPage * pageSize - (pageSize - 1);
 			int end = cPage * pageSize;
-			pstmt.setInt(1, end);
-			pstmt.setInt(2, start);
-			pstmt.setString(3, "%" + addr + "%");
+			
+			pstmt.setString(1, "%" + addr + "%");
+			pstmt.setInt(2, end);
+			pstmt.setInt(3, start);
 			rs = pstmt.executeQuery();
 
 			imgDao = new SaleImageDao();
