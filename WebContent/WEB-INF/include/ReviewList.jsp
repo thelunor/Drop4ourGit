@@ -82,6 +82,7 @@
 									<div align="right">
 			                    		<button type="submit" id="send" class="btn btn-primary btn-block btn-lg">작성 완료</button>
 									</div></td>
+								
 			                    </tr>
 			                    
 		                   </table>
@@ -100,25 +101,6 @@
 							
 						</table>
 						
-						
-<%-- 						<!--이전 링크 --> <!-- 아직 구현 안 함 -->
-						<c:if test="${cpage>1}">
-							<a href="board_list.jsp?cp=${cpage-1}&ps=${pagesize}">이전</a>
-						</c:if> 
-						<!--페이지 리스트 구현  -->
-						<c:forEach var="i" begin="1" end="${pagecount}" step="1">
-							<c:choose>
-								<c:when test="${cpage==i}">
-									<font color='red'>[${i}]</font>
-								</c:when>
-								<c:otherwise>
-									<a href="board_list.jsp?cp=${i}&ps=${pagesize}">[${i}]</a>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach> <!--다음 링크 --> <c:if test="${cpage<pagecount}">
-							<a href="board_list.jsp?cp=${cpage+1}&ps=${pagesize}">다음</a>
-						</c:if> --%>
-			
 					</div>
 				</div>
 			</div>
@@ -132,15 +114,12 @@
 var reaId = $("#getREAId").val();
 var reviewNum = $("#reviewNum").val();
 var reviewId = $("#reviewId").val();
-var reviewId2 = $("#reviewId").html();
 
 	$(function() {
 		getReviewList();
 		insert_review();
 	});
 	 
-	
-	
 	function insert_review(){
 		$("#send").on("click", function(){
 			var param = {
@@ -154,7 +133,8 @@ var reviewId2 = $("#reviewId").html();
 				type: 'post',
 				data: param,
 				success: function(data) {
-					if(data == "success"){
+					console.log(data);
+					if(data.trim() == "success"){
 						$("#reviewContent").val("");
 						$("#reviewListTbody").empty();
 						getReviewList();
@@ -185,7 +165,7 @@ var reviewId2 = $("#reviewId").html();
 					review += "<td colspan='2' style='height: 100px;'>";
 					review += "<textarea id='reveiwContent' name='reviewContent' rows='3' style='resize: none; width: 100%; border: 1px solid #d2d0d0;' readonly>";
 					review += element.reviewContent+"</textarea>";
-					review += "<input type='hidden' id='reviewNum' value='"+element.reviewNum+"'>";
+					review += "<input type='hidden' id='reviewNum' name='reviewNum' value='"+element.reviewNum+"'>";
 					review += "<div class='row'>"
 					review += "<div class='col-sm-6'>"
 					review += "<button class='btn btn-primary btn-block btn-sm' onclick='delete_review()'>삭제</button></div>";
@@ -197,6 +177,7 @@ var reviewId2 = $("#reviewId").html();
 			}
 	});
 	}
+	
 	function delete_review(){
 		var reviewId = $("#reviewId").text();
 		if(reviewId == $("#getUserId").val()){
@@ -206,7 +187,7 @@ var reviewId2 = $("#reviewId").html();
 				type: 'post',
 				success:function(data){
 					if(data.trim() == "success"){
-						alert("삭제되었습니다.");
+						$("#reviewListTbody").empty();
 						getReviewList();
 					}
 				}
@@ -247,7 +228,7 @@ var reviewId2 = $("#reviewId").html();
 			table += "<textarea id='editContent' name='editContent' class='ckeditor' rows='5'";
 			table += " style='resize: none; width: 100%; border: 1px solid #d2d0d0;'></textarea>";
 			table += "<div align='right'>";
-			table += "<input type='submit' id='edit_send' class='btn btn-primary btn-block btn-lg' value='수정 완료'>";
+			table += "<input type='submit' id='edit_send' class='btn btn-primary btn-block btn-lg' onclick='alert_edit()' value='수정 완료'>";
 			table += "</div></td></tr></table></form>";
 			$("#review_table").append(table);
 			
@@ -256,58 +237,9 @@ var reviewId2 = $("#reviewId").html();
 			return;
 		}
 	}
-	$("#edit_send").click(function(){
-		alert("수정 되었습니다.");
-	});
-	
-	/*
-	
-	function edit_review(){
-		var param = {
-				editNum : $('#editNum').val(),
-				editContent : $('#editContent').val(),
-				editId : $('#editId').val()
-			};
-		$.ajax({
-			url: 'EditReview', // kr.or.bit.ajax
-			dataType: 'text',
-			type: 'post',
-			data: param,
-			success:function(data){
-				if(data.trim() == "success"){
-					alert("수정 되었습니다.");
-					/*
-					$("#editContent").val(""); //여기까지 됨
-					var table = "";
-					table += "<tr>";
-					table += "<td style='padding: 0;'>";
-					table += "<div align='left' style='padding-left: 10px;'>날짜:&nbsp;";
-					table += "<input type='text' id='reviewDate' name='reviewDate' value='"+$("#getDate").val()+"'";
-					table += " readonly='readonly' style='display: inline; width: 50%; padding: 0;'></div>";
-					table += "<td style='padding: 0;'>";
-					table += "<div align='right' style='padding-right: 10px;'>작성자:&nbsp;";
-					table += "<input type='text' id='userId' name='userId' value='"+$("#getUserId").val()+"'";
-					table += " readonly='readonly' style='display: inline; width: 30%; padding: 0;'>";
-					table += "</div></td></tr>";
-					table += "<tr>";
-					table += "<td colspan='4' align='left' id='contentTd'>";
-					table += "<textarea id='reviewContent' name='reviewContent' class='ckeditor' rows='5'";
-					table += " style='resize: none; width: 100%; border: 1px solid #d2d0d0;'></textarea>";
-					table += "<div align='right'>";
-					table += "<button type='submit' id='send' class='btn btn-primary btn-block btn-lg'>작성 완료</button>";
-					table += "</div></td></tr>";
-					$("#reviewTbody").empty();
-					$("#reviewTbody").append(table);
-					getReviewList();
-					
-				}
-				return;
-			}
-		})
-		return;	
+	function alert_edit(){
 	}
-			
-		*/
-		
+	
+	
 
 </script>

@@ -60,8 +60,7 @@ public class InsertReview extends HttpServlet {
     		review.setReviewNum(reviewNum);     		
     		
     		if (result > 0) {
-    		  	JSONArray jsonlist = JSONArray.fromObject(review);
-    		  	out.print(jsonlist);
+    		  	out.print("success");
     		}
     	} catch (Exception e) {
     		System.out.println("InsertReview ajax 예외발생");

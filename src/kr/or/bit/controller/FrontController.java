@@ -236,7 +236,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/GetREAIntroPageService.d4b")) { //일반 사용자가 소개 페이지로
+		} else if (url_Command.equals("/GetREAIntroPageService.d4b")) { 
 			try {
 				action = new GetREAIntroPageService();
 				forward = action.execute(request, response);
