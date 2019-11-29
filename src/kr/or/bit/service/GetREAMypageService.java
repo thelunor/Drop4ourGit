@@ -12,7 +12,6 @@ import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.REAImageDao;
 import kr.or.bit.dao.REAUserDao;
 import kr.or.bit.dao.SaleDao;
-import kr.or.bit.dao.SaleDao2;
 import kr.or.bit.dto.REAImage;
 import kr.or.bit.dto.REAUser;
 import kr.or.bit.dto.Sale;

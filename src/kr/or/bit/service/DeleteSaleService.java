@@ -27,13 +27,10 @@ public class DeleteSaleService implements Action {
 	    	result = dao.deleteSale(aptNum);
 	    	saleList = dao.getSaleList(reaId);
 	    	if(result > 0) {
-	    		System.out.println("여기 타니?");
 	    		forward = new ActionForward();
 	    		request.setAttribute("reaUserId", reaId);
 	    		request.setAttribute("saleList", saleList);
-	    		
 	    		forward.setPath("WEB-INF/include/SaleList.jsp");
-	    		/*GetREAUserByIdService.d4b?reaUserId=?"+reaId*/
 	    	}
 	    }catch(Exception e) {
 	    	

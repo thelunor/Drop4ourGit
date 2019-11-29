@@ -34,14 +34,6 @@ public class SaleDao {
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-
-			// 매물 테이블에 객체 넣기
-//			String sql = "SELECT aptnum INTO salecopy FROM sale";
-//			pstmt=conn.prepareStatement(sql);
-//			rs=pstmt.executeQuery();
-//			String maxNum=rs.getString("maxNum");
-//			System.out.println("maxNum: 맥스넘~ " + maxNum);
-
 			String sql_insert_sale = "insert into sale(aptNum, aptSize, type, addr, roadAddr, aptName, aptDong, aptHo, price, direction, etc, isContract,reaId)"
 					+ " values(seq_aptNum.nextval, ?,(select type from type where type=?),?,?,?,?,?,?,?,?,?,(select reaid from reauser where reaid=?))";
 			pstmt = conn.prepareStatement(sql_insert_sale);
@@ -117,7 +109,6 @@ public class SaleDao {
 				e.printStackTrace();
 			}
 		}
-
 		return sale;
 	}
 
@@ -145,6 +136,38 @@ public class SaleDao {
 
 		return aptNum;
 	}
+	
+	public List<String> getAptNumByAddr(String addr) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<String> aptNumList = new ArrayList<String>();
+		String aptNum="";
+		try {
+			conn = ds.getConnection();
+			String sql = "select aptNum from sale where addr like ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+addr+"%");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				aptNum = rs.getString("aptNum");
+				aptNumList.add(aptNum);
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return aptNumList;
+	}
+	
 
 	public List<Sale> getSaleList(String id) { // 매물 리스트 출력(공인중개사 아이디로)
 		Connection conn = null;

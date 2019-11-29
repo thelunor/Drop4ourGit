@@ -12,51 +12,31 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.service.CheckIntroBoardService;
-import kr.or.bit.service.DeleteBookMarkService;
-import kr.or.bit.service.DeleteContractService;
-import kr.or.bit.service.DeleteGenericUserService;
-import kr.or.bit.service.DeleteREAImgService;
 import kr.or.bit.service.DeleteREAIntroService;
 import kr.or.bit.service.DeleteREAScheduleService;
-import kr.or.bit.service.DeleteREAUserService;
-import kr.or.bit.service.DeleteReviewComService;
-import kr.or.bit.service.DeleteReviewService;
-import kr.or.bit.service.DeleteSaleImgService;
-import kr.or.bit.service.DeleteSaleService2;
+import kr.or.bit.service.DeleteSaleService;
 import kr.or.bit.service.GetBookMarkService;
 import kr.or.bit.service.GetContractService;
-import kr.or.bit.service.GetGenericUserByIdService;
-import kr.or.bit.service.GetGenericUserByResService;
+import kr.or.bit.service.GetGenericUserEditService;
 import kr.or.bit.service.GetGenericUserMypageMainService;
 import kr.or.bit.service.GetGenericUserService;
-import kr.or.bit.service.GetGenericUserEditService;
-import kr.or.bit.service.GetREAImgService;
 import kr.or.bit.service.GetREAIntroBoardContentService;
 import kr.or.bit.service.GetREAIntroDataService;
 import kr.or.bit.service.GetREAIntroPageService;
 import kr.or.bit.service.GetREAIntroPageServiceForUser;
 import kr.or.bit.service.GetREAMypageService;
-import kr.or.bit.service.GetREAScheduleListByDateService;
 import kr.or.bit.service.GetREAScheduleListByIdService;
-import kr.or.bit.service.GetREAScheduleListByScheNumService;
 import kr.or.bit.service.GetREAUserByIdService;
-import kr.or.bit.service.GetREAUserByRegService;
 import kr.or.bit.service.GetREAUserMypageService;
 import kr.or.bit.service.GetREAUserService;
-import kr.or.bit.service.GetReviewComDataService;
 import kr.or.bit.service.GetReviewListService;
 import kr.or.bit.service.GetSaleDataService;
 import kr.or.bit.service.GetSaleEditPageService;
 import kr.or.bit.service.GetSaleImgService;
-import kr.or.bit.service.GetSaleListService;
 import kr.or.bit.service.InsertBookMarkService;
-import kr.or.bit.service.InsertContractService;
 import kr.or.bit.service.InsertGenericUserService;
-import kr.or.bit.service.InsertREAImgService;
 import kr.or.bit.service.InsertREAIntroService;
-import kr.or.bit.service.InsertREAScheduleService;
 import kr.or.bit.service.InsertREAUserService;
-import kr.or.bit.service.InsertReviewComService;
 import kr.or.bit.service.InsertReviewService;
 import kr.or.bit.service.InsertSaleImgService;
 import kr.or.bit.service.InsertSaleService;
@@ -64,16 +44,12 @@ import kr.or.bit.service.LoginService;
 import kr.or.bit.service.LogoutService;
 import kr.or.bit.service.SaleDeleteService;
 import kr.or.bit.service.SelectAtpListService;
-import kr.or.bit.service.SelectAtpListService2;
 import kr.or.bit.service.SelectGenericUserService;
 import kr.or.bit.service.SelectREAUserService;
 import kr.or.bit.service.UpdateContractService;
 import kr.or.bit.service.UpdateGenericUserService;
-import kr.or.bit.service.UpdateREAImgService;
 import kr.or.bit.service.UpdateREAIntroService;
-import kr.or.bit.service.UpdateREAScheduleService;
 import kr.or.bit.service.UpdateREAUserService;
-import kr.or.bit.service.UpdateReviewComService;
 import kr.or.bit.service.UpdateReviewService;
 import kr.or.bit.service.UpdateSaleImgService;
 import kr.or.bit.service.UpdateSaleService;
@@ -100,33 +76,6 @@ public class FrontController extends HttpServlet {
 			action = new CheckIntroBoardService();
 			forward = action.execute(request, response);
 
-		} else if(url_Command.equals("/DeleteBookMarkService.d4b")) {
-			action = new DeleteBookMarkService();
-			forward = action.execute(request, response);
-		
-		// 삭제=========================================
-		
-		} else if (url_Command.equals("/DeleteContractService.d4b")) {
-			try {
-				action = new DeleteContractService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/DeleteGenericUserService.d4b")) {
-			try {
-				action = new DeleteGenericUserService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/DeleteREAImgService.d4b")) {
-			try {
-				action = new DeleteREAImgService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if (url_Command.equals("/DeleteREAIntroService.d4b")) {
 			try {
 				action = new DeleteREAIntroService(); //
@@ -141,37 +90,9 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/DeleteREAUserService.d4b")) {
-			try {
-				action = new DeleteREAUserService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/DeleteReviewComService.d4b")) {
-			try {
-				action = new DeleteReviewComService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/DeleteReviewService.d4b")) {
-			try {
-				action = new DeleteReviewService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/DeleteSaleImgService.d4b")) {
-			try {
-				action = new DeleteSaleImgService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if (url_Command.equals("/DeleteSaleService.d4b")) {
 			try {
-				action = new DeleteSaleService2(); //
+				action = new DeleteSaleService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -208,29 +129,7 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (url_Command.equals("/GetGenericUserByIdService.d4b")) {
-			try {
-				action = new GetGenericUserByIdService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/GetGenericUserByResService.d4b")) {
-			try {
-				action = new GetGenericUserByResService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		} else if (url_Command.equals("/GetREAImgService.d4b")) {
-			try {
-				action = new GetREAImgService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/GetREAIntroDataService.d4b")) {
+		}  else if (url_Command.equals("/GetREAIntroDataService.d4b")) {
 			try {
 				action = new GetREAIntroDataService(); //
 				forward = action.execute(request, response);
@@ -261,13 +160,6 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/GetREAIntroBoardContentService.d4b")) {
 			try {
 				action = new GetREAIntroBoardContentService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/GetREAScheduleListByDateService.d4b")) {
-			try {
-				action = new GetREAScheduleListByDateService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -307,20 +199,6 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/GetREAUserByRegService.d4b")) {
-			try {
-				action = new GetREAUserByRegService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/GetReviewComDataService.d4b")) {
-			try {
-				action = new GetReviewComDataService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if (url_Command.equals("/GetReviewListService.d4b")) {
 			try {
 				action = new GetReviewListService(); //
@@ -356,13 +234,6 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/GetSaleListService.d4b")) {
-			try {
-				action = new GetSaleListService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if (url_Command.equals("/GetSaleEditPageService.d4b")) {
 			try {
 				action = new GetSaleEditPageService(); //
@@ -393,23 +264,9 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/InsertContractService.d4b")) {
-			try {
-				action = new InsertContractService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if (url_Command.equals("/InsertGenericUserService.d4b")) {
 			try {
 				action = new InsertGenericUserService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/InsertREAImgService.d4b")) {
-			try {
-				action = new InsertREAImgService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -421,23 +278,9 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/InsertREAScheduleService.d4b")) {
-			try {
-				action = new InsertREAScheduleService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if (url_Command.equals("/InsertREAUserService.d4b")) {
 			try {
 				action = new InsertREAUserService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/InsertReviewComService.d4b")) {
-			try {
-				action = new InsertReviewComService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -533,13 +376,6 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/UpdateREAImgService.d4b")) {
-			try {
-				action = new UpdateREAImgService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if (url_Command.equals("/UpdateREAIntroService.d4b")) {
 			try {
 				action = new UpdateREAIntroService(); //
@@ -547,28 +383,14 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/UpdateREAScheduleService.d4b")) {
-			try {
-				action = new UpdateREAScheduleService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/UpdateREAUserService.d4b")) {
+		}  else if (url_Command.equals("/UpdateREAUserService.d4b")) {
 			try {
 				action = new UpdateREAUserService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/UpdateReviewComService.d4b")) {
-			try {
-				action = new UpdateReviewComService(); //
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (url_Command.equals("/UpdateReviewService.d4b")) {
+		}  else if (url_Command.equals("/UpdateReviewService.d4b")) {
 			try {
 				action = new UpdateReviewService(); //
 				forward = action.execute(request, response);

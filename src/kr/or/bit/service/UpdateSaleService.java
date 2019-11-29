@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.SaleDao;
-import kr.or.bit.dao.SaleDao2;
 import kr.or.bit.dto.Sale;
 
 public class UpdateSaleService implements Action {
@@ -67,7 +66,7 @@ public class UpdateSaleService implements Action {
 		sale.setAptNum(aptNum);
 		
 		try {
-			SaleDao2 dao = new SaleDao2();
+			SaleDao dao = new SaleDao();
 			
 			result = dao.updateSale(sale);
 						

@@ -8,8 +8,6 @@ import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.AdminDao;
 import kr.or.bit.dao.SaleDao;
-import kr.or.bit.dao.SaleDao2;
-import kr.or.bit.dao.SaleDao3;
 import kr.or.bit.dto.GenericUser;
 import kr.or.bit.dto.Sale;
 
@@ -70,7 +68,7 @@ public class InsertSaleService implements Action {
 		System.out.println("sale 받았당~~"+sale.toString());
 
 		try {
-			SaleDao3 dao = new SaleDao3();
+			SaleDao dao = new SaleDao();
 			result = dao.insertSale(sale);
 			System.out.println("result : " + result);
 			String aptNum = dao.getAptNumByAptInfo(sale.getAptName(), sale.getAptDong(), sale.getAptHo());
@@ -82,7 +80,6 @@ public class InsertSaleService implements Action {
 				request.setAttribute("aptNum", aptNum);
 			} else {
 				forward.setPath("Main.jsp");
-				System.out.println("result가 빵개 입니다.");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
