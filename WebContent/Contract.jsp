@@ -103,7 +103,17 @@ function Btn2(){
 		}
 	});			  
 }
- 
+
+function result(){
+	var price = document.getElementById("price").value;
+	document.getElementById("money").value = price * 0.1;	
+	document.getElementById("money2").value = price * 0.4;
+	document.getElementById("change").value = price * 0.5;
+	document.getElementById("give").value = price * 0.009;
+}
+
+
+
 </script>
 <style type="text/css">
 .container {
@@ -169,8 +179,8 @@ input[type="text"] {
 			<br>
 			<h5>&nbsp;&nbsp;제 1조 위 부동산의 매매에 대하여 매도인과 매수인은 합의에 의하여 매매대금을 아래와 같이 지불하기로 한다.</h5>
 			<table border="1" style="width: 100%; text-align: left; font-size: 14px;"  >
-				<tr ><td style="text-align: center;">매매대금</td><td style="text-align: center; ">一金</td><td><input type="text" id ="price" value="${sale.value.price}" name="#" style="width: 250px" placeholder="10,000">원정 (\&nbsp;<input type="text" name="#" style="width: 150px" placeholder="100,000,000">)
-				<tr ><td style="text-align: center; ">계약금</td><td style="text-align: center; ">一金</td><td><input type="text" name="#" id="money" style="width: 250px">원정은 계약시에 지불하고 영수함. 영수자(<input type="text" placeholder="자필서명" style="width: 70px">)(인)
+				<tr ><td style="text-align: center;">매매대금</td><td style="text-align: center; ">一金</td><td><input type="text" id ="price" value="${sale.value.price}" name="#" style="width: 250px" placeholder="10,000">원정 (\&nbsp;<input type="text" name="#" style="width: 150px" placeholder="100,000,000">)&nbsp;&nbsp;&nbsp;<button type="button" onclick="result();" style="font-size: 10px;">자동 계산</button>
+				<tr ><td style="text-align: center; ">계약금</td><td style="text-align: center; ">一金</td><td><input type="text" id="money" style="width: 250px">원정은 계약시에 지불하고 영수함. 영수자(<input type="text" placeholder="자필서명" style="width: 70px">)(인)
 				<tr ><td style="text-align: center; font-size: 12px">현 임대보증금</td><td style="text-align: center; ">一金</td><td><input type="text" name="#" style="width: 250px">원정은&nbsp;&nbsp;
 						<select>
 							<option>현 상태에서 매수인이 승계함.</option>
@@ -179,9 +189,9 @@ input[type="text"] {
 							<option>매수인이 인수한다.</option>
 							<option>매수인이 인수하지 아니한다.</option>
 						</select>		
-				<tr ><td rowspan="2" style="text-align: center; ">중도금</td><td style="text-align: center; ">一金</td><td><input type="text" name="#" style="width: 250px">원정은 &nbsp;&nbsp;<input type="text" id="jung1" style="width: 100px; text-align: right;">일에 지불한다.</td>
+				<tr ><td rowspan="2" style="text-align: center; ">중도금</td><td style="text-align: center; ">一金</td><td><input type="text" id="money2" style="width: 250px">원정은 &nbsp;&nbsp;<input type="text" id="jung1" style="width: 100px; text-align: right;">일에 지불한다.</td>
 				<tr ><td style="text-align: center; ">一金</td><td><input type="text" name="#" style="width: 250px">원정은 &nbsp;&nbsp;<input type="text" id="jung2" style="width: 100px; text-align: right;">일에 지불한다.</td>
-				<tr ><td style="text-align: center; ">잔금</td><td style="text-align: center; ">一金</td><td><input type="text" name="change" style="width: 250px" placeholder="1억">원정은 &nbsp;&nbsp;<input type="text" id="jan" style="width: 100px; text-align: right;">일에 지불한다.</td>
+				<tr ><td style="text-align: center; ">잔금</td><td style="text-align: center; ">一金</td><td><input type="text" id="change" style="width: 250px" placeholder="1억">원정은 &nbsp;&nbsp;<input type="text" id="jan" style="width: 100px; text-align: right;">일에 지불한다.</td>
 			</table>
 			</c:forEach>
 			<br>
@@ -194,7 +204,7 @@ input[type="text"] {
 			<span style="font-size: 14px">제 7조 [중개보수] 개업공인중개사는 매도인 또는 매수인의 본 계약 불이행에 대하여 책임을 지지 않는다. 또한 중개보수 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;는 본 계약 체결과 동시에 계약 당사자 쌍방이 각각 지불하며,  개업공인중개사의 고의나 과실없이 본 계약이 무 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;효, 취소 또는 해제 되어도 중개보수는 지급한다. 공동중개인 경우에 매도인과 매수인은 자신이 중개 의뢰한 개업 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공인중개사에게 각각 중개보수를 지급한다.</span><br>
 			<span style="font-size: 14px">제 8조 [중개보수 외] 매도인 또는 매수인이 본 계약 이외의 업무를 의뢰한 경우,  이에 관한 보수는 중개보수와는 별도로  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;지급하며 그 금액은 합의에 의한다.</span><br>
 			<span style="font-size: 14px">제 9조 [중개대상물확인설명서 교부 등] 개공인중개사는 중개대상물확인설명서를 작성하고 업무보증관계증서(공제증서  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;등) 사본을 첨부하여 거래당사자 쌍방에게 교부한다. (교부일자: <input type="text" id="kobu" style="width: 100px; text-align: right;">)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset"  value="계약조항 초기화"></span><br>
-			<span style="font-size: 14px">중개보수는 <input type="text" style="width: 120px">원 으로 한다. (부가가치세 별도, 계약서인쇄 생략)</span><br>
+			<span style="font-size: 14px">중개보수는 <input type="text" id="give" style="width: 120px">원 으로 한다. (부가가치세 별도, 계약서인쇄 생략)</span><br>
 			<span style="font-size: 14px"></span><br>
 			<br>
 			<br>
