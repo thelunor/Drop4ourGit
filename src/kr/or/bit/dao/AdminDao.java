@@ -184,11 +184,42 @@ public class AdminDao {
 		return 0;
 	}
 
-	public int updateBlack(GenericUser user) { // 블랙리스트 추가/삭제
-		/*
-		 * if(user.black ==1){ user.black=0; } else{ user.black=1; }
-		 */
-		return 0;
+	public int updateBlack(String blackId) { // 블랙리스트 추가/삭제
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int resultRow = 0;
+		try {
+			conn = ds.getConnection();
+			String sql = "update reaUser set usercode=(select usercode from usercode where usercode=?) where reaId=?";
+
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("쿼리문 실행");
+
+			pstmt.setString(1, "B02");
+			pstmt.setString(2, blackId);
+			resultRow = pstmt.executeUpdate();
+			if(resultRow ==0) {
+				pstmt.close();
+				sql = "update genericUser set usercode=(select usercode from usercode where usercode=?) where reaId=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, "B01");
+				pstmt.setString(2, blackId);
+				resultRow = pstmt.executeUpdate();
+				System.out.println("resultRow: " + resultRow + " / 업데이트 성공" );
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		
+			try {
+				DB_Close.close(pstmt);
+				DB_Close.close(conn);
+			} catch (SQLException e) {
+				System.out.println("black 예외");
+			}
+		}
+		return resultRow;
 	}
 
 }
