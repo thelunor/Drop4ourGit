@@ -19,15 +19,75 @@
 <title>Drop 4our bit</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript">
+var count=10;
+
+$(function () {
+	
+	$(window).scroll(function () {
+	var type=$("#type").val();	
+   	 if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+   		 console.log('InfiniteScroll?type='+type);
+        $.ajax({
+            url: 'InfiniteScroll',
+            type: 'get',
+            dataType: 'json',
+            data: {
+                "type": $("#type").val(),
+                "count": 10
+            },
+            success: function (data) {
+//              	<td>${saleData.aptSize}</td>
+// 				<td>${saleData.type}</td>
+// 				<td>${saleData.addr}</td>
+// 				<td>${saleData.aptName}</td>
+// 				<td>${saleData.aptDong}</td>
+// 				<td>${saleData.aptHo}</td>
+// 				<td>${saleData.price}</td>
+// 				<td>${saleData.isContract}</td>
+// 				<td><button type='button' class='btn-group-sm' id='edit_btn' onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td>
+// 				<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
+             	 
+               	 $.each(data, function (index, element) {
+                    var list = "";
+                    list += "<tr>";
+                    list += "<td>" + element.aptSize + "</td>";
+                    list += "<td>" + element.type + "</td>";
+                    list += "<td>" + element.addr + "</td>";
+                    list += "<td>" + element.aptName + "</td>";
+                    list += "<td>" + element.aptDong + "</td>";
+                    list += "<td>" + element.aptHo + "</td>";
+                    list += "<td>" + element.price + "</td>";
+                    list += "<td>" + element.isContract + "</td>";
+                   // list += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href = 'editForm.d4b?empNo="+element.empNo+"' > 수정</button > " + "</td > ";
+                    list += "<td><button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href='GetSaleEditPageService.d4b?aptNum=" + element.aptNum + "'>수정</button></td>";
+                    //<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
+                    list += "<td><button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "location.href='SaleDeleteService.d4b?aptNum="+element.aptNum+"' > 삭제</button ></td > ";
+                    //list += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
+                    list += "</tr>";
+
+                    $('#tbody').append(list);
+                    
+	                })
+	            }
+	        })
+	    }
+	});
+});
+</script>
 <jsp:include page="./css/css.jsp"></jsp:include>
 <%
 	REAUser reaUser = (REAUser) request.getAttribute("reaUser");
 	REAImage reaImg = (REAImage) request.getAttribute("reaImg");
-	System.out.println(reaUser);
 	String userId = (String) session.getAttribute("userId");
 	SaleDao2 dao = new SaleDao2();
 	List<Sale> saleList = new ArrayList<Sale>();
 	saleList = dao.getSaleList(userId); //reaId로 리스트 불러오기
+	
+	String type= request.getParameter("type");
+	if(type==null){
+		type= (String) request.getAttribute("type");
+	}
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
 <c:set var="reaImgData" value="<%=reaImg%>"></c:set>
@@ -157,6 +217,7 @@ input {
 										<div class="table-responsive">
 											<table class="table table-bordered" width="100%"
 												cellspacing="0">
+												<input type="hidden" id="type" value="<%=type%>">
 												<thead>
 													<tr>
 														<th>면적</th>

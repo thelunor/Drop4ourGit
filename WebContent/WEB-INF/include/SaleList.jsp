@@ -16,14 +16,16 @@
     String reaId = (String) request.getAttribute("reaUserId");
     int result = 0;
 	saleList = (List) request.getAttribute("saleList");
-	System.out.print("여기여기");
 	SaleDao dao = new SaleDao();
 	result = dao.deleteSale(aptNum);
 	saleList = dao.getSaleList(reaId);
 	if(result > 0) {
-		System.out.println("여기 타니?");
 		request.setAttribute("reaUserId", reaId);
 		request.setAttribute("saleList", saleList);
+	}
+	String type=null;
+	if(type==null || type.trim()==""){
+		type= (String) request.getAttribute("type");
 	}
 	
 	
@@ -33,6 +35,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Member List</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
 </head>
 <body>
 	<div class="card-header py-3">
@@ -58,6 +63,7 @@
 				</thead>
 				<tbody>
 				<c:forEach var="saleData" items="<%=saleList%>" varStatus="status">
+					<input type="hidden" id="type" value=<%=type %>>
 					<tr>
 						<td>${saleData.aptSize}</td>
 						<td>${saleData.type}</td>

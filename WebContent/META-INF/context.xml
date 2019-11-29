@@ -15,7 +15,7 @@
             maxIdle="10000" 
             maxActive="10000" 
             password="1004" 
-            username="dodo" 
+            username="hi" 
             url="jdbc:oracle:thin:@localhost:1521:XE"
             driverClassName="oracle.jdbc.OracleDriver" 
             type="javax.sql.DataSource"

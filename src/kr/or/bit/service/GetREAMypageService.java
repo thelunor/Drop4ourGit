@@ -11,6 +11,7 @@ import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
 import kr.or.bit.dao.REAImageDao;
 import kr.or.bit.dao.REAUserDao;
+import kr.or.bit.dao.SaleDao;
 import kr.or.bit.dao.SaleDao2;
 import kr.or.bit.dto.REAImage;
 import kr.or.bit.dto.REAUser;
@@ -22,27 +23,29 @@ public class GetREAMypageService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
 		REAUser reaUser = new REAUser();
-		REAImage reaImg=new REAImage();
+		REAImage reaImg = new REAImage();
 		List<Sale> saleList = new ArrayList<Sale>();
-		
-		REAUserDao reaDao = null;
-		REAImageDao imgDao=null;
-		SaleDao2 saleDao = null;
-		HttpSession session = request.getSession();
-		String reaId = (String)session.getAttribute("userId");
-		String type=(String)request.getAttribute("type");
-		System.out.println("reaId 임돠"+reaId);
-		try {
 
+		REAUserDao reaDao = null;
+		REAImageDao imgDao = null;
+		SaleDao saleDao = null;
+		HttpSession session = request.getSession();
+		String reaId = (String) session.getAttribute("userId");
+		String type = (String) request.getAttribute("type");
+		
+		int count=0;
+		try {
 			forward = new ActionForward();
 			reaDao = new REAUserDao();
 			imgDao = new REAImageDao();
-			saleDao = new SaleDao2();
+			saleDao = new SaleDao();
 			reaUser = reaDao.getREAMypage(reaId);
-			reaImg =imgDao.getREAImg(reaId);
+			reaImg = imgDao.getREAImg(reaId);
 			saleList = saleDao.getSaleList(reaId);
+			count = saleDao.getSaleListCount(reaId);
+			System.out.println("카운트는 " + count);
 
-			if (reaUser != null && reaImg != null && saleList != null ) {
+			if (reaUser != null && reaImg != null && saleList != null) {
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("saleList", saleList);

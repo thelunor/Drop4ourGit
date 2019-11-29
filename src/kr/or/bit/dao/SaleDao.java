@@ -185,6 +185,48 @@ public class SaleDao {
 		}
 		return saleList;
 	}
+	
+	public int getSaleListCount(String id) { // 매물 리스트 출력(공인중개사 아이디로)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Sale> saleList = null;
+		int count=0;
+		
+		try {
+			conn = ds.getConnection();
+			String sql_select_sale = "select aptnum,aptsize,type,addr,aptname,aptdong,aptho,price,iscontract from sale where reaid=?";
+			pstmt = conn.prepareStatement(sql_select_sale);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			saleList = new ArrayList<Sale>();
+			while (rs.next()) {
+				Sale sale = new Sale();
+				sale.setAptNum(rs.getString("aptNum")); // 매물번호
+				sale.setAptSize(rs.getString("aptSize")); // 면적
+				sale.setType(rs.getString("type")); // 유형
+				sale.setAddr(rs.getString("addr")); // 주소
+				sale.setAptName(rs.getString("aptName")); // 아파트이름
+				sale.setAptDong(rs.getString("aptDong")); // 동
+				sale.setAptHo(rs.getString("aptHo")); // 호수
+				sale.setPrice(rs.getString("price")); // 매매가
+				sale.setIsContract(rs.getString("isContract"));
+				saleList.add(sale);
+				count++;
+			}
+		} catch (Exception e) {
+			
+		} finally {
+			DB_Close.close(pstmt);
+			DB_Close.close(rs);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return count;
+	}
 
 	public int updateSale(Sale sale) { // 매물 수정 (2019/11/24/알파카)
 		Connection conn = null;

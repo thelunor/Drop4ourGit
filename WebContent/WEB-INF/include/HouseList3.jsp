@@ -17,40 +17,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d0c0a21e3bf46994d7f7a41d9cc729f&libraries=services"></script>
    <script type="text/javascript">
 	        $(function () {
-	            $(window).scroll(function () {
-	                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-	                    $.ajax({
-	                        url: 'InfiniteScroll',
-	                        type: 'post',
-	                        data: {
-	                            "search": $("#search").val()
-	                        },
-	                        dataType: 'json',
-	                        success: function (data) {
-	                            $("#tbody").empty();
-	    
-	                            $.each(data, function (index, element) {
-	    
- 	                                console.log(element);
-	    
-// 	                                var dNametable = "";
-// 	                                dNametable += "<tr>";
-// 	                                dNametable += "<td>" + element.eName + "</td>";
-// 	                                dNametable += "<td>" + element.empNo + "</td>";
-// 	                                dNametable += "<td>" + element.job + "</td>";
-// 	                                dNametable += "<td>" + element.sal + "</td>";
-// 	                                dNametable += "<td>" + element.dName + "</td>";
-// 	                                dNametable += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href = 'editForm.d4b?empNo="+element.empNo+"' > 수정</button > " + "</td > ";
-// 	                                dNametable += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "
-// 	                                location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
-// 	                                dNametable += "</tr>";
-	    
-// 	                                $('#tbody').append(dNametable);
-	                            })
-	                        }
-	                    })
-	                }
-	            });
+
 	            
 	            $('.slick-items').slick({
 	                autoplay : true,
