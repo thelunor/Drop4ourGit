@@ -71,7 +71,11 @@ $(function () {
 	                    //<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
 	                    list += "<td><button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "location.href='SaleDeleteService.d4b?aptNum="+element.aptNum+"' > 삭제</button ></td > ";
 	                    //list += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
-	                    list += "<td><button type='button' class='btn-group-sm' id='contract_btn' onclick=" + "location.href='GetContractService.d4b?userId=" + element.reaId + "&aptNum=" + element.aptNum +"'>계약</button></td>";
+	                   if(element.isContract == "무"){
+	                    list += "<td><button type='button' class='btn-group-sm' id='contract_btn' onclick=" + "location.href='GetContractService.d4b?userId=" +$('#reaId').val()+ "&aptNum=" + element.aptNum +"'>계약</button></td>";
+	                   }else{
+	                	   list += "<td><button type='button' class='btn-group-sm' id='con_btn' disabled='disabled'>계약</button></td>";   
+	                   }
 	                    list += "</tr>";
 	
 	                    $('#tbody').append(list);
@@ -84,7 +88,49 @@ $(function () {
 		        })//ajax
 		    } //fetchList
 	 fetchList();
+    	    
 });
+
+
+function ContractList(){
+	
+	$.ajax({
+        url : 'ContractList',
+        type : 'post',
+        data : {"isContract" : "유"},
+        dataType : 'json',
+        success : function(data) {	
+            $("#saleList").empty();
+            
+            var clist ="";
+        	clist +="<div class='card-header py-3'><h6 class='m-0 font-weight-bold text-primary'>계약 관리</h6></div>";
+			clist +="<div class='card-body'><div class='table-responsive'><table class='table table-bordered' width='100%' cellspacing='0'>";
+            clist +="<thead><tr><th>면적</th><th>유형</th><th>주소</th><th>아파트이름</th><th>동</th><th>호수</th><th>매매가</th></tr></thead>";                
+            clist +="<tbody id='tbody'>";
+            clist +="</tbody></table></div></div></div>";
+            
+            $('#saleList').append(clist); 
+            
+            $.each(data, function(index, element) {
+            	
+             	var con = "";
+             	con += "<tr>";
+             	con += "<td>" + element.aptSize + "</td>";
+             	con += "<td>" + element.type + "</td>";
+             	con += "<td>" + element.addr + "</td>";
+             	con += "<td>" + element.aptName + "</td>";
+             	con += "<td>" + element.aptDong + "</td>";
+             	con += "<td>" + element.aptHo + "</td>";
+             	con += "<td>" + element.price + "</td>";               	
+                con += "</tr>";                         		                                      
+                
+                $('#tbody').append(con);     
+	
+            });
+        }
+	});
+	
+}
 </script>
 <jsp:include page="./css/css.jsp"></jsp:include>
 <%
@@ -99,10 +145,12 @@ $(function () {
 	if(type==null){
 		type= (String) request.getAttribute("type");
 	}
+	
+
 %>
 <c:set var="reaUserData" value="<%=reaUser%>"></c:set>
 <c:set var="reaImgData" value="<%=reaImg%>"></c:set>
-
+							
 <style type="text/css">
 .input-group {
 	height: 50px;
@@ -146,7 +194,13 @@ input {
 	border: 0.5px solid #eee;
 	color: #ff6863;
 }
-
+#con_btn:hover {
+	background-color: #eee;
+	border-color: #eee;
+	border: 0.5px solid #eee;
+	color: black;
+	font-weight: bold;
+}
 .btn-group-sm {
 	color: #fff;
 	background-color: #ff6863;
@@ -210,14 +264,14 @@ input {
 			                     <div class="col-md-12">
 			                        <input type="submit" class="btn-group" value="매물 등록">
 			                        &nbsp;
-			                        <button type="submit" class="btn-group">계약 관리</button>
+			                        <button type="button" class="btn-group" onclick="ContractList();">계약 관리</button>
 			                        &nbsp;
 			                        <button type="button" class="btn-group" onclick="location.href='CheckIntroBoardService.d4b'">소개글 관리</button>
 			                        &nbsp;
 			                        <button type="button" class="btn-group" onclick="location.href='GetREAScheduleListByIdService.d4b?userId=${reaUserData.reaId}'">일정 관리</button>
 			                        &nbsp;
 			                        <button type="button" class="btn-group" onclick="location.href='GetREAMypageEditService.d4b'">정보 수정</button>
-			                        
+			                        <input type="hidden" value="<%=userId %>" id="reaId">
 			                        <br> <br>
 			                        <div id="saleList">
 			                           <div class="card-header py-3">
@@ -225,8 +279,7 @@ input {
 			                           </div>
 			                           <div class="card-body">
 			                              <div class="table-responsive">
-			                                 <table class="table table-bordered" width="100%"
-			                                    cellspacing="0">
+			                                 <table class="table table-bordered" width="100%" cellspacing="0">
 			                                    <thead>
 			                                       <tr>
 			                                          <th>면적</th>
@@ -242,29 +295,8 @@ input {
 			                                          <th>계약</th>
 			                                       </tr>
 			                                    </thead>
-			                                    <tbody id="tbody">
-<%-- 			                                       <c:forEach var="saleData" items="<%=saleList%>" --%>
-<%-- 			                                          varStatus="status"> --%>
-<!-- 			                                          <input type="hidden" id="aptNum" -->
-<%-- 			                                             value="${saleData.aptNum}"> --%>
-<!-- 			                                          <tr> -->
-<%-- 			                                             <td>${saleData.aptSize}</td> --%>
-<%-- 			                                             <td>${saleData.type}</td> --%>
-<%-- 			                                             <td>${saleData.addr}</td> --%>
-<%-- 			                                             <td>${saleData.aptName}</td> --%>
-<%-- 			                                             <td>${saleData.aptDong}</td> --%>
-<%-- 			                                             <td>${saleData.aptHo}</td> --%>
-<%-- 			                                             <td>${saleData.price}</td> --%>
-<%-- 			                                             <td>${saleData.isContract}</td> --%>
-<!-- 			                                             <td><button type='button' class='btn-group-sm' -->
-<!-- 			                                                   id='edit_btn' -->
-<%-- 			                                                   onclick="location.href='GetSaleEditPageService.d4b?aptNum=${saleData.aptNum}'">수정</button></td> --%>
-<!-- 			                                             <td><button type='button' class='btn-group-sm' -->
-<%-- 			                                                   id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td> --%>
-<!-- 			                                             <td><button type='button' class='btn-group-sm' -->
-<%-- 			                                                   id='contract_btn' onclick="location.href='GetContractService.d4b?userId=${reaUserData.reaId}&aptNum=${saleData.aptNum}'">계약</button></td> --%>
-<!-- 			                                          </tr> -->
-<%-- 			                                       </c:forEach> --%>
+			                                    <tbody id="tbody">	
+			                                    		                                      
 			                                    </tbody>
 			                                 </table>
 										</div>
