@@ -62,7 +62,6 @@
 	<div class="row">
 	<div class="col-md-6">
 		<jsp:include page="WEB-INF/chart/Chart_0.jsp"></jsp:include>	
-		
 		<br>
 		<br>
 		<jsp:include page="WEB-INF/chart/barChart.jsp"></jsp:include>				
@@ -71,7 +70,8 @@
 		<jsp:include page="WEB-INF/chart/Chart_1.jsp"></jsp:include>	
 		<br>
 		<br>
-		혜리파트	
+		<!-- 뉴스 -->
+		<jsp:include page="WEB-INF/news/News.jsp"></jsp:include>	
 	</div>		
 	</div>
 	</div>
