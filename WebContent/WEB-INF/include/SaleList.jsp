@@ -1,5 +1,4 @@
 <%@page import="kr.or.bit.dao.SaleDao"%>
-<%@page import="kr.or.bit.dao.SaleDao2"%>
 <%@page import="kr.or.bit.service.GetSaleDataService"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.bit.dto.Sale"%>

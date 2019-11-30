@@ -55,15 +55,12 @@ public class UpdateSaleImgService implements Action {
 			 saleImg.setAptNum(aptNum);
 			
 			 
-			
-			 
-			 
 	         SaleImageDao dao = new SaleImageDao();
 
 	         result = dao.updateSaleImg(saleImg);
 	         
 	         	        
-	         forward.setPath("SaleImgUpdateFinish.jsp");
+	         forward.setPath("WEB-INF/sale/SaleImgUpdateFinish.jsp");
 
 	      }catch (Exception e) {
 

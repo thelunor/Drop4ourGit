@@ -20,7 +20,7 @@
 								<div class="row">
 								<div class="col-sm-4"></div>						           
 						        <div class="col-sm-4">
-						        	 <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='REAMypage.jsp'">마이페이지</button>
+						        	 <button type="submit" class="btn btn-primary btn-block btn-lg" onclick="location.href='GetREAMypageService.d4b?type=U02'">마이페이지</button>
 						        </div>
 						        <div class="col-sm-4"></div>
 						        </div> 		

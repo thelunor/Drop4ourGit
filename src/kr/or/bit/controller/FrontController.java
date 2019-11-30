@@ -154,7 +154,7 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/GetREAIntroBoardService.d4b")) { //공인중개사가 후기 작성 페이지로
 			try {
 				forward = new ActionForward();
-				forward.setPath("/REAIntroBoard.jsp");
+				forward.setPath("/WEB-INF/rea/REAIntroBoard.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -175,7 +175,7 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/GetREAScheduleListByIdServiceOk.d4b")) {
 			try {
 				forward = new ActionForward();
-				forward.setPath("/REASchedule.jsp");
+				forward.setPath("/WEB-INF/rea/REASchedule.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -211,6 +211,13 @@ public class FrontController extends HttpServlet {
 			try {
 				forward = new ActionForward();
 				forward.setPath("/REAIntro.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/GetSaleAddPageService.d4b")) {
+			try {
+				forward = new ActionForward();
+				forward.setPath("/WEB-INF/sale/SaleAdd.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

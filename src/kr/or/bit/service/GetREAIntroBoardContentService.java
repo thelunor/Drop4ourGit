@@ -22,7 +22,7 @@ public class GetREAIntroBoardContentService implements Action {
 			dao = new REAIntroBoardDao();
 			introBoard = dao.getREAIntroData(reaId);
 			if(introBoard != null) {
-				forward.setPath("REAIntroBoard_content.jsp");
+				forward.setPath("/WEB-INF/rea/REAIntroBoard_content.jsp");
 				request.setAttribute("introBoard", introBoard);
 			}
 		}catch(Exception e) {

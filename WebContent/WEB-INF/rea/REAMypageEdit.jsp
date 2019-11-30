@@ -165,8 +165,8 @@ img.avatar {
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6">
-												<input type="submit"
-													class="btn btn-primary btn-block btn-lg" value="수정 완료">
+												<button type="submit"
+													class="btn btn-primary btn-block btn-lg">수정 완료</button>
 											</div>
 											<div class="col-sm-6">
 												<button type="reset"

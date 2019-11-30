@@ -20,7 +20,7 @@ public class GetSaleEditPageService implements Action {
 			sale = dao.getSaleDataByAptNum(aptNum); //DB에서 가져온 정보 객체에 저장
 			if(sale !=null) {
 				request.setAttribute("sale", sale);
-				forward.setPath("SaleEdit.jsp?aptNum="+aptNum);
+				forward.setPath("/WEB-INF/sale/SaleEdit.jsp?aptNum="+aptNum);
 			}
 		}catch(Exception e) {
 			

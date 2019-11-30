@@ -7,6 +7,7 @@ import java.util.Enumeration;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -29,6 +30,9 @@ public class InsertSaleImgService implements Action {
       ActionForward forward = new ActionForward();
       ServletContext application = request.getServletContext();
       String uploadpath = application.getRealPath("reaimg");
+      HttpSession session = request.getSession();
+      String userId = (String) session.getAttribute("userId");
+      String userType = (String) request.getAttribute("type");
       int result = 0;
       int size = 1024 * 1024 * 10; // 10M 네이버 계산기
 
@@ -67,7 +71,7 @@ public class InsertSaleImgService implements Action {
          result = dao.insertSaleImg(saleImg);
          
         
-         forward.setPath("SaleImgUploadFinish.jsp");
+         forward.setPath("WEB-INF/sale/SaleImgUploadFinish.jsp");
 
       }catch (Exception e) {
 

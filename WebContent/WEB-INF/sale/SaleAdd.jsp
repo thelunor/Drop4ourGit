@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	String userId = (String) session.getAttribute("userId");
+	String type= request.getParameter("type");
+	if(type==null){
+		type= (String) request.getAttribute("type");
+	}
+%>	
 <!doctype html>
 <html class="no-js" lang="en">
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap"
@@ -80,9 +87,7 @@ h2 {
 			<!-- Side jsp -->
 			<jsp:include page="./../include/Side.jsp"></jsp:include>
 		</nav>
-		<!--Login Sections-->
-		<%String reaId=request.getParameter("reaId"); %>
-		<section id="join" class="about roomy-100">
+	<section id="join" class="about roomy-100">
 
 			<div class="container">
 				<div class="about_content">
@@ -179,7 +184,7 @@ h2 {
 								</div>
 								<input type="hidden" id="isContract" name="isContract" value="무">
 								<br>
-								<br> <input type="hidden" value="<%=reaId%>" name="reaId"
+								<br> <input type="hidden" value="<%=userId%>" name="reaId"
 									id="reaId">
 								<div class="form-group">
 									<div class="row">

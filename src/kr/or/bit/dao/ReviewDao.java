@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +51,11 @@ public class ReviewDao {
 			System.out.println("리뷰등록 dao 예외발생");
 			System.out.println(e.getMessage());
 		} finally {
+			DB_Close.close(pstmt);
 			try {
-				pstmt.close();
 				conn.close();
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
+			} catch (SQLException e) {
+				System.out.println("GenericUserLogin 예외");
 			}
 		}
 		return row;
@@ -84,8 +85,14 @@ public class ReviewDao {
 			}
 		}catch(Exception e) {
 			
-		}finally {
-			
+		} finally {
+			DB_Close.close(rs);
+			DB_Close.close(pstmt);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("GenericUserLogin 예외");
+			}
 		}
 		return review;
 	}

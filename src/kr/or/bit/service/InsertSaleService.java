@@ -16,6 +16,9 @@ public class InsertSaleService implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("userId");
+		String userType = (String) request.getAttribute("type");
 		int result = 0;
 		// 1. 데이터 받기 id, pwd, name, frontResNum, backResNum, phoneNum, addr, roadAddr
 		// String aptNum = request.getParameter("aptNum");
@@ -47,7 +50,6 @@ public class InsertSaleService implements Action {
 		}
 		String etc = request.getParameter("etc");
 		String isContract = request.getParameter("isContract");
-		String id = request.getParameter("reaId"); // reaId받아오기
 
 		// 2. 객체에 데이터 저장
 
@@ -63,10 +65,8 @@ public class InsertSaleService implements Action {
 		sale.setDirection(direction);
 		sale.setEtc(etc);
 		sale.setIsContract(isContract);
-		sale.setId(id);
+		sale.setId(userId);
 		
-		System.out.println("sale 받았당~~"+sale.toString());
-
 		try {
 			SaleDao dao = new SaleDao();
 			result = dao.insertSale(sale);
@@ -75,11 +75,11 @@ public class InsertSaleService implements Action {
 			Sale sale2 = dao.getSaleDataByAptNum(aptNum);
 						
 			if (result > 0) {
-				forward.setPath("SaleAdd2_2.jsp");
+				forward.setPath("WEB-INF/sale/SaleAdd2.jsp?type="+userType);
 				request.setAttribute("sale2", sale2);
 				request.setAttribute("aptNum", aptNum);
 			} else {
-				forward.setPath("Main.jsp");
+				forward.setPath("/Main.jsp");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

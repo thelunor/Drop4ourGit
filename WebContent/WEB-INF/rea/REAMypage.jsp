@@ -228,7 +228,7 @@ input {
 		</nav>
 		<!--Join Sections-->
 		<section id="id" class="about roomy-100">
-			<form action="SaleAdd.jsp?reaId=${reaUserData.reaId}" method="post">
+			<form action="GetSaleAddPageService.d4b" method="post">
 				<div class="container">
 					<div class="about_content">
 						<h2>My Page</h2>
