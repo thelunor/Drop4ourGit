@@ -18,7 +18,7 @@ String path = request.getContextPath();
 				}
 				%>
 				</li>		
-				<li class="join"><a href="../view/JoinPage.jsp">회원가입</a></li>
+				<li class="join"><a href="view/JoinPage.jsp">회원가입</a></li>
 				<li class="side-menu">
 				<%
 					String id = null;
