@@ -14,7 +14,7 @@ String path = request.getContextPath();
 				if(session.getAttribute("adminId") != null){
 					out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 				}else{
-					out.print("<a href ='"+path+"/view/Login.jsp'>로그인</a>");
+					out.print("<a href ='LoginService.d4b'>로그인</a>");
 				}
 				%>
 				</li>		

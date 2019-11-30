@@ -15,7 +15,7 @@
 				<%
 					System.out.println("타입쓰는 ? " + type);
 					if (type==null || type.trim().equals("")) {
-						out.print("<a href ='../view/Login.jsp'>로그인</a>");
+						out.print("<a href ='LoginService.d4b'>로그인</a>");
 					} else {
 						out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 					}
