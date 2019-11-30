@@ -5,11 +5,10 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+<!-- <link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> -->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script src="../../js/jquery.bootstrap.newsbox.min.js"
-	type="text/javascript"></script>
+<script src="../../js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
 <style>
 .glyphicon {
 	margin-right: 4px !important; /*override*/
