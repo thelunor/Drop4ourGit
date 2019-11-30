@@ -66,7 +66,7 @@ $(function() {
 		var userId = $('#userId').val();
 		var idReg = /^[a-zA-Z0-9]{4,12}$/;
 		$.ajax({
-			url : 'JoinIdCheck?userId='+ userId,
+			url : '../JoinIdCheck?userId='+ userId,
 			type : 'get',
 			success : function(data) {
 				console.log("1 = 중복o / 0 = 중복x : "+ data);							
@@ -97,6 +97,50 @@ $(function() {
 				}
 			});
 		});
+		
+    let idReg = /^[a-z]{1}[a-z0-9]{2,15}$/; //3~16자리의 영문+숫자 조합의 id 정규표현식
+    let passReg = /^[A-Za-z0-9]{3,16}$/; //3~16자리의 영문+숫자 조합의 비밀번호 정규표현식
+    let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//email정규표현식
+    let ssn1Reg = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))/; // 생년월일 정규식
+    let ssn2Reg = /[1-4][0-9]{6}$/; // 뒷자리 정규식
+    let phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;//휴대폰 정규표현식
+
+      
+    $('#reaPwd').keyup(function() { // 비밀번호 입력 유효성 검사
+        if (passReg.test($('reaPwd').val())) {
+            $('#pwd_check').text("3~16자리의 문자와 숫자 형태의 패스워드를 입력해주세요.");
+        	$("#signUp").attr("disabled", true);
+        } else {
+            $('#pwd_check').text("동일한 패스워드를 한 번 더 입력해주세요.");
+            $('#pwdCheck').keyup(function() { // 비밀번호 일치 유효성 검사
+                if ($('#reaPwd').val() != $('#pwdCheck').val()) {
+                    $('#pwd_pwd_check').text("암호가 일치하지 않습니다.");
+                	$("#signUp").attr("disabled", true);
+                } else {
+                    $('#pwd_pwd_check').text("암호가 일치합니다.");
+                }
+            });
+        }
+    });
+    
+    $('#reaPhoneNum').keyup(function(){
+        if(emailReg.test($('#reaPhoneNum').val())){ //정규표현식에 맞으면
+           $('#phone_check').text("");
+        }else{
+           $('#phone_check').text("형식에 맞지 않습니다.");
+           $("#signUp").attr("disabled", true);
+        }
+     });
+
+    $('#email').keyup(function(){
+        if(emailReg.test($('#email').val())){ //정규표현식에 맞으면
+           $('#check_email').text("");
+       	$("#signUp").attr("disabled", true);
+        }else{
+           $('#tdEmail').text("형식에 맞지 않습니다.");
+           check=false;
+        }
+     });
 });
 </script>
 </head>
@@ -132,17 +176,19 @@ $(function() {
 										<label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="id_check"></span></label>
 										<input type="text" class="form-control" name="userId"
 											id="userId" required="required">
-										
+										<div id="userId_check"></div>
 									</div>
 									<div class="form-group">
 										<label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>
 										<input type="password" class="form-control" name="userPwd"
 											id="userPwd" required="required">
+											<div id="pwd_check"></div>
 									</div>
 									<div class="form-group">
 										<label>비밀번호 확인 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 										<input type="password" class="form-control" name="pwdCheck"
 											id="pwdCheck" required="required">
+											<div id="pwd_pwd_check"></div>
 									</div>
 									<div class="form-group">
 										<label>이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
@@ -162,6 +208,7 @@ $(function() {
 										<label>휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 										<input type="text" class="form-control" name="userPhoneNum"
 											id="userPhoneNum" required="required" placeholder="010-0000-0000">
+											<div id="phone_check"></div>
 									</div>
 									<div class="form-group">
 										<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
@@ -184,14 +231,14 @@ $(function() {
 													class="btn btn-primary btn-block btn-lg">Sign Up</button>
 											</div>
 											<div class="col-sm-6">
-												<button type="reset"
-													class="btn btn-primary btn-block btn-lg">Cancel</button>
+												<button type="submit"
+													class="btn btn-primary btn-block btn-lg" onclick="location.href='../getMain.d4b'">Cancel</button>
 											</div>
 										</div>
 									</div>
 									<br> <br>
 									<div class="text-center">
-										이미 회원이신가요? <a href="LoginPageService.d4b">Click here</a>
+										이미 회원이신가요? <a href="../LoginPageService.d4b">Click here</a>
 									</div>
 
 									<br> <br> <br>

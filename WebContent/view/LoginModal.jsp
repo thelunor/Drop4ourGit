@@ -133,7 +133,7 @@ h2, h4, h6, h3 {
 						<div class="col-md-6">
 							<div class="form-group">
 
-								<button type="submit" class="btnJoin" onclick="location.href='JoinCheckGeneric.jsp'">
+								<button type="submit" class="btnJoin" onclick="location.href='../JoinCheckGeneric.jsp'">
 									<i class="fas fa-user"></i> 일반
 								</button>
 							</div>
@@ -141,7 +141,7 @@ h2, h4, h6, h3 {
 						<div class="col-md-6">
 							<div class="form-group">
 								<button type="submit" class="btnJoin"
-									style="padding-left: 20px; padding-right: 20px;" onclick="location.href='JoinCheckREA.jsp'">
+									style="padding-left: 20px; padding-right: 20px;" onclick="location.href='../JoinCheckREA.jsp'">
 									<i class="fas fa-home"></i> 공인중개인
 								</button>
 							</div>
