@@ -14,11 +14,12 @@ String path = request.getContextPath();
 				if(session.getAttribute("adminId") != null){
 					out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 				}else{
-					out.print("<a href ='LoginService.d4b'>로그인</a>");
+					out.print("<a href =' " + path +"/LoginService.d4b'>로그인</a>");
+
 				}
 				%>
 				</li>		
-				<li class="join"><a href="view/JoinPage.jsp">회원가입</a></li>
+				<li class="join"><a href="<%=request.getContextPath() %>/view/JoinPage.jsp">회원가입</a></li>
 				<li class="side-menu">
 				<%
 					String id = null;

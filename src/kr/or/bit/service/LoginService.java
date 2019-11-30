@@ -16,12 +16,11 @@ public class LoginService implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
-		PrintWriter out=null;
+		PrintWriter out = null;
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession(true);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 
@@ -32,7 +31,9 @@ public class LoginService implements Action {
 			REAUserDao rDao = new REAUserDao();
 			String gResult = null;
 			String rResult = null;
+			System.out.println("rResult"+rResult);
 
+			System.out.println("rResult"+rResult);
 			if (aDao.adminLogin(id, pwd)) { // 관리자 로그인 성공 시
 				System.out.println(aDao.adminLogin(id, pwd));
 				forward.setPath("/UserMain.jsp");
@@ -62,6 +63,9 @@ public class LoginService implements Action {
 			} else if (gResult.equals("B01") || rResult.equals("B02")) {// 블랙회원이 로그인 했을 때
 				forward.setPath("/BlackLogin.jsp");
 				System.out.println("블랙 회원 로그인");
+				return forward;
+			} else if (gResult == null || rResult == null) {
+				forward.setPath("LoginPageService.d4b");
 				return forward;
 			} else {
 				forward.setPath("/view/Login.jsp"); // 아이디 또는 비밀번호가 일치하지 않을 때
