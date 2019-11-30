@@ -71,44 +71,6 @@
 			float: none;
 		}
 	</style>
-	
-	<script type="text/javascript">
-		/* jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
-			// 두 줄은 충돌방지
-			
-			// 여기부터 날짜입력 달력
-			var monthNames = [];
-			for(var i = 1 ; i <=12 ;i++){
-				monthNames.push(i + "월")
-			}
-			
-			$("#selectdate").datepicker({
-				dateFormat: "yy. mm. dd",
-				prevText:"이전달", //이전달 Tool tip text
-				nextText:"다음달",  //다음달 Tool tip text
-				monthNames: monthNames,//['1월','2월'] 배열 //각 월표현
-				yearSuffix: '년',
-				numberOfMonths: 1			
-			})
-			
-			$('#selectdate').datepicker("option","onSelect",function(selectedDate){
-				//selectedDate 선택한 날짜를 받는 변수
-				//console.log(selectedDate);
-				//div 달력
-			});
-			
-		}) */
-		
- 		// summernote 충돌로 인해 일단 보류
-		/* jQuery( document ).ready(function( $ ) {//화면 다 뜨면 시작
-		     $('#summernote').summernote({
-				height: 200, // set editor height
-				minHeight: null, // set minimum height of editor
-				maxHeight: null, // set maximum height of editor
-				focus: true // set focus to editable area after initializing summernote
-		     });
-		}); */
-	</script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">
 	
@@ -117,7 +79,7 @@
 
 		<nav class="navbar navbar-light navbar-expand-lg navbar-fixed ivory no-background bootsnav">
 		<!-- Top jsp -->
-			<jsp:include page="../include/REAUser_Top.jsp" />
+			<jsp:include page="../include/User_Top.jsp" />
 
 		<!-- Side jsp -->
 			<jsp:include page="../include/Side.jsp" />

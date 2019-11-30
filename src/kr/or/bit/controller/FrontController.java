@@ -238,7 +238,7 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/GetSaleDataServiceOk.d4b")) {
 			try {
 				forward = new ActionForward();
-				forward.setPath("/SaleDetail.jsp");
+				forward.setPath("/WEB-INF/sale/SaleDetail.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -370,7 +370,7 @@ public class FrontController extends HttpServlet {
 		} else if (url_Command.equals("/SelectAptListServiceOk.d4b")) { // 아파트 목록보기
 			try {
 				forward = new ActionForward();
-				forward.setPath("/HouseListMain.jsp");
+				forward.setPath("/WEB-INF/sale/HouseListMain.jsp");
 				System.out.println("SelectAptListServiceOk컨트롤러끝난부분입니당: ");
 			} catch (Exception e) {
 				e.printStackTrace();

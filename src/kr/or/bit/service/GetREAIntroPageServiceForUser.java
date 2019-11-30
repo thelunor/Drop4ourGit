@@ -54,7 +54,8 @@ public class GetREAIntroPageServiceForUser implements Action {
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("rvList", rvList);
 				request.setAttribute("reaIntro", reaIntro);
-				forward.setPath("REAIntro.jsp");
+				request.setAttribute("type", "U01");
+				forward.setPath("/WEB-INF/rea/REAIntro.jsp");
 			}
 		} catch (Exception e) {
 			System.out.println("getREAIntroPageService 예외발생");
