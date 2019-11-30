@@ -32,9 +32,6 @@ public class DeleteReview extends HttpServlet {
         response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
     	String reviewNum = request.getParameter("reviewNum");
-    	System.out.println("그으으을번호"+reviewNum);
-    	//String reaId = request.getParameter("reaId");
-    	//List<Review> reviewList = null;
     	ReviewDao dao = null;
     	int result = 0;
     	try {

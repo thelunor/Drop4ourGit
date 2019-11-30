@@ -40,7 +40,7 @@ public class DeleteBookMark extends HttpServlet {
 			result = dao.deleteBookMark(userId, aptNum);
 			if(result > 0) {
 				System.out.println("result"+result);
-				out.print("<script>alert('북마크가 삭제 되었습니다.')</script>");
+				out.print("success");
 			}
     
 		}catch(Exception e) {

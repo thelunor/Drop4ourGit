@@ -151,8 +151,6 @@ public class SaleImageDao {
 			
 			resultRow = pstmt.executeUpdate();
 			
-			//2. sale 테이블에서 아파트 이름, 동, 호수 가져오기
-			String sql_select_aptInfo = "";
 			
 			if(resultRow>0) {
 				conn.commit();
