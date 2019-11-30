@@ -13,9 +13,8 @@ public class LogoutService implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
-
 		session.invalidate();
-		forward.setPath("Login.jsp");	
+		forward.setPath("/views/Login.jsp");	
 		return forward;
 	}
 }
