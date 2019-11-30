@@ -411,12 +411,54 @@ $(function() {
         data : {"reaId" : $("#reaId").val()},
         dataType : 'json',
         success : function(data) {	
+        	console.log(data.length);
+			console.log(data);
             $.each(data, function(index, element) {
             	var allData = "";
             	var no = element.scheNum;
             	console.log(no);
             	allData += "<li id='sche'><input type='hidden' id='scheNum' value='"+element.scheNum+"'>"+element.content+"<button class='close' type='button' onclick="+"location.href='DeleteREAScheduleService.d4b?reaId=" +$('#reaId').val()+ "&scheNum=" + element.scheNum +"'>\u00D7</button></li>";  
             	$('#myUL').append(allData);
+            	
+            	if(index %2 ==0){
+            		
+            	  var schedule1 = "";
+          	      schedule1 += "<li>";
+          	      schedule1 += "<div class='timeline-badge'>";
+          	      schedule1 += "<i class='fas fa-check'></i>";
+          	      schedule1 += "</div>";
+          	      schedule1 += "<div class='timeline-panel'>";
+          	      schedule1 += "<div class='timeline-heading'>";
+          	      schedule1 += "<h4 class='timeline-title'>20"+element.scheDate.year+"."+element.scheDate.month+1+"."+element.scheDate.date+" "+element.scheDate.hours+":"+element.scheDate.minutes+"</h4>";
+          	      schedule1 += "</div>";
+          	      schedule1 += "<div class='timeline-body'>";
+          	      schedule1 += "<p>"+element.content+"</p>";
+          	      schedule1 += "</div>";
+          	      schedule1 += "</div>";
+          	      schedule1 += "</li>";
+          	      
+          	      $('#timetable').append(schedule1);
+          	      
+            	}else if(index %2 ==1){
+            		
+              	  var schedule2 = "";
+        	      schedule2 += "<li class='timeline-inverted'>";
+        	      schedule2 += "<div class='timeline-badge success'>";
+        	      schedule2 += "	<i class='fas fa-check'></i>";
+          	      schedule2 += "</div>";
+          	      schedule2 += "<div class='timeline-panel'>";
+          	      schedule2 += "<div class='timeline-heading'>";
+          	      schedule2 += "<h4 class='timeline-title'>20"+(element.scheDate.year)+"."+element.scheDate.month+1+"."+element.scheDate.date+" "+element.scheDate.hours+":"+element.scheDate.minutes+"</h4>";
+          	      schedule2 += "</div>";
+          	      schedule2 += "<div class='timeline-body'>";
+          	      schedule2 += "<p>"+element.content+"</p>";
+          	      schedule2 += "</div>";
+          	      schedule2 += "</div>";
+          	      schedule2 += "</li>";
+          	      
+          	      $('#timetable').append(schedule2);            		
+           		
+            	}
             });
         }
 	});	
@@ -513,47 +555,8 @@ $(function() {
 								<h3 id="timeline">My Schedule</h3>
 							</div>
 							<div id="timeContent">
-							<ul class="timeline" id="timetable">
-								<c:forEach var="schedule" items="<%=sList%>" varStatus="status">
-									<c:choose>
-										<c:when test="${status.count %2 == 1}">
-											<li>
-												<div class="timeline-badge">
-													<i class="fas fa-check"></i>
-												</div>
-												<div class="timeline-panel">
-													<div class="timeline-heading">
-														<h4 class="timeline-title">
-															<fmt:formatDate value="${schedule.scheDate}"
-																pattern="yyyy.MM.dd HH:mm" />
-														</h4>
-													</div>
-													<div class="timeline-body">
-														<p>${schedule.content}</p>
-													</div>
-												</div>
-											</li>
-										</c:when>
-										<c:when test="${status.count %2 == 0}">
-											<li class="timeline-inverted">
-												<div class="timeline-badge success">
-													<i class="fas fa-check"></i>
-												</div>
-												<div class="timeline-panel">
-													<div class="timeline-heading">
-														<h4 class="timeline-title">
-															<fmt:formatDate value="${schedule.scheDate}"
-																pattern="yyyy.MM.dd HH:mm" />
-														</h4>
-													</div>
-													<div class="timeline-body">
-														<p>${schedule.content}</p>
-													</div>
-												</div>
-											</li>
-										</c:when>
-									</c:choose>
-								</c:forEach>
+							<ul class="timeline" id="timetable">								
+
 								</ul>
 							</div>
 						</div>
