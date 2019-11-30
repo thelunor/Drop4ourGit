@@ -16,7 +16,6 @@ public class DeleteBookMarkService implements Action{
 		String aptNum = request.getParameter("aptNum");
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("userId");
-
 		int result = 0;
 		BookMarkDao dao = null;
 		try {

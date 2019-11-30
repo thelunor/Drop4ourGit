@@ -4,7 +4,6 @@
 String adminId = (String) session.getAttribute("adminId");
 String path = request.getContextPath();
 %>	
-
 	<!-- Start Atribute Navigation -->
 	<div class="container">
 		<div class="attr-nav">

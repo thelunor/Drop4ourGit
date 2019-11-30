@@ -77,10 +77,10 @@ public class InsertREAUserService implements Action {
 				AdminDao dao = new AdminDao();
 				int result = dao.insertREAUser(user, reaImg);
 				if (result > 0) {
-					forward.setPath("JoinFinish.jsp");
+					forward.setPath("/WEB-INF/join/JoinFinish.jsp");
 					request.setAttribute("type", userCode);
 				} else {
-					forward.setPath("JoinREA.jsp");
+					forward.setPath("/WEB-INF/join/JoinREA.jsp");
 				}
 			} catch (Exception e) {
 				System.out.println("회원가입 서비스 실패");
