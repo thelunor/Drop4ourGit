@@ -11,10 +11,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<jsp:include page="./css/css.jsp"></jsp:include>
+<jsp:include page="css/css.jsp"></jsp:include>
 <style>
 .home {
-	background: url(<%=request.getContextPath() %>/images/home.jpg) no-repeat bottom center !important;
+	background: url(./images/home.jpg) no-repeat bottom center !important;
 	background-size: cover;
 	position: relative;
 }
@@ -27,9 +27,9 @@
 	padding-left: 80px;
 	padding-right: 80px;
 }
+
 </style>
 </head>
-
 <body data-spy="scroll" data-target=".navbar-collapse">
 	<!-- Preloader -->
 	<div id="loading">
@@ -52,7 +52,6 @@
 			<!-- Start Side Menu -->
 			<jsp:include page="WEB-INF/include/Side.jsp"></jsp:include>
 			<!-- End Side Menu -->
-
 		</nav>
 		<!--Home Sections-->
 	<jsp:include page="WEB-INF/include/Home.jsp"></jsp:include>	

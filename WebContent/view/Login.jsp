@@ -3,7 +3,6 @@
 <!doctype html>
 <html class="no-js" lang="en">
 <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
-
 <head>
     <meta charset="utf-8">
     <title>Drop 4our bit</title>

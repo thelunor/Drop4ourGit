@@ -18,7 +18,7 @@ String path = request.getContextPath();
 				}
 				%>
 				</li>		
-				<li class="join"><a href="<%=request.getContextPath() %>/view/JoinPage.jsp">회원가입</a></li>
+				<li class="join"><a href="view/JoinPage.jsp">회원가입</a></li>
 				<li class="side-menu">
 				<%
 					String id = null;
@@ -38,8 +38,8 @@ String path = request.getContextPath();
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggler" data-toggle="collapse"
 				data-target="#navbar-menu"></button>
-			<a class="navbar-brand" href="<%=request.getContextPath() %>/Main.jsp"> <img src="<%=request.getContextPath() %>/images/logo2.png" class="logo logo-display m-top-10" alt="">
-				<img src="<%=request.getContextPath() %>/images/logo.jpg" class="logo logo-scrolled" alt="">
+			<a class="navbar-brand" href="Main.jsp"> <img src="images/logo2.png" class="logo logo-display m-top-10" alt="">
+				<img src="images/logo.jpg" class="logo logo-scrolled" alt="">
 			</a>
 		</div>
 	</div>

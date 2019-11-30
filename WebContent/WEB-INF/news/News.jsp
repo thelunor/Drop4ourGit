@@ -7,13 +7,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../../css/site.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="./js/jquery.bootstrap.newsbox.min.js"
+<script src="../../js/jquery.bootstrap.newsbox.min.js"
 	type="text/javascript"></script>
 <style>
 .glyphicon {
@@ -52,7 +47,6 @@
 					$.each(items, function(index, element) {
 						console.log(element.title);
 						console.log(element.link);
-						
 						var table = "<li class='news-item'>";
 						table +="<table cellpadding='4'>";
 						table +="<tr>";
