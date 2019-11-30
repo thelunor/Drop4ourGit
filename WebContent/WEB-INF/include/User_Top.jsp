@@ -15,7 +15,7 @@
 				<%
 					System.out.println("타입쓰는 ? " + type);
 					if (type==null || type.trim().equals("")) {
-						out.print("<a href ='Login.jsp'>로그인</a>");
+						out.print("<a href ='../view/Login.jsp'>로그인</a>");
 					} else {
 						out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 					}
@@ -24,7 +24,7 @@
 			<li class="join">
 				<%
 					if (type == null || type.trim() == "") {
-						out.print("<a href='JoinPage.jsp'>회원가입</a>");
+						out.print("<a href='../view/JoinPage.jsp'>회원가입</a>");
 					} 
 				%>							
 			</li>
@@ -54,9 +54,9 @@
 		<button type="button" class="navbar-toggler" data-toggle="collapse"
 			data-target="#navbar-menu"></button>
 
-		<a class="navbar-brand" href="./UserMain.jsp?type=<%=type%>" > <img
-			src="./images/logo2.png" class="logo logo-display m-top-10" alt="">
-			<img src="./images/logo.jpg" class="logo logo-scrolled" alt="">
+		<a class="navbar-brand" href="GetUserMainPageService.d4b?type=<%=type%>" > <img
+			src="<%=request.getContextPath() %>/images/logo2.png" class="logo logo-display m-top-10" alt="">
+			<img src="<%=request.getContextPath() %>/images/logo.jpg" class="logo logo-scrolled" alt="">
 		</a>
 	</div>
 </div>

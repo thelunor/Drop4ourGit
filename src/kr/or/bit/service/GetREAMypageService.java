@@ -48,7 +48,7 @@ public class GetREAMypageService implements Action {
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("saleList", saleList);
 				request.setAttribute("type", type);
-				forward.setPath("REAMypage.jsp");
+				forward.setPath("/WEB-INF/rea/REAMypage.jsp");
 			} else {
 				System.out.println("조회 실패");
 				forward.setPath("/AdminMain.jsp");

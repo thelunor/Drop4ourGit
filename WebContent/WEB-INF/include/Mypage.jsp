@@ -166,8 +166,7 @@ function deleteBk(obj){
          <div class="col-lg-2">
             <div class="list-group">
                <a class="list-group-item"></a>
-               <a href="#" class="list-group-item">북마크</a> <a href="#"
-                  class="list-group-item">계약관리</a> <a
+               <a href="#" class="list-group-item">북마크</a> <a
                   href="GetGenericUserEditService.d4b?genericUserId=<%=genericUserId%>"
                   class="list-group-item">정보수정</a>
             </div>

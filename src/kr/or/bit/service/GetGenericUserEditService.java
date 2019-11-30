@@ -30,10 +30,10 @@ public class GetGenericUserEditService implements Action {
 			if (user != null) {
 				request.setAttribute("genericUser", user);
 				request.setAttribute("type",type);
-				forward.setPath("GenericUserEdit.jsp");
+				forward.setPath("/WEB-INF/generic/GenericUserEdit.jsp");
 			} else {
 				System.out.println("조회 실패");
-				forward.setPath("Main.jsp");
+				forward.setPath("/Main.jsp");
 			}
 		} catch (Exception e) {
 

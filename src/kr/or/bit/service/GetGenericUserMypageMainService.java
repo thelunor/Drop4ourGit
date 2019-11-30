@@ -30,10 +30,10 @@ public class GetGenericUserMypageMainService implements Action {
 				System.out.println("일반 회원 마이페이지 페이지!!!!");
 				request.setAttribute("genericUser", user);
 				request.setAttribute("type",type);
-				forward.setPath("MypageMain.jsp");
+				forward.setPath("/WEB-INF/generic/MypageMain.jsp");
 			} else {
 				System.out.println("조회 실패");
-				forward.setPath("Main.jsp");
+				forward.setPath("/Main.jsp");
 			}
 		} catch (Exception e) {
 

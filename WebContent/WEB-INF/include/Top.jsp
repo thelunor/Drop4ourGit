@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%	
 String adminId = (String) session.getAttribute("adminId");
+String path = request.getContextPath();
 %>	
+
 	<!-- Start Atribute Navigation -->
 	<div class="container">
 		<div class="attr-nav">
@@ -12,8 +14,8 @@ String adminId = (String) session.getAttribute("adminId");
 				if(session.getAttribute("adminId") != null){
 					out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 				}else{
-					out.print("<a href ='Login.jsp'>로그인</a>");
-				}	
+					out.print("<a href ='"+path+"/view/Login.jsp'>로그인</a>");
+				}
 				%>
 				</li>		
 				<li class="join"><a href="JoinPage.jsp">회원가입</a></li>
@@ -36,8 +38,8 @@ String adminId = (String) session.getAttribute("adminId");
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggler" data-toggle="collapse"
 				data-target="#navbar-menu"></button>
-			<a class="navbar-brand" href="./Main.jsp"> <img src="./images/logo2.png" class="logo logo-display m-top-10" alt="">
-				<img src="./images/logo.jpg" class="logo logo-scrolled" alt="">
+			<a class="navbar-brand" href="<%=request.getContextPath() %>/Main.jsp"> <img src="<%=request.getContextPath() %>/images/logo2.png" class="logo logo-display m-top-10" alt="">
+				<img src="<%=request.getContextPath() %>/images/logo.jpg" class="logo logo-scrolled" alt="">
 			</a>
 		</div>
 	</div>

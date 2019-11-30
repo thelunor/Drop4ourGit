@@ -47,7 +47,7 @@ public class UpdateGenericUserService implements Action {
 			String type = user.getUserCode();
 			if(result > 0) {
 				request.setAttribute("type",type);
-				forward.setPath("GenericUserEditOk.jsp");
+				forward.setPath("/WEB-INF/generic/GenericUserEditOk.jsp");
 				System.out.println("db 수정완료");
 			}else {
 				forward.setPath("GetGenericUserMypageMainService.d4b?genericUserId="+genericUserId);
