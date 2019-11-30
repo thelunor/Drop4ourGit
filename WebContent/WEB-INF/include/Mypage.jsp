@@ -98,10 +98,9 @@ function getBookMark(aptSize){
         data : {"userId" : $("#myId").val()},
         dataType : 'json',
         success : function(data) {   
-           $("#bmContent").empty();
-            $.each(data, function(index, element) {   
+            $("#bmContent").empty();
+            $.each(data, function(index, element) {
       
-               
                if(element.aptSize==aptSize){
                   
                var content = "";
@@ -110,7 +109,7 @@ function getBookMark(aptSize){
                content += "<div class='card'>";
                content += "<div class='contain'>";
                content += "<img class='card-img-top img-fluid' src='reaimg/"+element.saleImgSaveName1+"' width='100%' height='220'>";         
-               content += "<div id='text' style='display:inline'><button type='button' class='close' onclick='deleteBk()'><i class='fa fa-trash' aria-hidden='true'style='padding:0;border: none;background: none; color:white;'></i></button></div>";       
+               content += "<div id='text' style='display:inline'><button class='close' type='button' onclick="+"location.href='DeleteBookMarkService.d4b?userId=" +$('#myId').val()+ "&aptNum=" + element.aptNum +"'><i class='fa fa-trash' aria-hidden='true'style='padding:0;border: none;background: none; color:white;'></i></button></div>";       
                content += "</div>";
                content += "<div class='card-body'>";
                content += "<ul>";
@@ -118,6 +117,7 @@ function getBookMark(aptSize){
                content += "<li><i class='fa fa-check-circle text-primary'></i>"+element.type+"</li>";   
                content += "<li><i class='fa fa-check-circle text-primary'></i>"+element.price+"만 원</li>";
                content += "<input type='hidden' id='aptNum' value='"+element.aptNum+"'>";
+               content += "<input type='hidden' id='aptSize' value='"+element.aptSize+"'>";
                content += "</ul>";
                content += "</div>";
                content += "</div>";
@@ -140,19 +140,28 @@ var close = document.getElementsByClassName("close");
         }
       }
 
-function deleteBk(obj){
+function deleteBk(){
 
    var userId = $("#myId").val();
    var aptNum = $("#aptNum").val();
+   var aptSize = $("#aptSize").val();
 
    $.ajax({
-      url : 'DeleteBookMark?userId='+userId+'&aptNum='+aptNum,
+      url : 'DeleteBookMark?userId='+userId+'&aptNum='+aptNum+'&aptSize='+aptSize,
       type: 'post',
       dataType : 'html',
       success : function(data){
-         $("#bookmark").empty();
-         $("#bookmark").append(data);
+    	  console.log(data);
+          if(data.trim()=="success"){
+        	  $("#bmContent").empty();
+        	  getBookMark(aptSize);
+         } 
+         
+         /* $("#bookmark").empty();
+         $("#bookmark").append(data); */
+      	
       }
+   
     });
    
    
@@ -166,9 +175,8 @@ function deleteBk(obj){
          <div class="col-lg-2">
             <div class="list-group">
                <a class="list-group-item"></a>
-               <a href="#" class="list-group-item">북마크</a> <a
-                  href="GetGenericUserEditService.d4b?genericUserId=<%=genericUserId%>"
-                  class="list-group-item">정보수정</a>
+               <a href="#" class="list-group-item">북마크</a>
+               <a href="GetGenericUserEditService.d4b?genericUserId=<%=genericUserId%>" class="list-group-item">정보수정</a>
             </div>
          </div>
          <div class="col-lg-1"></div>
@@ -181,7 +189,7 @@ function deleteBk(obj){
             <a href="#" onclick="getBookMark('24')">24평</a> &nbsp; | &nbsp; <a href="#" onclick="getBookMark('32')">32평</a>&nbsp; |
             &nbsp; <a href="#" onclick="getBookMark('42')">42평</a> &nbsp;
 
-            <h6 style="float: right;"><img src="images/love.gif" style="width: 40px; height: 30px;"><%=genericUserId%> 님의 페이지입니다</h6>
+            <h6 style="float: right;"><img src="<%=request.getContextPath() %>/images/love.gif" style="width: 40px; height: 30px;"><%=genericUserId%> 님의 페이지입니다</h6>
             </div>
             </div>
             <hr>

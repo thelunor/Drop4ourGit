@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
+import kr.or.bit.ajax.DeleteBookMark;
 import kr.or.bit.service.CheckIntroBoardService;
+import kr.or.bit.service.DeleteBookMarkService;
 import kr.or.bit.service.DeleteREAIntroService;
 import kr.or.bit.service.DeleteREAScheduleService;
 import kr.or.bit.service.DeleteSaleService;
@@ -95,6 +97,34 @@ public class FrontController extends HttpServlet {
 			try {
 				action = new DeleteSaleService(); //
 				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/DeleteREAScheduleService.d4b")) {
+			try {
+				action = new DeleteREAScheduleService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/DeleteSaleService.d4b")) {
+			try {
+				action = new DeleteSaleService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/DeleteBookMarkService.d4b")) {
+			try {
+				action = new DeleteBookMarkService(); //
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (url_Command.equals("/DeleteBookMarkServiceOk.d4b")) {
+			try {
+				forward = new ActionForward();
+				forward.setPath("/WEB-INF/generic/MypageMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

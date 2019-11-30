@@ -411,47 +411,16 @@ $(function() {
         data : {"reaId" : $("#reaId").val()},
         dataType : 'json',
         success : function(data) {	
-        	console.log(data);
             $.each(data, function(index, element) {
-            	console.log(element);
             	var allData = "";
             	var no = element.scheNum;
             	console.log(no);
-            	allData += "<li id='sche'>"+element.content+"<button class='close' type='button' onclick='DeleteSchedule()'>\u00D7</button></li>";  
+            	allData += "<li id='sche'><input type='hidden' id='scheNum' value='"+element.scheNum+"'>"+element.content+"<button class='close' type='button' onclick="+"location.href='DeleteREAScheduleService.d4b?reaId=" +$('#reaId').val()+ "&scheNum=" + element.scheNum +"'>\u00D7</button></li>";  
             	$('#myUL').append(allData);
             });
         }
 	});	
-	
-	// Click on a close button to hide the current list item
-	var close = document.getElementsByClassName("close");
-	var i;
-	for (i = 0; i < close.length; i++) {
-	  close[i].onclick = function() {
-	    var div = this.parentElement;
-	    console.log(div);
-	    div.style.display = "none";
-	  }
-	}
-});
-
-
-function DeleteSchedule(){
-
-	var reaId = $("#reaId").val();
-	var scheNum = $("#scheNum").val();
-
-	$.ajax({
-		url : 'DeleteSchedule?reaId='+reaId+'&scheNum='+scheNum,
-		type: 'post',
-		dataType : 'html',
-		success : function(data){		
-			
-		}
-	 });
-   
-   
-}
+});		
 </script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse">

@@ -101,11 +101,11 @@ public class BookMarkDao {
 		int resultRow = 0;
 		try {
 			conn = ds.getConnection();
-			String sql_deleteBk = "delete from bookmark where userid=? and aptnum=?";
+			String sql_deleteBk = "delete from bookmark"
+					+" where userid=(select userid from genericuser where userid=?) and aptnum=(select aptnum from sale where aptnum=?)";
 			pstmt = conn.prepareStatement(sql_deleteBk);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, aptNum);
-			
 			resultRow = pstmt.executeUpdate();
 			if(resultRow > 0) {
 				System.out.println("북마크 삭제 완료");

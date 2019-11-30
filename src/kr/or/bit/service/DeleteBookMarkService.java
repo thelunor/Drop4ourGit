@@ -1,41 +1,33 @@
 package kr.or.bit.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.or.bit.action.Action;
 import kr.or.bit.action.ActionForward;
-import kr.or.bit.dao.REAScheduleDao;
-import kr.or.bit.dto.REASchedule;
+import kr.or.bit.dao.BookMarkDao;
 
-public class DeleteREAScheduleService implements Action {
+public class DeleteBookMarkService implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = null;
-		String scheNum = request.getParameter("scheNum");
-		System.out.println(scheNum);
+		String aptNum = request.getParameter("aptNum");
 		HttpSession session = request.getSession();
-		String reaId = request.getParameter("reaId");
-		System.out.println("아이디 " + reaId);
+		String userId = (String) session.getAttribute("userId");
 
 		int result = 0;
-		REAScheduleDao dao = null;
-		System.out.println("탄다");
+		BookMarkDao dao = null;
 		try {
-			dao = new REAScheduleDao();
-			result = dao.deleteREASchedule(reaId, scheNum);
-			System.out.println(result);
+			dao = new BookMarkDao();
+			result = dao.deleteBookMark(userId, aptNum);
 			if (result > 0) {
 				forward = new ActionForward();
 	    		request.setAttribute("result", result);
-	
-	    		
-	    	forward.setPath("REASchedule.jsp");
+	    		request.setAttribute("type", "U01");
+	    		System.out.println("북마크 삭제");
+	    	forward.setPath("DeleteBookMarkServiceOk.d4b");
 			}
 
 		} catch (Exception e) {
@@ -44,5 +36,4 @@ public class DeleteREAScheduleService implements Action {
 
 		return forward;
 	}
-
 }
