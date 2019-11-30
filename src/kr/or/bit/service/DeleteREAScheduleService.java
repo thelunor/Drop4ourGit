@@ -22,7 +22,6 @@ public class DeleteREAScheduleService implements Action {
 		HttpSession session = request.getSession();
 		String reaId = request.getParameter("reaId");
 		System.out.println("아이디 " + reaId);
-
 		int result = 0;
 		REAScheduleDao dao = null;
 		System.out.println("탄다");
@@ -35,7 +34,7 @@ public class DeleteREAScheduleService implements Action {
 	    		request.setAttribute("result", result);
 	
 	    		
-	    	forward.setPath("REASchedule.jsp");
+	    	forward.setPath("/WEB-INF/rea/REASchedule.jsp");
 			}
 
 		} catch (Exception e) {

@@ -151,54 +151,9 @@
 									<div style="margin-top: 20px; margin-bottom: 20px;">
 										<hr>
 									</div>
-								
-								<!-- 세 번째 매물 -->
-									<section>
-										<div class="container-fluid">
-											<div class="col-lg-12 text-center" style="background-color: #cccccc;">
-												<div id="myCarousel" class="carousel slide" data-ride="carousel">
-													<!-- Indicators -->
-													<ul class="carousel-indicators">
-														<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-														<li data-target="#myCarousel" data-slide-to="1"></li>
-														<li data-target="#myCarousel" data-slide-to="2"></li>
-													</ul>
-													
-													<!-- Slideshow -->
-													<div class="carousel-inner">
-														<div class="carousel-item active">
-															<img src="images/84a.jpg" width="100%">
-															<h5>1111</h5>
-															<br>
-														</div>
-														<div class="carousel-item">
-															<img src="images/84a.jpg" width="100%">
-															<h5>2222</h5>
-															<br>
-														</div>
-														<div class="carousel-item">
-															<img src="images/84a.jpg" width="100%">
-															<h5>3333</h5>
-															<br>
-														</div>
-													</div>
-													
-													<!-- Left and right controls -->
-													<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-														<span class="carousel-control-prev-icon"></span>
-													</a>
-													<a class="carousel-control-next" href="#myCarousel" data-slide="next">
-														<span class="carousel-control-next-icon"></span>
-													</a>
-												</div>
-											</div>
-										</div>
-									</section>
+						
 									<div style="margin-top: 20px; margin-bottom: 20px;">
-										<hr>
 									</div>
-								
-								<!-- 네 번째 후기 -->
 								<div>
 									<jsp:include page="./../include/ReviewList.jsp" />
 								</div>

@@ -582,7 +582,7 @@ $(function() {
 	}, false);
 
 	// Create a new list item when clicking on the "Add" button
-	function newElement() {
+	 function newElement() {
 	  var li = document.createElement("li");
 	  var inputValue = document.getElementById("myInput2").value;
 
