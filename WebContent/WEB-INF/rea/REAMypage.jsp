@@ -327,8 +327,7 @@ input {
 							function(event) {
 								var aptNum = event.target.value;
 								console.log(aptNum);
-								$
-										.ajax({
+								$.ajax({
 											url : $(),
 											type : 'post',
 											dataType : 'json',

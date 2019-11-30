@@ -35,7 +35,7 @@ public class UpdateContractService implements Action {
 			result = dao.updateContractSale(sale);
 						
 			if (result > 0) {
-				forward.setPath("ContractFinish.jsp");
+				forward.setPath("/WEB-INF/sale/ContractFinish.jsp");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

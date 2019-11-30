@@ -114,6 +114,13 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (url_Command.equals("/GetContractServiceOk.d4b")) {
+			try {
+				forward = new ActionForward();
+				forward.setPath("/WEB-INF/sale/Contract.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (url_Command.equals("/GetGenericUserEditService.d4b")) {
 			try {
 				action = new GetGenericUserEditService(); //
