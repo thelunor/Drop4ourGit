@@ -8,10 +8,10 @@
 <%
    String genericUserId = (String) session.getAttribute("userId");
    SaleImage saleImg = (SaleImage) request.getAttribute("saleImg");
+   String type = (String) request.getParameter("type");
    BookMarkDao dao = new BookMarkDao();
    List<BookMark> bmList = new ArrayList<BookMark>();
    bmList = dao.getBookMark(genericUserId); //reaId로 리스트 불러오기   
-   System.out.println("나야 " + bmList);
 %>   
 <script   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
@@ -108,7 +108,7 @@ function getBookMark(aptSize){
                content += "<div class='card_top_border'></div>";
                content += "<div class='card'>";
                content += "<div class='contain'>";
-               content += "<img class='card-img-top img-fluid' src='reaimg/"+element.saleImgSaveName1+"' width='100%' height='220'>";         
+               content += "<a href='GetSaleDataService.d4b?aptNum="+element.aptNum+"&type="+$("#type").val()+"'><img class='card-img-top img-fluid' src='reaimg/"+element.saleImgSaveName1+"' width='100%' height='220'></a>";         
                content += "<div id='text' style='display:inline'><button class='close' type='button' onclick="+"location.href='DeleteBookMarkService.d4b?userId=" +$('#myId').val()+ "&aptNum=" + element.aptNum +"'><i class='fa fa-trash' aria-hidden='true'style='padding:0;border: none;background: none; color:white;'></i></button></div>";       
                content += "</div>";
                content += "<div class='card-body'>";
@@ -185,6 +185,7 @@ function deleteBk(){
             <div class="row">
             <div class="col-sm-12">
             <input type="hidden" id="myId" value="<%=genericUserId%>">
+            <input type="hidden" id="type" value="<%=type%>">
  
             <a href="#" onclick="getBookMark('24')">24평</a> &nbsp; | &nbsp; <a href="#" onclick="getBookMark('32')">32평</a>&nbsp; |
             &nbsp; <a href="#" onclick="getBookMark('42')">42평</a> &nbsp;

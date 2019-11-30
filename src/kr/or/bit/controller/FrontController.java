@@ -33,6 +33,7 @@ import kr.or.bit.service.GetREAUserMypageService;
 import kr.or.bit.service.GetREAUserService;
 import kr.or.bit.service.GetReviewListService;
 import kr.or.bit.service.GetSaleDataService;
+import kr.or.bit.service.GetSaleDetailPageForUserService;
 import kr.or.bit.service.GetSaleEditPageService;
 import kr.or.bit.service.GetSaleImgService;
 import kr.or.bit.service.GetUserMainPageService;
