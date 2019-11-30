@@ -471,11 +471,12 @@ public class FrontController extends HttpServlet {
 			forward = action.execute(request, response);
 
 		} else if (url_Command.equals("/LoginPageService.d4b")) {
-			forward = new ActionForward();
-			forward.setPath("/view/Login.jsp");
-			action = new LoginService(); //
-			forward = action.execute(request, response);
-			
+			try {
+				forward = new ActionForward();
+				forward.setPath("view/Login.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (url_Command.equals("/LogoutService.d4b")) {
 			action = new LogoutService();
 			forward = action.execute(request, response);

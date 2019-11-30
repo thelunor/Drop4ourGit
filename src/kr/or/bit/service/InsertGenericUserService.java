@@ -46,9 +46,9 @@ public class InsertGenericUserService implements Action {
 			AdminDao dao = new AdminDao();
 			int result = dao.insertGenericUser(user);
 			if(result > 0) {
-				forward.setPath("JoinFinish.jsp");
+				forward.setPath("/WEB-INF/join/JoinFinish.jsp");
 			}else {
-				forward.setPath("JoinMember.jsp");
+				forward.setPath("/WEB-INF/join/JoinGeneric.jsp");
 			}
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

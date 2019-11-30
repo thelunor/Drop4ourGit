@@ -274,7 +274,7 @@ a.btn  {
 					
 					</div>
 					<input type="text" class="form-control" name="address"
-						id="address" required="required" placeholder="도로명 주소"  value="${saleData.roadAddr}">
+						id="address" required="required" placeholder="도로명 주소"  value="${saleData.roadAddr}" readonly>
 						<br>
 					<!-- Button -->
 					<%
@@ -304,29 +304,29 @@ a.btn  {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>동 </label> <input type="text" class="form-control"
-										required="required" value="${saleData.aptDong}">
+										required="required" value="${saleData.aptDong}" readonly>
 								</div>
 								<div class="form-group">
 									<label>유형 </label> 
-									<input type="text" class="form-control" value="${saleData.type}">
+									<input type="text" class="form-control" value="${saleData.type}" readonly>
 								</div>
 								<div class="form-group">
 									<label>방향 </label> <input type="text" class="form-control"
-										required="required" value="${saleData.direction}">
+										required="required" value="${saleData.direction}" readonly>
 								</div>								
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label>매매가 </label> <input type="text" class="form-control"
-										required="required" value="${saleData.price}">
+										required="required" value="${saleData.price}" readonly>
 								</div>
 								<div class="form-group">
 									<label>면적 </label> <input type="text" class="form-control" 
-									required="required" value="${saleData.aptSize}">
+									required="required" value="${saleData.aptSize}" readonly>
 								</div>
 								<div class="form-group">
 									<label>특징 </label> <input type="text" class="form-control"
-										required="required" value="${saleData.etc}">
+										required="required" value="${saleData.etc}" readonly>
 								</div>																
 							</div>
 						</div>
@@ -360,11 +360,11 @@ a.btn  {
                     <img id="preview" src="./reaimg/${reaImg.reaImgSaveName} " style="width:150px" alt="Profile">
                  </div>		
 				<br>
-				<a href="#" data-toggle="tooltip" title="${reaData.officeHp}" style="float:right; color:#ff6863;">전화번호 &nbsp;&nbsp;&nbsp; &nbsp;</a>
+				<a href="#" data-toggle="tooltip" title="${reaData.officeHp}" style="float:right; color:#ff6863;" readonly>전화번호 &nbsp;&nbsp;&nbsp; &nbsp;</a>
 				<br><br>
 				<div class="form-group">
 					<label>사무소 주소 </label> 
-					<input type="text" class="form-control" required="required" placeholder="주소" style="width:320px" value="${reaData.officeDetailAddr}">
+					<input type="text" class="form-control" required="required" placeholder="주소" style="width:320px" value="${reaData.officeDetailAddr}" readonly>
 				</div>
 				<br>			
 				<div class="form-group">

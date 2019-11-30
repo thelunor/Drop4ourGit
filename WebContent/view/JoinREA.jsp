@@ -208,7 +208,7 @@ $(function() {
 										</div>
 									<br> <br>
 									<div class="text-center">
-										이미 회원이신가요? <a href="Login_form.jsp">Click here</a>
+										이미 회원이신가요? <a href="LoginPageService.d4b">Click here</a>
 									</div>
 
 									<br> <br> <br>

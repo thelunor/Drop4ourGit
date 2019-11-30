@@ -115,7 +115,7 @@ $(function() {
 		<!--Login Sections-->
 
 		<section id="join" class="about roomy-100">
-			<form action="InsertGenericUserService.d4b" method="post" name="loginForm">
+			<form action="<%=request.getContextPath() %>/InsertGenericUserService.d4b" method="post" name="loginForm">
 				<div class="container">
 					<div class="about_content">
 						<div class="row">
@@ -191,7 +191,7 @@ $(function() {
 									</div>
 									<br> <br>
 									<div class="text-center">
-										이미 회원이신가요? <a href="Login.jsp">Click here</a>
+										이미 회원이신가요? <a href="LoginPageService.d4b">Click here</a>
 									</div>
 
 									<br> <br> <br>
