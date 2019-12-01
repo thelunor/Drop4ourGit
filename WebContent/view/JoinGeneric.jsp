@@ -81,7 +81,7 @@ $(function() {
 							// 0 : 아이디 길이 / 문자열 검사
 							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다.");
 							$('#id_check').css('color', '#ff6863');
-							$("#signUp").attr("disabled", false);
+							$("#signUp").attr("disabled", true);
 						} else if(userId == ""){
 							$('#id_check').text('아이디를 입력해주세요.');
 							$('#id_check').css('color', '#ff6863');
@@ -99,48 +99,48 @@ $(function() {
 		});
 		
     let idReg = /^[a-z]{1}[a-z0-9]{2,15}$/; //3~16자리의 영문+숫자 조합의 id 정규표현식
-    let passReg = /^[A-Za-z0-9]{3,16}$/; //3~16자리의 영문+숫자 조합의 비밀번호 정규표현식
+    let passReg =/^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;//영문, 숫자 혼합하여 6~20자리 이내
     let emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;//email정규표현식
-    let ssn1Reg = /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))/; // 생년월일 정규식
-    let ssn2Reg = /[1-4][0-9]{6}$/; // 뒷자리 정규식
     let phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;//휴대폰 정규표현식
 
-      
-    $('#reaPwd').keyup(function() { // 비밀번호 입력 유효성 검사
-        if (passReg.test($('reaPwd').val())) {
+
+
+
+    $('#userPwd').blur(function() {
+    	console.log("유효성 체크");
+        if (!passReg.test($('#userPwd').val())) {
             $('#pwd_check').text("3~16자리의 문자와 숫자 형태의 패스워드를 입력해주세요.");
-        	$("#signUp").attr("disabled", true);
+            $("#pwd_check").css("color", "#ff6863");
+            $("#signUp").attr("disabled", true);
         } else {
             $('#pwd_check').text("동일한 패스워드를 한 번 더 입력해주세요.");
-            $('#pwdCheck').keyup(function() { // 비밀번호 일치 유효성 검사
-                if ($('#reaPwd').val() != $('#pwdCheck').val()) {
+            $("#pwd_check").css("color", "#669999");
+            $('#pwdCheck').blur(function() {
+                if ($('#userPwd').val() != $('#pwdCheck').val()) {
                     $('#pwd_pwd_check').text("암호가 일치하지 않습니다.");
+                    $("#pwd_pwd_check").css("color", "#ff6863");
                 	$("#signUp").attr("disabled", true);
                 } else {
                     $('#pwd_pwd_check').text("암호가 일치합니다.");
+                    $("#pwd_pwd_check").css("color", "#669999");
+                    $("#signUp").attr("disabled", false);
                 }
             });
         }
     });
     
-    $('#reaPhoneNum').keyup(function(){
-        if(emailReg.test($('#reaPhoneNum').val())){ //정규표현식에 맞으면
+    $('#userPhoneNum').blur(function(){
+        if(!phoneReg.test($('#userPhoneNum').val())){ //정규표현식에 맞으면
+        	$('#phone_check').text("핸드폰 번호 형식에 맞지 않습니다.");
+        	$("#phone_check").css("color", "#ff6863");
+            $("#signUp").attr("disabled", true);
+        }else{
            $('#phone_check').text("");
-        }else{
-           $('#phone_check').text("형식에 맞지 않습니다.");
-           $("#signUp").attr("disabled", true);
+           $("#signUp").attr("disabled", false);
         }
+       
      });
-
-    $('#email').keyup(function(){
-        if(emailReg.test($('#email').val())){ //정규표현식에 맞으면
-           $('#check_email').text("");
-       	$("#signUp").attr("disabled", true);
-        }else{
-           $('#tdEmail').text("형식에 맞지 않습니다.");
-           check=false;
-        }
-     });
+    
 });
 </script>
 </head>
@@ -199,7 +199,7 @@ $(function() {
 										<label>주민등록번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
 										<div class="row">&nbsp;&nbsp;&nbsp;&nbsp;
 											<input type="text" class="form-control" name="frontResNum" id="frontResNum"
-												required="required" style="width:41%;">&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"
+												required="required" style="width:41%;">&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;<input type="password"
 												class="form-control" name="backResNum" id="backResNum"
 												required="required" style="width:41%;">
 										</div>
