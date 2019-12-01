@@ -26,7 +26,6 @@
     	type=request.getParameter("type");
     }
     if(type=="000"){
-    	System.out.println("비밀번호 틀림");
     	type=null;
     	out.print("<script>alert('아이디 또는 비밀번호를 확인해주세요.');</script>");
     	
@@ -47,7 +46,7 @@
         
         <!--Login Sections-->
         <section id="id" class="about roomy-100">
-            <form action="../LoginService.d4b" method="post" name="loginForm">
+            <form action="LoginService.d4b" method="post" name="loginForm">
                 <div class="container">
                     <div class="about_content">
                         <div class="row">

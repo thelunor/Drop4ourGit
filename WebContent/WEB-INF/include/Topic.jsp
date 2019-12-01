@@ -411,9 +411,7 @@ $(function() {
 </script>
 <%
 String search=(String)request.getAttribute("search");
-System.out.println(search);
 String name[] = search.split(" ");
-System.out.println(name[0]);
 Map<Sale, SaleImage> saleMap = (Map<Sale, SaleImage>)request.getAttribute("saleMap");
 System.out.println("saleMap: " + saleMap.isEmpty());
 %>

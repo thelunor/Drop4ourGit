@@ -498,6 +498,10 @@ public class FrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/WEB-INF/UserMain.jsp");
+		} else if (url_Command.equals("/getLogin.d4b")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/view/Login.jsp");
 		}
 		// dispatcher =================================================
 		if (forward != null) {

@@ -33,7 +33,6 @@ public class LoginService implements Action {
 			String rResult = null;
 
 			if (aDao.adminLogin(id, pwd)) { // 관리자 로그인 성공 시
-				System.out.println(aDao.adminLogin(id, pwd));
 				forward.setPath("/WEB-INF/UserMain.jsp");
 				session.setAttribute("userId", id);
 				request.setAttribute("type", "A00");
@@ -58,7 +57,7 @@ public class LoginService implements Action {
 				forward.setPath("/BlackLogin.jsp");
 				return forward;
 			}  else {
-				forward.setPath("/view/Login.jsp?type=000"); // 아이디 또는 비밀번호가 일치하지 않을 때
+				forward.setPath("getLogin.d4b"); // 아이디 또는 비밀번호가 일치하지 않을 때
 				request.setAttribute("type", "000");
 				return forward;
 			}
