@@ -62,18 +62,35 @@
 	<div class="contain-fluid">
 	<div class="row">
 	<div class="col-md-6">
+	<div class="row">
+	<div class="col-sm-1"></div>
+	<div class="col-sm-11">	
 		<jsp:include page="WEB-INF/chart/Chart_0.jsp"></jsp:include>	
 		<br>
 		<br>
 		<jsp:include page="WEB-INF/chart/barChart.jsp"></jsp:include>				
+	</div>	
+	</div>
 	</div>
 	<div class="col-md-6">
+	<div class="row">
+	<div class="col-sm-11">	
 		<jsp:include page="WEB-INF/chart/Chart_1.jsp"></jsp:include>	
 		<br>
 		<br>
 		<!-- 뉴스 -->
-		<jsp:include page="WEB-INF/news/News.jsp"></jsp:include>	
-	</div>		
+		<div class="news">
+		<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-10" style="width : 100%;">			
+		<jsp:include page="WEB-INF/news/News.jsp"></jsp:include>
+		</div>
+		<div class="col-sm-2"></div>
+		</div>	
+		</div>
+	</div>
+	<div class="col-sm-1"></div>
+	</div>	
 	</div>
 	</div>
 		<!-- scroll up-->
@@ -82,6 +99,7 @@
 		</div>
 		<!-- End off scroll up -->
 		<jsp:include page="WEB-INF/include/Bottom.jsp"></jsp:include>
+	</div>
 	</div>
 
 	<!-- JS includes -->	

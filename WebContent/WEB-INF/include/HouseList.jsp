@@ -255,7 +255,7 @@ text-align: center;
 		            <div class="detail" style="text-align: center;">
 <%-- 		            	<input type="hidden" class="form-control" name="aptName" value="${sale.key.aptName}">
  --%>		                <h5>${sale.key.aptName}</h5>
-		                <input type="text" class="form-control" value="전용면적   ${sale.key.aptSize}㎡">
+		                <input type="text" class="form-control" value="평형   ${sale.key.aptSize}평">
 		                <br>
 		                <div class="skill_bar sm-m-top-50">
 		                    <div class="teamskillbar clearfix m-top-20" data-percent="${79830 / sale.key.price * 100}%">
@@ -264,7 +264,7 @@ text-align: center;
 		                    </div>
 		                    <!-- End Skill Bar -->
 		                    <div class="teamskillbar clearfix m-top-50" data-percent="90%">
-		                        <h6>${sale.key.etc}</h6>
+		                        <h6 style="font-size: 12px;">${sale.key.etc}</h6>
 		                        <div class="teamskillbar-bar"></div>
 		                    </div>
 		                    <input type="hidden" name="addr" value=" ${sale.key.addr}">

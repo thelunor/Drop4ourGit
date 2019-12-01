@@ -6,10 +6,6 @@
 		<h6 class="title">관리자 페이지</h6>
 		<ul class="link">
            <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" id="pagesDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true">
-                   <span>Chart</span>
-				</a>
                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
                    <a class="dropdown-item" href="DeptChart.jsp">부서 차트</a>
                    <a class="dropdown-item" href="SalChart.jsp">연봉 차트</a> <!-- 내가 선점 했음 여기 내자리 -->

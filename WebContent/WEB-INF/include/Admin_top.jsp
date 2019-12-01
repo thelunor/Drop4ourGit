@@ -1,21 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>header</title>
-</head>
-<body>
+<%
+	String userId = (String) session.getAttribute("userId");
+	System.out.println("관리자 아이디: " + userId);
+
+%>
 	<!-- Start Atribute Navigation -->
 	<div class="container">
 		<div class="attr-nav">
 			<ul>
 				<li class="login">
 				<%
-				if(session.getAttribute("userId") != null){
-					out.print("<a href ='Logout.jsp'>로그아웃</a>");
-				}else{
+				if(userId != null){
+					out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
+				}else {
 					out.print("<a href ='Login_form.jsp'>로그인</a>");
 				}	
 				%>
@@ -63,5 +62,3 @@
 	</div>
 
 	<!-- End Header Navigation -->
-</body>
-</html>

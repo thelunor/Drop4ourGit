@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%	
-String adminId = (String) session.getAttribute("adminId");
+String adminId = (String) session.getAttribute("userId");
 String path = request.getContextPath();
 %>	
 	<!-- Start Atribute Navigation -->
@@ -10,7 +10,7 @@ String path = request.getContextPath();
 			<ul>
 				<li class="login">
 				<%
-				if(session.getAttribute("adminId") != null){
+				if(adminId != null){
 					out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 				}else{
 					out.print("<a href ='"+request.getContextPath()+"/view/Login.jsp'>로그인</a>");

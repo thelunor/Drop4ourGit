@@ -37,6 +37,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
 	<!-- include summernote css/js-->
@@ -96,7 +97,7 @@
 				<div class="about_content">
 					<div class="row">
 						<!-- Left -->
-						<div class="col-md-3" style="border: 1px solid rgb(211, 211, 211); padding-top: 15px; padding-bottom: 15px; height: 500px; width: 200px; position: fixed;">
+						<div class="col-md-3" style="border: 1px solid rgb(211, 211, 211); padding-top: 15px; padding-bottom: 15px; height: 600px; width: 200px; position: fixed;">
 							<div class="signup-form">
 								<div class="form-group" style="text-align : center">
 									<img id="preview" src="reaimg/${reaImgData.reaImgSaveName}" style="width:200px" alt="Profile">
@@ -147,11 +148,8 @@
 								
 								<!-- 두 번째 소개 -->
 									<section>
-										<div style="width: 40px; height: 40px; margin-top: 10px; margin-bottom: 10px;">
-											<img alt="house" src="./images/house.png">
-										</div>
 										<div>
-											${reaUserData.officeName} ${reaUserData.officeHp}
+											<i class="fas fa-home"></i> &nbsp; ${reaUserData.officeName} ${reaUserData.officeHp}
 										</div>
 									</section>
 									<div style="margin-top: 20px; margin-bottom: 20px;">
