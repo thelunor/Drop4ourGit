@@ -55,7 +55,42 @@
         </nav>
         <!--Home Sections-->
         <jsp:include page="include/Home.jsp"></jsp:include>
-
+	<br>
+	<br>
+	<div class="contain-fluid">
+	<div class="row">
+	<div class="col-md-6">
+	<div class="row">
+	<div class="col-sm-1"></div>
+	<div class="col-sm-11">	
+		<jsp:include page="chart/Chart_0.jsp"></jsp:include>	
+		<br>
+		<br>
+		<jsp:include page="chart/barChart.jsp"></jsp:include>				
+	</div>	
+	</div>
+	</div>
+	<div class="col-md-6">
+	<div class="row">
+	<div class="col-sm-11">	
+		<jsp:include page="chart/Chart_1.jsp"></jsp:include>	
+		<br>
+		<br>
+		<!-- 뉴스 -->
+		<div class="news">
+		<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-10" style="width : 100%;">			
+		<jsp:include page="news/News.jsp"></jsp:include>
+		</div>
+		<div class="col-sm-2"></div>
+		</div>	
+		</div>
+	</div>
+	<div class="col-sm-1"></div>
+	</div>	
+	</div>
+	</div>
         <!-- scroll up-->
         <div class="scrollup">
             <a href="#"><i class="fa fa-chevron-up"></i></a>
