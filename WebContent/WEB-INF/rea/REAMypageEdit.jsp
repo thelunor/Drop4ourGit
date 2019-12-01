@@ -165,7 +165,7 @@ img.avatar {
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6">
-												<button type="submit"
+												<button type="submit" id="editBtn"
 													class="btn btn-primary btn-block btn-lg">수정 완료</button>
 											</div>
 											<div class="col-sm-6">
@@ -260,6 +260,14 @@ img.avatar {
 		        document.querySelector('#preview').src = reader.result ;
 		    }; 
 		};
+		$("#editBtn").click(function(e){
+			if($("#getfile").val()==""){
+				e.preventDefault();
+				alert("소개 사진을 등록해주세요");
+			}else{
+				$(this).submit();
+			}
+		});
 	</script>
 
 </body>
