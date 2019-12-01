@@ -94,7 +94,6 @@ h2, h4, h6, h3 {
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
-
 	<div class="houseDetail">
 		<div class="page-wrapper">
 			<a class="btn trigger" href="#">Real Estate Agent</a>

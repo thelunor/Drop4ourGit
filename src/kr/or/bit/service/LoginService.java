@@ -56,14 +56,10 @@ public class LoginService implements Action {
 				}
 			} else if (gResult.equals("B01") || rResult.equals("B02")) {// 블랙회원이 로그인 했을 때
 				forward.setPath("/BlackLogin.jsp");
-				System.out.println("블랙 회원 로그인");
 				return forward;
-			} else if (gResult == null || rResult == null) {
-				forward.setPath("LoginPageService.d4b");
-				return forward;
-			} else {
-				forward.setPath("/view/Login.jsp"); // 아이디 또는 비밀번호가 일치하지 않을 때
-				session.setAttribute("type", "000");
+			}  else {
+				forward.setPath("/view/Login.jsp?type=000"); // 아이디 또는 비밀번호가 일치하지 않을 때
+				request.setAttribute("type", "000");
 				return forward;
 			}
 		} catch (Exception e) {
