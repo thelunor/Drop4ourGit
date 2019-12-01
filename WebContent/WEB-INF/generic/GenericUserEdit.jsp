@@ -147,8 +147,8 @@ img.avatar {
 													class="btn btn-primary btn-block btn-lg">수정 완료</button>
 											</div>
 											<div class="col-sm-6">
-												<button type="reset"
-													class="btn btn-primary btn-block btn-lg" onclick="location.href='GetGenericUserMypageMainService.d4b?genericUserId=${userData.userId}'">취소</button>
+												<button type="reset" 
+													class="btn btn-primary btn-block btn-lg" onclick="location.href='GetGenericUserMypageMainService.d4b?type=U01&genericUserId=${userData.userId}'">취소</button>
 											</div>
 										</div>
 									</div>

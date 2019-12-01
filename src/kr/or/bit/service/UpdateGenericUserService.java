@@ -46,6 +46,7 @@ public class UpdateGenericUserService implements Action {
 			int result = dao.updateGenericUser(user);
 			String type = user.getUserCode();
 			if(result > 0) {
+				request.setAttribute("userId", user.getUserId());
 				request.setAttribute("type",type);
 				forward.setPath("/WEB-INF/generic/GenericUserEditOk.jsp");
 				System.out.println("db 수정완료");
