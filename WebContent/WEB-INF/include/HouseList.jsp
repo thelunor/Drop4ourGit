@@ -93,7 +93,6 @@
 	int count = (int) request.getAttribute("count");
 	int pageSize = (int) request.getAttribute("pageSize");
 	int cPage = (int) request.getAttribute("cPage");
-	System.out.println("타입은:::::"+type);
 
 %>
 <link rel="stylesheet"
@@ -226,7 +225,7 @@ text-align: center;
 %>
 <h6>300개 이상의 매물</h6>
 <input type="hidden" value="<%=search%>" id="search">
-<p style="font-size: 13px">거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</p>
+<p style="font-size: 13px"><b>거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</b></p>
 <br>
 <div class="row">
 	<div class="col-lg-7" id="items">
