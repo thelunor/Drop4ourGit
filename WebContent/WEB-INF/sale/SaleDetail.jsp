@@ -526,13 +526,10 @@ if (drawingFlag) {
         
         // 그려지고 있는 원의 반경정보 커스텀 오버레이를 지도에 표시합니다
         drawingOverlay.setMap(map);
-        
-    } else { 
-        
+    } else {         
         drawingCircle.setMap(null);
         drawingLine.setMap(null);    
         drawingOverlay.setMap(null);
-        
     }
 }     
 });     
