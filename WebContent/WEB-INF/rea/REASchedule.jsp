@@ -13,6 +13,7 @@
 	System.out.println(sList);
 %>
 <c:set var="reaId" value="${sessionScope.userId}" />
+<c:set var="list" value="${requestScope.sList}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -404,7 +405,7 @@ h1, h3, #myUL {
 </style>
 <script>
 $(function() {
-	
+
 	$.ajax({
         url : 'ScheduleList',
         type : 'post',
@@ -419,7 +420,7 @@ $(function() {
             	console.log(no);
             	allData += "<li id='sche'><input type='hidden' id='scheNum' value='"+element.scheNum+"'>"+element.content+"<button class='close' type='button' onclick="+"location.href='DeleteREAScheduleService.d4b?reaId=" +$('#reaId').val()+ "&scheNum=" + element.scheNum +"'>\u00D7</button></li>";  
             	$('#myUL').append(allData);
-            	
+        	      
             	if(index %2 ==0){
             		
             	  var schedule1 = "";
@@ -429,7 +430,7 @@ $(function() {
           	      schedule1 += "</div>";
           	      schedule1 += "<div class='timeline-panel'>";
           	      schedule1 += "<div class='timeline-heading'>";
-          	      schedule1 += "<h4 class='timeline-title'>20"+element.scheDate.year+"."+element.scheDate.month+1+"."+element.scheDate.date+" "+element.scheDate.hours+":"+element.scheDate.minutes+"</h4>";
+          	      schedule1 += "<h4 class='timeline-title'>20"+parseInt(element.scheDate.year-100)+"."+parseInt(element.scheDate.month+1)+"."+element.scheDate.date+" "+element.scheDate.hours+":"+element.scheDate.minutes+"</h4>";
           	      schedule1 += "</div>";
           	      schedule1 += "<div class='timeline-body'>";
           	      schedule1 += "<p>"+element.content+"</p>";
@@ -448,7 +449,7 @@ $(function() {
           	      schedule2 += "</div>";
           	      schedule2 += "<div class='timeline-panel'>";
           	      schedule2 += "<div class='timeline-heading'>";
-          	      schedule2 += "<h4 class='timeline-title'>20"+(element.scheDate.year)+"."+element.scheDate.month+1+"."+element.scheDate.date+" "+element.scheDate.hours+":"+element.scheDate.minutes+"</h4>";
+          	      schedule2 += "<h4 class='timeline-title'>20"+parseInt(element.scheDate.year-100)+"."+parseInt(element.scheDate.month+1)+"."+element.scheDate.date+" "+element.scheDate.hours+":"+element.scheDate.minutes+"</h4>";
           	      schedule2 += "</div>";
           	      schedule2 += "<div class='timeline-body'>";
           	      schedule2 += "<p>"+element.content+"</p>";
@@ -524,8 +525,6 @@ $(function() {
 							<br> <br>
 							<c:set var="list" value="<%=sList%>"></c:set>
 							<input type="hidden" id="reaId" value="<%=reaId%>">
-
-
 							<!-- to do list -->
 							<div class="container-fluid">
 								<div id="myDIV" class="header">

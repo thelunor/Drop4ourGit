@@ -2,6 +2,8 @@ package kr.or.bit.ajax;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,6 +35,7 @@ public class ScheduleList extends HttpServlet {
 			dao = new REAScheduleDao();
 		  List<REASchedule> sList = dao.getSchedule(reaId);
 	  	  JSONArray jsonlist = JSONArray.fromObject(sList);
+	  	  System.out.println(jsonlist);
 	  	  out.print(jsonlist);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -90,47 +90,6 @@ $(function () {
 	 fetchList();
     	    
 });
-
-
-function ContractList(){
-	
-	$.ajax({
-        url : 'ContractList',
-        type : 'post',
-        data : {"isContract" : "유"},
-        dataType : 'json',
-        success : function(data) {	
-            $("#saleList").empty();
-            
-            var clist ="";
-        	clist +="<div class='card-header py-3'><h6 class='m-0 font-weight-bold text-primary'>계약 관리</h6></div>";
-			clist +="<div class='card-body'><div class='table-responsive'><table class='table table-bordered' width='100%' cellspacing='0'>";
-            clist +="<thead><tr><th>면적</th><th>유형</th><th>주소</th><th>아파트이름</th><th>동</th><th>호수</th><th>매매가</th></tr></thead>";                
-            clist +="<tbody id='tbody'>";
-            clist +="</tbody></table></div></div></div>";
-            
-            $('#saleList').append(clist); 
-            
-            $.each(data, function(index, element) {
-            	
-             	var con = "";
-             	con += "<tr>";
-             	con += "<td>" + element.aptSize + "</td>";
-             	con += "<td>" + element.type + "</td>";
-             	con += "<td>" + element.addr + "</td>";
-             	con += "<td>" + element.aptName + "</td>";
-             	con += "<td>" + element.aptDong + "</td>";
-             	con += "<td>" + element.aptHo + "</td>";
-             	con += "<td>" + element.price + "</td>";               	
-                con += "</tr>";                         		                                      
-                
-                $('#tbody').append(con);     
-	
-            });
-        }
-	});
-	
-}
 </script>
 <jsp:include page="../../css/css.jsp"></jsp:include>
 <%
@@ -264,7 +223,7 @@ input {
 			                     <div class="col-md-12">
 			                        <input type="submit" class="btn-group" value="매물 등록">
 			                        &nbsp;
-			                        <button type="button" class="btn-group" onclick="ContractList();">계약 관리</button>
+			                        <button type="button" class="btn-group" onclick="location.href='SelectContractListService.d4b?userId=${reaUserData.reaId}'">계약 관리</button>
 			                        &nbsp;
 			                        <button type="button" class="btn-group" onclick="location.href='CheckIntroBoardService.d4b'">소개글 관리</button>
 			                        &nbsp;

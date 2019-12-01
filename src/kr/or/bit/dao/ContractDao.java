@@ -163,23 +163,23 @@ public class ContractDao {
 	}
 	
 	
-	public List<Sale> getSaleContractList(String isContract) { // 매물 리스트 출력(계약 유무)
+	public List<Sale> getSaleContractList(String reaId) { // 매물 리스트 출력(계약 유무)
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Sale> saleList = null;
 		Sale sale = null;
-		
 		try {
 			conn = ds.getConnection();
-			String sql_select_contractSale = "select aptnum,aptsize,type,addr,aptname,aptdong,aptho,price from sale where isContract=?";
+			String sql_select_contractSale = "select aptnum,aptsize,type,addr,aptname,aptdong,aptho,price from sale where reaId=? and isContract='유'";
 			pstmt = conn.prepareStatement(sql_select_contractSale);
-			pstmt.setString(1, isContract);
+			pstmt.setString(1, reaId);
 			rs = pstmt.executeQuery();
 			saleList = new ArrayList<Sale>();
 			while(rs.next()) {
 				sale = new Sale();
-				sale.setAptNum(rs.getString("aptNum")); //매물번호				
+				
+				sale.setAptNum(rs.getString("aptNum")); //매물번호					
 				sale.setAptSize(rs.getString("aptSize")); //면적
 				sale.setType(rs.getString("type")); //유형
 				sale.setAddr(rs.getString("addr")); //주소
@@ -189,7 +189,6 @@ public class ContractDao {
 				sale.setPrice(rs.getString("price")); //매매가
 				saleList.add(sale);
 			}
-			System.out.println("사이즈"+saleList.size());
 
 		}catch(Exception e) {
 			
@@ -204,10 +203,5 @@ public class ContractDao {
 		}
 		return saleList;
 	}
-	
-	
-	
-	
-	
 	
 }

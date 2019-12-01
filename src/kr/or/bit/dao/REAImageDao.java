@@ -38,7 +38,6 @@ public class REAImageDao {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, reaId);
-			System.out.println("입성");
 			reaImg = new REAImage();
 			rs = pstmt.executeQuery();
 			
