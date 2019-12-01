@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%
 	String userId = (String) session.getAttribute("userId");
-	String type= "U02";
+	String type = (String) request.getAttribute("type");
+	if(type==null){
+		type=request.getParameter("type");
+	}
 %>
 <!-- Start Atribute Navigation -->
 <div class="container">

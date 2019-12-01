@@ -45,7 +45,7 @@
 	        	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	    		mapOption = {
 	    	   	center: new kakao.maps.LatLng(37.497571, 127.049994), // 지도의 중심좌표
-	    	   	level: 2 // 지도의 확대 레벨  
+	    	   	level: 6 // 지도의 확대 레벨  
 	    	};
 
 	    	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -87,8 +87,6 @@
 	        });
 </script>
 <%
-	//String genericUserId = (String) session.getAttribute("userId");
-	//String reaId = (String) session.getAttribute("reaId");
 	String userId = (String) session.getAttribute("userId");
 	String search= (String) request.getAttribute("search");
 	
@@ -101,14 +99,7 @@
 	int count = (int) request.getAttribute("count");
 	int pageSize = (int) request.getAttribute("pageSize");
 	int cPage = (int) request.getAttribute("cPage");
-	
-// 	System.out.println("type: "+type);
-// 	System.out.println("userId: "+userId);
-// 	System.out.println("search: "+search);
-// 	System.out.println("pageCount: " + pageCount);
-// 	System.out.println("count: " + count);
-// 	System.out.println("pageSize: " + pageSize);
-// 	System.out.println("cPage: " + cPage);
+	System.out.println("타입은:::::"+type);
 
 %>
 <link rel="stylesheet"

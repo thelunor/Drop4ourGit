@@ -365,11 +365,17 @@ a.btn  {
 				<div class="form-group">
 					<label>사무소 주소 </label> 
 					<input type="text" class="form-control" required="required" placeholder="주소" style="width:320px" value="${reaData.officeDetailAddr}" readonly>
+					<input type="hidden" id="reaId" value="${ reaData.reaId}">
 				</div>
 				<br>			
 				<div class="form-group">
+					<%if(type.equals("U01")){%>
 					<button type="submit" class="btn btn-primary btn-block btn-lg" 
-						onclick="location.href='GetREAIntroPageServiceForUser.d4b?reaId=${reaData.reaId}'">Click</button>
+					onclick="location.href='GetREAIntroPageServiceForUser.d4b?reaId=${reaData.reaId}'">Click</button>
+					<%}else if(type.equals("U02")){ %>					
+					<button type="submit" class="btn btn-primary btn-block btn-lg" 
+						onclick="location.href='GetREAIntroPageService.d4b?reaId=${reaData.reaId}'">Click</button>
+					<%} %>
 				</div>					
 				</div>
     </div>

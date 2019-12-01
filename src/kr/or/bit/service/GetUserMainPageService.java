@@ -15,8 +15,8 @@ public class GetUserMainPageService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		String type = request.getParameter("type");
-		if(type.trim().equals("U01") || type.trim().equals("U02")) {
-				forward.setPath("/WEB-INF/UserMain.jsp");
+		if(type.trim().equals("U01") || type.trim().equals("U02") || type.trim().equals("A00")) {
+				forward.setPath("/WEB-INF/UserMain.jsp?type="+type);
 			} else {
 				System.out.println("genericuser null");
 			}

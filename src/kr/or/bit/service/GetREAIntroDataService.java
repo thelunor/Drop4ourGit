@@ -26,11 +26,14 @@ public class GetREAIntroDataService implements Action {
 		HttpSession session = request.getSession();
 		String reaId = (String) session.getAttribute("userId");		
 		System.out.println("유저 아이디"+reaId);
+		String type = (String) request.getAttribute("type");
+		if(type==null) {
+			type=request.getParameter("type");
+		}
 		REAUser reaUser = null;
 		REAImage reaImg = null;
 		List<Review> rvList = null;
 		REAIntroBoard reaIntro = null;
-		
 		REAUserDao readao = null;
 		REAImageDao imgdao = null;
 		REAIntroBoardDao reaIntrodao = null;		
@@ -58,7 +61,8 @@ public class GetREAIntroDataService implements Action {
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("rvList", rvList);
 				request.setAttribute("reaIntro", reaIntro);
-				forward.setPath("/WEB-INF/rea/REAIntro.jsp?userId="+reaId);
+				request.setAttribute("type", type);
+				forward.setPath("/WEB-INF/rea/REAIntro.jsp");
 			}
 		} catch (Exception e) {
 			System.out.println("getREAIntroService 예외발생");

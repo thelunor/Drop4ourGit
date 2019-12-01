@@ -23,22 +23,18 @@ public class GetREAUserService implements Action {
 		REAImageDao imgdao = null;
 		
 		String REAUserId = request.getParameter("REAUserId");
-		System.out.println("음rr: " + REAUserId);
 		try {
 			forward = new ActionForward();
 			reaUser = new REAUser();
 			reaImg = new REAImage();
 			adao = new AdminDao();
 			imgdao = new REAImageDao();
-			
 			reaUser = adao.getREAUser(REAUserId);
 			reaImg = imgdao.getREAImg(REAUserId);
-			System.out.println("알이에이유저: " + reaUser);
 			if (reaUser != null && reaImg != null) {
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);
-				
-				forward.setPath("AdminREAUser.jsp");
+				forward.setPath("/WEB-INF/admin/AdminREAUser.jsp?type=A00");
 			} else {
 				System.out.println("reaUser null");
 				forward.setPath("/AdminMain.jsp");
