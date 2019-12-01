@@ -27,7 +27,6 @@ public class SelectGenericUserService implements Action {
 			
 			glist = gdao.getGenericUserList();
 			request.setAttribute("GenericUserList", glist);
-			System.out.println("glist: " + glist);
 		} catch (Exception e) {
 			System.out.println("서비스 예외발생");
 			System.out.println(e.getMessage());
