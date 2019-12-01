@@ -71,7 +71,7 @@ public class InfiniteScroll extends HttpServlet {
 			
 			if (ps == null || ps.trim().equals("")) {
 				// default 값 설정
-				ps = "10";
+				ps = "5";
 			}
 			if (cp == null || cp.trim().equals("")) {
 				// default 값 설정

@@ -75,7 +75,7 @@ public class FrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 		// 삭제=========================================
-		if(url_Command.equals("/CheckIntroBoardService.d4b")) {
+		if (url_Command.equals("/CheckIntroBoardService.d4b")) {
 			action = new CheckIntroBoardService();
 			forward = action.execute(request, response);
 
@@ -159,7 +159,7 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if(url_Command.equals("/GetGenericUserMypageMainService.d4b")) {
+		} else if (url_Command.equals("/GetGenericUserMypageMainService.d4b")) {
 			try {
 				action = new GetGenericUserMypageMainService(); //
 				forward = action.execute(request, response);
@@ -167,28 +167,28 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		}  else if (url_Command.equals("/GetREAIntroDataService.d4b")) {
+		} else if (url_Command.equals("/GetREAIntroDataService.d4b")) {
 			try {
 				action = new GetREAIntroDataService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/GetREAIntroPageService.d4b")) { 
+		} else if (url_Command.equals("/GetREAIntroPageService.d4b")) {
 			try {
 				action = new GetREAIntroPageService();
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (url_Command.equals("/GetREAIntroPageServiceForUser.d4b")) { //일반 사용자가 소개 페이지로
+		} else if (url_Command.equals("/GetREAIntroPageServiceForUser.d4b")) { // 일반 사용자가 소개 페이지로
 			try {
 				action = new GetREAIntroPageServiceForUser();
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (url_Command.equals("/GetREAIntroBoardService.d4b")) { //공인중개사가 후기 작성 페이지로
+		} else if (url_Command.equals("/GetREAIntroBoardService.d4b")) { // 공인중개사가 후기 작성 페이지로
 			try {
 				forward = new ActionForward();
 				forward.setPath("/WEB-INF/rea/REAIntroBoard.jsp");
@@ -360,7 +360,7 @@ public class FrontController extends HttpServlet {
 			}
 		}
 		// select ================================================
-		 else if (url_Command.equals("/SelectREAUserService.d4b")) { // 공인중개사회원 목록보기
+		else if (url_Command.equals("/SelectREAUserService.d4b")) { // 공인중개사회원 목록보기
 			try {
 				action = new SelectREAUserService(); //
 				forward = action.execute(request, response);
@@ -371,7 +371,7 @@ public class FrontController extends HttpServlet {
 			try {
 				forward = new ActionForward();
 				forward.setRedirect(false);
-				forward.setPath("/AdminMain.jsp");
+				forward.setPath("/WEB-INF/admin/AdminMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -386,7 +386,7 @@ public class FrontController extends HttpServlet {
 			try {
 				forward = new ActionForward();
 				forward.setRedirect(false);
-				forward.setPath("/AdminMain.jsp");
+				forward.setPath("/WEB-INF/admin/AdminMain.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -435,14 +435,14 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}  else if (url_Command.equals("/UpdateREAUserService.d4b")) {
+		} else if (url_Command.equals("/UpdateREAUserService.d4b")) {
 			try {
 				action = new UpdateREAUserService(); //
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}  else if (url_Command.equals("/UpdateReviewService.d4b")) {
+		} else if (url_Command.equals("/UpdateReviewService.d4b")) {
 			try {
 				action = new UpdateReviewService(); //
 				forward = action.execute(request, response);
@@ -483,11 +483,13 @@ public class FrontController extends HttpServlet {
 		}
 		// 페이지 이동관련 ==========================================
 		else if (url_Command.equals("/getMain.d4b")) {
-			System.out.println("컨트롤러 걸림");
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("/Main.jsp");
-			System.out.println("컨트롤러 걸림");
+		} else if (url_Command.equals("/getAdminMain.d4b")) {
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/WEB-INF/UserMain.jsp");
 		}
 		// dispatcher =================================================
 		if (forward != null) {
