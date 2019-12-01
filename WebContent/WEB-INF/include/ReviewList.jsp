@@ -82,25 +82,19 @@
 									<div align="right">
 			                    		<button type="submit" id="send" class="btn btn-primary btn-block btn-lg">작성 완료</button>
 									</div></td>
-								
 			                    </tr>
-			                    
 		                   </table>
 		                   </form>
 						</div>
 						</div>
-						
 						<div style="margin-top: 20px; margin-bottom: 20px;">
 							<hr>
 						</div>
 						<!-- 후기글 뿌려지는 곳 -->
 						<table style="width: 100%;" id="reviewList">
 						<tbody id="reviewListTbody">
-						
 						</tbody>
-							
 						</table>
-						
 					</div>
 				</div>
 			</div>
@@ -168,9 +162,11 @@ var reviewId = $("#reviewId").val();
 					review += "<input type='hidden' id='reviewNum' name='reviewNum' value='"+element.reviewNum+"'>";
 					review += "<div class='row'>"
 					review += "<div class='col-sm-6'>"
-					review += "<button class='btn btn-primary btn-block btn-sm' onclick='delete_review()'>삭제</button></div>";
+					review += "<button class='btn btn-primary btn-block btn-sm' onclick='delete_review()'>삭제";
+					review += "<input type='hidden' id='reviewId_delete' value='"+element.userId+"'</button></div>";
 					review += "<div class='col-sm-6'>"
-					review += "<button class='btn btn-primary btn-block btn-sm' onclick='edit_reviewBtn()'>수정</button></div>";
+					review += "<button class='btn btn-primary btn-block btn-sm' onclick='edit_reviewBtn()'>수정";
+					review += "<input type='hidden' id='reviewId_edit' value='"+element.userId+"'</button></div>";
 					review += "</div></div><hr></td></tr>";					
 				});
 				$("#reviewListTbody").append(review);
@@ -179,8 +175,10 @@ var reviewId = $("#reviewId").val();
 	}
 	
 	function delete_review(){
-		var reviewId = $("#reviewId").text();
-		if(reviewId == $("#getUserId").val()){
+		var reviewId = $(event.target.children).val();
+		//console.log(reviewId);
+		//console.log($("#getUserId").val().trim())
+		if(reviewId == $("#getUserId").val().trim()){
 			$.ajax({
 				url:'DeleteReview?reviewNum='+$("#reviewNum").val(),
 				dataType: 'text',
@@ -198,12 +196,14 @@ var reviewId = $("#reviewId").val();
 			return;
 		}
 	}
-	
 	function edit_reviewBtn(){
-		var reviewId = $("#reviewId").text().trim();
-		//console.log(reviewId);
+		var userId = $("#getUserId").val().trim();
+		console.log(userId);
+		var reviewId = $(event.target.children).val();
+			//$("#reviewId").text().trim();
+		console.log(reviewId);
 		var reviewNum =  $("#reviewNum").val().trim();
-		console.log(reviewNum);
+		//console.log(reviewNum);
 		if(reviewId == $("#getUserId").val().trim()){
 			$("#reviewListTbody").hide();
 			$("#review_table").empty();
@@ -237,9 +237,6 @@ var reviewId = $("#reviewId").val();
 			return;
 		}
 	}
-	function alert_edit(){
-	}
-	
 	
 
 </script>
