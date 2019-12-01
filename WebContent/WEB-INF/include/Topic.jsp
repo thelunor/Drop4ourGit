@@ -414,10 +414,15 @@ String search=(String)request.getAttribute("search");
 System.out.println(search);
 String name[] = search.split(" ");
 System.out.println(name[0]);
+Map<Sale, SaleImage> saleMap = (Map<Sale, SaleImage>)request.getAttribute("saleMap");
+System.out.println("saleMap: " + saleMap.isEmpty());
 %>
+<%if(!saleMap.isEmpty()){ %>
 <p style="font-size: 18px; font-family: 'Jua', sans-serif;"> 검색 결과 &nbsp;&nbsp; <span id="topic"><%= name[0]%></span>
 	<i class="fas fa-angle-right"></i><%= name[1]%></p>		
-
+<%}else{ %>
+<p style="font-size: 18px; font-family: 'Jua', sans-serif;"> 검색 결과가 없습니다.</p>
+<%} %>
 	<br>
 	<div class="notice">
 		<ul class="rolling" id="roll">
