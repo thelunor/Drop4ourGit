@@ -352,13 +352,13 @@ a.btn  {
         <i class="fa fa-times" aria-hidden="true"></i>
       </a>
     </div>
-    <div class="content">
+    <div class="content" style="padding-top:0;">
 				<div class="information">
 				<br>
 				<h3 style="text-align: center;">${reaData.reaName}</h3>
 				<br>
                  <div class="form-group" style="text-align : center">
-                    <img id="preview" src="./reaimg/${reaImg.reaImgSaveName} " style="width:150px" alt="Profile">
+                    <img id="preview" src="./reaimg/${reaImg.reaImgSaveName} " style="width:150px;height:235px;" alt="Profile">
                  </div>		
 				<br>
 				<a href="#" data-toggle="tooltip" title="${reaData.officeHp}" style="float:right; color:#ff6863;" readonly>전화번호 &nbsp;&nbsp;&nbsp; &nbsp;</a>
