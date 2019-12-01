@@ -29,56 +29,48 @@
 	                slidesToScroll : 1,
 	                fade : false
 	             });
-	            
+	          //아파트 이름 마커에 넣기 위해 배열 생성
+		          /*
+		        	var aptNameValue = $("input[name='aptName']").length;
+		        	var aptNameArr = new Array(aptNameValue);
+		        	for(var i=0; i< aptNameArr.length; i++){                          
+		        		aptNameArr[i] = "<div><span>"+$("input[name='aptName']")[i].value.split(",")[1]+"</span></div>";
+		            }
+				*/
+				
+				//아파트 주소를 배열로 생성
 	            var arrValue = $("input[name='addr']").length;
 	            var array = new Array(arrValue);
-	            
 	            for(var i=0; i< array.length; i++){                          
 	            	array[i] = $("input[name='addr']")[i].value.split(",");
 	            }
-	            
-	          //아파트 이름 마커에 넣기 위해 배열 생성
-	          /*
-	        	var aptNameValue = $("input[name='aptName']").length;
-	        	var aptNameArr = new Array(aptNameValue);
-	        	for(var i=0; i< aptNameArr.length; i++){                          
-	        		aptNameArr[i] = "<div><span>"+$("input[name='aptName']")[i].value.split(",")[1]+"</span></div>";
-	            }
-			*/
-	        	
-	        	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+	        
+	            var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	    		mapOption = {
 	    	   	center: new kakao.maps.LatLng(37.497571, 127.049994), // 지도의 중심좌표
 	    	   	level: 6 // 지도의 확대 레벨  
-	    	};
+	    		};
 
-	    	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-	    	//주소-좌표 변환 객체를 생성합니다
-	    	var geocoder = new kakao.maps.services.Geocoder();
-	    	
-	    	for (var i = 0; i < array.length; i++){
-	    		geocoder.addressSearch(array[i], function(result, status) {
-
-	    	        // 정상적으로 검색이 완료됐으면 
-	    	         if (status === kakao.maps.services.Status.OK) {
-
-	    	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-	    	            // 결과값으로 받은 위치를 마커로 표시합니다
-	    	            var marker = new kakao.maps.Marker({
-	    	                map: map,
-	    	                position: coords,
-	    	            });
-	    	            
-	    	           marker.setMap(map);
-	    	           
-	    	           map.setCenter(coords);
-	    	        } 
-	    	    }); 
-	    		
-	    	}
-
-	        });
+		    	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
+		    	//주소-좌표 변환 객체를 생성
+		    	var geocoder = new kakao.maps.services.Geocoder();
+		    	
+		    	for (var i = 0; i < array.length; i++){
+		    		geocoder.addressSearch(array[i], function(result, status) {
+		    	        // 정상적으로 검색이 완료됐으면 
+		    	         if (status === kakao.maps.services.Status.OK) {
+		    	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		    	            // 결과값으로 받은 위치를 마커로 표시
+		    	            var marker = new kakao.maps.Marker({
+		    	                map: map,
+		    	                position: coords,
+		    	            });
+		    	           marker.setMap(map);
+		    	           map.setCenter(coords);
+		    	        } 
+		    	    }); 
+		    	}
+		        });
 </script>
 <%
 	String userId = (String) session.getAttribute("userId");
@@ -221,7 +213,6 @@ text-align: center;
 
 <%
 	Map<Sale, SaleImage> saleMap = (Map<Sale, SaleImage>)request.getAttribute("saleMap");
-	
 %>
 <h6>300개 이상의 매물</h6>
 <input type="hidden" value="<%=search%>" id="search">
@@ -253,8 +244,7 @@ text-align: center;
 		        <!-- 내용 -->
 		        <div class="col-lg-4">
 		            <div class="detail" style="text-align: center;">
-<%-- 		            	<input type="hidden" class="form-control" name="aptName" value="${sale.key.aptName}">
- --%>		                <h5>${sale.key.aptName}</h5>
+						<h5>${sale.key.aptName}</h5>
 		                <input type="text" class="form-control" value="평형   ${sale.key.aptSize}평">
 		                <br>
 		                <div class="skill_bar sm-m-top-50">
@@ -276,8 +266,6 @@ text-align: center;
 		                <%} else{%>
 		                	<a class='btn trigger' href='#'>See the Details</a>
 		                <%} %>
-<%-- 		                <a class="btn trigger" href="GetSaleDataService.d4b?aptNum=${sale.key.aptNum}&type=<%=type%>">See the Details</a>
- --%>		            
  					</div>
 		        </div>
 		    </div>
