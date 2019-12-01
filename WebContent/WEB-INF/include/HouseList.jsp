@@ -18,8 +18,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d0c0a21e3bf46994d7f7a41d9cc729f&libraries=services"></script>
 <script type="text/javascript">
 	        $(function () {
-
-	            
 	            $('.slick-items').slick({
 	                autoplay : true,
 	                dots : true,
@@ -32,15 +30,21 @@
 	                fade : false
 	             });
 	            
-	            
 	            var arrValue = $("input[name='addr']").length;
 	            var array = new Array(arrValue);
 	            
 	            for(var i=0; i< array.length; i++){                          
-	            	array[i] = $("input[name='addr']")[i].value;
+	            	array[i] = $("input[name='addr']")[i].value.split(",");
 	            }
-	     
-	        	
+	            
+	          //아파트 이름 마커에 넣기 위해 배열 생성
+	        	var aptNameValue = $("input[name='aptName']").length;
+	        	var aptNameArr = new Array(aptNameValue);
+	        	for(var i=0; i< aptNameArr.length; i++){                          
+	        		aptNameArr[i] = "<span>"+$("input[name='aptName']")[i].value.split(",")[1]+"</span>";
+	            }
+	        	//console.log(aptNameArr);
+
 	        	
 	        	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	    		mapOption = {
@@ -51,9 +55,6 @@
 	    	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	    	//주소-좌표 변환 객체를 생성합니다
 	    	var geocoder = new kakao.maps.services.Geocoder();
-	    	
-	    	
-	    	
 	    	
 	    	for (var i = 0; i < array.length; i++){
 	    		geocoder.addressSearch(array[i], function(result, status) {
@@ -68,18 +69,36 @@
 	    	                map: map,
 	    	                position: coords,
 	    	            });
-
+					
+	    	            /*
+	    	            var content = new Array(aptNameValue);
+	    	            for ( var i = 0; i<content.length; i++){
+	    	            	content = "<div>"+aptNameArr[i]+"</div>";
+	    	            }
+	    	            console.log(content);
+	    	            console.log(content[1]);
+	    	            console.log(content[2]);
+	    	            console.log(content[3]); */
+	    	            
+	    	            
 	    	           marker.setMap(map);
 	    	           
-	    	           var content = "<div> hi </div>";
-	    	           var customOverlay = new daum.maps.CustomOverlay(
-	    	        		{
-	    	        			position : coords,
-	    	        			content : content
-	    	        		});
-	    	           customOverlay.setMap(map);
+	    	           //var content = "<div> hi </div>";
 	    	           map.setCenter(coords);
+
+	    	           for(var i=0; i<aptNameArr.length; i++){
+	    	        	   var customOverlay = new daum.maps.CustomOverlay(
+	   	    	        		{
+	   	    	        			position : coords,
+	   	    	        			content : aptNameArr[i]
+	   	    	        		});
+	    	           }
+	    	           customOverlay.setMap(map);
 	    	        } 
+	    	        
+	    	        
+	    	        
+	    	        
 	    	    }); 
 	    		
 	    	}
@@ -260,6 +279,7 @@ text-align: center;
 		        <!-- 내용 -->
 		        <div class="col-lg-4">
 		            <div class="detail" style="text-align: center;">
+		            	<input type="hidden" class="form-control" name="aptName" value="${sale.key.aptName}">
 		                <h5>${sale.key.aptName}</h5>
 		                <input type="text" class="form-control" value="전용면적   ${sale.key.aptSize}㎡">
 		                <br>
