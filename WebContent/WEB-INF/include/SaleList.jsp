@@ -26,8 +26,6 @@
 	if(type==null || type.trim()==""){
 		type= (String) request.getAttribute("type");
 	}
-	
-	
 %>
 <!DOCTYPE html>
 <html>

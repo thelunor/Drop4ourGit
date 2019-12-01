@@ -40,22 +40,8 @@ public class InfiniteScroll extends HttpServlet {
 		REAUser reaUser = null;
 		SaleDao saleDao = null;
 		int count=0;
-		
-		
-		
-		
-		
 		String ps = request.getParameter("pageSize"); // pagesize
 		String cp = request.getParameter("cPage"); 
-		
-		
-		
-		
-		
-		
-		
-		
-
 
 		PrintWriter out = response.getWriter();
 
@@ -67,7 +53,6 @@ public class InfiniteScroll extends HttpServlet {
 			reaUser = reaDao.getREAMypage(reaId);
 			
 			count = saleDao.getSaleListCount(reaId);
-			System.out.println("카운트는 " + count);
 			
 			if (ps == null || ps.trim().equals("")) {
 				// default 값 설정
@@ -80,25 +65,12 @@ public class InfiniteScroll extends HttpServlet {
 			int pageSize = Integer.parseInt(ps);
 			int cPage = Integer.parseInt(cp);
 			
-//			int pageCount = 0;
-//			if (count % pageSize == 0) {
-//				pageCount = count / pageSize;
-//			} else {
-//				pageCount = (count / pageSize) + 1;
-//			}
 			
 			saleList = saleDao.getSaleList(reaId, cPage, pageSize);
 			
 
 			if (saleList != null) {
 				JSONArray jsonlist = JSONArray.fromObject(saleList);
-//				JSONObject jsonObject= new JSONObject();
-//				jsonObject.put("reaUser", reaUser);
-//				jsonObject.put("type", type);
-//				jsonObject.put("pageSize", pageSize);
-//				jsonObject.put("cPage", cPage);
-//				request.setAttribute("reaUser", reaUser);
-//				request.setAttribute("type", type);
 				out.print(jsonlist);
 				
 			} else {

@@ -22,7 +22,10 @@
 <script type="text/javascript">
 var cPage=1;
 
+
+
 $(function () {
+	 
 	
 	let isEnd = false;
 	$(window).scroll(function () {
@@ -66,9 +69,7 @@ $(function () {
 	                    list += "<td>" + element.aptHo + "</td>";
 	                    list += "<td>" + element.price + "</td>";
 	                    list += "<td>" + element.isContract + "</td>";
-	                   // list += "<td>" + "<button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href = 'editForm.d4b?empNo="+element.empNo+"' > 수정</button > " + "</td > ";
 	                    list += "<td><button type='button' class='btn-group-sm' id='edit_btn' onclick=" + "location.href='GetSaleEditPageService.d4b?aptNum=" + element.aptNum + "'>수정</button></td>";
-	                    //<td><button type='button' class='btn-group-sm' id='delete_btn' onclick="location.href='SaleDeleteService.d4b?aptNum=${saleData.aptNum}'">삭제</button></td>
 	                    list += "<td><button type='button' class='btn-group-sm' id='delete_btn' onclick=" + "location.href='SaleDeleteService.d4b?aptNum="+element.aptNum+"' > 삭제</button ></td > ";
 	                    //list += "<td>" + "<button type='button' class='btn-group-sm' id='delete_btn' onclick=" location.href = 'deleteInfo.d4b?empNo="+element.empNo+"' > 삭제</button > " + "</td > ";
 	                   if(element.isContract == "무"){
@@ -88,8 +89,8 @@ $(function () {
 		        })//ajax
 		    } //fetchList
 	 fetchList();
-    	    
 });
+
 </script>
 <jsp:include page="../../css/css.jsp"></jsp:include>
 <%
