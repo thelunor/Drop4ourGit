@@ -40,10 +40,10 @@ function checkAll() {
 				alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
 				return;
 			} else if ($("#check2").is(":checked") == false) {
-				alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다..");
+				alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
 				return;
 			} else if ($("#check3").is(":checked") == false) {
-				alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다...");
+				alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
 				return;
 			} else {
 				location.href = 'JoinGeneric.jsp';
