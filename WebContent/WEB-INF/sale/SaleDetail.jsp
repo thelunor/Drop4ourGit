@@ -273,6 +273,7 @@ a.btn  {
 					%>
 					
 					</div>
+					<br>
 					<input type="text" class="form-control" name="address"
 						id="address" required="required" placeholder="도로명 주소"  value="${saleData.roadAddr}" readonly>
 						<br>

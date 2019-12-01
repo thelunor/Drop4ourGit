@@ -165,7 +165,6 @@ text-align: center;
 	
 	$(function(){
 		$("#submitBtn").click(function(event){
-			
 			if( $("#getfile1").val()=="" || $("#getfile2").val()=="" || $("#getfile3").val()==""){
 				alert("매물 사진을 등록해주세요");
 				e.preventdefault();

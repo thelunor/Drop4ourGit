@@ -339,8 +339,17 @@ $(function() {
 		        document.querySelector('#preview').src = reader.result ;
 		    }; 
 		};
+		
+		$("#signUp").click(function(e){
+			if($("#getfile").val()==""){
+				e.preventDefault();
+				alert("소개 사진을 등록해주세요");
+			}else{
+				$(this).submit();
+			}
+		});
+		
 	</script>
-
 </body>
 
 </html>
