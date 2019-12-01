@@ -328,13 +328,13 @@ function checkAll() {
 						            <button type="submit" class="btn btn-primary btn-block btn-lg" id="agree">Agree</button>
 						        </div>
 						        <div class="col-sm-6">
-						        	 <button type="reset" class="btn btn-primary btn-block btn-lg" onclick="location.href='Main.jsp'">Cancel</button>
+						        	 <button type="reset" class="btn btn-primary btn-block btn-lg" onclick="location.href='../getMain.d4b'">Cancel</button>
 						        </div>	
 						        </div> 
 						        </div>
 								<br>
 								<br>
-                                    <div class="text-center">이미 회원이신가요? <a href="LoginPageService.d4b">Click here</a></div>
+                                    <div class="text-center">이미 회원이신가요? <a href="../LoginPageService.d4b">Click here</a></div>
 
                                     <br> <br> <br>
                                 </div>

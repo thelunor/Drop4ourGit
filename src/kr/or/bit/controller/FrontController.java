@@ -482,7 +482,13 @@ public class FrontController extends HttpServlet {
 			forward = action.execute(request, response);
 		}
 		// 페이지 이동관련 ==========================================
-
+		else if (url_Command.equals("/getMain.d4b")) {
+			System.out.println("컨트롤러 걸림");
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("/Main.jsp");
+			System.out.println("컨트롤러 걸림");
+		}
 		// dispatcher =================================================
 		if (forward != null) {
 			if (forward.isRedirect()) { // true
