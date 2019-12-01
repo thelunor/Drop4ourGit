@@ -16,7 +16,10 @@
 	String userId = (String) session.getAttribute("userId");
 	String reaId = reaUser.getReaId();
 	String type = (String) request.getAttribute("type");
-	System.out.println("타입은??????????????????"+type);
+	if(type==null){
+		type=request.getParameter("type");
+	}
+	System.out.println("너의 타입은????????????" +type);
 %>
 <c:set var="reaUserData" value="<%=reaUser %>"/>
 <c:set var="reaImgData" value="<%=reaImg %>"/>
@@ -77,12 +80,11 @@
 		<nav class="navbar navbar-light navbar-expand-lg navbar-fixed ivory no-background bootsnav">
 		<!-- Top jsp -->
 			<%
-			if(type.equals("U01"))
-			{%>
+			if(type.equals("U01")){%>
 			<jsp:include page='../include/GenericUser_Top.jsp' />
-			<%} else if(type.equals("U02")){ %>			
+			<%}else if(type.equals("U02")){%>			
 			<jsp:include page='../include/REAUser_Top.jsp' />
-			<%} %>
+			<%}%>
 			
 
 		<!-- Side jsp -->

@@ -28,7 +28,7 @@ public class GetREAIntroPageService implements Action {
 		REAUserDao readao = null;
 		REAImageDao imgdao = null;
 		HttpSession session = request.getSession();
-		String reaId = (String) session.getAttribute("reaId");
+		String reaId = (String) session.getAttribute("userId");
 		List<Review> rvList = null;
 		ReviewDao rvdao = null;
 		REAIntroBoard reaIntro = null;
@@ -50,13 +50,12 @@ public class GetREAIntroPageService implements Action {
 			System.out.println("reaUser: " + reaUser);
 			System.out.println("rvList: " + rvList);
 			System.out.println("reaIntro: " + reaIntro);
-			if(reaUser != null && reaImg != null && rvList != null) {
+			if(reaUser != null && rvList != null) {
 				request.setAttribute("reaUser", reaUser);
 				request.setAttribute("reaImg", reaImg);
 				request.setAttribute("rvList", rvList);
 				request.setAttribute("reaIntro", reaIntro);
 				request.setAttribute("type", "U02");
-
 				forward.setPath("/WEB-INF/rea/REAIntro.jsp");
 			}
 		} catch (Exception e) {
