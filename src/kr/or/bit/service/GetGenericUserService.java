@@ -17,18 +17,15 @@ public class GetGenericUserService implements Action {
 		GenericUser genericuser = null;
 		AdminDao adao = null;
 		String genericUserId = request.getParameter("genericUserId");
-		System.out.println("음: " + genericUserId);
 		try {
 			forward = new ActionForward();
 			genericuser = new GenericUser();
 			adao = new AdminDao();
 			
 			genericuser = adao.getGenericUser(genericUserId);
-			System.out.println("제네릭유저: " + genericuser);
 			if (genericuser != null) {
 				request.setAttribute("genericUser", genericuser);
-				
-				forward.setPath("AdminGenericUser.jsp");
+				forward.setPath("/WEB-INF/admin/AdminGenericUser.jsp?type=A00");
 			} else {
 				System.out.println("genericuser null");
 			}

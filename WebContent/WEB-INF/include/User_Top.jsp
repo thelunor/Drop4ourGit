@@ -13,7 +13,6 @@
 		<ul>
 			<li class="login">
 				<%
-					System.out.println("타입쓰는 ? " + type);
 					if (type==null || type.trim().equals("")) {
 						out.print("<a href ='LoginService.d4b'>로그인</a>");
 					} else {
