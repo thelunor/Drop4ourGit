@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String genericUserId = (String) session.getAttribute("genericUserId");
+	String userId = (String) session.getAttribute("userId");
+	System.out.println("유저아이디: " + userId);
+
 %>
 <!-- Start Atribute Navigation -->
 <div class="container">
@@ -9,7 +11,7 @@
 		<ul>
 			<li class="login">
 				<%
-					if (session.getAttribute("genericUserId") != null) {
+					if (userId != null) {
 						out.print("<a href ='LogoutService.d4b'>로그아웃</a>");
 					} else {
 						out.print("<a href ='Login.jsp'>로그인</a>");

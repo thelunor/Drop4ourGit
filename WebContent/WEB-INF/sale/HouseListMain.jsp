@@ -185,8 +185,6 @@ table {
 
 			<!--End off container -->
 		</section>
-
-
 		<!-- scroll up-->
 		<jsp:include page="../include/ScrollUp.jsp"></jsp:include>
 		<!-- End off scroll up -->

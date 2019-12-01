@@ -33,8 +33,6 @@ public class GetSaleDataService implements Action {
 		REAImage reaImg = null; //공인중개사 사진
 		boolean bkCheck = false;
 		
-		
-		
 		try {
 			SaleDao saleDao = new SaleDao();
 			SaleImageDao saleImgDao = new SaleImageDao();

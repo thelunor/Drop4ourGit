@@ -15,11 +15,8 @@
 	REAIntroBoard reaIntro = (REAIntroBoard) request.getAttribute("reaIntro");
 	String userId = (String) session.getAttribute("userId");
 	String reaId = reaUser.getReaId();
-	System.out.println("REAIntro genericUserId: " + userId);
-	System.out.println("REAIntro reaId: " + reaId);
-
-	// System.out.println("reaUser: " + reaUser);
-	// System.out.println("reaIntro: " + reaIntro);
+	String type = (String) request.getAttribute("type");
+	System.out.println("타입은??????????????????"+type);
 %>
 <c:set var="reaUserData" value="<%=reaUser %>"/>
 <c:set var="reaImgData" value="<%=reaImg %>"/>
@@ -79,7 +76,14 @@
 
 		<nav class="navbar navbar-light navbar-expand-lg navbar-fixed ivory no-background bootsnav">
 		<!-- Top jsp -->
-			<jsp:include page="../include/User_Top.jsp" />
+			<%
+			if(type.equals("U01"))
+			{%>
+			<jsp:include page='../include/GenericUser_Top.jsp' />
+			<%} else if(type.equals("U02")){ %>			
+			<jsp:include page='../include/REAUser_Top.jsp' />
+			<%} %>
+			
 
 		<!-- Side jsp -->
 			<jsp:include page="../include/Side.jsp" />

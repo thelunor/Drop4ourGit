@@ -30,7 +30,6 @@ public class GetREAIntroDataService implements Action {
 		REAImage reaImg = null;
 		List<Review> rvList = null;
 		REAIntroBoard reaIntro = null;
-		
 		REAUserDao readao = null;
 		REAImageDao imgdao = null;
 		REAIntroBoardDao reaIntrodao = null;		
