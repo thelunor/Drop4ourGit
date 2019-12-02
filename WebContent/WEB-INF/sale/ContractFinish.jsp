@@ -48,7 +48,7 @@ text-align: center;
 									<br>
 									<br>
 							<h2 style="font-size: 18px;">
-								마이페이지에서<br>완료 매물 리스트를 확인할 수 있습니다.
+								마이페이지에서<br>완료 계약 리스트를 확인할 수 있습니다.
 							</h2>
 							<hr>
 							 <br> <br>

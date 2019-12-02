@@ -9,8 +9,12 @@
 %>
 <script>
 $.noConflict();
-
-jQuery(document).ready(function( $ ) {//화면 다 뜨면 시작
+/*
+부트스트랩 사용으로 jquery UI(autocomplete)와 충돌나는 경우가 종 종 있을 때
+$.noConflict();를 통해서 다른 버전의 jquery가  충돌 시 해결 그리고 
+jQuery(document).ready(function( $ ) { 구문을 통해서 다시 $를 alias로 사용
+ */
+jQuery(document).ready(function( $ ) {
 	var addrList = []; //주소 저장 리스트
 	
 	$.ajax({
@@ -20,7 +24,7 @@ jQuery(document).ready(function( $ ) {//화면 다 뜨면 시작
         success : function(data) { 
      	$.each(data, function(index, element) {
      		if(addrList.indexOf((element.addr.split(" ")[1] + " " + element.addr.split(" ")[2])) == -1 ) addrList.push(element.addr.split(" ")[1] + " " + element.addr.split(" ")[2]);
-
+			//json으로 넘어온 주소를 split으로 잘라서 배열에 넣어 출력
      	});
 
      	$("#searchInput").autocomplete({ //오토 컴플릿트 시작

@@ -587,8 +587,12 @@ $(function() {
 	 function newElement() {
 	  var li = document.createElement("li");
 	  var inputValue = document.getElementById("myInput2").value;
-
+	
 	  var count = $('#timetable').children().size();
+	 /*
+	 timetable의 자식의 size가 짝수 번째이면 to do list 입력시 타임라인에는 왼쪽에 위치
+	 					     홀수 번째이면 to do list 입력시 타임라인에는 오른쪽에 위치 
+	 */
 	  var time = document.getElementById("myInput1").value;
 	 console.log(time);
 	  if(count%2==0){
