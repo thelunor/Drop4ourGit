@@ -217,15 +217,13 @@ input[type="text"] {
 			<table border="1" style="width: 100%; text-align: left; font-size: 14px;" id="sellerInfo">
 				<tr><td rowspan="2" style="text-align: center;">매도인<br><input type="text" style="width: 80px;" id="username1"><br><button type="button" onclick="Btn1();" style="font-size: 10px;">정보 불러오기</button></td><td>주 소(도로명)</td><td><input type="text" placeholder="도로명 주소를 모르는 경우 우측에 도로명 검색을 클릭하세요!" style="width: 460px;"><input type="button"  value="도로명 검색" ></td>
 				<tr><td style="text-align: center; ">주민등록번호</td><td><input type="text" style="width: 80px;"> - <input type="text" style="width: 80px;">&nbsp;전화&nbsp;<input type="text" style="width: 160px"> &nbsp;성명&nbsp;<input type="text" style="width: 119px"></td></tr>	
-				<tr><td rowspan="2" style="text-align: center;">매도인<br><input type="text" style="width: 80px;" id="username1"><br></td><td>주 소(도로명)</td><td><input type="text" placeholder="도로명 주소를 모르는 경우 우측에 도로명 검색을 클릭하세요!" style="width: 460px;"><input type="button"  value="도로명 검색" ></td>
-				<tr><td style="text-align: center; ">주민등록번호</td><td><input type="text" style="width: 80px;"> - <input type="text" style="width: 80px;">&nbsp;전화&nbsp;<input type="text" style="width: 160px"> &nbsp;성명&nbsp;<input type="text" style="width: 119px"></td></tr>	
+			
 			</table>
 			<br>
 			<table border="1" style="width: 100%; text-align: left; font-size: 14px;" id="buyerInfo">
 				<tr><td rowspan="2" style="text-align: center;">매수인<br><input type="text" style="width: 80px;" id="username2"><br><button type="button" onclick="Btn2();" style="font-size: 10px;">정보 불러오기</button></td><td>주 소(도로명)</td><td><input type="text" placeholder="도로명 주소를 모르는 경우 우측에 도로명 검색을 클릭하세요!" style="width: 460px;"><input type="button"  value="도로명 검색" ></td>
 				<tr><td style="text-align: center; ">주민등록번호</td><td><input type="text" style="width: 80px;"> - <input type="text" style="width: 80px;">&nbsp;전화&nbsp;<input type="text" style="width: 160px"> &nbsp;성명&nbsp;<input type="text" style="width: 119px"></td></tr>	
-				<tr><td rowspan="2" style="text-align: center;">매수인<br><input type="text" style="width: 80px;"></td><td>주 소(도로명)</td><td><input type="text" placeholder="도로명 주소를 모르는 경우 우측에 도로명 검색을 클릭하세요!" style="width: 460px;"><input type="button"  value="도로명 검색" ></td>
-				<tr><td style="text-align: center; ">주민등록번호</td><td><input type="text" style="width: 80px;"> - <input type="text" style="width: 80px;">&nbsp;전화&nbsp;<input type="text" style="width: 160px"> &nbsp;성명&nbsp;<input type="text" style="width: 119px"></td></tr>
+			
 			</table>
 			<br>
 			<c:forEach var="reaU" items="<%=conMap%>" varStatus="status">

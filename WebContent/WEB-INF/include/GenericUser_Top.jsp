@@ -18,7 +18,7 @@
 					}
 				%>
 			</li>
-			<li class="main"><a href="Main.jsp">메인</a></li>
+			<li class="main"><a href="GetUserMainPageService.d4b?type=U02">메인</a></li>
 		</ul>
 	</div>
 	<!-- End Atribute Navigation -->
