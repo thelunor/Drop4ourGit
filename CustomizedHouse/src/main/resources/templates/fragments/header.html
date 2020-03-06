@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="indexHeader">
+    <title>Drop 4our bit</title>
+    <meta charset="utf-8">
+    <!--폰트적용해야함-->
+    <link rel="stylesheet" th:href="@{/css/slick.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/slick-theme.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/animate.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/fonticons.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/bootsnav.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/responsive.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/bootsnav.css}" type="text/css"/>
+    <script th:src="@{/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js}"></script>
+
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        .home {
+            background: url(/images/background/home.jpg) no-repeat bottom center !important;
+            background-size: cover;
+            position: relative;
+        }
+
+        .input-group {
+            height: 45px;
+        }
+
+        .about_bottom_content {
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+
+    </style>
+</head>
+<div class="container" th:fragment="indexNav">
+    <div class="attr-nav">
+        <ul>
+            <li class="login">
+                <a href ='getLogin.d4b'>로그인</a>
+            </li>
+            <li class="join"><a href="<%=request.getContextPath() %>/view/JoinPage.jsp">회원가입</a></li>
+            <li class="side-menu">
+                <a href='#'><i class='fa fa-bars'></i></a>
+        </ul>
+    </div>
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler" data-toggle="collapse"
+                data-target="#navbar-menu"></button>
+        <a class="navbar-brand" href="Main.jsp?type=null">
+            <img th:src="@{/images/logo/logo2.png}" class="logo"/>
+            <img th:src="@{/images/logo/logo.jpg}" class="logo logo-scrolled"/>
+        </a>
+    </div>
+</div>
+</html>

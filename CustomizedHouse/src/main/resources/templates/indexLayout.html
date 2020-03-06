@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      >
+<head th:replace="fragments/header :: indexHeader">
+    <div th:replace="fragments/chart :: chart1Head"></div>
+</head>
+<body data-spy="scroll" data-target=".navbar-collapse">
+<div class="culmn">
+    <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed white no-background bootsnav">
+        <div th:replace="fragments/header :: indexNav"></div>
+    </nav>
+    <section layout:fragment="indexContent">
+    </section>
+    <br>
+    <br>
+</div>
+<div th:replace="fragments/chart :: chart1Body">
+</div>
+<div th:replace="fragments/footer :: indexFooter"></div>
+<!-- JS includes -->
+<!--<jsp:include page="./js/js.jsp"></jsp:include>-->
+</body>
+
+</html>
