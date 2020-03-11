@@ -35,9 +35,9 @@
         <ul>
             <li class="login">
                 <a sec:authorize="isAnonymous()" th:href="@{/loginPage}">로그인</a>
-                <a sec:authorize="isAuthenticated()" th:href="@{/loginPage}">로그아웃</a>
+                <a sec:authorize="isAnonymous()" th:href="@{/loginPage}">로그아웃</a>
             </li>
-            <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/loginPage}">회원가입</a></li>
+            <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/joinPage}">회원가입</a></li>
             <li class="join"><a sec:authorize="isAuthenticated()" th:href="@{/loginPage}">내정보</a></li>
             <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
             <li class="side-menu">

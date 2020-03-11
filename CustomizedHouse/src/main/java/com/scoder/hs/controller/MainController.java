@@ -22,6 +22,10 @@ public class MainController {
 	public String login() {
 		return "loginPage";
 	}
+	@GetMapping("/joinPage")
+	public String join() {
+		return "joinPage";
+	}
 	
 
 
