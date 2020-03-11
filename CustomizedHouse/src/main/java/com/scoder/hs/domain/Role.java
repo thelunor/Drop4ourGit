@@ -1,22 +1,15 @@
 package com.scoder.hs.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import lombok.Data;
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+public enum Role{
+    ADMIN("ROLE_ADMIN"),
+    MEMBER("ROLE_MEMBER");
 
-@Entity
-@Data
-@Table(name="role")
-public class Role {
-	
-	@Id
-	@Column(name="rolename", updatable=false, nullable=false)
-	private String roleName;
-	
-	@Column(name="roledesc", updatable=false, nullable=false)
-	private String roleDesc;
-
+    private String value;
 }

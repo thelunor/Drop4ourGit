@@ -16,21 +16,21 @@ public class MainController {
 	@Autowired
 	private UserServiceImpl userService;
 	
-	@GetMapping("/login")
-	public String index() {
-		System.out.println("index ÆäÀÌÁö!");
-		return "index";
-	}
+	@GetMapping("/")
+    public String index() {
+        return "/index";
+    }
+		
 	
 	@GetMapping("/user/login")
 	public String login() {
-		System.out.println("login ÆäÀÌÁö!");
+		System.out.println("ë¡œê·¸ì¸??");
 		return "login";
 	}
 	
 	@GetMapping("/user/login/result")
 	public String loginResult() {
-		System.out.println("login ¿Ï·á ÆäÀÌÁö!");
+		System.out.println("login ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 		return "loginSuccess";
 	}
 	
@@ -38,7 +38,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/user/greeting", method = RequestMethod.GET)
 	public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-		System.out.println("ÄÁÆ®·Ñ·¯ Å¸´Ï?"+name.toString());
+		System.out.println("ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ Å¸ï¿½ï¿½?"+name.toString());
         model.addAttribute("name", name);		
 		return "greeting";   
 	}
