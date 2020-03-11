@@ -33,12 +33,11 @@ public class UserServiceImpl implements UserService {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if (("admin@example.com").equals(userId)) {
-            authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
-        } else {
-            authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
-        }
-
+		/*
+		 * if (("admin@example.com").equals(userId)) { authorities.add(new
+		 * SimpleGrantedAuthority(Role.ADMIN.getValue())); } else { authorities.add(new
+		 * SimpleGrantedAuthority(Role.MEMBER.getValue())); }
+		 */
         return new User(userEntity.getUserId(), userEntity.getPassword(), authorities);
     }
 	
