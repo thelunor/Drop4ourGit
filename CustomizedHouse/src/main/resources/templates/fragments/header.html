@@ -34,11 +34,11 @@
     <div class="attr-nav">
         <ul>
             <li class="login">
-                <a sec:authorize="isAnonymous()" th:href="@{/loginPage}">로그인</a>
-                <a sec:authorize="isAnonymous()" th:href="@{/loginPage}">로그아웃</a>
+                <a sec:authorize="isAnonymous()" th:href="@{/sign/loginPage}">로그인</a>
+                <a sec:authorize="isAnonymous()" th:href="@{/sign/loginPage}">로그아웃</a>
             </li>
-            <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/joinPage}">회원가입</a></li>
-            <li class="join"><a sec:authorize="isAuthenticated()" th:href="@{/loginPage}">내정보</a></li>
+            <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/sign/signUpPage}">회원가입</a></li>
+            <li class="join"><a sec:authorize="isAuthenticated()" th:href="@{/sign/loginPage}">내정보</a></li>
             <li class="side-menu">
                 <a sec:authorize="hasRole('ROLE_ADMIN')"><i class='fa fa-bars'></i></a>
         </ul>
