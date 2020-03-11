@@ -10,11 +10,11 @@ public class SignController {
 
 	@GetMapping("/loginPage")
 	public String login() {
-		return "loginPage";
+		return "sign/loginPage";
 	}
 	@GetMapping("/joinPage")
 	public String join() {
-		return "joinPage";
+		return "sign/joinPage";
 	}
 
 }
