@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="indexHeader">
     <title>Drop 4our bit</title>
     <meta charset="utf-8">
@@ -26,20 +26,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
-        .home {
-            background: url(/images/background/home.jpg) no-repeat bottom center !important;
-            background-size: cover;
-            position: relative;
-        }
 
-        .input-group {
-            height: 45px;
-        }
-
-        .about_bottom_content {
-            padding-left: 80px;
-            padding-right: 80px;
-        }
 
     </style>
 </head>
@@ -47,9 +34,12 @@
     <div class="attr-nav">
         <ul>
             <li class="login">
-                <a href ='getLogin.d4b'>로그인</a>
+                <a sec:authorize="isAnonymous()" th:href="@{/loginPage}">로그인</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/loginPage}">로그아웃</a>
             </li>
-            <li class="join"><a href="<%=request.getContextPath() %>/view/JoinPage.jsp">회원가입</a></li>
+            <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/loginPage}">회원가입</a></li>
+            <li class="join"><a sec:authorize="isAuthenticated()" th:href="@{/loginPage}">내정보</a></li>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
             <li class="side-menu">
                 <a href='#'><i class='fa fa-bars'></i></a>
         </ul>
