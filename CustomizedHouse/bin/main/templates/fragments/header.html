@@ -39,15 +39,14 @@
             </li>
             <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/loginPage}">회원가입</a></li>
             <li class="join"><a sec:authorize="isAuthenticated()" th:href="@{/loginPage}">내정보</a></li>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
             <li class="side-menu">
-                <a href='#'><i class='fa fa-bars'></i></a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')"><i class='fa fa-bars'></i></a>
         </ul>
     </div>
     <div class="navbar-header">
         <button type="button" class="navbar-toggler" data-toggle="collapse"
                 data-target="#navbar-menu"></button>
-        <a class="navbar-brand" href="Main.jsp?type=null">
+        <a class="navbar-brand" th:href="@{/}">
             <img th:src="@{/images/logo/logo2.png}" class="logo"/>
             <img th:src="@{/images/logo/logo.jpg}" class="logo logo-scrolled"/>
         </a>
