@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import com.scoder.hs.domain.Role;
 import com.scoder.hs.domain.entity.CHUserEntity;
-import com.scoder.hs.dto.CHUser;
 import com.scoder.hs.repository.UserRepository;
 
 
