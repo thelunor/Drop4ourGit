@@ -35,7 +35,7 @@
         <ul>
             <li class="login">
                 <a sec:authorize="isAnonymous()" th:href="@{/loginPage}">로그인</a>
-                <a sec:authorize="isAnonymous()" th:href="@{/loginPage}">로그아웃</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/loginPage}">로그아웃</a>
             </li>
             <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/joinPage}">회원가입</a></li>
             <li class="join"><a sec:authorize="isAuthenticated()" th:href="@{/loginPage}">내정보</a></li>
