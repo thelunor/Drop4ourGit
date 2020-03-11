@@ -7,12 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Generic {
 	
-    private String userId;
-    private String userPwd;
-    private String name;
-    private String role;
-	
-
+	private String userId;
+	private String resNum;
+	private String userAddress;
 }

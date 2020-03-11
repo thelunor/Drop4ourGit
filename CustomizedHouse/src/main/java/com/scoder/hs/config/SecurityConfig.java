@@ -1,8 +1,6 @@
 package com.scoder.hs.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,53 +10,53 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.stereotype.Component;
 
 import com.scoder.hs.service.UserServiceImpl;
 
+import lombok.AllArgsConstructor;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
-	
-	@Autowired
-	private UserServiceImpl userService;
-	
-	@Autowired
+@EnableWebSecurity
+@AllArgsConstructor
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private UserServiceImpl userService;
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-	@Override
+    @Override
     public void configure(WebSecurity web) throws Exception
     {
-        // static µğ·ºÅÍ¸®ÀÇ ÇÏÀ§ ÆÄÀÏ ¸ñ·ÏÀº ÀÎÁõ ¹«½Ã ( = Ç×»óÅë°ú )
+        // static ë””ë ‰í„°ë¦¬ì˜ í•˜ìœ„ íŒŒì¼ ëª©ë¡ì€ ì¸ì¦ ë¬´ì‹œ ( = í•­ìƒí†µê³¼ )
         web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-	        .anyRequest()//allow all urls
-	        .authenticated()
-            .and() // ·Î±×ÀÎ ¼³Á¤
+                // ï¿½ëŸ¹ï¿½ì” ï§ï¿½ æ²…ëš°ë¸³ ï¿½ê½•ï¿½ì ™
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/myinfo").hasRole("MEMBER")
+                .antMatchers("/**").permitAll()
+                .and() // æ¿¡ì’“ë ‡ï¿½ì”¤ ï¿½ê½•ï¿½ì ™
                 .formLogin()
-                .loginPage("/user/login")
-                .defaultSuccessUrl("/user/login/result")
+                .loginPage("/loginPage")
+                .defaultSuccessUrl("/")
                 .permitAll()
-            .and() // ·Î±×¾Æ¿ô ¼³Á¤
+                .and() // æ¿¡ì’“ë ‡ï¿½ë¸˜ï¿½ì ï¿½ê½•ï¿½ì ™
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
                 .logoutSuccessUrl("/user/logout/result")
                 .invalidateHttpSession(true)
-            .and()
-                // 403 ¿¹¿ÜÃ³¸® ÇÚµé¸µ
-            	.exceptionHandling().accessDeniedPage("/user/denied");
+                .and()
+                // 403 ï¿½ì‚ï¿½ì‡…ï§£ì„â” ï¿½ë¹–ï¿½ë±¾ï§ï¿½
+                .exceptionHandling().accessDeniedPage("/user/denied");
     }
-	
-	@Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-    }
-	
 
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+    }
 }
