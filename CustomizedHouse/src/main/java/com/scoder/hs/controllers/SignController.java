@@ -12,9 +12,9 @@ public class SignController {
 	public String login() {
 		return "sign/loginPage";
 	}
-	@GetMapping("/joinPage")
+	@GetMapping("/signUpPage")
 	public String join() {
-		return "sign/joinPage";
+		return "sign/signUpPage";
 	}
 
 }
