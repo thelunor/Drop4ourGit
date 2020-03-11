@@ -26,12 +26,12 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	
 	@Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         Optional<CHUserEntity> userEntityWrapper = userRepository.findById(userId);
         CHUserEntity userEntity = userEntityWrapper.get();
-
+        System.out.println("디비에서 가져온 유저 정보?"+userEntity.toString());
+        
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         if (("admin@example.com").equals(userId)) {

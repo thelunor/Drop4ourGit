@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/myinfo").hasRole("MEMBER")
                 .antMatchers("/**").permitAll()
-                .and() // 濡쒓렇�씤 �꽕�젙
+                .and() // 
                 .formLogin()
-                .loginPage("/loginPage")
+                .loginPage("/login")
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and() // 濡쒓렇�븘�썐 �꽕�젙
@@ -57,6 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService);
     }
+    
+    
+    
 }

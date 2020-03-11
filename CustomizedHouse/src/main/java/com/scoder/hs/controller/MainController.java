@@ -13,15 +13,19 @@ import com.scoder.hs.service.UserServiceImpl;
 @Controller
 public class MainController {
 	
+	@Autowired
+	private UserServiceImpl userService;
+	
 	@GetMapping("/")
 	public String index() {
 		return "index";
 	}
 	
-	@GetMapping("/loginPage")
+	@GetMapping("/login")
 	public String login() {
 		return "loginPage";
 	}
+	
 	@GetMapping("/joinPage")
 	public String join() {
 		return "joinPage";
