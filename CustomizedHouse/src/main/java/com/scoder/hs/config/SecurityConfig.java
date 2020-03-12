@@ -36,22 +36,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                // �럹�씠吏� 沅뚰븳 �꽕�젙
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/myinfo").hasRole("USER")
                 .antMatchers("/**").permitAll()
-                .and() // 濡쒓렇�씤 �꽕�젙
+                .and() 
                 .formLogin()
                 .loginPage("/sign/loginPage")
                 .defaultSuccessUrl("/")
                 .permitAll()
-                .and() // 濡쒓렇�븘�썐 �꽕�젙
+                .and() 
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                .logoutSuccessUrl("/user/logout/result")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/sign/logout"))
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .and()
-                // 403 �삁�쇅泥섎━ �빖�뱾留�
                 .exceptionHandling().accessDeniedPage("/user/denied");
     }
 

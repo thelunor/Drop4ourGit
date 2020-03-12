@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.scoder.hs.domain.Role;
 import com.scoder.hs.domain.entity.CHUserEntity;
 import com.scoder.hs.domain.entity.UserRoleListEntity;
+import com.scoder.hs.dto.CHUserCustom;
 import com.scoder.hs.repository.RoleRepository;
 import com.scoder.hs.repository.UserRepository;
 
@@ -27,6 +28,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	boolean enabled = true; 
+	boolean accountNonExpired = true; 
+	boolean credentialsNonExpired = true; 
+	boolean accountNonLocked = true;
+	
 	
 	@Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
@@ -34,6 +40,7 @@ public class UserServiceImpl implements UserService {
         CHUserEntity userEntity = userEntityWrapper.get();
         Optional<UserRoleListEntity> roleEntityWrapper = roleRepository.findRoleNameByUserId(userId);
         UserRoleListEntity roleEntity = roleEntityWrapper.get();
+        
         System.out.println("유저 정보 가져오니?"+userEntity.toString());
         System.out.println("롤 정보 가져오니?"+roleEntity.toString());
         
@@ -45,9 +52,10 @@ public class UserServiceImpl implements UserService {
         	authorities.add(new SimpleGrantedAuthority(Role.USER.getValue()));
         }
         
-        System.out.println("권한?"+authorities.get(0).toString());
-        
-        return new User(userEntity.getUserId(), userEntity.getPassword(), authorities);
+        CHUserCustom chuserCustom = new CHUserCustom(userEntity.getUserId(), userEntity.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities, 
+        		userEntity.getUserName(), userEntity.getUserPhoneNum(), userEntity.getIsLock(), userEntity.getLoginCnt(), userEntity.getUserMail());
+                
+        return chuserCustom;
     }
 	
 	
