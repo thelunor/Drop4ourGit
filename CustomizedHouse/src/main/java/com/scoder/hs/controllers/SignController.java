@@ -1,16 +1,19 @@
 package com.scoder.hs.controllers;
 
+import com.scoder.hs.dto.CHUser;
+import com.scoder.hs.dto.Generic;
 import com.scoder.hs.service.SignService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/sign")
 public class SignController {
 
-	private SignService boardService;
+	private SignService signService;
 
 	@GetMapping("/loginPage")
 	public String login() {
@@ -48,10 +51,14 @@ public class SignController {
 		return "sign/signUpGenericInfo";
 	}
 
-//	@PostMapping("/genericUserSignUp")
-//	public String write(BoardDto boardDto) {
-//		boardService.genericUserSignUp(boardDto);
-//
-//		return "redirect:/signUpSuccess";
-//	}
+	@PostMapping("/signUpGenericUser")
+	public String signUpGenericUser() {
+		System.out.println("왜그래");
+		//System.out.println(chUserDto.toString());
+//		System.out.println(genericDto.toString());
+		//signService.signUpCHuser(chUserDto);
+//		signService.signUpGenericUser(genericDto);
+
+		return "redirect:/signUpSuccess";
+	}
 }

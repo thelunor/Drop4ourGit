@@ -1,5 +1,6 @@
 package com.scoder.hs.dto;
 
+import com.scoder.hs.domain.entity.CHUserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,17 @@ public class CHUser {
     private int loginCnt;
     private String userMail;
     
-	
+	public CHUserEntity toEntity() {
+        CHUserEntity chUserEntity = CHUserEntity.builder()
+                .userId(userId)
+                .password(password)
+                .userName(userName)
+                .userPhoneNum(userPhoneNum)
+                .isLock(isLock)
+                .loginCnt(loginCnt)
+                .userMail(userMail)
+                .build();
+        return chUserEntity;
+    }
 
 }
