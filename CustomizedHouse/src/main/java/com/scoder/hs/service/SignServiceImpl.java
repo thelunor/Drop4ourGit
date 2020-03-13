@@ -17,7 +17,7 @@ import com.scoder.hs.dto.CHUserCustom;
 import com.scoder.hs.dto.Role;
 import com.scoder.hs.repository.CHUserRepository;
 import com.scoder.hs.repository.RoleRepository;
-import com.scoder.hs.repository.UserRepository;
+
 
 
 @Service
@@ -48,10 +48,12 @@ public class SignServiceImpl implements SignService {
         
         if(roleEntity.getRoleName().equals("ROLE_ADMIN")) {
         	authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
+        	
         } else if (roleEntity.getRoleName().equals("ROLE_GENUSER")) {
         	authorities.add(new SimpleGrantedAuthority(Role.GENUSER.getValue()));
+        	
         } else if (roleEntity.getRoleName().equals("ROLE_REAUSER")) {
-        	authorities.add(new SimpleGrantedAuthority(Role.REAUSER.getValue()));
+        	authorities.add(new SimpleGrantedAuthority(Role.REAUSER .getValue()));
         }
         
         CHUserCustom chuserCustom = new CHUserCustom(userEntity.getUserId(), userEntity.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities, 

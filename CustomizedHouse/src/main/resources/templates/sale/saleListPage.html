@@ -9,15 +9,15 @@
 	            $('.slick-items').slick({
 	                autoplay : true,
 	                dots : true,
-	                speed : 300 /* 이미지가 슬라이딩시 걸리는 시간 */,
+	                speed : 300 /* �씠誘몄�媛� �뒳�씪�씠�뵫�떆 嫄몃━�뒗 �떆媛� */,
 	                infinite : true,
-	                autoplaySpeed : 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */,
+	                autoplaySpeed : 3000 /* �씠誘몄�媛� �떎瑜� �씠誘몄�濡� �꽆�뼱 媛덈븣�쓽 �� */,
 	                arrows : true,
 	                slidesToShow : 1,
 	                slidesToScroll : 1,
 	                fade : false
 	             });
-	          //아파트 이름 마커에 넣기 위해 배열 생성
+	          //�븘�뙆�듃 �씠由� 留덉빱�뿉 �꽔湲� �쐞�빐 諛곗뿴 �깮�꽦
 		          /*
 		        	var aptNameValue = $("input[name='aptName']").length;
 		        	var aptNameArr = new Array(aptNameValue);
@@ -26,29 +26,29 @@
 		            }
 				*/
 				
-				//아파트 주소를 배열로 생성
+				//�븘�뙆�듃 二쇱냼瑜� 諛곗뿴濡� �깮�꽦
 	            var arrValue = $("input[name='addr']").length;
 	            var array = new Array(arrValue);
 	            for(var i=0; i< array.length; i++){                          
 	            	array[i] = $("input[name='addr']")[i].value.split(",");
 	            }
 	        
-	            var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+	            var mapContainer = document.getElementById('map'), // 吏��룄瑜� �몴�떆�븷 div  
 	    		mapOption = {
-	    	   	center: new kakao.maps.LatLng(37.497571, 127.049994), // 지도의 중심좌표
-	    	   	level: 6 // 지도의 확대 레벨  
+	    	   	center: new kakao.maps.LatLng(37.497571, 127.049994), // 吏��룄�쓽 以묒떖醫뚰몴
+	    	   	level: 6 // 吏��룄�쓽 �솗�� �젅踰�  
 	    		};
 
-		    	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
-		    	//주소-좌표 변환 객체를 생성
+		    	var map = new kakao.maps.Map(mapContainer, mapOption); // 吏��룄瑜� �깮�꽦
+		    	//二쇱냼-醫뚰몴 蹂��솚 媛앹껜瑜� �깮�꽦
 		    	var geocoder = new kakao.maps.services.Geocoder();
 		    	
 		    	for (var i = 0; i < array.length; i++){
 		    		geocoder.addressSearch(array[i], function(result, status) {
-		    	        // 정상적으로 검색이 완료됐으면 
+		    	        // �젙�긽�쟻�쑝濡� 寃��깋�씠 �셿猷뚮릱�쑝硫� 
 		    	         if (status === kakao.maps.services.Status.OK) {
 		    	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		    	            // 결과값으로 받은 위치를 마커로 표시
+		    	            // 寃곌낵媛믪쑝濡� 諛쏆� �쐞移섎�� 留덉빱濡� �몴�떆
 		    	            var marker = new kakao.maps.Marker({
 		    	                map: map,
 		    	                position: coords,
@@ -183,11 +183,74 @@ text-align: center;
 	overflow: hidden;
 	background: #ff6863;
 }
+
+.input-group {
+	height: 50px;
+}
+
+a {
+	color: #797979;
+}
+
+a:hover {
+	color: #212529;
+}
+
+.carousel-inner img {
+	width: 100%; /* Set width to 100% */
+	margin: auto;
+}
+
+@media ( max-width : 600px) {
+	.carousel-caption {
+		display: none;
+		/* Hide the carousel text when the screen is less than 600 pixels wide */
+	}
+}
+
+.carousel-control.right, .carousel-control.left {
+	background-image: none;
+	color: #fff;
+}
+
+.carousel-indicators li {
+	border-color: #ff;
+}
+
+.carousel-indicators li.active {
+	background-color: #fff;
+}
+
+ol, ul {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	text-decoration: none;
+	list-style: none;
+	font-weight: bold;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 </style>
 </head>
 <section id="saleListPage" class="about roomy-100" layout:fragment="content">
-    <h6>300개 이상의 매물</h6>
-<p style="font-size: 13px"><b>거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</b></p>
+    <h6>300媛� �씠�긽�쓽 留ㅻЪ</h6>
+<p style="font-size: 13px"><b>嫄곕옒 媛�寃⑹쓽 鍮꾩쑉�씠 �넂�쓣 �닔濡� �룊洹� 媛�寃⑸낫�떎 �궙�뒿�땲�떎.</b></p>
 <br>
 <div class="row">
 	<div class="col-lg-7" id="items">
@@ -196,25 +259,25 @@ text-align: center;
 		        <div class="col-lg-7">
 		            <div class="slick-items">
 		                <div>
-		                    <img src="reaimg/${sale.value.saleImgSaveName1}" alt="매물사진1" width="500" height="220">
+		                    <img src="reaimg/${sale.value.saleImgSaveName1}" alt="留ㅻЪ�궗吏�1" width="500" height="220">
 		                </div>
 		                <div>
-		                    <img src="reaimg/${sale.value.saleImgSaveName2}" alt="매물사진2" width="500" height="220">
+		                    <img src="reaimg/${sale.value.saleImgSaveName2}" alt="留ㅻЪ�궗吏�2" width="500" height="220">
 		                </div>
 		                <div>
-		                    <img src="reaimg/${sale.value.saleImgSaveName3}" alt="매물사진3" width="500" height="220">
+		                    <img src="reaimg/${sale.value.saleImgSaveName3}" alt="留ㅻЪ�궗吏�3" width="500" height="220">
 		                </div>
 		            </div>
 		        </div>
-		        <!-- 내용 -->
+		        <!-- �궡�슜 -->
 		        <div class="col-lg-4">
 		            <div class="detail" style="text-align: center;">
 						<h5>#</h5>
-		                <input type="text" class="form-control" value="평형   #평">
+		                <input type="text" class="form-control" value="�룊�삎   #�룊">
 		                <br>
 		                <div class="skill_bar sm-m-top-50">
 		                    <div class="teamskillbar clearfix m-top-20" data-percent="# %">
-		                        <h6>거래 가격 : # </h6>
+		                        <h6>嫄곕옒 媛�寃� : # </h6>
 		                        <div class="teamskillbar-bar"></div>
 		                    </div>
 		                    <!-- End Skill Bar -->
@@ -249,12 +312,12 @@ text-align: center;
 			</div>
 			<div class="content">
 				<div class="information">
-					<h3 style="text-align: center;">로그인</h3>
+					<h3 style="text-align: center;">濡쒓렇�씤</h3>
 					<br>
 					<div class="form-group">
-						<label>아이디 </label> 
+						<label>�븘�씠�뵒 </label> 
 						<input class="form-control" type="text" name="id" id="id" placeholder="ID" style="width: 320px" required="required">
-						<label>비밀번호 </label> 
+						<label>鍮꾨�踰덊샇 </label> 
 						<input class="form-control" type="password" name="pwd" id="pwd" required="required" placeholder="PASSWORD" style="width: 320px">
 					</div>
 					<br>
@@ -263,14 +326,14 @@ text-align: center;
 						<br>
 						<hr>
 					</div>
-					<br> <span>계정이 없으신가요?</span> <br>
+					<br> <span>怨꾩젙�씠 �뾾�쑝�떊媛��슂?</span> <br>
 					<br>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
 
 								<button type="submit" class="btnJoin">
-									<i class="fas fa-user"></i> 일반
+									<i class="fas fa-user"></i> �씪諛�
 								</button>
 							</div>
 						</div>
@@ -278,7 +341,7 @@ text-align: center;
 							<div class="form-group">
 								<button type="submit" class="btnJoin"
 									style="padding-left: 20px; padding-right: 20px;">
-									<i class="fas fa-home"></i> 공인중개인
+									<i class="fas fa-home"></i> 怨듭씤以묎컻�씤
 								</button>
 							</div>
 						</div>
