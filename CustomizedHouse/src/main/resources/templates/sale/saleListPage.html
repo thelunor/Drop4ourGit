@@ -5,59 +5,60 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=LIBRARY"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript">
-	        $(function () {
-	            $('.slick-items').slick({
-	                autoplay : true,
-	                dots : true,
-	                speed : 300 /* �씠誘몄�媛� �뒳�씪�씠�뵫�떆 嫄몃━�뒗 �떆媛� */,
-	                infinite : true,
-	                autoplaySpeed : 3000 /* �씠誘몄�媛� �떎瑜� �씠誘몄�濡� �꽆�뼱 媛덈븣�쓽 �� */,
-	                arrows : true,
-	                slidesToShow : 1,
-	                slidesToScroll : 1,
-	                fade : false
-	             });
-	          //�븘�뙆�듃 �씠由� 留덉빱�뿉 �꽔湲� �쐞�빐 諛곗뿴 �깮�꽦
-		          /*
-		        	var aptNameValue = $("input[name='aptName']").length;
-		        	var aptNameArr = new Array(aptNameValue);
-		        	for(var i=0; i< aptNameArr.length; i++){                          
-		        		aptNameArr[i] = "<div><span>"+$("input[name='aptName']")[i].value.split(",")[1]+"</span></div>";
-		            }
-				*/
-				
-				//�븘�뙆�듃 二쇱냼瑜� 諛곗뿴濡� �깮�꽦
-	            var arrValue = $("input[name='addr']").length;
-	            var array = new Array(arrValue);
-	            for(var i=0; i< array.length; i++){                          
-	            	array[i] = $("input[name='addr']")[i].value.split(",");
-	            }
-	        
-	            var mapContainer = document.getElementById('map'), // 吏��룄瑜� �몴�떆�븷 div  
-	    		mapOption = {
-	    	   	center: new kakao.maps.LatLng(37.497571, 127.049994), // 吏��룄�쓽 以묒떖醫뚰몴
-	    	   	level: 6 // 吏��룄�쓽 �솗�� �젅踰�  
-	    		};
+$(function () {
+    $('.slick-items').slick({
+        autoplay : true,
+        dots : true,
+        speed : 300 /* 이미지가 슬라이딩시 걸리는 시간 */,
+        infinite : true,
+        autoplaySpeed : 3000 /* 이미지가 다른 이미지로 넘어 갈때의 텀 */,
+        arrows : true,
+        slidesToShow : 1,
+        slidesToScroll : 1,
+        fade : false
+     });
+    
+  //아파트 이름 마커에 넣기 위해 배열 생성
+      /*
+    	var aptNameValue = $("input[name='aptName']").length;
+    	var aptNameArr = new Array(aptNameValue);
+    	for(var i=0; i< aptNameArr.length; i++){                          
+    		aptNameArr[i] = "<div><span>"+$("input[name='aptName']")[i].value.split(",")[1]+"</span></div>";
+        }
+	*/
+	
+	//아파트 주소를 배열로 생성
+    var arrValue = $("input[name='addr']").length;
+    var array = new Array(arrValue);
+    for(var i=0; i< array.length; i++){                          
+    	array[i] = $("input[name='addr']")[i].value.split(",");
+    }
 
-		    	var map = new kakao.maps.Map(mapContainer, mapOption); // 吏��룄瑜� �깮�꽦
-		    	//二쇱냼-醫뚰몴 蹂��솚 媛앹껜瑜� �깮�꽦
-		    	var geocoder = new kakao.maps.services.Geocoder();
-		    	
-		    	for (var i = 0; i < array.length; i++){
-		    		geocoder.addressSearch(array[i], function(result, status) {
-		    	        // �젙�긽�쟻�쑝濡� 寃��깋�씠 �셿猷뚮릱�쑝硫� 
-		    	         if (status === kakao.maps.services.Status.OK) {
-		    	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-		    	            // 寃곌낵媛믪쑝濡� 諛쏆� �쐞移섎�� 留덉빱濡� �몴�떆
-		    	            var marker = new kakao.maps.Marker({
-		    	                map: map,
-		    	                position: coords,
-		    	            });
-		    	           marker.setMap(map);
-		    	           map.setCenter(coords);
-		    	        } 
-		    	    }); 
-		    	}
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+	mapOption = {
+   	center: new kakao.maps.LatLng(37.497571, 127.049994), // 지도의 중심좌표
+   	level: 6 // 지도의 확대 레벨  
+	};
+
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
+	//주소-좌표 변환 객체를 생성
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	for (var i = 0; i < array.length; i++){
+		geocoder.addressSearch(array[i], function(result, status) {
+	        // 정상적으로 검색이 완료됐으면 
+	         if (status === kakao.maps.services.Status.OK) {
+	            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	            // 결과값으로 받은 위치를 마커로 표시
+	            var marker = new kakao.maps.Marker({
+	                map: map,
+	                position: coords,
+	            });
+	           marker.setMap(map);
+	           map.setCenter(coords);
+	        } 
+	    }); 
+	}
 		    	
 		    	$('.trigger').click(function(){
 		       	 $('.modal-wrapper').toggleClass('open');
@@ -249,47 +250,68 @@ table {
 </style>
 </head>
 <section id="saleListPage" class="about roomy-100" layout:fragment="content">
-    <h6>300媛� �씠�긽�쓽 留ㅻЪ</h6>
-<p style="font-size: 13px"><b>嫄곕옒 媛�寃⑹쓽 鍮꾩쑉�씠 �넂�쓣 �닔濡� �룊洹� 媛�寃⑸낫�떎 �궙�뒿�땲�떎.</b></p>
+<div class="container">
+				<div class="about_content">
+					<h1 style="font-family: 'Jua', sans-serif; text-align: center;">매물
+						리스트</h1>
+					<br> <br>
+					<div class="row">
+						<div class="col-md-8">
+							<div class="input-group">
+									<input type="text" placeholder="법정동 검색" id="houseSearch"
+										name="houseSearch" style="width: 200px; height: 50px;">
+								<div class="input-group-append ">
+									<button type="submit" class="btn btn-primary btn-block btn-lg" id="submitbtn">검색</button>
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+					<!--Topic 자리 -->
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+<h6>300개 이상의 매물</h6>
+<p style="font-size: 13px"><b>거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</b></p>
 <br>
 <div class="row">
 	<div class="col-lg-7" id="items">
 		    <div class="row">
 		        <div class="col-lg-1"></div>
 		        <div class="col-lg-7">
-		            <div class="slick-items">
+		           <div class="slick-items">
 		                <div>
-		                    <img src="reaimg/${sale.value.saleImgSaveName1}" alt="留ㅻЪ�궗吏�1" width="500" height="220">
+		                    <img src="reaimg/${sale.value.saleImgSaveName1}" alt="매물사진1" width="500" height="220">
 		                </div>
 		                <div>
-		                    <img src="reaimg/${sale.value.saleImgSaveName2}" alt="留ㅻЪ�궗吏�2" width="500" height="220">
+		                    <img src="reaimg/${sale.value.saleImgSaveName2}" alt="매물사진2" width="500" height="220">
 		                </div>
 		                <div>
-		                    <img src="reaimg/${sale.value.saleImgSaveName3}" alt="留ㅻЪ�궗吏�3" width="500" height="220">
+		                    <img src="reaimg/${sale.value.saleImgSaveName3}" alt="매물사진3" width="500" height="220">
 		                </div>
 		            </div>
 		        </div>
-		        <!-- �궡�슜 -->
+		        <!-- 내용-->
 		        <div class="col-lg-4">
 		            <div class="detail" style="text-align: center;">
-						<h5>#</h5>
-		                <input type="text" class="form-control" value="�룊�삎   #�룊">
+						<h5>레미안 아파트</h5>
+		                <input type="text" class="form-control" value="평형  #평">
 		                <br>
 		                <div class="skill_bar sm-m-top-50">
-		                    <div class="teamskillbar clearfix m-top-20" data-percent="# %">
-		                        <h6>嫄곕옒 媛�寃� : # </h6>
+		                    <div class="teamskillbar clearfix m-top-20" data-percent="#%">
+		                        <h6>거래 가격 : #</h6>
 		                        <div class="teamskillbar-bar"></div>
 		                    </div>
 		                    <!-- End Skill Bar -->
 		                    <div class="teamskillbar clearfix m-top-50" data-percent="90%">
-		                        <h6 style="font-size: 12px;"> # </h6>
+		                        <h6 style="font-size: 12px;">#</h6>
 		                        <div class="teamskillbar-bar"></div>
 		                    </div>
 		                    <input type="hidden" name="addr" value=" #">
 		                    
 		                    <!-- End Skill Bar -->
 		                </div>
-		                	<a class="btn">See the Details</a>
+		                
  					</div>
 		        </div>
 		    </div>
@@ -350,5 +372,10 @@ table {
 			</div>
 		</div>
 	</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+    
 
 </section>
