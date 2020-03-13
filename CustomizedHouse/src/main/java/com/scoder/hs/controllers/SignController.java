@@ -1,12 +1,16 @@
 package com.scoder.hs.controllers;
 
+import com.scoder.hs.service.SignService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/sign")
 public class SignController {
+
+	private SignService boardService;
 
 	@GetMapping("/loginPage")
 	public String login() {
@@ -42,5 +46,12 @@ public class SignController {
 	@GetMapping("/signUpGenericInfo")
 	public String signUpGenericInfo() {
 		return "sign/signUpGenericInfo";
+	}
+
+	@PostMapping("/signUp")
+	public String write(BoardDto boardDto) {
+		boardService.savePost(boardDto);
+
+		return "redirect:/signUpSuccess";
 	}
 }

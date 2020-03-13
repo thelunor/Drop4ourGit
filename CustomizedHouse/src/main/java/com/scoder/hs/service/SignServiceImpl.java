@@ -20,7 +20,7 @@ import com.scoder.hs.repository.UserRepository;
 
 
 @Service
-public class UserServiceImpl implements UserService {
+public class SignServiceImpl implements SignService {
 	
 	@Autowired
 	private UserRepository userRepository;
