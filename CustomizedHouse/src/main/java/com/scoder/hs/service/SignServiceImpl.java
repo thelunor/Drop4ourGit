@@ -58,6 +58,11 @@ public class SignServiceImpl implements SignService {
                 
         return chuserCustom;
     }
+
+    @Override
+    public void genericUserSignUp(){
+	    return;
+    }
 	
 	
 }

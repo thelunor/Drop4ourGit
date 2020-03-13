@@ -48,10 +48,10 @@ public class SignController {
 		return "sign/signUpGenericInfo";
 	}
 
-	@PostMapping("/signUp")
-	public String write(BoardDto boardDto) {
-		boardService.savePost(boardDto);
-
-		return "redirect:/signUpSuccess";
-	}
+//	@PostMapping("/genericUserSignUp")
+//	public String write(BoardDto boardDto) {
+//		boardService.genericUserSignUp(boardDto);
+//
+//		return "redirect:/signUpSuccess";
+//	}
 }
