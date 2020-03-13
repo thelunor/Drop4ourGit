@@ -24,14 +24,23 @@ public class SignController {
 		return "sign/signUpPage";
 	}
 
-	@GetMapping("/signUpGeneric")
-	public String signUpGeneric() {
-		return "sign/signUpGeneric";
+	@GetMapping("/signUpGenericTerms")
+	public String signUpGenericTerms() {
+		return "sign/signUpGenericTerms";
 	}
 
-	@GetMapping("/signUpREA")
-	public String signUpREA() {
-		return "sign/signUpREA";
+	@GetMapping("/signUpREATerms")
+	public String signUpREATerms() {
+		return "sign/signUpREATerms";
 	}
 
+	@GetMapping("/signUpREAInfo")
+	public String signUpREAInfo() {
+		return "sign/signUpREAInfo";
+	}
+
+	@GetMapping("/signUpGenericInfo")
+	public String signUpGenericInfo() {
+		return "sign/signUpGenericInfo";
+	}
 }
