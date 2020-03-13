@@ -7,5 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/rea")
 public class REAController {
+	
+	@GetMapping("/myPage")
+	public String myPage() {
+		System.out.println("공인중개사 마이페이지 걸려?");
+		return "rea/reaIntro";
+	}
 
 }
