@@ -3,6 +3,7 @@
 <head th:fragment="indexHeader">
     <title>Drop 4our bit</title>
     <meta charset="utf-8">
+    <script th:src="@{//code.jquery.com/ui/1.12.1/jquery-ui.js}"></script>
     <!--폰트적용해야함-->
     <link rel="stylesheet" th:href="@{/css/slick.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/slick-theme.css}" type="text/css"/>
@@ -15,19 +16,14 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/responsive.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/bootsnav.css}" type="text/css"/>
-    <script th:src="@{/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js}"></script>
-
+    <link rel="stylesheet" th:href="@{//fonts.googleapis.com/css?family=Jua&display=swap}" type="text/css"/>
 
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <style>
+
+    <link rel="stylesheet" th:href="@{//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}" type="text/css"/>
 
 
-    </style>
 </head>
 <div class="container" th:fragment="indexNav">
     <div class="attr-nav">
