@@ -46,6 +46,10 @@
 					<div style="margin-top: 10px; margin-bottom: 10px;">
 						<hr>
 					</div>
+					<!-- url path로 나옴!  /rea/myPage 로 나옴 -->
+					<div th:with="currentUrl=(${#httpServletRequest.requestURI})">
+					   <a th:text="${currentUrl}"></a>
+					</div>
 					<!-- <div>
 						<b>${reaUserData.officeName}</b><br>
 						대표 공인중개사: <br>

@@ -2,7 +2,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       >
 <head th:replace="fragments/header :: indexHeader">
-    <div th:replace="fragments/chart :: chart1Head"></div>
+<!--    <div th:replace="fragments/chart :: chart1Head"></div>-->
     <style>
         .home {
             background: url(/images/background/home.jpg) no-repeat bottom center !important;
@@ -52,7 +52,12 @@
 <body data-spy="scroll" data-target=".navbar-collapse">
 <div class="culmn">
     <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed white no-background bootsnav">
-        <div th:replace="fragments/header :: indexNav"></div>
+    	<div th:if="${#httpServletRequest.requestURI} == '/rea/**' ">
+    		<div th:replace="fragments/header-rea :: indexNav"></div>
+    	</div>
+    	<div th:unless="${#httpServletRequest.requestURI} == '/rea/**' ">
+    		<div th:replace="fragments/header :: indexNav"></div>
+    	</div>
     </nav>
     <section layout:fragment="content">
     </section>
