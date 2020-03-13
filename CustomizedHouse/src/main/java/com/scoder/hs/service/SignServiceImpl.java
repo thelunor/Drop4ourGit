@@ -17,7 +17,6 @@ import com.scoder.hs.dto.CHUserCustom;
 import com.scoder.hs.dto.Role;
 import com.scoder.hs.repository.CHUserRepository;
 import com.scoder.hs.repository.RoleRepository;
-import com.scoder.hs.repository.UserRepository;
 
 
 @Service

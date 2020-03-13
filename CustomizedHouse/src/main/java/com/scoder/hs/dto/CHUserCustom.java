@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class CHUserCustom extends User {
 	
-    private String userName;
+    private String name;
     private String userPhoneNum;
     private int isLock;
     private int loginCnt;
@@ -21,14 +21,13 @@ public class CHUserCustom extends User {
 	
     public CHUserCustom(String username, String password, boolean enabled, boolean accountNonExpired,
 			boolean credentialsNonExpired, boolean accountNonLocked,
-			Collection<? extends GrantedAuthority> authorities, String userName, String userPhoneNum, 
+			Collection<? extends GrantedAuthority> authorities, String name, String userPhoneNum, 
 			int isLock, int loginCnt, String userMail) {
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-		this.userName = userName;
+		this.name = name;
 		this.userPhoneNum = userPhoneNum;
 		this.isLock = isLock;
 		this.loginCnt = loginCnt;
 		this.userMail = userMail;
 	}
-	
 }

@@ -20,11 +20,11 @@ public class REAController {
 	
 	@GetMapping("/reaMain")
 	public String mainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
-		System.out.println("공인중개사 메인!");
-		System.out.println("유저 아이디?"+chuserCustom.getUsername());
 		REA rea = reaService.getReaInfo(chuserCustom.getUsername());
+		
+		model.addAttribute("user", chuserCustom);
 		model.addAttribute("rea", rea);
-		//공인중개사 정보 & 사무실 소개 정보 가져와서 뿌려줘야 함
+		//공인중개사 소개 넣기!
 		return "rea/reaMain";
 	}
 	@GetMapping("/myPage")
