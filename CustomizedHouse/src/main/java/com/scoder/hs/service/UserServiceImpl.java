@@ -11,10 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.scoder.hs.domain.Role;
 import com.scoder.hs.domain.entity.CHUserEntity;
 import com.scoder.hs.domain.entity.UserRoleListEntity;
 import com.scoder.hs.dto.CHUserCustom;
+import com.scoder.hs.dto.Role;
 import com.scoder.hs.repository.RoleRepository;
 import com.scoder.hs.repository.UserRepository;
 
