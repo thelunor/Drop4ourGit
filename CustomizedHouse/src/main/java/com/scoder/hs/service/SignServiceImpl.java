@@ -15,6 +15,7 @@ import com.scoder.hs.domain.entity.CHUserEntity;
 import com.scoder.hs.domain.entity.UserRoleListEntity;
 import com.scoder.hs.dto.CHUserCustom;
 import com.scoder.hs.dto.Role;
+import com.scoder.hs.repository.CHUserRepository;
 import com.scoder.hs.repository.RoleRepository;
 import com.scoder.hs.repository.UserRepository;
 
@@ -23,7 +24,7 @@ import com.scoder.hs.repository.UserRepository;
 public class SignServiceImpl implements SignService {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private CHUserRepository chuserRepository;
 	@Autowired
 	private RoleRepository roleRepository;
 	
@@ -35,7 +36,7 @@ public class SignServiceImpl implements SignService {
 	
 	@Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        Optional<CHUserEntity> userEntityWrapper = userRepository.findById(userId);
+        Optional<CHUserEntity> userEntityWrapper = chuserRepository.findById(userId);
         CHUserEntity userEntity = userEntityWrapper.get();
         Optional<UserRoleListEntity> roleEntityWrapper = roleRepository.findRoleNameByUserId(userId);
         UserRoleListEntity roleEntity = roleEntityWrapper.get();
