@@ -289,4 +289,31 @@
 		<!--End off row-->
 	</div>
 	<!--End off container -->
+	<script>
+		function checkAll() {
+			if ($("#allCheck").is(':checked')) {
+				$("input[name=check]").prop("checked", true);
+			} else {
+				$("input[name=check]").prop("checked", false);
+			}
+		}
+		$(function() {
+
+			$("#agree").click(function() {
+				if ($("#check1").is(":checked") == false) {
+					alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+					return;
+				} else if ($("#check2").is(":checked") == false) {
+					alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+					return;
+				} else if ($("#check3").is(":checked") == false) {
+					alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
+					return;
+				} else {
+					location.href = 'JoinGeneric.jsp';
+				}
+
+			});
+		});
+	</script>
 </section>
