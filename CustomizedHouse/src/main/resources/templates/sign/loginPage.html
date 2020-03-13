@@ -2,18 +2,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{indexLayout}"
 >
-<head>
-    <style type="text/css">
-        .input-group {
-            height: 50px;
-        }
+<style type="text/css" layout:fragment="pageCss">
+    .input-group {
+        height: 50px;
+    }
 
-        h2 {
-            font-family: 'Jua', sans-serif;
+    h2 {
+        font-family: 'Jua', sans-serif;
 
-        }
-    </style>
-</head>
+    }
+</style>
 <section id="loginPage" class="about roomy-100" layout:fragment="content">
     <form action="/sign/loginPage" method="post" name="loginForm">
         <div class="container">

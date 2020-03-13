@@ -1,19 +1,20 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorator="~{indexLayout}">
+<style type="text/css" layout:fragment="pageCss">
+	h2, label {
+		font-family: 'Jua', sans-serif;
+	}
+	span{
+		color:#ff6863;
+	}
+	b{
+		color : black;
+		font-size: 16px;
+	}
+</style>
 <section id="signUpGeneric" class="about roomy-100" layout:fragment="content">
-	<style type="text/css">
-		h2, label {
-			font-family: 'Jua', sans-serif;
-		}
-		span{
-			color:#ff6863;
-		}
-		b{
-			color : black;
-			font-size: 16px;
-		}
-	</style>
+
 	<div class="container">
 		<div class="about_content">
 			<div class="row">

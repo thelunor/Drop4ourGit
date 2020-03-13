@@ -1,47 +1,46 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	      layout:decorator="~{indexLayout}">
+<style type="text/css" layout:fragment="pageCss">
+	h2 {
+		font-family: 'Jua', sans-serif;
+	}
+
+	input {
+		height: 40px;
+	}
+
+	form-control {
+		height: 40px;
+	}
+
+	.genderbox {
+		padding: 1px;
+		border: 1px solid #cccccc;
+		height: 40px;
+	}
+
+	#id_check, #tdEmail, #tdPw, #tdCh {
+		font-size: 13px;
+		font-family: 'Jua', sans-serif;
+		color: #ff6863;
+	}
+
+	.form-group input[type="text"], input[type="email"], input[type="password"]
+	{
+		border: 1px solid #e5e5e5;
+	}
+	/* Center the avatar image inside this container */
+	.imgcontainer {
+		text-align: center;
+	}
+	/* Avatar image */
+	img.avatar {
+		border-radius: 50%;
+	}
+</style>
 
 <section id="signUpGenericInfo" class="about roomy-100" layout:fragment="content">
-	<style type="text/css">
-		h2 {
-			font-family: 'Jua', sans-serif;
-		}
-
-		input {
-			height: 40px;
-		}
-
-		form-control {
-			height: 40px;
-		}
-
-		.genderbox {
-			padding: 1px;
-			border: 1px solid #cccccc;
-			height: 40px;
-		}
-
-		#id_check, #tdEmail, #tdPw, #tdCh {
-			font-size: 13px;
-			font-family: 'Jua', sans-serif;
-			color: #ff6863;
-		}
-
-		.form-group input[type="text"], input[type="email"], input[type="password"]
-		{
-			border: 1px solid #e5e5e5;
-		}
-		/* Center the avatar image inside this container */
-		.imgcontainer {
-			text-align: center;
-		}
-		/* Avatar image */
-		img.avatar {
-			border-radius: 50%;
-		}
-	</style>
-
 	<form action="/sign/signUpGenericUser" method="post">
 		<div class="container">
 			<div class="about_content">

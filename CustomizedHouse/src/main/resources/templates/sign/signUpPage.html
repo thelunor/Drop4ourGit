@@ -1,24 +1,24 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	      layout:decorator="~{indexLayout}">
+<style type="text/css" layout:fragment="pageCss">
+
+
+	.input-group {
+		height: 50px;
+	}
+
+	h2, h5, p {
+		font-family: 'Jua', sans-serif;
+		text-align: center;
+	}
+
+	.form{
+		border : 3px double black;
+		padding : 10px;
+	}
+</style>
 <section class="about roomy-100" layout:fragment="content">
-	<style type="text/css">
-
-
-		.input-group {
-			height: 50px;
-		}
-
-		h2, h5, p {
-			font-family: 'Jua', sans-serif;
-			text-align: center;
-		}
-
-		.form{
-			border : 3px double black;
-			padding : 10px;
-		}
-	</style>
     <div>
 		<div class="container">
 			<div class="about_content">
