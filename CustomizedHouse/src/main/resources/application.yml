@@ -20,6 +20,9 @@ spring:
     mode: HTML5
     cache: false
     order: 0
+  devtools:
+    livereload:
+      enabled: true
 logging:
   level:
     org:
