@@ -9,6 +9,6 @@ import com.scoder.hs.domain.entity.CHUserEntity;
 
 
 @EnableJpaRepositories
-public interface UserRepository extends JpaRepository<CHUserEntity, String> {
+public interface CHUserRepository extends JpaRepository<CHUserEntity, String> {
 	Optional<CHUserEntity> findById(String userId);
 }

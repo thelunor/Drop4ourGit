@@ -2,7 +2,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{indexLayout}"
 >
-
 <head>
 	<style type="text/css">
 		a {
@@ -31,7 +30,6 @@
 		}
 	</style>
 </head>
-
 <section id="join" class="about roomy-100" layout:fragment="content">
 	<div class="container">
 		<div class="about_content">
@@ -47,9 +45,9 @@
 						<hr>
 					</div>
 					<!-- url path로 나옴!  /rea/myPage 로 나옴 -->
-					<div th:with="currentUrl=(${#httpServletRequest.requestURI})">
+					<!-- <div th:with="currentUrl=(${#httpServletRequest.requestURI})">
 					   <a th:text="${currentUrl}"></a>
-					</div>
+					</div> -->
 					<!-- <div>
 						<b>${reaUserData.officeName}</b><br>
 						대표 공인중개사: <br>
@@ -59,12 +57,12 @@
 					<div style="margin-top: 10px; margin-bottom: 10px;">
 						<hr>
 					</div>
-					<!-- <div>
+					<div th:with="${rea}">
 						사업장 주소: <br>
 						${reaUserData.officeAddr} ${reaUserData.officeDetailAddr}<br><br>
 						사업자 등록번호: <br>
 						${reaUserData.regNum}
-					</div> -->
+					</div>
 				</div>
 				<!-- Left End -->
 				
