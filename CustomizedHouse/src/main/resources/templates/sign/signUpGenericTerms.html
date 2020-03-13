@@ -289,6 +289,8 @@
 		<!--End off row-->
 	</div>
 	<!--End off container -->
+</section>
+<js layout:fragment="pageJs">
 	<script>
 		function checkAll() {
 			if ($("#allCheck").is(':checked')) {
@@ -298,7 +300,6 @@
 			}
 		}
 		$(function() {
-
 			$("#agree").click(function() {
 				if ($("#check1").is(":checked") == false) {
 					alert("모든 약관에 동의 하셔야 다음 단계로 진행 가능합니다.");
@@ -315,4 +316,4 @@
 			});
 		});
 	</script>
-</section>
+</js>
