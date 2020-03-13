@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -28,9 +27,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RoleRepository roleRepository;
 	
-	boolean enabled = true; 
-	boolean accountNonExpired = true; 
-	boolean credentialsNonExpired = true; 
+	boolean enabled = true;
+	boolean accountNonExpired = true;
+	boolean credentialsNonExpired = true;
 	boolean accountNonLocked = true;
 	
 	
@@ -48,8 +47,10 @@ public class UserServiceImpl implements UserService {
         
         if(roleEntity.getRoleName().equals("ROLE_ADMIN")) {
         	authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
-        } else if (roleEntity.getRoleName().equals("ROLE_USER")) {
-        	authorities.add(new SimpleGrantedAuthority(Role.USER.getValue()));
+        } else if (roleEntity.getRoleName().equals("ROLE_GENUSER")) {
+        	authorities.add(new SimpleGrantedAuthority(Role.GENUSER.getValue()));
+        } else if (roleEntity.getRoleName().equals("ROLE_REAUSER")) {
+        	authorities.add(new SimpleGrantedAuthority(Role.REAUSER.getValue()));
         }
         
         CHUserCustom chuserCustom = new CHUserCustom(userEntity.getUserId(), userEntity.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities, 

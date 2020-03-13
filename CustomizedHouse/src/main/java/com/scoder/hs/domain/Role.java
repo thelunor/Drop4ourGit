@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 public enum Role{
     ADMIN("ROLE_ADMIN"),
-    USER("ROLE_USER");
+    GENUSER("ROLE_GENUSER"),
+	REAUSER("ROLE_REAUSER");
 
     private String value;
 }

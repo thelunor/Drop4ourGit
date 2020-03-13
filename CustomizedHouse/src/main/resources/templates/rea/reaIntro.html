@@ -1,0 +1,110 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{indexLayout}"
+>
+
+<head>
+	<style type="text/css">
+		a {
+		    color: #797979;
+		}
+		
+		a:hover {
+		    color: #212529;
+		}
+		
+		h2 {
+			font-family: 'Jua', sans-serif;
+			text-align: center;
+		}
+		
+		h1, h3 {
+		font-family: 'Jua', sans-serif;
+		text-align: center;
+		}
+		
+		.clearfix:after {
+			content: '';
+			display: block;
+			clear: both;
+			float: none;
+		}
+	</style>
+</head>
+
+<section id="join" class="about roomy-100" layout:fragment="content">
+	<div class="container">
+		<div class="about_content">
+			<div class="row">
+				<!-- Left -->
+				<div class="col-md-3" style="border: 1px solid rgb(211, 211, 211); padding-top: 15px; padding-bottom: 15px; height: 600px; width: 200px; position: fixed;">
+					<div class="signup-form">
+						<div class="form-group" style="text-align : center">
+							<img id="preview" src="" style="width:200px" alt="Profile">
+						</div>
+					</div>
+					<div style="margin-top: 10px; margin-bottom: 10px;">
+						<hr>
+					</div>
+					<!-- <div>
+						<b>${reaUserData.officeName}</b><br>
+						대표 공인중개사: <br>
+						<b>${reaUserData.reaName}</b><br>
+						${reaUserData.officeHp}
+					</div> -->
+					<div style="margin-top: 10px; margin-bottom: 10px;">
+						<hr>
+					</div>
+					<!-- <div>
+						사업장 주소: <br>
+						${reaUserData.officeAddr} ${reaUserData.officeDetailAddr}<br><br>
+						사업자 등록번호: <br>
+						${reaUserData.regNum}
+					</div> -->
+				</div>
+				<!-- Left End -->
+				
+				<!-- Right -->
+				<div class="col-md-9" style="margin-left: 240px;">
+					<div style="margin-left: 80px;">
+						<!-- 첫 소개 글머리 -->
+							<section>
+								<div style="margin-bottom: 32px;">
+									<div>
+										<div>
+											<h4>
+												안녕하세요. 에 오신 것을 환영합니다. 
+											</h4>
+										</div>
+										<!-- <div style="margin-top: 8px;">
+											${reaIntroData.subject }
+										</div>
+										<div style="margin-top: 8px;">
+											${reaIntroData.content }
+										</div> -->
+									</div>
+								</div>
+							</section>
+						
+						<!-- 두 번째 소개 -->
+							<section>
+								<!-- <div>
+									${reaUserData.officeName} ${reaUserData.officeHp}
+								</div> -->
+							</section>
+							<div style="margin-top: 20px; margin-bottom: 20px;">
+								<hr>
+							</div>
+				
+							<div style="margin-top: 20px; margin-bottom: 20px;">
+							</div>
+						<!-- <div>
+							<jsp:include page="./../include/ReviewList.jsp" />
+						</div> -->
+						<!-- Right End -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

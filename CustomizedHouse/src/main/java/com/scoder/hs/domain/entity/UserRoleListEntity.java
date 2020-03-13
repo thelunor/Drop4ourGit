@@ -21,7 +21,7 @@ public class UserRoleListEntity {
 	@Id
 	private String userId;
 	
-	@Column(name = "roleName ", length = 10, nullable = false)
+	@Column(name = "roleName ", length = 15, nullable = false)
 	private String roleName;
 	
 	@Builder
