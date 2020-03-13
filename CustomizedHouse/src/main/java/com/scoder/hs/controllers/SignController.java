@@ -20,8 +20,18 @@ public class SignController {
 //	}
 	
 	@GetMapping("/signUpPage")
-	public String join() {
+	public String signUpPage() {
 		return "sign/signUpPage";
+	}
+
+	@GetMapping("/signUpGeneric")
+	public String signUpGeneric() {
+		return "sign/signUpGeneric";
+	}
+
+	@GetMapping("/signUpREA")
+	public String signUpREA() {
+		return "sign/signUpREA";
 	}
 
 }
