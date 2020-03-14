@@ -2,7 +2,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       >
     <!--header-->
-    <div th:replace="fragments/header :: indexHeader">
+    <head th:replace="fragments/header :: indexHeader">
     <!--    <div th:replace="fragments/chart :: chart1Head"></div>-->
         <!--페이지별 필요 css-->
         <div layout:fragment="pageCss"/>
@@ -35,7 +35,7 @@
 
     <!--    	}); -->
     <!--    </script>-->
-    </div>
+    </head>
     <body data-spy="scroll" data-target=".navbar-collapse">
         <div class="culmn">
             <!--nav-->
