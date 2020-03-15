@@ -74,12 +74,12 @@
 												안녕하세요. <span th:text="${rea.officeName}"></span> 에 오신 것을 환영합니다. 
 											</h4>
 										</div>
-										<!-- <div style="margin-top: 8px;">
-											${reaIntroData.subject }
+										<div style="margin-top: 8px;">
+											<b th:text="${reaIntroBoard.introTitle}"></b>
 										</div>
 										<div style="margin-top: 8px;">
-											${reaIntroData.content }
-										</div> -->
+											<span th:text="${reaIntroBoard.introContent}"></span>
+										</div>
 									</div>
 								</div>
 							</section>
@@ -95,9 +95,6 @@
 							</div>
 							<div style="margin-top: 20px; margin-bottom: 20px;">
 							</div>
-						<!-- <div>
-							<jsp:include page="./../include/ReviewList.jsp" />
-						</div> -->
 						<!-- 공인중개사 후기 -->
 						<div>
 							<section id="id" class="about">

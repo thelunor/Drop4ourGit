@@ -2,12 +2,17 @@ package com.scoder.hs.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.scoder.hs.domain.entity.REAEntity;
+import com.scoder.hs.domain.entity.ReaIntroBoardEntity;
 import com.scoder.hs.dto.REA;
+import com.scoder.hs.dto.REAIntroBoard;
 import com.scoder.hs.repository.REARepository;
+import com.scoder.hs.repository.ReaIntroBoardRepository;
 
 @Service
 public class REAService {
@@ -15,6 +20,10 @@ public class REAService {
 	@Autowired
 	private REARepository reaRepository;
 	
+	@Autowired
+	private ReaIntroBoardRepository reaIntroBoardRepository;
+	
+	//공인중개사 회원 정보 가져오기
 	public REA getReaInfo(String userId) {
 		Optional<REAEntity> reaEntityWrapper = reaRepository.findById(userId);
 		REAEntity reaEntity = reaEntityWrapper.get();
@@ -25,8 +34,32 @@ public class REAService {
 				.officeAddress(reaEntity.getOfficeAddress())
 				.officePhoneNum(reaEntity.getOfficePhoneNum())
 				.build();
-		System.out.println("값 객체로 됨?"+rea.toString());
 		return rea;
+	}
+	
+	//공인중개사 소개글 쓰기
+	@Transactional
+	public boolean saveReaIntro(REAIntroBoard reaIntroBoard) {
+		boolean result = false;
+		try {
+			reaIntroBoardRepository.save(reaIntroBoard.toEntity()).getUserId();
+			result = true;
+		} catch(Exception e) {
+			System.out.println("saveReaIntro Service Error"+e.getMessage());
+		}
+		return result;
+	}
+	
+	//공인중개사 소개글 가져오기
+	public REAIntroBoard getReaIntro(String userId) {
+		Optional<ReaIntroBoardEntity> reaIntroBoardWrapper = reaIntroBoardRepository.findByUserId(userId);
+		ReaIntroBoardEntity reaIntroBoardEntity = reaIntroBoardWrapper.get();
+		REAIntroBoard reaIntroBoard = REAIntroBoard.builder()
+										.userId(reaIntroBoardEntity.getUserId())
+										.introTitle(reaIntroBoardEntity.getIntroTitle())
+										.introContent(reaIntroBoardEntity.getIntroContent())
+										.build();
+		return reaIntroBoard;
 	}
 
 }

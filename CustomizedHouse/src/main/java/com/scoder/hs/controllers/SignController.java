@@ -24,12 +24,6 @@ public class SignController {
 	public String login() {
 		return "/sign/loginPage";
 	}
-//	@GetMapping("/loginSuccess") -> 테스트용
-//	public String loginSuccess(@AuthenticationPrincipal CHUserCustom chuserCustom) {
-//		System.out.println("이거 타니?");
-//		System.out.println("유저"+chuserCustom.toString());
-//		return "index";
-//	}
 	
 	@GetMapping("/signUpPage")
 	public String signUpPage() {

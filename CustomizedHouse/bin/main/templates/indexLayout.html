@@ -1,68 +1,58 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       >
-<head th:replace="fragments/header :: indexHeader">
-<!--    <div th:replace="fragments/chart :: chart1Head"></div>-->
-    <style>
-        .home {
-            background: url(/images/background/home.jpg) no-repeat bottom center !important;
-            background-size: cover;
-            position: relative;
-        }
+    <!--header-->
+    <head th:replace="fragments/header :: indexHeader">
+    <!--    <div th:replace="fragments/chart :: chart1Head"></div>-->
+        <!--페이지별 필요 css-->
+        <div layout:fragment="pageCss"/>
+    <!--    <script>-->
+    <!--    $(function() {-->
+    <!--    	var addrList = ["강남구", "강서구", "양천구"]; //주소 저장 리스트-->
 
-        .input-group {
-            height: 45px;
-        }
+    <!--        $("#searchInput").autocomplete({ //오토 컴플릿트 시작-->
+    <!--    			source : addrList, // source 는 자동 완성 대상-->
+    <!--    			select : function(event, ui) { //아이템 선택시-->
 
-        .about_bottom_content {
-            padding-left: 80px;
-            padding-right: 80px;
-        }
-    </style>
-    <script>
-    $(function() {
-    	var addrList = ["강남구", "강서구", "양천구"]; //주소 저장 리스트
+    <!--    			},-->
+    <!--    			focus : function(event, ui) { //포커스 가면-->
+    <!--    				return false;//한글 에러 잡기용도로 사용됨-->
+    <!--    			},-->
+    <!--    			minLength : 1,// 최소 글자수-->
+    <!--    			autoFocus : true, //첫번째 항목 자동 포커스 기본값 false-->
+    <!--    			classes : { //잘 모르겠음-->
+    <!--    				"ui-autocomplete" : "highlight"-->
+    <!--    			},-->
+    <!--    			delay : 100, //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)-->
+    <!--    			//            disabled: true, //자동완성 기능 끄기-->
+    <!--    			position : {-->
+    <!--    				my : "right top",-->
+    <!--    				at : "right bottom"-->
+    <!--    			}, //잘 모르겠음-->
+    <!--    			close : function(event) { //자동완성창 닫아질때 호출-->
+    <!--    			}-->
+    <!--    		});     	-->
 
-        $("#searchInput").autocomplete({ //오토 컴플릿트 시작
-    			source : addrList, // source 는 자동 완성 대상
-    			select : function(event, ui) { //아이템 선택시
-
-    			},
-    			focus : function(event, ui) { //포커스 가면
-    				return false;//한글 에러 잡기용도로 사용됨
-    			},
-    			minLength : 1,// 최소 글자수
-    			autoFocus : true, //첫번째 항목 자동 포커스 기본값 false
-    			classes : { //잘 모르겠음
-    				"ui-autocomplete" : "highlight"
-    			},
-    			delay : 100, //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
-    			//            disabled: true, //자동완성 기능 끄기
-    			position : {
-    				my : "right top",
-    				at : "right bottom"
-    			}, //잘 모르겠음
-    			close : function(event) { //자동완성창 닫아질때 호출
-    			}
-    		});     	
-
-    	}); 
-    </script>
-</head>
-<body data-spy="scroll" data-target=".navbar-collapse">
-<div class="culmn">
-    <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed white no-background bootsnav">
-    	<div th:if="${#httpServletRequest.requestURI} == '/rea/**' ">
-    		<div th:replace="fragments/header-rea :: indexNav"></div>
-    	</div>
-    	<div th:unless="${#httpServletRequest.requestURI} == '/rea/**' ">
-    		<div th:replace="fragments/header :: indexNav"></div>
-    	</div>
-    </nav>
-    <section layout:fragment="content">
-    </section>
-</div>
-<div th:replace="fragments/footer :: indexFooter"></div>
-</body>
-
+    <!--    	}); -->
+    <!--    </script>-->
+    </head>
+    <body data-spy="scroll" data-target=".navbar-collapse">
+        <div class="culmn">
+            <!--nav-->
+            <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed white no-background bootsnav">
+                <div th:if="${#httpServletRequest.requestURI} == '/rea/**' ">
+                    <div th:replace="fragments/header-rea :: indexNav"/>
+                </div>
+                <div th:unless="${#httpServletRequest.requestURI} == '/rea/**' ">
+                    <div th:replace="fragments/header :: indexNav"/>
+                </div>
+            </nav>
+            <!--컨텐츠-->
+            <section layout:fragment="content"/>
+        </div>
+        <!--footer-->
+        <div th:replace="fragments/footer :: indexFooter"/>
+    </body>
+    <!--페이지별 필요 js-->
+    <div layout:fragment="pageJs"/>
 </html>

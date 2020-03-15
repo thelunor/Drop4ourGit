@@ -77,7 +77,6 @@ public class SignService implements UserDetailsService {
 		} catch (Exception e) {
 			System.out.println("SignService signUpGenericUser 예외발생: " + e.getMessage());
 		}
-
 		return result;
 	}
 }
