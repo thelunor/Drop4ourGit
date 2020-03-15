@@ -3,7 +3,10 @@ package com.scoder.hs.controllers;
 import com.scoder.hs.dto.CHUser;
 import com.scoder.hs.dto.Generic;
 import com.scoder.hs.service.SignService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,13 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/sign")
+@Slf4j
 public class SignController {
 
+	@Autowired
 	private SignService signService;
 
 	@GetMapping("/loginPage")
 	public String login() {
-		return "sign/loginPage";
+		return "/sign/loginPage";
 	}
 //	@GetMapping("/loginSuccess") -> 테스트용
 //	public String loginSuccess(@AuthenticationPrincipal CHUserCustom chuserCustom) {
@@ -28,37 +33,37 @@ public class SignController {
 	
 	@GetMapping("/signUpPage")
 	public String signUpPage() {
-		return "sign/signUpPage";
+		return "/sign/signUpPage";
 	}
 
 	@GetMapping("/signUpGenericTerms")
 	public String signUpGenericTerms() {
-		return "sign/signUpGenericTerms";
+		return "/sign/signUpGenericTerms";
 	}
 
 	@GetMapping("/signUpREATerms")
 	public String signUpREATerms() {
-		return "sign/signUpREATerms";
+		return "/sign/signUpREATerms";
 	}
 
 	@GetMapping("/signUpREAInfo")
 	public String signUpREAInfo() {
-		return "sign/signUpREAInfo";
+		return "/sign/signUpREAInfo";
 	}
 
 	@GetMapping("/signUpGenericInfo")
 	public String signUpGenericInfo() {
-		return "sign/signUpGenericInfo";
+		return "/sign/signUpGenericInfo";
 	}
 
 	@PostMapping("/signUpGenericUser")
-	public String signUpGenericUser() {
-		System.out.println("왜그래");
-		//System.out.println(chUserDto.toString());
-//		System.out.println(genericDto.toString());
-		//signService.signUpCHuser(chUserDto);
-//		signService.signUpGenericUser(genericDto);
-
-		return "redirect:/signUpSuccess";
+	public boolean signUpGenericUser(CHUser chUser, Generic generic) {
+		boolean result = false;
+		try {
+			result = signService.signUpGenericUser(chUser, generic);
+		} catch (Exception e) {
+			System.out.println("Controller signUpGenericUser 예외발생: " + e.getMessage());
+		}
+		return result;
 	}
 }

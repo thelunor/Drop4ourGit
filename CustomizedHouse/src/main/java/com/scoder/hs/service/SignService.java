@@ -54,7 +54,7 @@ public class SignService implements UserDetailsService {
 		}
 
 		CHUserCustom chuserCustom = new CHUserCustom(userEntity.getUserId(), userEntity.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities,
-				userEntity.getUserName(), userEntity.getUserPhoneNum(), userEntity.getIsLock(), userEntity.getLoginCnt(), userEntity.getUserMail());
+				userEntity.getUserName(), userEntity.getUserPhoneNum(), userEntity.getIsLock(), userEntity.getLoginCnt(), userEntity.getUserEmail());
 
 		return chuserCustom;
 	}
@@ -63,11 +63,21 @@ public class SignService implements UserDetailsService {
 
 	@Transactional
 	public String signUpCHuser(CHUser chUser) {
+		System.out.println(chUserRepository.save(chUser.toEntity()).getUserId() + " chUserRepository.save(chUser.toEntity()).getUserId()");
 		return chUserRepository.save(chUser.toEntity()).getUserId();
 	}
 
 	@Transactional
-	public String signUpGenericUser(Generic generic) {
-		return genericRepository.save(generic.toEntity()).getUserId();
+	public boolean signUpGenericUser(CHUser chUser, Generic generic) {
+		boolean result = false;
+		try {
+			chUserRepository.save(chUser.toEntity()).getUserId();
+			genericRepository.save(generic.toEntity()).getUserId();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("SignService signUpGenericUser 예외발생: " + e.getMessage());
+		}
+
+		return result;
 	}
 }

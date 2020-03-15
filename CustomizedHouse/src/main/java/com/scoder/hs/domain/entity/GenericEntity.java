@@ -22,6 +22,9 @@ public class GenericEntity {
     private String userId;
 
     @Column(length = 30, nullable = false)
+    private String birth;
+
+    @Column(length = 30, nullable = false)
     private String resNum;
 
     @Column(length = 500, nullable = false)
@@ -29,8 +32,9 @@ public class GenericEntity {
 
 
     @Builder
-    public GenericEntity(String userId, String resNum, String userAddress) {
+    public GenericEntity(String userId, String resNum, String userAddress, String birth) {
         this.userId = userId;
+        this.birth = birth;
         this.resNum = resNum;
         this.userAddress = userAddress;
     }

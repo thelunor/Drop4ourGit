@@ -16,7 +16,7 @@ public class CHUser {
     private String userPhoneNum;
     private int isLock;
     private int loginCnt;
-    private String userMail;
+    private String userEmail;
     
 	public CHUserEntity toEntity() {
         CHUserEntity chUserEntity = CHUserEntity.builder()
@@ -26,7 +26,7 @@ public class CHUser {
                 .userPhoneNum(userPhoneNum)
                 .isLock(isLock)
                 .loginCnt(loginCnt)
-                .userMail(userMail)
+                .userEmail(userEmail)
                 .build();
         return chUserEntity;
     }

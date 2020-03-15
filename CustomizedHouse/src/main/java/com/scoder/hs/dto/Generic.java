@@ -11,12 +11,14 @@ import lombok.NoArgsConstructor;
 public class Generic {
 	
 	private String userId;
+	private String birth;
 	private String resNum;
 	private String userAddress;
 
 	public GenericEntity toEntity() {
 		GenericEntity genericEntity = GenericEntity.builder()
 				.userId(userId)
+				.birth(birth)
 				.resNum(resNum)
 				.userAddress(userAddress)
 				.build();

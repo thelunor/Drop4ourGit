@@ -37,18 +37,18 @@ public class CHUserEntity {
     private int loginCnt;
     
     @Column(length = 30, nullable = false)
-    private String userMail;
+    private String userEmail;
 
     @Builder
 	public CHUserEntity(String userId, String password, String userName, String userPhoneNum, int isLock, int loginCnt,
-			String userMail) {
+			String userEmail) {
 		this.userId = userId;
 		this.password = password;
 		this.userName = userName;
 		this.userPhoneNum = userPhoneNum;
 		this.isLock = isLock;
 		this.loginCnt = loginCnt;
-		this.userMail = userMail;
+		this.userEmail = userEmail;
 	}
 
 }
