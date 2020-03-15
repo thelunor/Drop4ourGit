@@ -21,10 +21,12 @@ public class REAController {
 	@GetMapping("/reaMain")
 	public String mainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
 		REA rea = reaService.getReaInfo(chuserCustom.getUsername());
-		
 		model.addAttribute("user", chuserCustom);
 		model.addAttribute("rea", rea);
 		//공인중개사 소개 넣기!
+		
+		//공인중개사 후기 가져오기
+		
 		return "rea/reaMain";
 	}
 	@GetMapping("/myPage")
@@ -33,7 +35,7 @@ public class REAController {
 	}
 	@GetMapping("/introPage")
 	public String introPage() {
-		return "rea/introPage";
+		return "rea/reaIntroPage";
 	}
 
 }

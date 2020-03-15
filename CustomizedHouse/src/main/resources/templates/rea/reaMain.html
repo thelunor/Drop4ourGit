@@ -45,7 +45,6 @@
 						<hr>
 					</div>
 					<div>
-						
 						<b th:text="${rea.officeName}"></b><br>
 						대표 공인중개사: <br>
 						<b th:text="${user.name}"></b><br>
@@ -84,7 +83,6 @@
 									</div>
 								</div>
 							</section>
-						
 						<!-- 두 번째 소개 -->
 							<section>
 								<div>
@@ -95,12 +93,65 @@
 							<div style="margin-top: 20px; margin-bottom: 20px;">
 								<hr>
 							</div>
-				
 							<div style="margin-top: 20px; margin-bottom: 20px;">
 							</div>
 						<!-- <div>
 							<jsp:include page="./../include/ReviewList.jsp" />
 						</div> -->
+						<!-- 공인중개사 후기 -->
+						<div>
+							<section id="id" class="about">
+								<div class="container">
+									<div class="about_content">
+										<div class="container-fluid">
+											<div class="card-header py-3">
+												<h5 class="m-0 font-weight-bold text-primary">계약자 생생후기</h5>
+											</div>
+											<div class="card-body">
+												<div class="table-responsive">
+												
+												<div id="review_table">
+													<form id="review_form" name="review_form" method="post">
+														<table class="table table-bordered" id="reviewTable"
+															style="text-align: center; margin: auto; width: 100%; border: none;">								
+										                    <tr>
+										                        <td style="padding: 0;">
+										                        <div align="left" style="padding-left: 10px;">
+									                        		날짜:&nbsp;<input type="text" id="reviewDate" name="reviewDate" value="<%=sdf.format(today) %>" 
+										                        					readonly="readonly" style="display: inline; width: 50%; padding: 0;"></div>
+										                       	<td style="padding: 0;">
+										                       	<div align="right" style="padding-right: 10px;">
+										                       		작성자:&nbsp;<input type="text" id="userId" name="userId" value="<%=genericUserId%>" 
+										                       						readonly="readonly" style="; display: inline; width: 30%; padding: 0;">
+										                       	</div></td>
+										                    </tr>
+										                    <tr>
+										                    	<td colspan="4" align="left" id="contentTd">
+										                    		<textarea id="reviewContent" name="reviewContent" class="ckeditor"
+																		rows="5" style="resize: none; width: 100%; border: 1px solid #d2d0d0;"></textarea>
+																<div align="right">
+										                    		<button type="submit" id="send" class="btn btn-primary btn-block btn-lg">작성 완료</button>
+																</div></td>
+										                    </tr>
+									                   </table>
+									                   </form>
+													</div>
+													</div>
+													<div style="margin-top: 20px; margin-bottom: 20px;">
+														<hr>
+													</div>
+													<!-- 후기글 뿌려지는 곳 -->
+													<table style="width: 100%;" id="reviewList">
+													<tbody id="reviewListTbody">
+													</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
 						<!-- Right End -->
 					</div>
 				</div>
