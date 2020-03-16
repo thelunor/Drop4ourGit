@@ -29,9 +29,12 @@ public class REAController {
 		REA rea = reaService.getReaInfo(chuserCustom.getUsername());
 		model.addAttribute("user", chuserCustom);
 		model.addAttribute("rea", rea);
+		
+		//공인중개사 소개 & 후기 없을 때 어떻게 처리할 지 넣기
+		
 		//공인중개사 소개 가져오기!
 		REAIntroBoard reaIntroBoard = reaService.getReaIntro(chuserCustom.getUsername());
-		System.out.println("후기글 가져와?"+reaIntroBoard.toString());
+				
 		model.addAttribute("reaIntroBoard", reaIntroBoard);
 		
 		//공인중개사 후기 가져오기
@@ -52,7 +55,10 @@ public class REAController {
 		String path = "";
 		reaIntroBoard.setUserId(chuserCustom.getUsername());
 		String str = reaIntroBoard.getIntroContent();
-		str.replace("<p>", "");
+		//System.out.println("글을 써보자!"+reaIntroBoard.toString());
+		//System.out.println("내용 가져와!"+str);
+		String str2 = str.replace("<p>", "");
+		System.out.println("값 바뀜1111?"+str2);
 		
 		boolean result = reaService.saveReaIntro(reaIntroBoard);
 		if(result) {

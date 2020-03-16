@@ -49,6 +49,7 @@
 						대표 공인중개사: <br>
 						<b th:text="${user.name}"></b><br>
 						<span th:text="${rea.officePhoneNum}"></span>
+						<b th:text="${#httpServletRequest.requestURI}"></b>
 					</div>
 					<div style="margin-top: 10px; margin-bottom: 10px;">
 						<hr>
@@ -74,12 +75,25 @@
 												안녕하세요. <span th:text="${rea.officeName}"></span> 에 오신 것을 환영합니다. 
 											</h4>
 										</div>
-										<div style="margin-top: 8px;">
-											<b th:text="${reaIntroBoard.introTitle}"></b>
+										
+										<div th:if="${not #strings.isEmpty(reaIntroBoard)}">
+											<div style="margin-top: 8px;">
+												<b th:text="${reaIntroBoard.introTitle}"></b>
+											</div>
+											<div style="margin-top: 8px;">
+												<div th:text="${reaIntroBoard.introContent}"></div>
+											</div>
 										</div>
-										<div style="margin-top: 8px;">
-											<textarea th:text="${reaIntroBoard.introContent}"></textarea>
+										<div th:uless="${not #strings.isEmpty(reaIntroBoard)}">
+											<div style="margin-top: 8px;">
+												<b> 소개글이 아직 없습니다.</b>
+											</div>
 										</div>
+										
+											
+										
+										
+										
 									</div>
 								</div>
 							</section>
@@ -157,18 +171,11 @@
 </section>
 <div layout:fragment="pageJs">
 	<!-- include summernote css/js -->
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
 	<script>
 	$(function(){
-		$('#summernote').summernote({
-			placeholder: '소개글을 작성해주세요.',
-	        tabsize: 2,
-	        height: 400,
-			fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
-			fontNamesIgnoreCheck : [ '맑은고딕' ],
-			focus: true
-		});
+		$('#summernote').code();
 	})
 	</script>
 </div>
