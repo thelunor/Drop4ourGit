@@ -7,5 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/generic")
 public class GenericController {
-	
+	@GetMapping("/myPage")
+	public String myPage() {
+		return "generic/main";
+	}
 }

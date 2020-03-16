@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{indexLayout}">
+<style type="text/css">
+.input-group {
+	height: 50px;
+}
+
+a {
+	color: #797979;
+}
+
+a:hover {
+	color: #212529;
+}
+
+h2 {
+	font-family: 'Jua', sans-serif;
+	text-align: center;
+}
+
+.carousel-inner img {
+	width: 100%; /* Set width to 100% */
+	margin: auto;
+}
+
+@media ( max-width : 600px) {
+	.carousel-caption {
+		display: none;
+		/* Hide the carousel text when the screen is less than 600 pixels wide */
+	}
+}
+
+.carousel-control.right, .carousel-control.left {
+	background-image: none;
+	color: #fff;
+}
+
+.carousel-indicators li {
+	border-color: #ff;
+}
+
+.carousel-indicators li.active {
+	background-color: #fff;
+}
+</style>
+<section class="about roomy-100" layout:fragment="content">
+	<div class="container-fluid">
+		<div class="about_content">
+			<br>
+			<h3 style="font-family: 'Jua', sans-serif; text-align: center;">마이페이지</h3>
+			<br> <br> <br>
+			<div class="row">
+				<div class="col-md-12" >
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
