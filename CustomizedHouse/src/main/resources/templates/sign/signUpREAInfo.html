@@ -40,23 +40,24 @@
 		border-radius: 50%;
 	}
 </style>
-<section id="signUpGenericInfo" class="about roomy-100" layout:fragment="content">
-	<form action="<%=request.getContextPath() %>/InsertREAUserService.d4b" method="post" name="loginForm" enctype="multipart/form-data">
+<section id="signUpREAInfo" class="about roomy-100" layout:fragment="content">
+	<form th:action="@{/sign/signUpREAUser}" method="post" th:id="signUpREAInfoForm" th:name="signUpREAInfoForm" enctype="multipart/form-data">
 		<div class="container">
 			<div class="about_content">
 				<div class="row">
 					<div class="col-md-3"></div>
 					<div class="col-md-6">
 						<div class="signup-form">
-
-							<br> <br> <br>
+							<br>
+							<br>
+							<br>
 							<h2 style="text-align: center">공인중개사회원 회원가입</h2>
 							<br>
 							<hr>
 							<div class="form-group" style="text-align: center">
 								<img id="preview" src="/images/profile.png"
 									 style="width: 200px" alt="Profile"> <br> <br>
-								&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="filename" id="getfile" accept="image/*"><br>
+								&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" name="reaImage" id="reaImage" accept="image/*"><br>
 							</div>
 							<br> <br>
 							<div class="form-group">
@@ -160,147 +161,150 @@
 		let phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;//휴대폰 정규표현식
 
 		let check=false;
-		// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
-		$("#reaId").blur(function() {
-			// id = "id_reg" / name = "reaId"
-			var reaId = $('#reaId').val();
-			var idReg = /^[a-zA-Z0-9]{4,12}$/;
-			$.ajax({
-				url : '../JoinIdCheck?userId='+ reaId,
-				type : 'get',
-				success : function(data) {
-					console.log("1 = 중복o / 0 = 중복x : "+ data);
-					if (data == 1) {
-						// 1 : 아이디가 중복되는 문구
-						$("#id_check").text("사용중인 아이디입니다.");
-						$("#id_check").css("color", "red");
-						$("#signUp").attr("disabled", true);
-					} else {
-						if(!idReg.test(reaId)){
-							// 0 : 아이디 길이 / 문자열 검사
-							$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다.");
-							$('#id_check').css('color', 'red');
-							$("#signUp").attr("disabled", false);
-						} else if(reaId == ""){
-							$('#id_check').text('아이디를 입력해주세요.');
-							$('#id_check').css('color', 'red');
-							$("#signUp").attr("disabled", true);
-						} else{
-							$('#id_check').text('사용가능한 아이디입니다.');
-							$('#id_check').css('color', 'green');
-							$("#signUp").attr("disabled", false);
-						}
-					}
-				}, error : function() {
-					console.log("실패");
-				}
-			});
-		});
-		$('#reaPwd').blur(function() {
-			if (!passReg.test($('#reaPwd').val())) {
-				$('#pwd_check').text("3~16자리의 문자와 숫자 형태의 패스워드를 입력해주세요.");
-				$('#pwd_pwd_check').text("");
-				$("#pwd_check").css("color", "#ff6863");
-				$("#signUp").attr("disabled", true);
-			} else {
-				$('#pwd_check').text("동일한 패스워드를 한 번 더 입력해주세요.");
-				$("#pwd_check").css("color", "#669999");
-				$('#pwdCheck').blur(function() {
-					if ($('#reaPwd').val() != $('#pwdCheck').val()) {
-						$('#pwd_pwd_check').text("암호가 일치하지 않습니다.");
-						$("#pwd_pwd_check").css("color", "#ff6863");
-						$("#signUp").attr("disabled", true);
-					} else {
-						$('#pwd_pwd_check').text("암호가 일치합니다.");
-						$("#pwd_pwd_check").css("color", "#669999");
-						$("#signUp").attr("disabled", false);
-					}
-				});
-			}
-		});
-
-		$('#reaPhoneNum').blur(function(){
-			if(!phoneReg.test($('#reaPhoneNum').val())){ //정규표현식에 맞으면
-				$('#phone_check').text("핸드폰 번호 형식에 맞지 않습니다.");
-				$("#phone_check").css("color", "#ff6863");
-				$("#signUp").attr("disabled", true);
-			}else{
-				$('#phone_check').text("");
-				$("#signUp").attr("disabled", false);
-			}
-		});
-
-
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-				mapOption = {
-					center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-					level : 5
-					// 지도의 확대 레벨
-				};
-
-		//지도를 미리 생성
-		var map = new daum.maps.Map(mapContainer, mapOption);
-		//주소-좌표 변환 객체를 생성
-		var geocoder = new daum.maps.services.Geocoder();
-		//마커를 미리 생성
-		var marker = new daum.maps.Marker({
-			position : new daum.maps.LatLng(37.537187, 127.005476),
-			map : map
-		});
-
-		function searchAddr() {
-			new daum.Postcode({
-				oncomplete : function(data) {
-					var addr = data.address; // 최종 주소 변수
-
-					// 주소 정보를 해당 필드에 넣는다.
-					document.getElementById("officeAddr").value = addr;
-					// 주소로 상세 정보를 검색
-					geocoder.addressSearch(data.address, function(results,
-																  status) {
-						// 정상적으로 검색이 완료됐으면
-						if (status === daum.maps.services.Status.OK) {
-
-							var result = results[0]; //첫번째 결과의 값을 활용
-
-							// 해당 주소에 대한 좌표를 받아서
-							var coords = new daum.maps.LatLng(result.y,
-									result.x);
-							// 지도를 보여준다.
-							mapContainer.style.display = "block";
-							map.relayout();
-							// 지도 중심을 변경한다.
-							map.setCenter(coords);
-							// 마커를 결과값으로 받은 위치로 옮긴다.
-							marker.setPosition(coords)
-						}
-					});
-				}
-			}).open();
-		}
-
-		var file = document.querySelector('#getfile');
-
-		file.onchange = function () {
-			var fileList = file.files ;
-
-			// 읽기
-			var reader = new FileReader();
-			reader.readAsDataURL(fileList [0]);
-
-			//로드 한 후
-			reader.onload = function  () {
-				document.querySelector('#preview').src = reader.result ;
-			};
-		};
-
-		$("#signUp").click(function(e){
-			if($("#getfile").val()==""){
-				e.preventDefault();
-				alert("소개 사진을 등록해주세요");
-			}else{
-				$(this).submit();
-			}
-		});
+		$(function () {
+			console.log()
+		})
+		// // 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+		// $("#reaId").blur(function() {
+		// 	// id = "id_reg" / name = "reaId"
+		// 	var reaId = $('#reaId').val();
+		// 	var idReg = /^[a-zA-Z0-9]{4,12}$/;
+		// 	$.ajax({
+		// 		url : '../JoinIdCheck?userId='+ reaId,
+		// 		type : 'get',
+		// 		success : function(data) {
+		// 			console.log("1 = 중복o / 0 = 중복x : "+ data);
+		// 			if (data == 1) {
+		// 				// 1 : 아이디가 중복되는 문구
+		// 				$("#id_check").text("사용중인 아이디입니다.");
+		// 				$("#id_check").css("color", "red");
+		// 				$("#signUp").attr("disabled", true);
+		// 			} else {
+		// 				if(!idReg.test(reaId)){
+		// 					// 0 : 아이디 길이 / 문자열 검사
+		// 					$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다.");
+		// 					$('#id_check').css('color', 'red');
+		// 					$("#signUp").attr("disabled", false);
+		// 				} else if(reaId == ""){
+		// 					$('#id_check').text('아이디를 입력해주세요.');
+		// 					$('#id_check').css('color', 'red');
+		// 					$("#signUp").attr("disabled", true);
+		// 				} else{
+		// 					$('#id_check').text('사용가능한 아이디입니다.');
+		// 					$('#id_check').css('color', 'green');
+		// 					$("#signUp").attr("disabled", false);
+		// 				}
+		// 			}
+		// 		}, error : function() {
+		// 			console.log("실패");
+		// 		}
+		// 	});
+		// });
+		// $('#reaPwd').blur(function() {
+		// 	if (!passReg.test($('#reaPwd').val())) {
+		// 		$('#pwd_check').text("3~16자리의 문자와 숫자 형태의 패스워드를 입력해주세요.");
+		// 		$('#pwd_pwd_check').text("");
+		// 		$("#pwd_check").css("color", "#ff6863");
+		// 		$("#signUp").attr("disabled", true);
+		// 	} else {
+		// 		$('#pwd_check').text("동일한 패스워드를 한 번 더 입력해주세요.");
+		// 		$("#pwd_check").css("color", "#669999");
+		// 		$('#pwdCheck').blur(function() {
+		// 			if ($('#reaPwd').val() != $('#pwdCheck').val()) {
+		// 				$('#pwd_pwd_check').text("암호가 일치하지 않습니다.");
+		// 				$("#pwd_pwd_check").css("color", "#ff6863");
+		// 				$("#signUp").attr("disabled", true);
+		// 			} else {
+		// 				$('#pwd_pwd_check').text("암호가 일치합니다.");
+		// 				$("#pwd_pwd_check").css("color", "#669999");
+		// 				$("#signUp").attr("disabled", false);
+		// 			}
+		// 		});
+		// 	}
+		// });
+		//
+		// $('#reaPhoneNum').blur(function(){
+		// 	if(!phoneReg.test($('#reaPhoneNum').val())){ //정규표현식에 맞으면
+		// 		$('#phone_check').text("핸드폰 번호 형식에 맞지 않습니다.");
+		// 		$("#phone_check").css("color", "#ff6863");
+		// 		$("#signUp").attr("disabled", true);
+		// 	}else{
+		// 		$('#phone_check').text("");
+		// 		$("#signUp").attr("disabled", false);
+		// 	}
+		// });
+		//
+		//
+		// var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+		// 		mapOption = {
+		// 			center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+		// 			level : 5
+		// 			// 지도의 확대 레벨
+		// 		};
+		//
+		// //지도를 미리 생성
+		// var map = new daum.maps.Map(mapContainer, mapOption);
+		// //주소-좌표 변환 객체를 생성
+		// var geocoder = new daum.maps.services.Geocoder();
+		// //마커를 미리 생성
+		// var marker = new daum.maps.Marker({
+		// 	position : new daum.maps.LatLng(37.537187, 127.005476),
+		// 	map : map
+		// });
+		//
+		// function searchAddr() {
+		// 	new daum.Postcode({
+		// 		oncomplete : function(data) {
+		// 			var addr = data.address; // 최종 주소 변수
+		//
+		// 			// 주소 정보를 해당 필드에 넣는다.
+		// 			document.getElementById("officeAddr").value = addr;
+		// 			// 주소로 상세 정보를 검색
+		// 			geocoder.addressSearch(data.address, function(results,
+		// 														  status) {
+		// 				// 정상적으로 검색이 완료됐으면
+		// 				if (status === daum.maps.services.Status.OK) {
+		//
+		// 					var result = results[0]; //첫번째 결과의 값을 활용
+		//
+		// 					// 해당 주소에 대한 좌표를 받아서
+		// 					var coords = new daum.maps.LatLng(result.y,
+		// 							result.x);
+		// 					// 지도를 보여준다.
+		// 					mapContainer.style.display = "block";
+		// 					map.relayout();
+		// 					// 지도 중심을 변경한다.
+		// 					map.setCenter(coords);
+		// 					// 마커를 결과값으로 받은 위치로 옮긴다.
+		// 					marker.setPosition(coords)
+		// 				}
+		// 			});
+		// 		}
+		// 	}).open();
+		// }
+		//
+		// var file = document.querySelector('#reaImage');
+		//
+		// file.onchange = function () {
+		// 	var fileList = file.files ;
+		//
+		// 	// 읽기
+		// 	var reader = new FileReader();
+		// 	reader.readAsDataURL(fileList [0]);
+		//
+		// 	//로드 한 후
+		// 	reader.onload = function  () {
+		// 		document.querySelector('#preview').src = reader.result ;
+		// 	};
+		// };
+		//
+		// $("#signUp").click(function(e){
+		// 	if($("#reaImage").val()==""){
+		// 		e.preventDefault();
+		// 		alert("소개 사진을 등록해주세요");
+		// 	}else{
+		// 		$(this).submit();
+		// 	}
+		// });
 	</script>
 </div>
