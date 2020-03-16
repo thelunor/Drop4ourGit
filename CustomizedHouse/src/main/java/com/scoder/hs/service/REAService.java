@@ -54,7 +54,6 @@ public class REAService {
 	public REAIntroBoard getReaIntro(String userId) {
 		REAIntroBoard reaIntroBoard = null;
 		Optional<ReaIntroBoardEntity> reaIntroBoardWrapper = reaIntroBoardRepository.findByUserId(userId);
-		
 		if(reaIntroBoardWrapper.isPresent()) {
 			ReaIntroBoardEntity reaIntroBoardEntity = reaIntroBoardWrapper.get();
 			System.out.println("엔티티 가져와?"+reaIntroBoardEntity);
@@ -63,9 +62,9 @@ public class REAService {
 											.introTitle(reaIntroBoardEntity.getIntroTitle())
 											.introContent(reaIntroBoardEntity.getIntroContent())
 											.build();
-		} else {
-			System.out.println("이거 타니?");
 		}
+		
+		System.out.println("소개글 dto?"+reaIntroBoard);
 		
 		return reaIntroBoard;
 	}

@@ -62,6 +62,7 @@ public class SignService implements UserDetailsService {
 		CHUserCustom chuserCustom = new CHUserCustom(userEntity.getUserId(), userEntity.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities,
 				userEntity.getUserName(), userEntity.getUserPhoneNum(), userEntity.getIsLock(), userEntity.getLoginCnt(), userEntity.getUserEmail());
 
+		System.out.println("커스텀된 객체 만들기" + chuserCustom.getAuthorities());
 		return chuserCustom;
 	}
 

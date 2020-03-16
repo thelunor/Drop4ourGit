@@ -26,6 +26,7 @@ public class REAController {
 	@GetMapping("/reaMain")
 	public String mainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
 		System.out.println("공인중개사 메인!");
+		System.out.println("커스텀 된 객체?"+chuserCustom.toString());
 		REA rea = reaService.getReaInfo(chuserCustom.getUsername());
 		model.addAttribute("user", chuserCustom);
 		model.addAttribute("rea", rea);
@@ -49,23 +50,19 @@ public class REAController {
 	public String introPage() {
 		return "rea/reaIntroPage";
 	}
-	
 	@PostMapping("/introPageWrite")
-	public String introPageWrite(@AuthenticationPrincipal CHUserCustom chuserCustom, REAIntroBoard reaIntroBoard) {
+	public String introPageWrite() {
+		System.out.println("소개페이지 글쓰기 타니?");
 		String path = "";
-		reaIntroBoard.setUserId(chuserCustom.getUsername());
-		String str = reaIntroBoard.getIntroContent();
-		//System.out.println("글을 써보자!"+reaIntroBoard.toString());
-		//System.out.println("내용 가져와!"+str);
-		String str2 = str.replace("<p>", "");
-		System.out.println("값 바뀜1111?"+str2);
+
+		//@AuthenticationPrincipal CHUserCustom chuserCustom, REAIntroBoard reaIntroBoard
 		
-		boolean result = reaService.saveReaIntro(reaIntroBoard);
-		if(result) {
-			path = "redirect:/rea/reaMain";
-		} else {
-			path = "redirect:/rea/introPageWrite";
-		}
+//		boolean result = reaService.saveReaIntro(reaIntroBoard);
+//		if(result) {
+//			path = "redirect:/rea/reaMain";
+//		} else {
+//			path = "redirect:/rea/introPageWrite";
+//		}
 		return path;
 	}
 
