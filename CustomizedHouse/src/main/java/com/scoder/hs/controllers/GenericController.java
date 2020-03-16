@@ -14,14 +14,12 @@ import com.scoder.hs.dto.CHUserCustom;
 public class GenericController {
 	@GetMapping("/genMainPage")
 	public String genMainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
-		System.out.println("일반 회원 메인 타니?");
 		model.addAttribute("user", chuserCustom);
 		return "generic/main";
 	}
 	
 	@GetMapping("/myPage")
 	public String myPage() {
-		System.out.println("일반 회원 마이페이지 타니?");
 		return "generic/myPage";
 	}
 }
