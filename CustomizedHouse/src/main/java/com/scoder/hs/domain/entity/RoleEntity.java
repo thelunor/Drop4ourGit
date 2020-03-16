@@ -1,9 +1,12 @@
 package com.scoder.hs.domain.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -16,19 +19,24 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "userRoleList")
-public class UserRoleListEntity {
+@Table(name = "role")
+public class RoleEntity {
+	
+	@OneToMany
+	@JoinColumn(name="roleName")
+	private Set<UserRoleListEntity> userRoleListEntity;
 	
 	@Id
-	private String userId;
-	
-	@Column(name = "roleName", length = 15, nullable = false)
+	@Column (length = 20, nullable = false)
 	private String roleName;
 	
+	@Column (length = 30, nullable = false)
+	private String roleDesc;
+
 	@Builder
-	public UserRoleListEntity(String userId, String roleName) {
-		this.userId = userId;
+	public RoleEntity(String roleName, String roleDesc) {
 		this.roleName = roleName;
+		this.roleDesc = roleDesc;
 	}
-	
+
 }
