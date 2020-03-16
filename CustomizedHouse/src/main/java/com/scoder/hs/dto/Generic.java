@@ -14,6 +14,7 @@ public class Generic {
 	private String birth;
 	private String resNum;
 	private String userAddress;
+	private String userDetailAddress;
 
 	public GenericEntity toEntity() {
 		GenericEntity genericEntity = GenericEntity.builder()
@@ -21,6 +22,7 @@ public class Generic {
 				.birth(birth)
 				.resNum(resNum)
 				.userAddress(userAddress)
+				.userDetailAddress(userDetailAddress)
 				.build();
 		return genericEntity;
 	}

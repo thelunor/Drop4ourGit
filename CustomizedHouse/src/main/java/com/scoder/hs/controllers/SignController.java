@@ -51,13 +51,25 @@ public class SignController {
 	}
 
 	@PostMapping("/signUpGenericUser")
-	public boolean signUpGenericUser(CHUser chUser, Generic generic) {
+	public String signUpGenericUser(CHUser chUser, Generic generic) {
 		boolean result = false;
+		System.out.println(generic.toString());
 		try {
 			result = signService.signUpGenericUser(chUser, generic);
 		} catch (Exception e) {
 			System.out.println("Controller signUpGenericUser 예외발생: " + e.getMessage());
 		}
-		return result;
+		return result ? "redirect:/sign/signUpSuccess" : "redirect:/sign/signUpFailure";
 	}
+
+	@GetMapping("/signUpSuccess")
+	public String signUpSuccess() {
+		return "/sign/signUpSuccess";
+	}
+
+	@GetMapping("/signUpFailure")
+	public String signUpFailure() {
+		return "/sign/signUpFailure";
+	}
+
 }

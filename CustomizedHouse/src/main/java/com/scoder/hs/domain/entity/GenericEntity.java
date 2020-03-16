@@ -15,7 +15,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "rea")
+@Table(name = "generic")
 public class GenericEntity {
 
     @Id
@@ -30,13 +30,17 @@ public class GenericEntity {
     @Column(length = 500, nullable = false)
     private String userAddress;
 
+    @Column(length = 500, nullable = false)
+    private String userDetailAddress;
+
 
     @Builder
-    public GenericEntity(String userId, String resNum, String userAddress, String birth) {
+    public GenericEntity(String userId, String resNum, String userAddress, String birth, String userDetailAddress) {
         this.userId = userId;
         this.birth = birth;
         this.resNum = resNum;
         this.userAddress = userAddress;
+        this.userDetailAddress = userDetailAddress;
     }
 
 }
