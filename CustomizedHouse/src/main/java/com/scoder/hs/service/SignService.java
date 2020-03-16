@@ -15,7 +15,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -30,6 +32,10 @@ public class SignService implements UserDetailsService {
 	private GenericRepository genericRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+
 
 	boolean enabled = true;
 	boolean accountNonExpired = true;
@@ -71,6 +77,8 @@ public class SignService implements UserDetailsService {
 	public boolean signUpGenericUser(CHUser chUser, Generic generic) {
 		boolean result = false;
 		try {
+			String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
+			chUser.setPassword(encodedPassword);
 			chUserRepository.save(chUser.toEntity()).getUserId();
 			genericRepository.save(generic.toEntity()).getUserId();
 			result = true;
@@ -78,5 +86,9 @@ public class SignService implements UserDetailsService {
 			System.out.println("SignService signUpGenericUser 예외발생: " + e.getMessage());
 		}
 		return result;
+	}
+
+	public PasswordEncoder passwordEncoder() {
+		return this.passwordEncoder;
 	}
 }

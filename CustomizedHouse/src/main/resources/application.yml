@@ -12,7 +12,6 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-      ddl-auto: create
   thymeleaf:
     prefix: classpath:templates/
     check-template-location: true

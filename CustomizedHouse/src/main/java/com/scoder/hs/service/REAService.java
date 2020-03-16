@@ -52,13 +52,21 @@ public class REAService {
 	
 	//공인중개사 소개글 가져오기
 	public REAIntroBoard getReaIntro(String userId) {
+		REAIntroBoard reaIntroBoard = null;
 		Optional<ReaIntroBoardEntity> reaIntroBoardWrapper = reaIntroBoardRepository.findByUserId(userId);
-		ReaIntroBoardEntity reaIntroBoardEntity = reaIntroBoardWrapper.get();
-		REAIntroBoard reaIntroBoard = REAIntroBoard.builder()
-										.userId(reaIntroBoardEntity.getUserId())
-										.introTitle(reaIntroBoardEntity.getIntroTitle())
-										.introContent(reaIntroBoardEntity.getIntroContent())
-										.build();
+		
+		if(reaIntroBoardWrapper.isPresent()) {
+			ReaIntroBoardEntity reaIntroBoardEntity = reaIntroBoardWrapper.get();
+			System.out.println("엔티티 가져와?"+reaIntroBoardEntity);
+			reaIntroBoard = REAIntroBoard.builder()
+											.userId(reaIntroBoardEntity.getUserId())
+											.introTitle(reaIntroBoardEntity.getIntroTitle())
+											.introContent(reaIntroBoardEntity.getIntroContent())
+											.build();
+		} else {
+			System.out.println("이거 타니?");
+		}
+		
 		return reaIntroBoard;
 	}
 

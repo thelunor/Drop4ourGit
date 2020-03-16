@@ -42,7 +42,7 @@
 			<div class="form-group">
 				<textarea class="form-control" id="summernote" name="introContent" maxlength="140" rows="7"></textarea>
 			</div>
-			<button type="submit" id="submitBtn" class="btn btn-primary pull-right">작성 완료</button>
+			<button type="button" id="submitBtn" class="btn btn-primary pull-right">작성 완료</button>
 		</form>
 	</div>
 </section>
@@ -52,14 +52,59 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
 	<script>
 	$(function(){
+		
+		
+		
+		$("#submitBtn").click(function(){
+			let content = $("#summernote").val();
+			let str = content.replace('<p>', '');
+			
+			console.log('컨텐츠!!'+content);
+			console.log('replace : '+str);
+			
+			let str2 = str.replace('</p>','');
+			console.log('바뀜?'+str2);
+		})
 		$('#summernote').summernote({
+			height: 350,
+			placeholder: "글을 입력하세요.",
+			lang: 'ko-KR', /*한국어*/ 
+			toolbar: [   /*summernote 글옵션 상자*/
+				  ['fontname'],
+				  ['fontsize'],
+				  ['font', ['bold', 'underline','italic','strikethrough','superscript','subscript']],  
+				  ['color', ['forecolor','backcolor']],
+				  ['para', ['ul', 'ol', 'paragraph','hr','height']],
+				  ['table', ['table']],
+				  ['insert', ['link', 'picture', 'video','file']],
+				  ['view', ['fullscreen', 'codeview', 'help']],
+				],
+			spellCheck: true,  /*맞춤법 검사 */
+			codemirror: { // codemirror options
+				    theme: 'monokai',
+				    htmlMode: true
+				  },
+			 callbacks: {
+				 onChange: function(contents) {
+				      console.log('onChange:', contents);
+				      
+				    }
+				  },    	       	
+		    });
+	
+		
+		/* $('#summernote').summernote({
 			placeholder: '소개글을 작성해주세요.',
 	        tabsize: 2,
 	        height: 400,
 			fontNames : [ '맑은고딕', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', ],
 			fontNamesIgnoreCheck : [ '맑은고딕' ],
 			focus: true
-		});
+		}); */
+		
+		
+		
+		
 	})
 	</script>
 </div>

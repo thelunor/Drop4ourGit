@@ -32,7 +32,7 @@
                 </li>
                 <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/sign/signUpPage}">회원가입</a></li>
                 <li class="join"><a sec:authorize="hasRole('ROLE_REAUSER')" th:href="@{/rea/reaMain}">공인중개사 회원</a></li>
-                <li class="join"><a sec:authorize="hasRole('ROLE_GENUSER')" th:href="@{/gen/myPage}">내정보</a></li>
+                <li class="join"><a sec:authorize="hasRole('ROLE_GENUSER')" th:href="@{/generic/myPage}">내정보</a></li>
                 <li class="side-menu">
                     <a sec:authorize="hasRole('ROLE_ADMIN')"><i class='fa fa-bars'></i></a>
                 </li>
