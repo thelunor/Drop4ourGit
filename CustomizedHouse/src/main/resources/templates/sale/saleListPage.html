@@ -2,8 +2,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{indexLayout}">
 <head>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=LIBRARY"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=58b9f2ab38f9ccb70e8d94e99bcaab94&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c25e5251a65ff1c89ea18b02aa87d788"></script>
+
+
 <script type="text/javascript">
 $(function () {
     $('.slick-items').slick({
@@ -26,9 +27,27 @@ $(function () {
     		aptNameArr[i] = "<div><span>"+$("input[name='aptName']")[i].value.split(",")[1]+"</span></div>";
         }
 	*/
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+	
+	// 마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
 	
 	//아파트 주소를 배열로 생성
-    var arrValue = $("input[name='addr']").length;
+    /* var arrValue = $("input[name='addr']").length;
     var array = new Array(arrValue);
     for(var i=0; i< array.length; i++){                          
     	array[i] = $("input[name='addr']")[i].value.split(",");
@@ -58,7 +77,7 @@ $(function () {
 	           map.setCenter(coords);
 	        } 
 	    }); 
-	}
+	} */
 		    	
 		    	$('.trigger').click(function(){
 		       	 $('.modal-wrapper').toggleClass('open');
@@ -274,11 +293,10 @@ table {
 <h6>300개 이상의 매물</h6>
 <p style="font-size: 13px"><b>거래 가격의 비율이 높을 수록 평균 가격보다 낮습니다.</b></p>
 <br>
+</div>
+</div>
 <div class="row">
-	<div class="col-lg-7" id="items">
-		    <div class="row">
-		        <div class="col-lg-1"></div>
-		        <div class="col-lg-7">
+		        <div class="col-lg-5">
 		           <div class="slick-items">
 		                <div>
 		                    <img src="reaimg/${sale.value.saleImgSaveName1}" alt="매물사진1" width="500" height="220">
@@ -292,7 +310,7 @@ table {
 		            </div>
 		        </div>
 		        <!-- 내용-->
-		        <div class="col-lg-4">
+		        <div class="col-lg-2">
 		            <div class="detail" style="text-align: center;">
 						<h5>레미안 아파트</h5>
 		                <input type="text" class="form-control" value="평형  #평">
@@ -314,10 +332,7 @@ table {
 		                
  					</div>
 		        </div>
-		    </div>
 		    <hr>
-    </div>
-
 
     <!-- map -->
     <div class="col-lg-5">
@@ -374,8 +389,6 @@ table {
 	</div> -->
 						</div>
 					</div>
-				</div>
-			</div>
     
 
 </section>
