@@ -16,7 +16,6 @@ public class GenericController {
 	public String genMainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
 		System.out.println("일반 회원 메인 타니?");
 		model.addAttribute("user", chuserCustom);
-		
 		return "generic/main";
 	}
 	
