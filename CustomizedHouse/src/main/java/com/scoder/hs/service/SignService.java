@@ -1,14 +1,11 @@
 package com.scoder.hs.service;
 import com.scoder.hs.domain.entity.CHUserEntity;
 import com.scoder.hs.domain.entity.UserRoleListEntity;
-import com.scoder.hs.dto.CHUser;
-import com.scoder.hs.dto.CHUserCustom;
-import com.scoder.hs.dto.Generic;
-import com.scoder.hs.dto.Role;
+import com.scoder.hs.dto.*;
 import com.scoder.hs.repository.CHUserRepository;
 import com.scoder.hs.repository.GenericRepository;
+import com.scoder.hs.repository.REARepository;
 import com.scoder.hs.repository.RoleRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +27,8 @@ public class SignService implements UserDetailsService {
 	private CHUserRepository chUserRepository;
 	@Autowired
 	private GenericRepository genericRepository;
+	@Autowired
+	private REARepository reaRepository;
 	@Autowired
 	private RoleRepository roleRepository;
 
@@ -67,12 +66,12 @@ public class SignService implements UserDetailsService {
 
 
 
-	@Transactional
-	public String signUpCHuser(CHUser chUser) {
-		System.out.println(chUserRepository.save(chUser.toEntity()).getUserId() + " chUserRepository.save(chUser.toEntity()).getUserId()");
-		return chUserRepository.save(chUser.toEntity()).getUserId();
-	}
+//	@Transactional
+//	public String signUpCHuser(CHUser chUser) {
+//		return chUserRepository.save(chUser.toEntity()).getUserId();
+//	}
 
+	//일반유저 회원가입
 	@Transactional
 	public boolean signUpGenericUser(CHUser chUser, Generic generic) {
 		boolean result = false;
@@ -87,7 +86,23 @@ public class SignService implements UserDetailsService {
 		}
 		return result;
 	}
+	//공인중개사 회원가입
+	@Transactional
+	public boolean signUpREAUser(CHUser chUser, REA rea) {
+		boolean result = false;
+		try {
+			String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
+			chUser.setPassword(encodedPassword);
+			chUserRepository.save(chUser.toEntity()).getUserId();
+			reaRepository.save(rea.toEntity()).getUserId();
+			result = true;
+		} catch (Exception e) {
+			System.out.println("SignService signUpREAUser 예외발생: " + e.getMessage());
+		}
+		return result;
+	}
 
+	//암호화
 	public PasswordEncoder passwordEncoder() {
 		return this.passwordEncoder;
 	}
