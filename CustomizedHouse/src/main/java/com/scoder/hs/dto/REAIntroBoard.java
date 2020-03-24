@@ -30,6 +30,7 @@ public class REAIntroBoard { //중개인 게시판
 		this.userId = userId;
 		this.introTitle = introTitle;
 		this.introContent = introContent;
+		
 	}
 	
 	
