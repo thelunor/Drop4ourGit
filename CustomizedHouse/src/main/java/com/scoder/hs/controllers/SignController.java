@@ -1,6 +1,5 @@
 package com.scoder.hs.controllers;
 
-import com.scoder.hs.dto.REAImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,27 +71,19 @@ public class SignController {
 
 	//공인중개사 회원가입 기능
 	@PostMapping("/signUpREAUser")
-	public String signUpREAUser(CHUser chUser, REA rea, @RequestParam("reaImage") MultipartFile multipartFile , REAImage reaImage) {
+	public String signUpREAUser(CHUser chUser, REA rea, @RequestParam("reaImage") MultipartFile multipartFile) {
 		boolean result = false;
 		try {
-			System.out.println("chUser " + chUser.toString());
-			System.out.println("rea " + rea.toString());
-			System.out.println("multipartFile " + multipartFile.toString());
-			System.out.println("reaImage " + reaImage.toString());
-			result = signService.signUpREAUser(chUser, rea, multipartFile, reaImage);
-
 		} catch (Exception e) {
 			System.out.println("Controller signUpREAUser 예외발생: " + e.getMessage());
 		}
 		return result ? "redirect:/sign/signUpSuccess" : "redirect:/sign/signUpFailure";
 	}
-
 	//회원가입 성공 페이지
 	@GetMapping("/signUpSuccess")
 	public String signUpSuccess() {
 		return "/sign/signUpSuccess";
 	}
-
 	//회원가입 실패 페이지
 	@GetMapping("/signUpFailure")
 	public String signUpFailure() {
