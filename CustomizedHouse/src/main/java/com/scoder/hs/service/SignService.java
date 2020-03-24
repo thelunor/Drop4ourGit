@@ -76,10 +76,13 @@ public class SignService implements UserDetailsService {
 	@Transactional
 	public boolean signUpGenericUser(CHUser chUser, Generic generic) {
 		boolean result = false;
+		System.out.println("수정---------------------");
+		System.out.println(chUser.toString());
 		try {
 			String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
 			chUser.setPassword(encodedPassword);
 			chUserRepository.save(chUser.toEntity()).getUserId();
+			
 			genericRepository.save(generic.toEntity()).getUserId();
 			result = true;
 		} catch (Exception e) {

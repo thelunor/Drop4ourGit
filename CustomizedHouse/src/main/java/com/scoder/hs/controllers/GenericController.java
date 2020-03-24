@@ -5,9 +5,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.scoder.hs.dto.CHUser;
 import com.scoder.hs.dto.CHUserCustom;
 import com.scoder.hs.dto.Generic;
 import com.scoder.hs.service.GenericService;
@@ -52,5 +54,15 @@ public class GenericController {
 		return "generic/genericUserEdit";
 	}
 	
+	@PostMapping("/userInfoEdit")
+	public String userInfoEdit(@AuthenticationPrincipal CHUserCustom chuserCustom, CHUser chUser, Generic generic) {
+		boolean result = false;
+		try {
+			result = genericService.EditGenericUser(chUser, generic, chuserCustom.getUsername()); 
+		} catch (Exception e) {
+			System.out.println("Controller signUpGenericUser 예외발생: " + e.getMessage());
+		}
+		return "generic/genericEditSuccess";
+	}
 	
 }

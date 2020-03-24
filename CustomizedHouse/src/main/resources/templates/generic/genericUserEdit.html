@@ -25,7 +25,7 @@
 									</div>
 									<div class="form-group">
 										<label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>
-										<input type="password" class="form-control" name="userPwd"
+										<input type="password" class="form-control" name="password"
 											id="userPwd" required="required" placeholder="비밀번호를 입력해주세요" >
 									</div>
 									<div class="form-group">
@@ -34,6 +34,11 @@
 											id="userName" required="required" th:value="${genericUser.name}">
 									</div>
 									<div class="form-group">
+		                                <label>이메일 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdEmail"></span></label>
+		                                <input type="text" class="form-control" name="userEmail"
+		                                       id="userEmail" required="required" th:value="${genericUser.userMail}">
+		                            </div>
+									<div class="form-group">
 										<label>휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 										<input type="text" class="form-control" name="userPhoneNum"
 											id="userPhoneNum" required="required" placeholder="010-0000-0000" th:value="${genericUser.userPhoneNum}">
@@ -41,11 +46,11 @@
 									<div class="form-group">
 										<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 										<div class="row">&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="text" class="form-control" name="userAddr" id="userAddr"
+										<input type="text" class="form-control" name="userAddress" id="userAddress"
 											required="required" placeholder="주소" style="width:72%;"  th:value="${generic.userAddress}"> &nbsp;&nbsp;
 											<input type="button" onclick="searchAddr()" value="주소 검색"><br><br>
 										</div>
-										<input type="text" class="form-control" name="userDetailAddr" id="userDetailAddr"
+										<input type="text" class="form-control" name="userDetailAddress" id="userDetailAddress"
 											required="required" placeholder="상세주소" style="width:77%;" th:value="${generic.userDetailAddress}"><br>
 										</div><br>									
 									
