@@ -10,7 +10,11 @@ public class SaleController {
 
 	@GetMapping("/saleListPage")
 	public String saleListPage() {
-		System.out.println("난 탄다 컨트롤");
 		return "sale/saleListPage";
+	}
+	
+	@GetMapping("/saleDetailPage")
+	public String saleDetailPage() {
+		return "sale/saleDetailPage";
 	}
 }

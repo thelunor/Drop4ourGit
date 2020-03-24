@@ -2,17 +2,180 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{indexLayout}">
 <head>
-<style type="text/css">
+<style type="text/css" layout:fragment="pageCss">
+/*
+Featured section style
+========================*/
+.main_featured .head_title {
+	width: 70%;
+	margin: 0 auto;
+}
 
+.slick-center .featured_img {
+	position: relative;
+}
+
+.slick-center .featured_img:before {
+	content: "+";
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	position: absolute;
+	left: 43.5%;
+	right: 43.5%;
+	top: 35%;
+	color: #000;
+	background-color: #fff;
+	border-radius: 50%;
+	font-size: 3rem;
+	z-index: 2;
+	cursor: pointer;
+}
+
+.slick-center .featured_img a {
+	position: absolute;
+	left: 43.5%;
+	right: 43.5%;
+	top: 35%;
+	display: block;
+	width: 50px;
+	height: 50px;
+	z-index: 3;
+}
+
+.featured_img a {
+	display: none;
+}
+
+.featured_slider {
+	width: 100%;
+	height: 250px;
+	margin: 20px auto;
+	text-align: center;
+}
+
+.featured_img img {
+	width : 100%;
+	height : 250px;
+}
+
+.featured_slider div {
+	margin-right: 5px;
+}
+
+.slick-slide {
+	opacity: .6;
+}
+
+.slick-center {
+	display: block;
+	max-width: 10% !important;
+	max-height: 20% !important;
+	opacity: 1;
+}
 </style>
 </head>
 <section id="saleDetailPage" class="about roomy-100" layout:fragment="content">
+		<div class="container-fluid">
+			<div class="main_featured m-top-100">
+				<h2 style="text-align: center;">매물 상세 페이지</h2>
+				<br>
+			</div>
+			<div class="featured_slider">
+				<div>
+					<div class="featured_img">
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName1() %>" alt="매물사진1"/> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName1() %>" class="popup-img"></a>
+					</div>
+				</div>
+				<div>
+					<div class="featured_img">
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName2() %>" alt="매물사진2"/> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName2() %>" class="popup-img"></a>
+					</div>
+				</div>
+				<div>
+					<div class="featured_img">
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName3() %>" alt="매물사진3"/> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName3() %>" class="popup-img"></a>
+					</div>
+				</div>
+				<div>
+					<div class="featured_img">
+						<img src="reaimg/<%=saleImg.getSaleImgSaveName3() %>" alt=""/> <a
+							href="reaimg/<%=saleImg.getSaleImgSaveName3() %>" class="popup-img"></a>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="container">
+			<br> <br> <br> <br>
+			<div class="row">
+				<div class="col-md-12">
+				<div class="houseDetail">
+					<div class="page-wrapper">
+					  <a class="btn trigger" href="#">담당 부동산</a>
+					</div>
+					<div class=row>
+					<h4 style="color:#ff6863;"><i class="fas fa-home"></i>&nbsp;<span id="apartment">${saleData.aptName}</span>&nbsp;${saleData.type}</h4> 										
+					&nbsp;&nbsp;&nbsp;
+					
+					</div>
+					<br>
+					<input type="text" class="form-control" name="address"
+						id="address" required="required" placeholder="도로명 주소"  value="${saleData.roadAddr}" readonly>
+						<br>
+					<!-- Button -->
 
+					<br>
+					<input type="hidden" id="id" value="${userId}">
+					<input type="hidden" value="${saleData.aptNum}" id="aptNo">
+					<div class="box">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>동 </label> <input type="text" class="form-control"
+										required="required" value="${saleData.aptDong}" readonly>
+								</div>
+								<div class="form-group">
+									<label>유형 </label> 
+									<input type="text" class="form-control" value="${saleData.type}" readonly>
+								</div>
+								<div class="form-group">
+									<label>방향 </label> <input type="text" class="form-control"
+										required="required" value="${saleData.direction}" readonly>
+								</div>								
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>매매가 </label> <input type="text" class="form-control"
+										required="required" value="${saleData.price}" readonly>
+								</div>
+								<div class="form-group">
+									<label>면적 </label> <input type="text" class="form-control" 
+									required="required" value="${saleData.aptSize}" readonly>
+								</div>
+								<div class="form-group">
+									<label>특징 </label> <input type="text" class="form-control"
+										required="required" value="${saleData.etc}" readonly>
+								</div>																
+							</div>
+						</div>
+					</div>
+					<br>
 
+					<p style="font-size: 15px; font-family: 'Jua', sans-serif;"><i class="fas fa-subway"></i> 5분 거리 &nbsp; &nbsp;| &nbsp; &nbsp;
+					<i class="fas fa-school"></i> 10분 거리 &nbsp; &nbsp;| &nbsp; &nbsp; <i class="fas fa-tree"></i> 5분 거리 </p>
+				 <div id="map" style="width: 100%; height: 380px;"></div>	
+				 <br> <br> <br> <br>				 					
+				</div>
+				</div>
+			</div>
+		</div>
+		<!-- End off featured slider -->
 </section>
 <div layout:fragment="pageJs">
 <script>
-
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 mapOption = { 
     center: new kakao.maps.LatLng(37.497571, 127.049994), // 지도의 중심좌표
