@@ -1,7 +1,10 @@
 package com.scoder.hs.dto;
 
 import com.scoder.hs.domain.entity.CHUserEntity;
+import com.scoder.hs.dto.Generic.GenericBuilder;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +34,10 @@ public class CHUser {
         return chUserEntity;
     }
 
+	@Builder
+	public CHUser(String userId, String userName) {
+		this.userId = userId;
+		this.userName = userName;
+
+	}
 }
