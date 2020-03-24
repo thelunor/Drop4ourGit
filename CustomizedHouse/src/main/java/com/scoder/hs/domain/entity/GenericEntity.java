@@ -20,10 +20,11 @@ import lombok.ToString;
 @Table(name = "generic")
 public class GenericEntity {
 	
-	@OneToOne(mappedBy = "reaEntity")
+	@OneToOne(mappedBy = "genericEntity")
 	private CHUserEntity chuserEntity;
 
     @Id
+    @Column(length = 30, nullable = false)
     private String userId;
 
     @Column(length = 30, nullable = false)

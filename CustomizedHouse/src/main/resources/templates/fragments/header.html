@@ -30,7 +30,8 @@
                     <a sec:authorize="isAuthenticated()" th:href="@{/sign/logout}">로그아웃</a>
                 </li>
                 <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/sign/signUpPage}">회원가입</a></li>
-                <li class="join"><a sec:authorize="hasRole('ROLE_REAUSER')" th:href="@{/rea/reaMain}">공인중개사 회원</a></li>
+                <li class="join"><a sec:authorize="hasRole('ROLE_REAUSER')" th:href="@{/rea/reaMain}">소개 페이지</a></li>
+                <li class="join"><a sec:authorize="hasRole('ROLE_REAUSER')" th:href="@{/rea/reaSale}">매물 페이지</a></li>
                 <li class="join"><a sec:authorize="hasRole('ROLE_GENUSER')" th:href="@{/generic/genMainPage}">내정보</a></li>
                 <li class="side-menu">
                     <a sec:authorize="hasRole('ROLE_ADMIN')"><i class='fa fa-bars'></i></a>
