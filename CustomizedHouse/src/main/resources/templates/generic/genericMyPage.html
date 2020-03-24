@@ -3,6 +3,12 @@
       layout:decorator="~{indexLayout}">
 <head>
 <style type="text/css" layout:fragment="pageCss">
+#myInfoEdit:hover {
+	color: #ff6863;
+	cursor: pointer;
+}
+
+
 a {
    color: gray;
 }
@@ -87,7 +93,7 @@ font-family: 'Jua', sans-serif;
             <div class="list-group">
                <a class="list-group-item"></a>
                <a href="#" class="list-group-item">북마크</a>
-               <a href="GetGenericUserEditService.d4b?genericUserId=<%=genericUserId%>" class="list-group-item">정보수정</a>
+               <a id="myInfoEdit" onclick="location.href='/generic/genericUserEdit'" class="list-group-item">정보수정</a>
                <a href="#" class="list-group-item">회원탈퇴</a>
             </div>
          </div>

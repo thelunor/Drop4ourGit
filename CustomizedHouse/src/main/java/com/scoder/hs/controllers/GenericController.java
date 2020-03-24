@@ -19,11 +19,38 @@ public class GenericController {
 	@Autowired
 	private GenericService genericService;
 	
+	/**
+	 * 일반회원 마이페이지로 이동
+	 * @author 이정은
+	 * @since 2020/03/24 
+	 * @param chuserCustom
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/genericMyPage")
-	public String genMainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
+	public String userMyPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
 		genericService.getUserInfo(chuserCustom.getUsername());
 		model.addAttribute("genericUser", chuserCustom);
 		return "generic/genericMyPage";
 	}
+	
+	/**
+	 * 회원정보 수정페이지로 이동
+	 * @author 이정은
+	 * @since 2020/03/24
+	 * @param chuserCustom
+	 * @param model
+	 * @return "generic/genericUserEdit";
+	 */
+	@GetMapping("/genericUserEdit")
+	public String userEditPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
+		genericService.getUserInfo(chuserCustom.getUsername());
+		model.addAttribute("genericUser", chuserCustom);
+		
+		Generic generic = genericService.getUserDetailInfo(chuserCustom.getUsername());
+		model.addAttribute("generic", generic);
+		return "generic/genericUserEdit";
+	}
+	
 	
 }

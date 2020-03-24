@@ -35,9 +35,11 @@ public class CHUser {
     }
 
 	@Builder
-	public CHUser(String userId, String userName) {
+	public CHUser(String userId, String userName, String userEmail, String userPhoneNum) {
 		this.userId = userId;
 		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhoneNum = userPhoneNum;
 
 	}
 }
