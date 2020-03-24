@@ -62,13 +62,13 @@
 							<br> <br>
 							<div class="form-group">
 								<label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-								<input type="text" class="form-control" name="reaId" id="reaId"
+								<input type="text" class="form-control" name="userId" id="reaId"
 									   required="required">
 								<div id="id_check"></div>
 							</div>
 							<div class="form-group">
 								<label>비밀번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdPw"></span></label>
-								<input type="password" class="form-control" name="reaPwd"
+								<input type="password" class="form-control" name="password"
 									   id="reaPwd" required="required" placeholder="영문+숫자 7자 이상">
 								<div id="pwd_check"></div>
 							</div>
@@ -80,15 +80,20 @@
 							</div>
 							<div class="form-group">
 								<label>이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-								<input type="text" class="form-control" name="reaName" id="reaName"
+								<input type="text" class="form-control" name="userName" id="reaName"
 									   required="required">
 							</div>
 							<div class="form-group">
 								<label>휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
-								<input type="text" class="form-control" name="reaPhoneNum"
+								<input type="text" class="form-control" name="userPhoneNum"
 									   id="reaPhoneNum" required="required" placeholder="010-0000-0000">
 								<div id="phone_check"></div>
 							</div>
+                            <div class="form-group">
+                                <label>이메일 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdEmail"></span></label>
+                                <input type="text" class="form-control" name="userEmail"
+                                       id="userEmail" required="required">
+                            </div>
 							<div class="form-group">
 								<label>사무소 이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
 								<input type="text" class="form-control" name="officeName"
@@ -98,8 +103,8 @@
 								<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 								<div class="row">
 									&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"
-																	class="form-control" name="officeAddr" id="officeAddr"
-																	required="required" placeholder="주소" style="width: 72%;">
+                                                class="form-control" name="officeAddress" id="officeAddr"
+                                                required="required" placeholder="주소" style="width: 72%;">
 									&nbsp;&nbsp; <input type="button" onclick="searchAddr()"
 														value="주소 검색"><br>
 									<br>
@@ -120,7 +125,7 @@
 							</div>
 							<div class="form-group">
 								<label>사업자등록번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
-								<input type="text" class="form-control" name="regNum"
+								<input type="text" class="form-control" name="reaNum"
 									   id="regNum" required="required" placeholder="000-00-00000">
 							</div>
 							<input type="hidden" id="userCode" name="userCode" value="U02">

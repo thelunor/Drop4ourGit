@@ -1,11 +1,9 @@
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/chouse?serverTimezone=UTC&characterEncoding=UTF-8
     username: scoder
     password: 1004
-
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
@@ -22,6 +20,10 @@ spring:
   devtools:
     livereload:
       enabled: true
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
 logging:
   level:
     org:
@@ -36,6 +38,4 @@ server:
 app:
   upload:
     dir: /reaImages
-multipart:
-  maxFileSize: 5MB
-  maxRequestSize: 5MB
+

@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.scoder.hs.dto.REAImage;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,6 +32,10 @@ public class CHUserEntity {
 	@OneToOne
     @JoinColumn(name="userId")
     private UserRoleListEntity userRoleListEntity;
+
+	@OneToOne
+	@JoinColumn(name="userId")
+	private REAImageEntity reaImageEntity;
 	
 	@Id
 	@Column (length = 30, nullable = false)
