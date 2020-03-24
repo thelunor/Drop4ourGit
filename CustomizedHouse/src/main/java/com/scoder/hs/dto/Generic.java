@@ -2,12 +2,17 @@ package com.scoder.hs.dto;
 
 import com.scoder.hs.domain.entity.GenericEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter 
+@Setter
+@ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class Generic {
 	
 	private String userId;
@@ -26,4 +31,15 @@ public class Generic {
 				.build();
 		return genericEntity;
 	}
+
+	@Builder
+	public Generic(String userId, String birth, String resNum, String userAddress, String userDetailAddress) {
+		this.userId = userId;
+		this.birth = birth;
+		this.resNum = resNum;
+		this.userAddress = userAddress;
+		this.userDetailAddress = userDetailAddress;
+	}
+	
+	
 }

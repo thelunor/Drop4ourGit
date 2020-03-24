@@ -65,5 +65,12 @@ public class REAController {
 //		}
 		return path;
 	}
+	
+	@GetMapping("/reaSale")
+	public String salePage() {
+		//공인중개사 정보 가져와서 뿌리기
+		System.out.println("매물 페이지!");
+		return "rea/reaSalePage";
+	}
 
 }
