@@ -1,5 +1,6 @@
 package com.scoder.hs.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,6 +22,48 @@ public class Sale { //매물
 	private String price; //거래금액
 	private String direction; //향
 	private String etc; //매물 특징
-	private String isContract; //계약 여부
+	private int isContract; //계약 여부
+	
+	
+//	public SaleEntity toEntity() {
+//		SaleEntity saleEntity = SaleEntity.builder()
+//				.saleNum(saleNum)
+//				.userId(userId)
+//				.typeNum(typeNum)
+//				.aptSize(aptSize)
+//				.address(address)
+//				.roadAddress(roadAddress)
+//				.aptName(aptName)
+//				.aptDong(aptDong)
+//				.aptHo(aptHo)
+//				.price(price)
+//				.direction(direction)
+//				.etc(etc)
+//				.isContract(isContract)
+//				.build();
+//		return saleEntity;
+//	}
+	
+	
+	@Builder
+	public Sale(int saleNum, String userId, int typeNum, String aptSize, String address, String roadAddress,
+			String aptName, String aptDong, String aptHo, String price, String direction, String etc,
+			int isContract) {
+		this.saleNum = saleNum;
+		this.userId = userId;
+		this.typeNum = typeNum;
+		this.aptSize = aptSize;
+		this.address = address;
+		this.roadAddress = roadAddress;
+		this.aptName = aptName;
+		this.aptDong = aptDong;
+		this.aptHo = aptHo;
+		this.price = price;
+		this.direction = direction;
+		this.etc = etc;
+		this.isContract = isContract;
+	}
+	
+	
 
 }

@@ -11,6 +11,7 @@ import com.scoder.hs.domain.entity.REAEntity;
 import com.scoder.hs.domain.entity.ReaIntroBoardEntity;
 import com.scoder.hs.dto.REA;
 import com.scoder.hs.dto.REAIntroBoard;
+import com.scoder.hs.dto.Sale;
 import com.scoder.hs.repository.REARepository;
 import com.scoder.hs.repository.ReaIntroBoardRepository;
 
@@ -22,6 +23,9 @@ public class REAService {
 	
 	@Autowired
 	private ReaIntroBoardRepository reaIntroBoardRepository;
+	
+//	@Autowired
+//	private SaleRepository saleRepository;
 	
 	//공인중개사 회원 정보 가져오기
 	public REA getReaInfo(String userId) {
@@ -70,5 +74,16 @@ public class REAService {
 	}
 	
 	//매물 등록
+//	@Transactional
+//	public boolean saveSale(Sale sale) {
+//		boolean result = false;
+//		try {
+//			saleRepository.save(sale.toEntity()).getSaleNum();
+//			result = true;
+//		} catch(Exception e) {
+//			System.out.println("saveSale Service Error"+e.getMessage());
+//		}
+//		return result;
+//	}
 
 }
