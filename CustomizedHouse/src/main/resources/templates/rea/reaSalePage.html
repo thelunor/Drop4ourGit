@@ -3,8 +3,66 @@
       layout:decorator="~{indexLayout}"
 >
 <head>
+	<style layout:fragment="pageCss">
+		.input-group {
+			height: 50px;
+		}
+		
+		a {
+			color: #797979;
+		}
+		
+		a:hover {
+			color: #212529;
+		}
+		
+		h2 {
+			font-family: 'Jua', sans-serif;
+			text-align: center;
+		}
+		
+		input {
+			text-align: center;
+		}
+		
+		.btn-group:hover {
+			background-color: #eee;
+			border-color: #eee;
+			border: 0.5px solid #eee;
+			color: #ff6863;
+		}
+		
+		.btn-group {
+			color: #fff;
+			background-color: #ff6863;
+			border-color: #ff6863;
+			border: 2px solid #eee;
+			padding: 0.5rem 1rem;
+		}
+		
+		.btn-group-sm:hover {
+			background-color: #eee;
+			border-color: #eee;
+			border: 0.5px solid #eee;
+			color: #ff6863;
+		}
+		#con_btn:hover {
+			background-color: #eee;
+			border-color: #eee;
+			border: 0.5px solid #eee;
+			color: black;
+			font-weight: bold;
+		}
+		.btn-group-sm {
+			color: #fff;
+			background-color: #ff6863;
+			border-color: #ff6863;
+			border: 2px solid #eee;
+			padding: 0.5rem 1rem;
+		}
+	</style>
 </head>
-<section id="join" class="about roomy-100" layout:fragment="content">
+<section class="about roomy-100" layout:fragment="content">
 	<form action="GetSaleAddPageService.d4b" method="post">
 		<div class="container">
 			<div class="about_content">
@@ -14,25 +72,25 @@
 						<div class="col-md-6" style="text-align: center">
 							<img id="preview" src=""
 								style="width: 200px" alt="Profile"> <br> <br> 
-							<input	type="text" class="form-control" name="" id="" required value="공인중개사 이름" readonly>
+							<input	type="text" class="form-control" th:value="${user.name}" readonly>
 							<br>
 						</div>
 						<div class="col-md-6">
-							<label>사업자 등록번호 &nbsp;&nbsp;&nbsp;&nbsp;</label> 
-							<input type="text" class="form-control" name="User_Id" id="User_Id" required value="사업자 등록번호" readonly> 
+							<label>사업자 등록번호 &nbsp;&nbsp;&nbsp;&nbsp;</label>
+							<input type="text" class="form-control" th:value="${rea.reaNum}" readonly> 
 							<label>사무소이름&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-							<input type="text" class="form-control" name="User_Id" id="User_Id" required value="사무소이름" readonly>
+							<input type="text" class="form-control" th:value="${rea.officeName}" readonly>
 							<label>연락처&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-							<input type="text" class="form-control" name="User_Id" id="User_Id" required value="연락처" readonly>
+							<input type="text" class="form-control"  th:value="${rea.officePhoneNum}" readonly>
 							<label>사무소 주소 &nbsp;&nbsp;&nbsp;&nbsp;</label> 
-							<input type="text" class="form-control" name="User_Id" id="User_Id" required value="사무소 주소" readonly> 
+							<input type="text" class="form-control"  th:value="${rea.officeAddress}" readonly> 
 							<br>
 						</div>
 					</div>
 						<hr>
 		                  <div class="row">
 		                     <div class="col-md-12">
-		                        <input type="submit" class="btn-group" value="매물 등록">
+		                     	<button type="button" class="btn-group" th:onclick="|window.location.href='/rea/addSale'|">매물 등록</button>
 		                        &nbsp;
 		                        <button type="button" class="btn-group" onclick="location.href='SelectContractListService.d4b?userId=${reaUserData.reaId}'">계약 관리</button>
 		                        &nbsp;
@@ -81,3 +139,4 @@
 <div layout:fragment="pageJs">
 
 </div>
+</html>

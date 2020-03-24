@@ -68,5 +68,7 @@ public class REAService {
 		
 		return reaIntroBoard;
 	}
+	
+	//매물 등록
 
 }
