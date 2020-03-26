@@ -27,7 +27,13 @@ public class GenericService {
 	
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
-	//일반회원 마이페이지 화면에 보일 기본 정보 가져오기
+	/**
+	 * 일반회원 마이페이지 화면에 보일 기본 정보 가져오기
+	 * @author 이정은
+	 * @since 2020/03/24 
+	 * @param userId
+	 * @return chUser
+	 */
 	public CHUser getUserInfo (String userId) {
 		Optional<CHUserEntity> chUserEntityWrapper = chUserRepository.findById(userId);
 		CHUserEntity chUserEntity = chUserEntityWrapper.get();		
@@ -41,7 +47,13 @@ public class GenericService {
 		
 	}
 	
-	//회원 정보 수정에 필요한 정보 가져오기
+	/**
+	 * 회원 정보 수정에 필요한 정보 가져오기
+	 * @author 이정은
+	 * @since 2020/03/24 
+	 * @param userId
+	 * @return generic
+	 */
 	public Generic getUserDetailInfo (String userId) {
 		Optional<GenericEntity> genericEntityWrapper = genericRepository.findById(userId);
 		GenericEntity genericEntity = genericEntityWrapper.get();		
@@ -56,10 +68,17 @@ public class GenericService {
 		
 	}
 	
-		//일반유저 회원수정
+		/**
+		 * 회원정보 데이터 수정
+		 * @author 이정은
+		 * @since 2020/03/26 
+		 * @param chUser
+		 * @param generic
+		 * @param userId
+		 * @return result
+		 */
 	    @Transactional
 		public boolean EditGenericUser(CHUser chUser, Generic generic, String userId) {
-	    	System.out.println("회원정보 수정 시작-----------");
 			boolean result = false;
 			try {
 				String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
@@ -79,7 +98,6 @@ public class GenericService {
 					genericUser.setUserDetailAddress(generic.getUserDetailAddress());
 					GenericEntity newGeneric = genericRepository.save(genericUser);
 				});
-				genericRepository.save(generic.toEntity()).getUserId();
 				result = true;
 			} catch (Exception e) {
 				System.out.println("SignService signUpGenericUser 예외발생: " + e.getMessage());

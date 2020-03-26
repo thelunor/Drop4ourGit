@@ -54,17 +54,30 @@ public class GenericController {
 		return "generic/genericUserEdit";
 	}
 	
+	/**
+	 * 회원정보 데이터 수정
+	 * @author 이정은
+	 * @since 2020/03/24 
+	 * @param chuserCustom
+	 * @param chUser
+	 * @param generic
+	 * @return "generic/genericEditSuccess";
+	 */
 	@PostMapping("/userInfoEdit")
 	public String userInfoEdit(@AuthenticationPrincipal CHUserCustom chuserCustom, CHUser chUser, Generic generic) {
-		System.out.println("controller---------------");
-		System.out.println(chUser.toString());
 		boolean result = false;
 		try {
 			result = genericService.EditGenericUser(chUser, generic, chuserCustom.getUsername()); 
 		} catch (Exception e) {
 			System.out.println("Controller signUpGenericUser 예외발생: " + e.getMessage());
 		}
-		return "generic/genericEditSuccess";
+		return "redirect:/generic/genericEditSuccess";
+	}
+	
+	//회원수정 성공 페이지
+	@GetMapping("/genericEditSuccess")
+	public String userEditSuccess() {
+		return "/generic/genericEditSuccess";
 	}
 	
 }
