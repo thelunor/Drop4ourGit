@@ -71,9 +71,10 @@ public class SignController {
 
 	//공인중개사 회원가입 기능
 	@PostMapping("/signUpREAUser")
-	public String signUpREAUser(CHUser chUser, REA rea, @RequestParam("reaImage") MultipartFile multipartFile) {
+	public String signUpREAUser(CHUser chUser, REA rea) {
 		boolean result = false;
 		try {
+			result = signService.signUpREAUser(chUser, rea);
 		} catch (Exception e) {
 			System.out.println("Controller signUpREAUser 예외발생: " + e.getMessage());
 		}

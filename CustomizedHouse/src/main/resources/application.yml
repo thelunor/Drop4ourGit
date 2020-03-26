@@ -23,6 +23,10 @@ spring:
   devtools:
     livereload:
       enabled: true
+  servlet:
+    multipart:
+      maxFileSize: 100MB
+      maxRequestSize: 100MB
 logging:
   level:
     org:
@@ -37,6 +41,3 @@ server:
 app:
   upload:
     dir: /reaImages
-multipart:
-  maxFileSize: 5MB
-  maxRequestSize: 5MB

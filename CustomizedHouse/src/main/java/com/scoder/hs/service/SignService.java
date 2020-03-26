@@ -82,7 +82,6 @@ public class SignService implements UserDetailsService {
 			String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
 			chUser.setPassword(encodedPassword);
 			chUserRepository.save(chUser.toEntity()).getUserId();
-			
 			genericRepository.save(generic.toEntity()).getUserId();
 			result = true;
 		} catch (Exception e) {

@@ -2,7 +2,7 @@ package com.scoder.hs.controllers;
 
 import org.springframework.web.bind.annotation.*;
 @RestController
-public class AjaxRestController {
+public class ChartRestController {
 
     @RequestMapping(value = "/chart1", method = RequestMethod.POST)
     public String chart1() {
