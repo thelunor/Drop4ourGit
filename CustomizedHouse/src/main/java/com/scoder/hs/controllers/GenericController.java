@@ -56,6 +56,8 @@ public class GenericController {
 	
 	@PostMapping("/userInfoEdit")
 	public String userInfoEdit(@AuthenticationPrincipal CHUserCustom chuserCustom, CHUser chUser, Generic generic) {
+		System.out.println("controller---------------");
+		System.out.println(chUser.toString());
 		boolean result = false;
 		try {
 			result = genericService.EditGenericUser(chUser, generic, chuserCustom.getUsername()); 

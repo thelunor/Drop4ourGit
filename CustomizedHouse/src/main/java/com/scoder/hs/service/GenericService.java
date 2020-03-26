@@ -47,6 +47,8 @@ public class GenericService {
 		GenericEntity genericEntity = genericEntityWrapper.get();		
 		Generic generic = Generic.builder()
 							.userId(genericEntity.getUserId())
+							.birth(genericEntity.getBirth())
+							.resNum(genericEntity.getResNum())
 							.userAddress(genericEntity.getUserAddress())
 							.userDetailAddress(genericEntity.getUserDetailAddress())
 							.build();
@@ -58,30 +60,25 @@ public class GenericService {
 	    @Transactional
 		public boolean EditGenericUser(CHUser chUser, Generic generic, String userId) {
 	    	System.out.println("회원정보 수정 시작-----------");
-			/*boolean result = false;
+			boolean result = false;
 			try {
 				String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
-	
 				Optional<CHUserEntity> chUserEntityWrapper = chUserRepository.findById(userId);
-				chUserEntityWrapper.ifPresent(chuser ->{
-					chUser.setPassword(encodedPassword);
-					chUser.setUserName(chUser.getUserName());
-					chUser.setUserEmail(chUser.getUserEmail());
-					chUser.setUserPhoneNum(chUser.getUserPhoneNum());
-					CHUserEntity newUser = chUserRepository.save(chuser);
+				chUserEntityWrapper.ifPresent(user ->{
+					user.setPassword(encodedPassword);
+					user.setUserName(chUser.getUserName());
+					user.setUserEmail(chUser.getUserEmail());
+					user.setUserPhoneNum(chUser.getUserPhoneNum());
+					CHUserEntity newUser = chUserRepository.save(user);
 		           });
-
-				genericRepository.save(generic.toEntity()).getUserId();
-				result = true;
-			} catch (Exception e) {
-				System.out.println("SignService signUpGenericUser 예외발생: " + e.getMessage());
-			}
-			return result;*/
-	    	boolean result = false;
-			try {
-				String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
-				chUser.setPassword(encodedPassword);
-				chUserRepository.save(chUser.toEntity()).getUserId();
+				Optional<GenericEntity> genericEntityWrapper = genericRepository.findById(userId);
+				genericEntityWrapper.ifPresent(genericUser ->{
+					genericUser.setBirth(generic.getBirth());
+					genericUser.setResNum(generic.getResNum());
+					genericUser.setUserAddress(generic.getUserAddress());
+					genericUser.setUserDetailAddress(generic.getUserDetailAddress());
+					GenericEntity newGeneric = genericRepository.save(genericUser);
+				});
 				genericRepository.save(generic.toEntity()).getUserId();
 				result = true;
 			} catch (Exception e) {

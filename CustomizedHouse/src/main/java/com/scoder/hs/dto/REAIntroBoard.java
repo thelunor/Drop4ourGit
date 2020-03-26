@@ -32,6 +32,8 @@ public class REAIntroBoard { //중개인 게시판
 		this.introContent = introContent;
 		
 	}
+
+
 	
 	
 
