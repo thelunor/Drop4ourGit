@@ -102,8 +102,8 @@
 									<label>주소 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span>
 										<input type="button" class="addrBtn" onclick="searchAddr()" value="주소 검색">
 									</label>
-									<input type="text" class="form-control" name="address" required placeholder="지번 주소" style="width: 95%"> 
-									<input type="text" class="form-control" name="roadAddress" required placeholder="도로명 주소" style="width: 95%">
+									<input type="text" class="form-control" name="saleAddress" required placeholder="지번 주소" style="width: 95%"> 
+									<input type="text" class="form-control" name="saleRoadAddress" required placeholder="도로명 주소" style="width: 95%">
 								</div>
 							</div>																
 						</div>
@@ -125,11 +125,11 @@
 						</div>
 						<div class="form-group">
 							<label>거래 금액 (매매가 | 보증금)</label> 
-							<input type="text" class="form-control" name="price" required placeholder="0억 0000천 만원">
+							<input type="text" class="form-control" name="salePrice" required placeholder="0억 0000천 만원">
 						</div>
 						<div class="form-group">
 							<label>향(선택) &nbsp;&nbsp;&nbsp;&nbsp;</label> 
-							<select	class="form-control" style="width: 95%" name="direction">
+							<select	class="form-control" style="width: 95%" name="saleDirection">
 								<option value="blank">-</option>
 								<option value="남향">남향</option>
 								<option value="남동향">남동향</option>
@@ -144,12 +144,12 @@
 						<div class="form-group">
 							<label>매물특징 &nbsp;&nbsp;&nbsp;&nbsp;</label>
 							<p>
-								<textarea cols="70" rows="3" placeholder="매물에 관한 부가적인 내용" name="etc"></textarea>
+								<textarea cols="70" rows="3" placeholder="매물에 관한 부가적인 내용" name="saleEtc"></textarea>
 							</p>
 						</div>
-						<input type="hidden" name="isContract" value="0">
 						<br>
 						<br>
+						<input type="hidden" name="isContract" value="1">
 						<div class="form-group">
 							<div class="row">
 								<div class="col-sm-4"></div>

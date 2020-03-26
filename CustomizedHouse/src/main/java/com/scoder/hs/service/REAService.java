@@ -14,6 +14,7 @@ import com.scoder.hs.dto.REAIntroBoard;
 import com.scoder.hs.dto.Sale;
 import com.scoder.hs.repository.REARepository;
 import com.scoder.hs.repository.ReaIntroBoardRepository;
+import com.scoder.hs.repository.SaleRepository;
 
 @Service
 public class REAService {
@@ -24,8 +25,8 @@ public class REAService {
 	@Autowired
 	private ReaIntroBoardRepository reaIntroBoardRepository;
 	
-//	@Autowired
-//	private SaleRepository saleRepository;
+	@Autowired
+	private SaleRepository saleRepository;
 	
 	//공인중개사 회원 정보 가져오기
 	public REA getReaInfo(String userId) {
@@ -74,16 +75,18 @@ public class REAService {
 	}
 	
 	//매물 등록
-//	@Transactional
-//	public boolean saveSale(Sale sale) {
-//		boolean result = false;
-//		try {
-//			saleRepository.save(sale.toEntity()).getSaleNum();
-//			result = true;
-//		} catch(Exception e) {
-//			System.out.println("saveSale Service Error"+e.getMessage());
-//		}
-//		return result;
-//	}
+	@Transactional
+	public boolean saveSale(Sale sale) {
+		System.out.println("매물 서비스 탄다!"+sale.toEntity());
+		boolean result = false;
+		try {
+			Long saleNum = saleRepository.save(sale.toEntity()).getSaleNum();
+			System.out.println("매물 번호?"+saleNum);
+			result = true;
+		} catch(Exception e) {
+			System.out.println("saveSale Service Error"+e.getMessage());
+		}
+		return result;
+	}
 
 }

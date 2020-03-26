@@ -10,7 +10,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -19,24 +18,17 @@ import lombok.ToString;
 @Getter
 @ToString
 @Entity
-@Table(name = "role")
-public class RoleEntity {
+@Table(name = "type")
+public class TypeEntity {
 	
 	@OneToMany
-	@JoinColumn(name="roleName")
-	private Collection<UserRoleListEntity> userRoleListEntity;
+	@JoinColumn(name="typeNum")
+	private Collection<SaleEntity> sales;
 	
 	@Id
-	@Column (length = 20, nullable = false)
-	private String roleName;
+	private int typeNum; //거래유형번호
 	
-	@Column (length = 30, nullable = false)
-	private String roleDesc;
-
-	@Builder
-	public RoleEntity(String roleName, String roleDesc) {
-		this.roleName = roleName;
-		this.roleDesc = roleDesc;
-	}
-
+	@Column(length = 100, nullable = false)
+	private String typeName; //거래유형명
+	
 }

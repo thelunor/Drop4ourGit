@@ -7,10 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.scoder.hs.dto.CHUserCustom;
 import com.scoder.hs.dto.REA;
@@ -83,17 +79,16 @@ public class REAController {
 	}
 	
 	//매물 등록하기
-//	@PostMapping("/addSale")
-//	public String addSale(Sale sale, @AuthenticationPrincipal CHUserCustom chuserCustom) {
-//		System.out.println(sale.toString());
-//		sale.setUserId(chuserCustom.getUsername());
-//		//서비스 연결 -> db 저장
-//		boolean result = reaService.saveSale(sale);
-//		System.out.println("매물 저장 됨?");
-//		
-//		
-//		return "rea/saleAddPage";
-//	}
-//	
+	@PostMapping("/addSale")
+	public String addSale(Sale sale, @AuthenticationPrincipal CHUserCustom chuserCustom) {
+		System.out.println(sale.toString());
+		//서비스 연결 -> db 저장
+		boolean result = reaService.saveSale(sale);
+		System.out.println("매물 저장 됨?");
+		
+		
+		return "rea/saleAddPage";
+	}
+	
 
 }

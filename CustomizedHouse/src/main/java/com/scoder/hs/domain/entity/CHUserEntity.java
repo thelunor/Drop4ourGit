@@ -1,9 +1,13 @@
 package com.scoder.hs.domain.entity;
 
+import java.util.Collection;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,6 +35,7 @@ public class CHUserEntity {
 	@OneToOne
     @JoinColumn(name="userId")
     private UserRoleListEntity userRoleListEntity;
+	
 	
 	@Id
 	@Column (length = 30, nullable = false)
