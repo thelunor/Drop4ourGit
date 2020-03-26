@@ -5,12 +5,13 @@ spring:
     url: jdbc:mysql://localhost:3306/chouse?serverTimezone=UTC&characterEncoding=UTF-8
     username: scoder
     password: 1004
-
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
     show-sql: true
+    generate-ddl: true
     hibernate:
+      ddl-auto: update
       format_sql: true
   thymeleaf:
     prefix: classpath:templates/

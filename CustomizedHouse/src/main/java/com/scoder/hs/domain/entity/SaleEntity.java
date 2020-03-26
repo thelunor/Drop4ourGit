@@ -30,37 +30,37 @@ public class SaleEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "saleNum", insertable=false)
-	private Long saleNum; //매물번호
+	private Long saleNum; 
 	
 	@Column(length = 100, nullable = false)
-	private String aptSize; //면적
+	private String aptSize; 
 	
 	@Column(length = 500, nullable = false)
-	private String saleAddress; //지번주소
+	private String saleAddress; 
 	
 	@Column(length = 500, nullable = false)
-	private String saleRoadAddress; //도로명주소
+	private String saleRoadAddress;
 	
 	@Column(length = 500, nullable = false)
-	private String aptName; //아파트 이름
+	private String aptName; 
 	
 	@Column(length = 500, nullable = false)
-	private String aptDong; //동
+	private String aptDong; 
 	
 	@Column(length = 500, nullable = false)
-	private String aptHo; //호	
+	private String aptHo; 	
 	
 	@Column(length = 500, nullable = false)
-	private String salePrice; //거래금액
+	private String salePrice; 
 	
 	@Column(length = 500, nullable = false)
-	private String saleDirection; //향
+	private String saleDirection;
 	
 	@Column(length = 3000, nullable = false)
-	private String saleEtc; //매물 특징
+	private String saleEtc; 
 	
 	@Column(length = 30, nullable = false, columnDefinition = "default 1")
-	private int isContract; //계약 여부
+	private int isContract; 
 	
 
 	@Builder
