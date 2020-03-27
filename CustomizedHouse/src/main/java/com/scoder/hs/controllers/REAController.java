@@ -146,9 +146,23 @@ public class REAController {
 		return "redirect:/rea/reaEditSuccess";
 	}
 
-	//공인중개사 정보 수정 성공 페이지
+	/**
+	 * 공인중개사 정보 수정 성공 페이지
+	 * @author 이정은
+	 * @since 2020/03/24  
+	 * @return "/rea/reaEditSuccess";
+	 */
 	@GetMapping("/reaEditSuccess")
 	public String reaEditSuccess() {
 		return "/rea/reaEditSuccess";
+	}
+	
+	/**
+	 * 일정관리 페이지 이동
+	 * @return
+	 */
+	@GetMapping("/reaSchedulePage")
+	public String reaSchedulePage() {
+		return "rea/reaSchedulePage";
 	}
 }
