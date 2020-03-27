@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.scoder.hs.dto.CHUserCustom;
+import com.scoder.hs.dto.Generic;
 import com.scoder.hs.dto.REA;
 import com.scoder.hs.dto.REAIntroBoard;
 import com.scoder.hs.dto.Sale;
+import com.scoder.hs.service.GenericService;
 import com.scoder.hs.service.REAService;
 
 @Controller
@@ -20,6 +22,9 @@ public class REAController {
 	
 	@Autowired
 	private REAService reaService;
+	
+	@Autowired
+	private GenericService genericService;
 	
 	@GetMapping("/reaMain")
 	public String mainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
@@ -91,5 +96,22 @@ public class REAController {
 		return "rea/saleAddPage";
 	}
 	
+	
+	/**
+	 * 공인중개사 정보  수정페이지로 이동
+	 * @author 이정은
+	 * @since 2020/03/27 
+	 * @param chuserCustom
+	 * @param model
+	 * @return "generic/reaEditPage";
+	 */
+	@GetMapping("/reaEditPage")
+	public String userEditPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
+		genericService.getUserInfo(chuserCustom.getUsername());
+		model.addAttribute("genericUser", chuserCustom);
+		REA rea  = reaService.getReaInfo(chuserCustom.getUsername());
+		model.addAttribute("rea", rea);
+		return "rea/reaEditPage";
+	}
 
 }
