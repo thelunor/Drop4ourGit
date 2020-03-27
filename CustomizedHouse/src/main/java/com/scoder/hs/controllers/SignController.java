@@ -1,11 +1,9 @@
 package com.scoder.hs.controllers;
 
+import com.scoder.hs.dto.REAImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.scoder.hs.dto.CHUser;
@@ -71,10 +69,11 @@ public class SignController {
 
 	//공인중개사 회원가입 기능
 	@PostMapping("/signUpREAUser")
-	public String signUpREAUser(CHUser chUser, REA rea) {
+	public String signUpREAUser(CHUser chUser, REA rea, REAImage reaImage, @RequestParam(value = "reaImage") MultipartFile multipartFile) {
 		boolean result = false;
 		try {
-			result = signService.signUpREAUser(chUser, rea);
+			System.out.println(multipartFile);
+			result = signService.signUpREAUser(chUser, rea, reaImage, multipartFile);
 		} catch (Exception e) {
 			System.out.println("Controller signUpREAUser 예외발생: " + e.getMessage());
 		}

@@ -31,8 +31,12 @@ public class CHUserEntity {
     private REAEntity reaEntity; 
 	
 	@OneToOne
-    @JoinColumn(name="userId")
-    private GenericEntity genericEntity;
+	@JoinColumn(name="userId")
+	private GenericEntity genericEntity;
+
+	@OneToOne
+	@JoinColumn(name="userId")
+	private REAImageEntity reaImageEntity;
 	
 	@OneToOne
     @JoinColumn(name="userId")

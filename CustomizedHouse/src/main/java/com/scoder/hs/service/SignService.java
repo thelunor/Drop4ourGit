@@ -2,10 +2,7 @@ package com.scoder.hs.service;
 import com.scoder.hs.domain.entity.CHUserEntity;
 import com.scoder.hs.domain.entity.UserRoleListEntity;
 import com.scoder.hs.dto.*;
-import com.scoder.hs.repository.CHUserRepository;
-import com.scoder.hs.repository.GenericRepository;
-import com.scoder.hs.repository.REARepository;
-import com.scoder.hs.repository.RoleRepository;
+import com.scoder.hs.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -31,6 +29,8 @@ public class SignService implements UserDetailsService {
 	private REARepository reaRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private REAImageRepository reaImageRepository;
 
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -91,13 +91,18 @@ public class SignService implements UserDetailsService {
 	}
 	//공인중개사 회원가입
 	@Transactional
-	public boolean signUpREAUser(CHUser chUser, REA rea) {
+	public boolean signUpREAUser(CHUser chUser, REA rea, REAImage reaImage, MultipartFile multipartFile) {
 		boolean result = false;
 		try {
+			System.out.println(reaImage.toString());
+			System.out.println(multipartFile.getOriginalFilename());
 			String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
+			reaImage.setReaImageName(multipartFile.getOriginalFilename());
 			chUser.setPassword(encodedPassword);
 			chUserRepository.save(chUser.toEntity()).getUserId();
 			reaRepository.save(rea.toEntity()).getUserId();
+
+			reaImageRepository.save(reaImage.toEntity()).getUserId();
 			result = true;
 		} catch (Exception e) {
 			System.out.println("SignService signUpREAUser 예외발생: " + e.getMessage());
