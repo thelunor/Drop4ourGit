@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.scoder.hs.dto.CHUser;
 import com.scoder.hs.dto.CHUserCustom;
+import com.scoder.hs.dto.Generic;
 import com.scoder.hs.dto.REA;
 import com.scoder.hs.dto.REAIntroBoard;
 import com.scoder.hs.dto.Sale;
+import com.scoder.hs.service.GenericService;
 import com.scoder.hs.service.REAService;
 
 @Controller
@@ -21,10 +24,11 @@ public class REAController {
 	@Autowired
 	private REAService reaService;
 	
+	@Autowired
+	private GenericService genericService;
+	
 	@GetMapping("/reaMain")
 	public String mainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
-		System.out.println("공인중개사 메인!");
-		System.out.println("커스텀 된 객체?"+chuserCustom.toString());
 		REA rea = reaService.getReaInfo(chuserCustom.getUsername());
 		model.addAttribute("user", chuserCustom);
 		model.addAttribute("rea", rea);
@@ -91,5 +95,42 @@ public class REAController {
 		return "rea/saleAddPage";
 	}
 	
+	
+	/**
+	 * 공인중개사 정보  수정페이지로 이동
+	 * @author 이정은
+	 * @since 2020/03/27 
+	 * @param chuserCustom
+	 * @param model
+	 * @return "generic/reaEditPage";
+	 */
+	@GetMapping("/reaEditPage")
+	public String userEditPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
+		genericService.getUserInfo(chuserCustom.getUsername());
+		model.addAttribute("genericUser", chuserCustom);
+		REA rea  = reaService.getReaInfo(chuserCustom.getUsername());
+		model.addAttribute("rea", rea);
+		return "rea/reaEditPage";
+	}
+	
+	/**
+	 * 회원정보 데이터 수정
+	 * @author 이정은
+	 * @since 2020/03/24 
+	 * @param chuserCustom
+	 * @param chUser
+	 * @param generic
+	 * @return "generic/genericEditSuccess";
+	 */
+	@PostMapping("/reaInfoEdit")
+	public String reaInfoEdit(@AuthenticationPrincipal CHUserCustom chuserCustom, CHUser chUser, REA rea) {
+		boolean result = false;
+		try {
+			result = reaService.EditREAUser(chUser, rea, chuserCustom.getUsername()); 
+		} catch (Exception e) {
+			System.out.println("Controller signUpGenericUser 예외발생: " + e.getMessage());
+		}
+		return "rea/reaEditSuccess";
+	}
 
 }
