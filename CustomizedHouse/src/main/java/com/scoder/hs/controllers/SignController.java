@@ -2,6 +2,7 @@ package com.scoder.hs.controllers;
 
 import com.scoder.hs.dto.REAImage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,10 +14,15 @@ import com.scoder.hs.service.SignService;
 
 import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+
 @Controller
 @RequestMapping("/sign")
 @Slf4j
 public class SignController {
+
+
 
 	// application.properties 에 app.upload.dir을 정의하고, 없는 경우에 default 값으로 user.home (System에 종속적인)
 	private String uploadDir;
@@ -69,11 +75,10 @@ public class SignController {
 
 	//공인중개사 회원가입 기능
 	@PostMapping("/signUpREAUser")
-	public String signUpREAUser(CHUser chUser, REA rea, REAImage reaImage, @RequestParam(value = "reaImage") MultipartFile multipartFile) {
+	public String signUpREAUser(CHUser chUser, REA rea, REAImage reaImage, @RequestParam(value = "reaImage") MultipartFile multipartFile, HttpServletRequest request) {
 		boolean result = false;
 		try {
-			System.out.println(multipartFile);
-			result = signService.signUpREAUser(chUser, rea, reaImage, multipartFile);
+			result = signService.signUpREAUser(chUser, rea, reaImage, multipartFile, request);
 		} catch (Exception e) {
 			System.out.println("Controller signUpREAUser 예외발생: " + e.getMessage());
 		}

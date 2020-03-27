@@ -27,6 +27,7 @@ spring:
     multipart:
       maxFileSize: 100MB
       maxRequestSize: 100MB
+      location: C:/Temp
 logging:
   level:
     org:
@@ -38,4 +39,3 @@ logging:
               BasicBinder: TRACE
 server:
   port: 8000
-

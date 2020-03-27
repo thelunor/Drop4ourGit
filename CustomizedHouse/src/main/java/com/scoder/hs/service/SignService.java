@@ -14,13 +14,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class SignService implements UserDetailsService {
+
 	@Autowired
 	private CHUserRepository chUserRepository;
 	@Autowired
@@ -33,8 +36,6 @@ public class SignService implements UserDetailsService {
 	private REAImageRepository reaImageRepository;
 
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-
 
 	boolean enabled = true;
 	boolean accountNonExpired = true;
@@ -91,11 +92,13 @@ public class SignService implements UserDetailsService {
 	}
 	//공인중개사 회원가입
 	@Transactional
-	public boolean signUpREAUser(CHUser chUser, REA rea, REAImage reaImage, MultipartFile multipartFile) {
+	public boolean signUpREAUser(CHUser chUser, REA rea, REAImage reaImage, MultipartFile multipartFile, HttpServletRequest request) {
 		boolean result = false;
 		try {
-			System.out.println(reaImage.toString());
-			System.out.println(multipartFile.getOriginalFilename());
+			File dest = new File("C:/reaimage/" + multipartFile.getOriginalFilename());
+			multipartFile.transferTo(dest);
+			System.out.println("request.getContextPath()" + request.getContextPath());
+
 			String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
 			reaImage.setReaImageName(multipartFile.getOriginalFilename());
 			chUser.setPassword(encodedPassword);

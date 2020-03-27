@@ -28,6 +28,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	//파일 업로드
+	implementation 'commons-io:commons-io:2.6'
+
 	compile 'org.projectlombok:lombok'
 	compile 'com.h2database:h2:1.4.199'
 	compile 'mysql:mysql-connector-java'
