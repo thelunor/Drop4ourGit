@@ -1,5 +1,6 @@
 package com.scoder.hs.controllers;
 
+import com.scoder.hs.service.CHUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class REAController {
 	private REAService reaService;
 	
 	@Autowired
-	private GenericService genericService;
+	private CHUserService chUserService;
 	
 	@GetMapping("/reaMain")
 	public String mainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
@@ -106,9 +107,13 @@ public class REAController {
 	 */
 	@GetMapping("/reaEditPage")
 	public String userEditPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
-		genericService.getUserInfo(chuserCustom.getUsername());
-		model.addAttribute("genericUser", chuserCustom);
+		CHUser chUser = chUserService.getCHUserInfo(chuserCustom.getUsername()); //CHUser
+		model.addAttribute("chUser", chUser);
 		REA rea  = reaService.getReaInfo(chuserCustom.getUsername());
+
+		System.out.println("GET chUser: " + chUser.toString());
+		System.out.println("GET chuserCustom: " + chuserCustom.toString());
+		System.out.println("GET rea: " + rea.toString());
 		model.addAttribute("rea", rea);
 		return "rea/reaEditPage";
 	}
@@ -125,8 +130,12 @@ public class REAController {
 	@PostMapping("/reaInfoEdit")
 	public String reaInfoEdit(@AuthenticationPrincipal CHUserCustom chuserCustom, CHUser chUser, REA rea) {
 		boolean result = false;
+		System.out.println("POST chUser: " + chUser.toString());
+		System.out.println("POST chuserCustom: " + chuserCustom.toString());
+		System.out.println("POST rea: " + rea.toString());
 		try {
-			result = reaService.EditREAUser(chUser, rea, chuserCustom.getUsername()); 
+			System.out.println("chuserCustom.getUsername(): " + chuserCustom.getUsername());
+			result = reaService.EditREAUser(chUser, rea, chuserCustom.getUsername());
 		} catch (Exception e) {
 			System.out.println("Controller signUpGenericUser 예외발생: " + e.getMessage());
 		}

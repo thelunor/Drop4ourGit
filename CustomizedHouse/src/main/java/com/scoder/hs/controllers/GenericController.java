@@ -1,5 +1,6 @@
 package com.scoder.hs.controllers;
 
+import com.scoder.hs.service.CHUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class GenericController {
 	
 	@Autowired
 	private GenericService genericService;
+
+	@Autowired
+	private CHUserService chUserService;
 	
 	/**
 	 * 일반회원 마이페이지로 이동
@@ -31,7 +35,7 @@ public class GenericController {
 	 */
 	@GetMapping("/genericMyPage")
 	public String userMyPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
-		genericService.getUserInfo(chuserCustom.getUsername());
+		chUserService.getCHUserInfo(chuserCustom.getUsername());
 		model.addAttribute("genericUser", chuserCustom);
 		return "generic/genericMyPage";
 	}
@@ -46,7 +50,7 @@ public class GenericController {
 	 */
 	@GetMapping("/genericUserEdit")
 	public String userEditPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
-		genericService.getUserInfo(chuserCustom.getUsername());
+		chUserService.getCHUserInfo(chuserCustom.getUsername());
 		model.addAttribute("genericUser", chuserCustom);
 		
 		Generic generic = genericService.getUserDetailInfo(chuserCustom.getUsername());

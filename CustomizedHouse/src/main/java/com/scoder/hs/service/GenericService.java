@@ -27,26 +27,7 @@ public class GenericService {
 	
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
-	/**
-	 * 일반회원 마이페이지 화면에 보일 기본 정보 가져오기
-	 * @author 이정은
-	 * @since 2020/03/24 
-	 * @param userId
-	 * @return chUser
-	 */
-	public CHUser getUserInfo (String userId) {
-		Optional<CHUserEntity> chUserEntityWrapper = chUserRepository.findById(userId);
-		CHUserEntity chUserEntity = chUserEntityWrapper.get();		
-		CHUser chUser = CHUser.builder()
-							.userId(chUserEntity.getUserId())
-							.userName(chUserEntity.getUserName())
-							.userEmail(chUserEntity.getUserEmail())
-							.userPhoneNum(chUserEntity.getUserPhoneNum())
-							.build();
-		return chUser;
-		
-	}
-	
+
 	/**
 	 * 회원 정보 수정에 필요한 정보 가져오기
 	 * @author 이정은

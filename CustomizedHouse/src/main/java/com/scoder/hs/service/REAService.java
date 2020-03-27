@@ -102,7 +102,6 @@ public class REAService {
 		return result;
 	}
 
-
 	/**
 	 * 공인중개사 정보 데이터 수정
 	 * @author 이정은

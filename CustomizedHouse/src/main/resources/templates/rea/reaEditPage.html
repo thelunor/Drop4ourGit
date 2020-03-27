@@ -29,7 +29,7 @@ h2 {
 							<div class="form-group">
 								<label>아이디 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
 								<input type="text" class="form-control" name="userId" id="reaId"
-									   required="required" th:value="${genericUser.username}" readonly>
+									   required="required" th:value="${chUser.userId}" readonly>
 								<div id="id_check"></div>
 							</div>
 							<div class="form-group">
@@ -41,18 +41,18 @@ h2 {
 							<div class="form-group">
 								<label>이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
 								<input type="text" class="form-control" name="userName" id="reaName"
-									   required="required" th:value="${genericUser.name}">
+									   required="required" th:value="${chUser.userName}">
 							</div>
 							<div class="form-group">
 								<label>휴대폰번호 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdCh"></span></label>
 								<input type="text" class="form-control" name="userPhoneNum"
-									   id="reaPhoneNum" required="required" th:value="${genericUser.userPhoneNum}">
+									   id="reaPhoneNum" required="required" th:value="${chUser.userPhoneNum}">
 								<div id="phone_check"></div>
 							</div>
 							<div class="form-group">
 								<label>이메일 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdEmail"></span></label>
 								<input type="text" class="form-control" name="userEmail"
-									   id="userEmail" required="required" th:value="${genericUser.userMail}">
+									   id="userEmail" required="required" th:value="${chUser.userEmail}">
 							</div>
 							<div class="form-group">
 								<label>부동산 이름 &nbsp;&nbsp;&nbsp;&nbsp;<span id="tdId"></span></label>
