@@ -28,8 +28,6 @@ public class REAController {
 	
 	@GetMapping("/reaMain")
 	public String mainPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
-		System.out.println("공인중개사 메인!");
-		System.out.println("커스텀 된 객체?"+chuserCustom.toString());
 		REA rea = reaService.getReaInfo(chuserCustom.getUsername());
 		model.addAttribute("user", chuserCustom);
 		model.addAttribute("rea", rea);
