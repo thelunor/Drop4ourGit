@@ -13,7 +13,7 @@ import lombok.ToString;
 public class Sale { //매물
 	
 	private Long saleNum; //매물번호
-	//private int typeNum; //거래유형번호
+	private int typeNum; //거래유형번호
 	private String aptSize; //면적
 	private String saleAddress; //지번주소
 	private String saleRoadAddress; //도로명주소
@@ -24,8 +24,8 @@ public class Sale { //매물
 	private String saleDirection; //향
 	private String saleEtc; //매물 특징
 	private int isContract; //계약 여부
-	
 
+	
 	public SaleEntity toEntity() {
 		SaleEntity saleEntity = SaleEntity.builder()
 				.saleNum(saleNum)

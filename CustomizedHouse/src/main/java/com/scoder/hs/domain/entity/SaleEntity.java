@@ -1,15 +1,16 @@
 package com.scoder.hs.domain.entity;
 
+import java.util.Optional;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.ColumnDefault;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -23,9 +24,15 @@ import lombok.ToString;
 @Entity
 @Table(name = "sale")
 public class SaleEntity {
+	
 
-	@ManyToOne(targetEntity = CHUserEntity.class)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="userId", nullable = false)
 	private CHUserEntity chuserEntity;
+	
+	@ManyToOne
+	@JoinColumn(name="typeNum")
+	private TypeEntity typeEntity;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -42,16 +49,16 @@ public class SaleEntity {
 	private String saleRoadAddress;
 	
 	@Column(length = 500, nullable = false)
-	private String aptName; 
+	private String aptName;
 	
 	@Column(length = 500, nullable = false)
 	private String aptDong; 
 	
 	@Column(length = 500, nullable = false)
-	private String aptHo; 	
+	private String aptHo;
 	
 	@Column(length = 500, nullable = false)
-	private String salePrice; 
+	private String salePrice;
 	
 	@Column(length = 500, nullable = false)
 	private String saleDirection;
@@ -60,12 +67,19 @@ public class SaleEntity {
 	private String saleEtc;
 	
 	@Column(length = 30, nullable = false)
-	private int isContract; 
+	private int isContract;
 	
+	public String getUserId(CHUserEntity chuserEntity) {
+		return chuserEntity.getUserId();
+	}
+	
+	public void addCHUserEntity(CHUserEntity chuserEntity) {
+		
+	}
 
 	@Builder
-	public SaleEntity(CHUserEntity chuserEntity, Long saleNum, String aptSize, String saleAddress,
-			String saleRoadAddress, String aptName, String aptDong, String aptHo, String salePrice,
+	public SaleEntity( CHUserEntity chuserEntity, Long saleNum, String aptSize,
+			String saleAddress, String saleRoadAddress, String aptName, String aptDong, String aptHo, String salePrice,
 			String saleDirection, String saleEtc, int isContract) {
 		this.chuserEntity = chuserEntity;
 		this.saleNum = saleNum;
@@ -80,6 +94,8 @@ public class SaleEntity {
 		this.saleEtc = saleEtc;
 		this.isContract = isContract;
 	}
+
+	
 
 
 }

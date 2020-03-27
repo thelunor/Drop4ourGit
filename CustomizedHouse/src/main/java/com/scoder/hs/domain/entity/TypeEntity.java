@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -21,9 +22,6 @@ import lombok.ToString;
 @Table(name = "type")
 public class TypeEntity {
 	
-	@OneToMany
-	@JoinColumn(name="typeNum")
-	private Collection<SaleEntity> sales;
 	
 	@Id
 	private int typeNum; //거래유형번호
