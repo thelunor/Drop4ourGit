@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.scoder.hs.dto.CHUser;
@@ -18,8 +19,11 @@ import com.scoder.hs.dto.Sale;
 import com.scoder.hs.service.GenericService;
 import com.scoder.hs.service.REAService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/rea")
+@Slf4j
 public class REAController {
 	
 	@Autowired
@@ -139,7 +143,12 @@ public class REAController {
 		} catch (Exception e) {
 			System.out.println("Controller signUpGenericUser 예외발생: " + e.getMessage());
 		}
-		return "rea/reaEditSuccess";
+		return "redirect:/rea/reaEditSuccess";
 	}
 
+	//공인중개사 정보 수정 성공 페이지
+	@GetMapping("/reaEditSuccess")
+	public String reaEditSuccess() {
+		return "/rea/reaEditSuccess";
+	}
 }
