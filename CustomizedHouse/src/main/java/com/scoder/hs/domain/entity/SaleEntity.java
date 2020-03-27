@@ -30,7 +30,7 @@ public class SaleEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "saleNum", insertable=false)
-	private Long saleNum; 
+	private Long saleNum;
 	
 	@Column(length = 100, nullable = false)
 	private String aptSize; 
@@ -57,9 +57,9 @@ public class SaleEntity {
 	private String saleDirection;
 	
 	@Column(length = 3000, nullable = false)
-	private String saleEtc; 
+	private String saleEtc;
 	
-	@Column(length = 30, nullable = false, columnDefinition = "default 1")
+	@Column(length = 30, nullable = false)
 	private int isContract; 
 	
 

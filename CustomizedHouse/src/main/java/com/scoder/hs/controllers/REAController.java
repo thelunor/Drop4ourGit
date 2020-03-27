@@ -81,6 +81,7 @@ public class REAController {
 	//매물 등록하기
 	@PostMapping("/addSale")
 	public String addSale(Sale sale, @AuthenticationPrincipal CHUserCustom chuserCustom) {
+		System.out.println("매물 등록!");
 		System.out.println(sale.toString());
 		//서비스 연결 -> db 저장
 		boolean result = reaService.saveSale(sale);
