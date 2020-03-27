@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.scoder.hs.dto.CHUser;
 import com.scoder.hs.dto.CHUserCustom;
 import com.scoder.hs.dto.Generic;
 import com.scoder.hs.dto.REA;
@@ -110,6 +111,26 @@ public class REAController {
 		REA rea  = reaService.getReaInfo(chuserCustom.getUsername());
 		model.addAttribute("rea", rea);
 		return "rea/reaEditPage";
+	}
+	
+	/**
+	 * 회원정보 데이터 수정
+	 * @author 이정은
+	 * @since 2020/03/24 
+	 * @param chuserCustom
+	 * @param chUser
+	 * @param generic
+	 * @return "generic/genericEditSuccess";
+	 */
+	@PostMapping("/reaInfoEdit")
+	public String reaInfoEdit(@AuthenticationPrincipal CHUserCustom chuserCustom, CHUser chUser, REA rea) {
+		boolean result = false;
+		try {
+			result = reaService.EditREAUser(chUser, rea, chuserCustom.getUsername()); 
+		} catch (Exception e) {
+			System.out.println("Controller signUpGenericUser 예외발생: " + e.getMessage());
+		}
+		return "rea/reaEditSuccess";
 	}
 
 }

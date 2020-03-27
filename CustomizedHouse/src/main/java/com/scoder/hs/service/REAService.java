@@ -5,13 +5,20 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.scoder.hs.domain.entity.CHUserEntity;
+import com.scoder.hs.domain.entity.GenericEntity;
 import com.scoder.hs.domain.entity.REAEntity;
 import com.scoder.hs.domain.entity.ReaIntroBoardEntity;
+import com.scoder.hs.dto.CHUser;
+import com.scoder.hs.dto.Generic;
 import com.scoder.hs.dto.REA;
 import com.scoder.hs.dto.REAIntroBoard;
 import com.scoder.hs.dto.Sale;
+import com.scoder.hs.repository.CHUserRepository;
 import com.scoder.hs.repository.REARepository;
 import com.scoder.hs.repository.ReaIntroBoardRepository;
 import com.scoder.hs.repository.SaleRepository;
@@ -26,7 +33,13 @@ public class REAService {
 	private ReaIntroBoardRepository reaIntroBoardRepository;
 	
 	@Autowired
+	private CHUserRepository chUserRepository;
+	
+	@Autowired
 	private SaleRepository saleRepository;
+	
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	
 	
 	//공인중개사 회원 정보 가져오기
 	public REA getReaInfo(String userId) {
@@ -89,4 +102,46 @@ public class REAService {
 		return result;
 	}
 
+
+	/**
+	 * 공인중개사 정보 데이터 수정
+	 * @author 이정은
+	 * @since 2020/03/26  
+	 * @param chUser
+	 * @param rea
+	 * @param userId
+	 * @return result
+	 */
+    @Transactional
+	public boolean EditREAUser(CHUser chUser, REA rea, String userId) {
+		boolean result = false;
+		try {
+			String encodedPassword = new BCryptPasswordEncoder().encode(chUser.getPassword());
+			Optional<CHUserEntity> chUserEntityWrapper = chUserRepository.findById(userId);
+			chUserEntityWrapper.ifPresent(user ->{
+				user.setPassword(encodedPassword);
+				user.setUserName(chUser.getUserName());
+				user.setUserEmail(chUser.getUserEmail());
+				user.setUserPhoneNum(chUser.getUserPhoneNum());
+				CHUserEntity newUser = chUserRepository.save(user);
+	           });
+			Optional<REAEntity> reaEntityWrapper = reaRepository.findById(userId);
+			reaEntityWrapper.ifPresent(reaUser ->{
+				reaUser.setOfficeName(rea.getOfficeName());
+				reaUser.setOfficeAddress(rea.getOfficeAddress());
+				reaUser.setOfficePhoneNum(rea.getOfficePhoneNum());
+				reaUser.setReaNum(rea.getReaNum());				
+				REAEntity newREA = reaRepository.save(reaUser);
+			});
+			result = true;
+		} catch (Exception e) {
+			System.out.println("SignService signUpGenericUser 예외발생: " + e.getMessage());
+		}
+		return result;
+	}
+	
+	//암호화
+	public PasswordEncoder passwordEncoder() {
+		return this.passwordEncoder;
+	}
 }
