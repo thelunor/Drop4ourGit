@@ -35,8 +35,8 @@ public class GenericController {
 	 */
 	@GetMapping("/genericMyPage")
 	public String userMyPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
-		chUserService.getCHUserInfo(chuserCustom.getUsername());
-		model.addAttribute("genericUser", chuserCustom);
+		CHUser chUser = chUserService.getCHUserInfo(chuserCustom.getUsername());
+		model.addAttribute("genericUser", chUser);
 		return "generic/genericMyPage";
 	}
 	
@@ -50,8 +50,8 @@ public class GenericController {
 	 */
 	@GetMapping("/genericUserEdit")
 	public String userEditPage(@AuthenticationPrincipal CHUserCustom chuserCustom, Model model) {
-		chUserService.getCHUserInfo(chuserCustom.getUsername());
-		model.addAttribute("genericUser", chuserCustom);
+		CHUser chUser = chUserService.getCHUserInfo(chuserCustom.getUsername());
+		model.addAttribute("genericUser", chUser);
 		
 		Generic generic = genericService.getUserDetailInfo(chuserCustom.getUsername());
 		model.addAttribute("generic", generic);
