@@ -1,0 +1,18 @@
+--기본 값 셋팅
+insert into role VALUES('ROLE_GENUSER', '일반회원');
+insert into role VALUES('ROLE_REAUSER', '공인중개사회원');
+
+
+--트리거
+ DELIMITER $$
+   create trigger signUpGeneric after INSERT ON chuser for each ROW BEGIN
+      INSERT INTO userrolelist SET rolename='ROLE_GENUSER',  userid= NEW.userid;
+   END $$;
+DELIMITER ;
+
+
+DELIMITER $$
+   create trigger signUpREA after INSERT ON rea for each ROW BEGIN
+      INSERT INTO userrolelist SET rolename='ROLE_REAUSER',  userid= NEW.userid;
+   END $$;
+DELIMITER ;

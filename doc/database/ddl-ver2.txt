@@ -1,0 +1,403 @@
+-- 회원
+CREATE TABLE `CHUSER` (
+	`USERID`       VARCHAR(30)  NOT NULL, -- 아이디
+	`PASSWORD`     VARCHAR(500) NOT NULL, -- 비밀번호
+	`USERNAME`     VARCHAR(20)  NOT NULL, -- 이름
+	`USERPHONENUM` VARCHAR(30)  NOT NULL, -- 핸드폰번호
+	`ISLOCK`       INT          NOT NULL DEFAULT 1, -- 잠금여부
+	`LOGINCNT`     INT          NOT NULL DEFAULT 0, -- 로그인시도횟수
+	`USEREMAIL`    VARCHAR(30)  NOT NULL  -- 이메일
+);
+
+-- 회원
+ALTER TABLE `CHUSER`
+	ADD CONSTRAINT `PK_CHUSER` -- 회원 기본키
+		PRIMARY KEY (
+			`USERID` -- 아이디
+		);
+
+-- 개인회원
+CREATE TABLE `GENERIC` (
+	`USERID`      VARCHAR(30)  NOT NULL, -- 아이디
+	`RESNUM`      VARCHAR(30)  NOT NULL, -- 주민등록번호
+	`USERADDRESS` VARCHAR(500) NOT NULL  -- 개인회원 주소
+);
+
+-- 개인회원
+ALTER TABLE `GENERIC`
+	ADD CONSTRAINT `PK_GENERIC` -- 개인회원 기본키
+		PRIMARY KEY (
+			`USERID` -- 아이디
+		);
+
+-- 공인중개사회원 이미지
+CREATE TABLE `REAIMAGE` (
+	`USERID`       VARCHAR(30)   NOT NULL, -- 아이디
+	`REAIMAGENAME` VARCHAR(1000) NOT NULL  -- 공인중개사 이미지명
+);
+
+-- 공인중개사회원 이미지
+ALTER TABLE `REAIMAGE`
+	ADD CONSTRAINT `PK_REAIMAGE` -- 공인중개사회원 이미지 기본키
+		PRIMARY KEY (
+			`USERID` -- 아이디
+		);
+
+-- 매물이미지
+CREATE TABLE `SALEIMAGE` (
+	`SALEIMAGENUM`  INT           NOT NULL, -- 매물이미지번호
+	`SALENUM`       INT           NOT NULL, -- 매물번호
+	`SALEIMAGENAME` VARCHAR(1000) NOT NULL  -- 매물이미지명
+);
+
+-- 매물이미지
+ALTER TABLE `SALEIMAGE`
+	ADD CONSTRAINT `PK_SALEIMAGE` -- 매물이미지 기본키
+		PRIMARY KEY (
+			`SALEIMAGENUM` -- 매물이미지번호
+		);
+
+ALTER TABLE `SALEIMAGE`
+	MODIFY COLUMN `SALEIMAGENUM` INT NOT NULL AUTO_INCREMENT;
+
+-- 공인중개사 매물일정관리
+CREATE TABLE `REASCHEDULE` (
+	`SCHEDULENUM`     INT           NOT NULL, -- 일정번호
+	`SCHEDULEDATE`    TIMESTAMP     NOT NULL, -- 날짜
+	`USERID`          VARCHAR(30)   NOT NULL, -- 아이디
+	`SCHEDULECONTENT` VARCHAR(3000) NOT NULL  -- 내용
+);
+
+-- 공인중개사 매물일정관리
+ALTER TABLE `REASCHEDULE`
+	ADD CONSTRAINT `PK_REASCHEDULE` -- 공인중개사 매물일정관리 기본키
+		PRIMARY KEY (
+			`SCHEDULENUM`,  -- 일정번호
+			`SCHEDULEDATE`  -- 날짜
+		);
+
+-- 공인중개사 후기
+CREATE TABLE `REVIEW` (
+	`REVIEWNUM`     INT           NOT NULL, -- 후기번호
+	`USERID`        VARCHAR(30)   NOT NULL, -- 아이디
+	`REVIEWCONTENT` VARCHAR(3000) NOT NULL, -- 후기내용
+	`REVIEWDATE`    TIMESTAMP     NOT NULL DEFAULT NOW() -- 날짜
+);
+
+-- 공인중개사 후기
+ALTER TABLE `REVIEW`
+	ADD CONSTRAINT `PK_REVIEW` -- 공인중개사 후기 기본키
+		PRIMARY KEY (
+			`REVIEWNUM` -- 후기번호
+		);
+
+ALTER TABLE `REVIEW`
+	MODIFY COLUMN `REVIEWNUM` INT NOT NULL AUTO_INCREMENT;
+
+-- 북마크
+CREATE TABLE `BOOKMARK` (
+	`SALENUM`      INT         NOT NULL, -- 매물번호
+	`USERID`       VARCHAR(30) NOT NULL, -- 아이디
+	`BOOKMARTDATE` TIMESTAMP   NOT NULL DEFAULT NOW() -- 날짜
+);
+
+-- 북마크
+ALTER TABLE `BOOKMARK`
+	ADD CONSTRAINT `PK_BOOKMARK` -- 북마크 기본키
+		PRIMARY KEY (
+			`SALENUM`, -- 매물번호
+			`USERID`   -- 아이디
+		);
+
+ALTER TABLE `BOOKMARK`
+	MODIFY COLUMN `SALENUM` INT NOT NULL AUTO_INCREMENT;
+
+-- 공인중개사 소개 게시판
+CREATE TABLE `REAINTROBOARD` (
+	`USERID`       VARCHAR(30)   NOT NULL, -- 아이디
+	`INTROTITLE`   VARCHAR(500)  NOT NULL, -- 제목
+	`INTROCONTENT` VARCHAR(3000) NOT NULL  -- 내용
+);
+
+-- 공인중개사 소개 게시판
+ALTER TABLE `REAINTROBOARD`
+	ADD CONSTRAINT `PK_REAINTROBOARD` -- 공인중개사 소개 게시판 기본키
+		PRIMARY KEY (
+			`USERID` -- 아이디
+		);
+
+-- 매물
+CREATE TABLE `SALE` (
+	`SALENUM`         INT           NOT NULL, -- 매물번호
+	`USERID`          VARCHAR(30)   NOT NULL, -- 아이디
+	`TYPENUM`         INT           NOT NULL, -- 거래유형번호
+	`APTSIZE`         VARCHAR(100)  NOT NULL, -- 면적
+	`ADDRESS`     VARCHAR(500)  NOT NULL, -- 지번주소
+	`ROADADDRESS` VARCHAR(500)  NOT NULL, -- 도로명주소
+	`APTNAME`         VARCHAR(500)  NOT NULL, -- 아파트이름
+	`APTDONG`         VARCHAR(500)  NOT NULL, -- 동
+	`APTHO`           VARCHAR(500)  NOT NULL, -- 호수
+	`RICE`       VARCHAR(500)  NOT NULL, -- 거래금액
+	`DIRECTION`   VARCHAR(500)  NOT NULL, -- 향
+	`ETC`         VARCHAR(3000) NOT NULL, -- 매물특징
+	`ISCONSTRACT`     INT           NOT NULL DEFAULT 1 -- 계약여부
+);
+
+-- 매물
+ALTER TABLE `SALE`
+	ADD CONSTRAINT `PK_SALE` -- 매물 기본키
+		PRIMARY KEY (
+			`SALENUM` -- 매물번호
+		);
+
+ALTER TABLE `SALE`
+	MODIFY COLUMN `SALENUM` INT NOT NULL AUTO_INCREMENT;
+
+-- 거래유형
+CREATE TABLE `TYPE` (
+	`TYPENUM`  INT          NOT NULL, -- 거래유형번호
+	`TYPENAME` VARCHAR(100) NOT NULL  -- 거래유형명
+);
+
+-- 거래유형
+ALTER TABLE `TYPE`
+	ADD CONSTRAINT `PK_TYPE` -- 거래유형 기본키
+		PRIMARY KEY (
+			`TYPENUM` -- 거래유형번호
+		);
+
+ALTER TABLE `TYPE`
+	MODIFY COLUMN `TYPENUM` INT NOT NULL AUTO_INCREMENT;
+
+-- 권한
+CREATE TABLE `ROLE` (
+	`ROLENAME` VARCHAR(20) NOT NULL, -- 권한명
+	`ROLEDESC` VARCHAR(30) NOT NULL  -- 권한설명
+);
+
+-- 권한
+ALTER TABLE `ROLE`
+	ADD CONSTRAINT `PK_ROLE` -- 권한 기본키
+		PRIMARY KEY (
+			`ROLENAME` -- 권한명
+		);
+
+-- 공인중개사 회사 이미지
+CREATE TABLE `OFFICEIMAGE` (
+	`USERID`          VARCHAR(30)   NOT NULL, -- 아이디
+	`OFFICEIMAGENAME` VARCHAR(1000) NOT NULL  -- 회사 이미지명
+);
+
+-- 공인중개사 회사 이미지
+ALTER TABLE `OFFICEIMAGE`
+	ADD CONSTRAINT `PK_OFFICEIMAGE` -- 공인중개사 회사 이미지 기본키
+		PRIMARY KEY (
+			`USERID` -- 아이디
+		);
+
+-- 권한목록
+CREATE TABLE `USERROLELIST` (
+	`USERID`   VARCHAR(30) NOT NULL, -- 아이디
+	`ROLENAME` VARCHAR(10) NOT NULL  -- 권한명
+);
+
+-- 권한목록
+ALTER TABLE `USERROLELIST`
+	ADD CONSTRAINT `PK_USERROLELIST` -- 권한목록 기본키
+		PRIMARY KEY (
+			`USERID`,   -- 아이디
+			`ROLENAME`  -- 권한명
+		);
+
+-- 공인중개사회원
+CREATE TABLE `REA` (
+	`USERID`         VARCHAR(30)  NOT NULL, -- 아이디
+	`REANUM`         VARCHAR(30)  NOT NULL, -- 사업자등록번호
+	`OFFICENAME`     VARCHAR(100) NOT NULL, -- 사무소 이름
+	`OFFICEADDRESS`  VARCHAR(500) NOT NULL, -- 사무소 주소
+	`OFFICEPHONENUM` VARCHAR(100) NOT NULL  -- 사무소 전화번호
+);
+
+-- 공인중개사회원
+ALTER TABLE `REA`
+	ADD CONSTRAINT `PK_REA` -- 공인중개사회원 기본키
+		PRIMARY KEY (
+			`USERID` -- 아이디
+		);
+
+-- 댓글
+CREATE TABLE `COMMENT` (
+	`COMMENTNUM`     INT           NOT NULL, -- 댓글번호
+	`USERID`         VARCHAR(30)   NOT NULL, -- 작성자
+	`REVIEWNUM`      INT           NOT NULL, -- 후기번호
+	`COMMENTINDEX`   INT           NOT NULL, -- 답글순서
+	`COMMENTDATE`    TIMESTAMP     NOT NULL DEFAULT NOW(), -- 작성일
+	`COMMENTCONTENT` VARCHAR(3000) NOT NULL  -- 댓글내용
+);
+
+-- 댓글
+ALTER TABLE `COMMENT`
+	ADD CONSTRAINT `PK_COMMENT` -- 댓글 기본키
+		PRIMARY KEY (
+			`COMMENTNUM` -- 댓글번호
+		);
+
+-- 개인회원
+ALTER TABLE `GENERIC`
+	ADD CONSTRAINT `FK_CHUSER_TO_GENERIC` -- 회원 -> 개인회원
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 공인중개사회원 이미지
+ALTER TABLE `REAIMAGE`
+	ADD CONSTRAINT `FK_CHUSER_TO_REAIMAGE` -- 회원 -> 공인중개사회원 이미지
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 매물이미지
+ALTER TABLE `SALEIMAGE`
+	ADD CONSTRAINT `FK_SALE_TO_SALEIMAGE` -- 매물 -> 매물이미지
+		FOREIGN KEY (
+			`SALENUM` -- 매물번호
+		)
+		REFERENCES `SALE` ( -- 매물
+			`SALENUM` -- 매물번호
+		);
+
+-- 공인중개사 매물일정관리
+ALTER TABLE `REASCHEDULE`
+	ADD CONSTRAINT `FK_CHUSER_TO_REASCHEDULE` -- 회원 -> 공인중개사 매물일정관리
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 공인중개사 후기
+ALTER TABLE `REVIEW`
+	ADD CONSTRAINT `FK_CHUSER_TO_REVIEW` -- 회원 -> 공인중개사 후기
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 북마크
+ALTER TABLE `BOOKMARK`
+	ADD CONSTRAINT `FK_SALE_TO_BOOKMARK` -- 매물 -> 북마크
+		FOREIGN KEY (
+			`SALENUM` -- 매물번호
+		)
+		REFERENCES `SALE` ( -- 매물
+			`SALENUM` -- 매물번호
+		);
+
+-- 북마크
+ALTER TABLE `BOOKMARK`
+	ADD CONSTRAINT `FK_CHUSER_TO_BOOKMARK` -- 회원 -> 북마크
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 공인중개사 소개 게시판
+ALTER TABLE `REAINTROBOARD`
+	ADD CONSTRAINT `FK_CHUSER_TO_REAINTROBOARD` -- 회원 -> 공인중개사 소개 게시판
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 매물
+ALTER TABLE `SALE`
+	ADD CONSTRAINT `FK_CHUSER_TO_SALE` -- 회원 -> 매물
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 매물
+ALTER TABLE `SALE`
+	ADD CONSTRAINT `FK_TYPE_TO_SALE` -- 거래유형 -> 매물
+		FOREIGN KEY (
+			`TYPENUM` -- 거래유형번호
+		)
+		REFERENCES `TYPE` ( -- 거래유형
+			`TYPENUM` -- 거래유형번호
+		);
+
+-- 공인중개사 회사 이미지
+ALTER TABLE `OFFICEIMAGE`
+	ADD CONSTRAINT `FK_CHUSER_TO_OFFICEIMAGE` -- 회원 -> 공인중개사 회사 이미지
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 권한목록
+ALTER TABLE `USERROLELIST`
+	ADD CONSTRAINT `FK_ROLE_TO_USERROLELIST` -- 권한 -> 권한목록
+		FOREIGN KEY (
+			`ROLENAME` -- 권한명
+		)
+		REFERENCES `ROLE` ( -- 권한
+			`ROLENAME` -- 권한명
+		);
+
+-- 권한목록
+ALTER TABLE `USERROLELIST`
+	ADD CONSTRAINT `FK_CHUSER_TO_USERROLELIST` -- 회원 -> 권한목록
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 공인중개사회원
+ALTER TABLE `REA`
+	ADD CONSTRAINT `FK_CHUSER_TO_REA` -- 회원 -> 공인중개사회원
+		FOREIGN KEY (
+			`USERID` -- 아이디
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);
+
+-- 댓글
+ALTER TABLE `COMMENT`
+	ADD CONSTRAINT `FK_REVIEW_TO_COMMENT` -- 공인중개사 후기 -> 댓글
+		FOREIGN KEY (
+			`REVIEWNUM` -- 후기번호
+		)
+		REFERENCES `REVIEW` ( -- 공인중개사 후기
+			`REVIEWNUM` -- 후기번호
+		);
+
+-- 댓글
+ALTER TABLE `COMMENT`
+	ADD CONSTRAINT `FK_CHUSER_TO_COMMENT` -- 회원 -> 댓글
+		FOREIGN KEY (
+			`USERID` -- 작성자
+		)
+		REFERENCES `CHUSER` ( -- 회원
+			`USERID` -- 아이디
+		);

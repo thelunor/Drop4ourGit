@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <head th:fragment="indexHeader">
+        <title>Drop 4our bit</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" th:href="@{/css/slick.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/slick-theme.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/animate.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/fonticons.css}" type="text/css"/>
+		<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/magnific-popup.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/bootsnav.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/responsive.css}" type="text/css"/>
+        <link rel="stylesheet" th:href="@{/css/bootsnav.css}" type="text/css"/>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+        <link rel="stylesheet" th:src="@{//codes.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}" type="text/css"/>
+
+    </head>
+    <div class="container" th:fragment="indexNav">
+        <div class="attr-nav">
+            <ul>
+                <li class="login">
+                    <a sec:authorize="isAnonymous()" th:href="@{/sign/loginPage}">로그인</a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/sign/logout}">로그아웃</a>
+                </li>
+                <li class="join"><a sec:authorize="isAnonymous()" th:href="@{/sign/signUpPage}">회원가입</a></li>
+                <li class="join"><a sec:authorize="hasRole('ROLE_REAUSER')" th:href="@{/rea/reaMain}">소개 페이지</a></li>
+                <li class="join"><a sec:authorize="hasRole('ROLE_REAUSER')" th:href="@{/rea/reaSale}">매물 페이지</a></li>
+                <li class="join"><a sec:authorize="hasRole('ROLE_GENUSER')" th:href="@{/generic/genericMyPage}">마이페이지</a></li>
+                <li class="side-menu">
+                    <a sec:authorize="hasRole('ROLE_ADMIN')"><i class='fa fa-bars'></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggler" data-toggle="collapse"
+                    data-target="#navbar-menu"></button>
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/logo/logo2.png}" class="logo"/>
+                <img th:src="@{/images/logo/logo.jpg}" class="logo logo-scrolled"/>
+            </a>
+        </div>
+    </div>
+</html>

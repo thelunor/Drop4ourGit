@@ -1,0 +1,142 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{indexLayout}"
+>
+<head>
+	<style layout:fragment="pageCss">
+		.input-group {
+			height: 50px;
+		}
+		
+		a {
+			color: #797979;
+		}
+		
+		a:hover {
+			color: #212529;
+		}
+		
+		h2 {
+			font-family: 'Jua', sans-serif;
+			text-align: center;
+		}
+		
+		input {
+			text-align: center;
+		}
+		
+		.btn-group:hover {
+			background-color: #eee;
+			border-color: #eee;
+			border: 0.5px solid #eee;
+			color: #ff6863;
+		}
+		
+		.btn-group {
+			color: #fff;
+			background-color: #ff6863;
+			border-color: #ff6863;
+			border: 2px solid #eee;
+			padding: 0.5rem 1rem;
+		}
+		
+		.btn-group-sm:hover {
+			background-color: #eee;
+			border-color: #eee;
+			border: 0.5px solid #eee;
+			color: #ff6863;
+		}
+		#con_btn:hover {
+			background-color: #eee;
+			border-color: #eee;
+			border: 0.5px solid #eee;
+			color: black;
+			font-weight: bold;
+		}
+		.btn-group-sm {
+			color: #fff;
+			background-color: #ff6863;
+			border-color: #ff6863;
+			border: 2px solid #eee;
+			padding: 0.5rem 1rem;
+		}
+	</style>
+</head>
+<section class="about roomy-100" layout:fragment="content">
+	<form action="GetSaleAddPageService.d4b" method="post">
+		<div class="container">
+			<div class="about_content">
+				<h2>매물 관리 페이지</h2>
+				<br> <br>
+					<div class="row">
+						<div class="col-md-6" style="text-align: center">
+							<img id="preview" src=""
+								style="width: 200px" alt="Profile"> <br> <br> 
+							<input	type="text" class="form-control" th:value="${user.name}" readonly>
+							<br>
+						</div>
+						<div class="col-md-6">
+							<label>사업자 등록번호 &nbsp;&nbsp;&nbsp;&nbsp;</label>
+							<input type="text" class="form-control" th:value="${rea.reaNum}" readonly> 
+							<label>사무소이름&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+							<input type="text" class="form-control" th:value="${rea.officeName}" readonly>
+							<label>연락처&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+							<input type="text" class="form-control"  th:value="${rea.officePhoneNum}" readonly>
+							<label>사무소 주소 &nbsp;&nbsp;&nbsp;&nbsp;</label> 
+							<input type="text" class="form-control"  th:value="${rea.officeAddress}" readonly> 
+							<br>
+						</div>
+					</div>
+						<hr>
+		                  <div class="row">
+		                     <div class="col-md-12">
+		                     	<button type="button" class="btn-group" th:onclick="|window.location.href='/rea/addSale'|">매물 등록</button>
+		                        &nbsp;
+		                        <button type="button" class="btn-group" onclick="location.href='SelectContractListService.d4b?userId=${reaUserData.reaId}'">계약 관리</button>
+		                        &nbsp;
+		                        <button type="button" class="btn-group" onclick="location.href='CheckIntroBoardService.d4b'">소개글 관리</button>
+		                        &nbsp;
+		                        <button type="button" class="btn-group" onclick="location.href='/rea/reaSchedulePage'">일정 관리</button>
+		                        &nbsp;
+		                        <button type="button" class="btn-group" onclick="location.href='/rea/reaEditPage'">정보 수정</button>
+		                        <input type="hidden" value="<%=userId %>" id="reaId">
+		                        <br> <br>
+		                        <div id="saleList">
+		                           <div class="card-header py-3">
+		                              <h6 class="m-0 font-weight-bold text-primary">매물 관리</h6>
+		                           </div>
+		                           <div class="card-body">
+		                              <div class="table-responsive">
+		                                 <table class="table table-bordered" width="100%" cellspacing="0">
+		                                 	<thead>
+		                                 		<tr>
+		                                 			<th>면적</th>
+		                                          	<th>유형</th>
+		                                          	<th>주소</th>
+		                                          	<th>아파트이름</th>
+		                                          	<th>동</th>
+			                                          <th>호수</th>
+			                                          <th>매매가</th>
+			                                          <th>계약여부</th>
+			                                          <th>수정</th>
+			                                          <th>삭제</th>
+			                                          <th>계약</th>
+		                                       </tr>
+		                                    </thead>
+		                                    <tbody id="tbody">	
+		                                    		                                      
+		                                    </tbody>
+		                                </table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>
+<div layout:fragment="pageJs">
+
+</div>
+</html>

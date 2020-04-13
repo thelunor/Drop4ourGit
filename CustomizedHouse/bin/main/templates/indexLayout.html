@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      >
+    <!--header-->
+    <head th:replace="fragments/header :: indexHeader">
+    <!--    <div th:replace="fragments/chart :: chart1Head"></div>-->
+        <!--페이지별 필요 css-->
+        <div layout:fragment="pageCss"/>
+    </head>
+    <body data-spy="scroll" data-target=".navbar-collapse">
+        <div class="culmn">
+            <!--nav-->
+            <nav class="navbar navbar-light navbar-expand-lg  navbar-fixed white no-background bootsnav">
+                <div th:if="${#httpServletRequest.requestURI} == '/rea/**' ">
+                    <div th:replace="fragments/header-rea :: indexNav"/>
+                </div>
+                <div th:unless="${#httpServletRequest.requestURI} == '/rea/**' ">
+                    <div th:replace="fragments/header :: indexNav"/>
+                </div>
+            </nav>
+            <!--컨텐츠-->
+            <section layout:fragment="content"/>
+        </div>
+        <!--footer-->
+        <div th:replace="fragments/footer :: indexFooter"/>
+    </body>
+    <!--페이지별 필요 js-->
+    <div layout:fragment="pageJs"/>
+</html>

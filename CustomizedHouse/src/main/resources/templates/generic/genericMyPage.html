@@ -1,0 +1,123 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{indexLayout}">
+<head>
+<style type="text/css" layout:fragment="pageCss">
+#myInfoEdit:hover {
+	color: #ff6863;
+	cursor: pointer;
+}
+
+
+a {
+   color: gray;
+}
+
+a:hover, a:focus, a:active, a.active {
+   color: #ff6863;
+   outline: 0;
+}
+
+.list-group-item {
+   color: gray;
+}
+
+.contain {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.contain #text{
+  position: absolute;
+  top: 10%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+.contain #text:hover {
+  color: yellow;
+}
+/* Style the close button */
+#text {
+   color: black;
+   font-size: 18px;
+   font-weight: bold;
+}
+.card_top_border {
+   height:4px;
+   width: 100%;
+   background-color: #ff6863;
+}
+
+.card-body {
+   overflow: hidden;
+   width : 100%;
+}
+
+.card-body ul {
+   width: 55%;
+   margin: 0 auto;
+}
+
+.card-body ul li {
+   line-height: 3rem;
+}
+
+.card-body ul li i {
+   margin-right: 10px;
+}
+h6{
+font-family: 'Jua', sans-serif;
+}
+</style>
+</head>
+<section id="genericMyPage" layout:fragment="content">
+				<br>
+				<br>
+				<br>
+			<div class="container-fluid">
+				<div class="about_content">
+				<br>
+				<h3 style="font-family: 'Jua', sans-serif; text-align: center;">마이페이지</h3>
+				<br>
+				<br>
+				<br>
+		 <div class="row">
+         <div class="col-lg-2">
+            <div class="list-group">
+               <a class="list-group-item"></a>
+               <a href="#" class="list-group-item">북마크</a>
+               <a id="myInfoEdit" onclick="location.href='/generic/genericUserEdit'" class="list-group-item">정보수정</a>
+               <a href="#" class="list-group-item">회원탈퇴</a>
+            </div>
+         </div>
+         <div class="col-lg-1"></div>
+         <div class="col-lg-9">
+            <h3 style="font-family: 'Jua', sans-serif;">북마크</h3>
+            <div class="row">
+            <div class="col-sm-12">
+ 
+            <a href="#" onclick="getBookMark('24')">24평</a> &nbsp; | &nbsp; <a href="#" onclick="getBookMark('32')">32평</a>&nbsp; |
+            &nbsp; <a href="#" onclick="getBookMark('42')">42평</a> &nbsp;
+
+            <h6 style="float: right;"><img src="<%=request.getContextPath() %>/images/love.gif" style="width: 40px; height: 30px;"><b th:text="${genericUser.name}"></b> 님의 페이지입니다</h6>
+            </div>
+            </div>
+            <hr>
+            <div class="row" id="bmContent">
+            <br>                           
+         </div>
+      </div>
+   </div>
+				</div>
+			</div>		
+</section>
+<div layout:fragment="pageJs">
+			
+</div>

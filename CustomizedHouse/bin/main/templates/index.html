@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{indexLayout}"
+>
+<style type="text/css" layout:fragment="pageCss">
+    .ui-autocomplete {
+        max-height: 100px !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: rgba( 255, 255, 255, 0.5);
+    }
+    .home {
+        background: url(/images/background/home.jpg) no-repeat bottom center !important;
+        background-size: cover;
+        position: relative;
+    }
+
+    .input-group {
+        height: 45px;
+    }
+
+    .about_bottom_content {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+</style>
+<section id="hello" class="home bg-mega" layout:fragment="content">
+
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="main_home">
+                <div class="home_border">
+                    <div class="home_text">
+                        <h1 class="text-white">
+                            맞춤형 집 <br />구하는 기술
+                        </h1>
+                        <br>
+                    </div>
+
+                    <div class="input-group">
+                        <input class="form-control" id="searchInput" type="text"
+                               placeholder="동으로 검색">
+                        <div id="data">
+                            <button type="button" onclick="location.href='/sale/saleListPage'" style="height: 45px;" > <!-- onclick="location.href='SelectaptListService.d4b?search='" -->
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div layout:fragment="pageJs">
+<script>
+    $(function() {
+	    let addrList = ["강남구", "강서구", "양천구"]; //주소 저장 리스트
+		 $("#searchInput").autocomplete({ //오토 컴플릿트 시작
+				source : addrList, // source 는 자동 완성 대상
+				select : function(event, ui) { //아이템 선택시
+
+				},
+				focus : function(event, ui) { //포커스 가면
+					return false;//한글 에러 잡기용도로 사용됨
+				},
+				minLength : 1,// 최소 글자수
+				autoFocus : true, //첫번째 항목 자동 포커스 기본값 false
+				classes : { //잘 모르겠음
+					"ui-autocomplete" : "highlight"
+				},
+				delay : 100, //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+				//            disabled: true, //자동완성 기능 끄기
+				position : {
+					my : "right top",
+					at : "right bottom"
+				}, //잘 모르겠음
+				close : function(event) { //자동완성창 닫아질때 호출
+				}
+			});
+	}); 
+      </script>
+</div>

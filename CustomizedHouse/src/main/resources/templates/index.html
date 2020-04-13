@@ -1,0 +1,219 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{indexLayout}"
+>
+<style type="text/css" layout:fragment="pageCss">
+    .ui-autocomplete {
+        max-height: 100px !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: rgba( 255, 255, 255, 0.5);
+    }
+    .home {
+        background: url(/images/background/home.jpg) no-repeat bottom center !important;
+        background-size: cover;
+        position: relative;
+    }
+
+    .input-group {
+        height: 45px;
+    }
+
+    .about_bottom_content {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+</style>
+<section id="hello" class="home bg-mega" layout:fragment="content">
+
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="main_home">
+                <div class="home_border">
+                    <div class="home_text">
+                        <h1 class="text-white">
+                            맞춤형 집 <br />구하는 기술
+                        </h1>
+                        <br>
+                    </div>
+
+                    <div class="input-group">
+                        <input class="form-control" id="searchInput" type="text"
+                               placeholder="동으로 검색">
+                        <div id="data">
+                            <button type="button" onclick="location.href='/sale/saleListPage'" style="height: 45px;" > <!-- onclick="location.href='SelectaptListService.d4b?search='" -->
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%;">
+        <canvas id="canvas0"></canvas>
+    </div>
+</section>
+<div layout:fragment="pageJs">
+    <script src="https://www.chartjs.org/dist/2.9.2/Chart.min.js"></script>
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+    <script>
+        //autocomplete
+        $(function() {
+            let addrList = ["강남구", "강서구", "양천구"]; //주소 저장 리스트
+             $("#searchInput").ㅍ({ //오토 컴플릿트 시작
+                source : addrList, // source 는 자동 완성 대상
+                select : function(event, ui) { //아이템 선택시
+
+                },
+                focus : function(event, ui) { //포커스 가면
+                    return false;//한글 에러 잡기용도로 사용됨
+                },
+                minLength : 1,// 최소 글자수
+                autoFocus : true, //첫번째 항목 자동 포커스 기본값 false
+                classes : { //잘 모르겠음
+                    "ui-autocomplete" : "highlight"
+                },
+                delay : 100, //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+                //            disabled: true, //자동완성 기능 끄기
+                position : {
+                    my : "right top",
+                    at : "right bottom"
+                }, //잘 모르겠음
+                close : function(event) { //자동완성창 닫아질때 호출
+                }
+            });
+        });
+
+        //차트
+        var microData = []; //초소형
+        var smallData = []; //소형
+        var middleData = []; //중형
+        var middleBigData = []; //중대형
+        var bigData = []; //대형
+        $.ajax({
+            url: "http://localhost:8000/chart1",
+            type: "POST",
+            dataType: "text",
+            success : function(data) {
+                console.log(data);
+                let arrTest=[];
+                let arr1 = [];
+
+                let test = [];
+                $.each(data, function(index, element) {
+                    let rsRow = element.response.body.item.rsRow;
+                    let sizeNm = element.response.body.item.sizeNm; //소형 초소형 같은 분류
+                    let rsRow2 = [];
+                    console.log(index);
+
+                    rsRow2= rsRow.split(",");
+
+                    for(var i=1; i<rsRow2.length; i+=2){
+                        arrTest.push(rsRow2[i]);
+                    }
+                });
+                for(i=0; i<8; i++){
+                    microData.push(parseInt(arrTest[i]));
+                }
+                for(i=7; i<16; i++){
+                    smallData.push(parseInt(arrTest[i]));
+                }
+                for(i=14; i<24; i++){
+                    middleData.push(parseInt(arrTest[i]));
+                }
+                for(i=21; i<32; i++){
+                    middleBigData.push(parseInt(arrTest[i]));
+                }
+                for(i=28; i<40; i++){
+                    bigData.push(parseInt(arrTest[i]));
+                }
+
+                setHighChart();
+            }
+
+        }); //ajax 닫기
+
+        function setHighChart(){
+            var lineChartData = {
+
+                labels : ['2019.01', '2019.02', '2019.03', '2019.04',
+                    '2019.05', '2019.06', '2019.07', '2019.08'],
+                datasets : [{
+                    label : '초소형(24평 미만)',
+                    borderColor : window.chartColors.red,
+                    backgroundColor : window.chartColors.red,
+                    fill : false,
+                    data : microData,
+                    yAxisID : 'y-axis-1',
+                }, {
+                    label : '소형(24평)',
+                    borderColor : window.chartColors.blue,
+                    backgroundColor : window.chartColors.blue,
+                    fill : false,
+                    data : smallData,
+                    yAxisID : 'y-axis-1'
+                }, {
+                    label : '중소형(32평 미만)',
+                    borderColor : window.chartColors.green,
+                    backgroundColor : window.chartColors.green,
+                    fill : false,
+                    data : middleData,
+                    yAxisID : 'y-axis-1'
+                }, {
+                    label : '중대형(32평)',
+                    borderColor : window.chartColors.yellow,
+                    backgroundColor : window.chartColors.yellow,
+                    fill : false,
+                    data : middleBigData,
+                    yAxisID : 'y-axis-1'
+                }, {
+                    label : '대형(32평 초과)',
+                    borderColor : window.chartColors.purple,
+                    backgroundColor : window.chartColors.purple,
+                    fill : false,
+                    data : bigData,
+                    yAxisID : 'y-axis-1'
+                } ]
+            };
+
+            var ctx = document.getElementById('canvas0').getContext('2d');
+            window.myLine = Chart.Line(ctx, {
+                data : lineChartData,
+                options : {
+                    responsive : true,
+                    hoverMode : 'index',
+                    stacked : false,
+                    title : {
+                        display : true,
+                        text : '서울시 아파트 매매 실거래 가격 지수'
+                    },
+                    scales : {
+                        yAxes : [ {
+                            type : 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                            display : true,
+                            position : 'left',
+                            id : 'y-axis-1',
+                            ticks: {
+                                beginAtZero: true,
+                                min: 100,
+                                max: 130
+                            },
+                            // grid line settings
+                            gridLines : {
+                                drawOnChartArea : false, // only want the grid lines for one axis to show up
+                            },
+                        } ],
+                    }
+                }
+            });
+        }
+    </script>
+</div>
